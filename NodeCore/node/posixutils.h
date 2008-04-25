@@ -21,6 +21,8 @@
 #define posixutils_h
 
 #include <dirent.h>
+#include <string>
+#include <vector>
 
 #define NAMLEN(dirent) strlen((dirent)->d_name)
 

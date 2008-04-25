@@ -22,6 +22,11 @@
 
 #include "Connection.h"
 
+#include <string>
+#include <exception>
+#include <iostream>
+#include <vector>
+
 namespace NodeCore {
 
 class Node;

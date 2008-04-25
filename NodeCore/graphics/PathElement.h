@@ -22,6 +22,8 @@
 
 #include "Point.h"
 
+#include <iostream>
+
 namespace NodeCore {
 
 enum PathCommand {

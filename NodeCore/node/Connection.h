@@ -20,6 +20,10 @@
 #ifndef Connection_h
 #define Connection_h
 
+#include <string>
+#include <exception>
+#include <iostream>
+
 namespace NodeCore {
     
 class Field;

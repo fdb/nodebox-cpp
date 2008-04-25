@@ -25,6 +25,10 @@
 #include "PythonNode.h"
 #include "posixutils.h"
 
+#include <string>
+#include <exception>
+#include <vector>
+
 namespace NodeCore {
 
 const std::string LIBRARY_NATIVE = "native";

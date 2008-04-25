@@ -22,6 +22,10 @@
 
 #include "Field.h"
 
+#include <string>
+#include <exception>
+#include <map>
+
 namespace NodeCore {
 
 class Field;
@@ -30,9 +34,10 @@ class Node;
 typedef Field* (*FieldInitializer)(Node *node, FieldName name, FieldPolarity polarity);
 typedef std::map<std::string, FieldInitializer> FieldTypeMap;
 
-class FieldTypeNotFound {
+class FieldTypeNotFound : public std::exception {
 public:
     FieldTypeNotFound(FieldType type) : m_type(type) {}
+    virtual ~FieldTypeNotFound() throw () {}
     FieldType getFieldType() { return m_type; }
 private:
     FieldType m_type;

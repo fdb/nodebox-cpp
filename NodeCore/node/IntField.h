@@ -22,6 +22,8 @@
 
 #include "Field.h"
 
+#include <string>
+
 namespace NodeCore {
 
 class IntField : public Field {

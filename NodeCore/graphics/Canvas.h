@@ -23,6 +23,10 @@
 #include "Grob.h"
 #include "BezierPath.h"
 
+#include <iostream>
+#include <vector>
+#include <ApplicationServices/ApplicationServices.h>
+
 namespace NodeCore {
 
 typedef std::vector<Grob*> GrobList;
