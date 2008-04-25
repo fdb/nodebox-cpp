@@ -51,19 +51,21 @@ Field::~Field()
 
 bool Field::validName(const FieldName& name)
 {
-/*
+    regex_t nameRe, doubleUnderScoreRe, reservedRe;
+
     // Only lowercase letters, digits and underscore. Start with letter or underscore.
     // Minimum 1 characters, maximum 30 characters.
-    static boost::regex nameRe("^[a-z_][a-z0-9_]{0,29}$");
+    regcomp(&nameRe, "^[a-z_][a-z0-9_]{0,29}$", REG_EXTENDED|REG_NOSUB);
+
     // No double underscore names (__reserved)
-    static boost::regex doubleUnderScoreRe("^__.*$");
+    regcomp(&doubleUnderScoreRe, "^__.*$", REG_EXTENDED|REG_NOSUB);
+
     // No reserved words
-    static boost::regex reservedRe("^(?:node|process|name|x|y|dirty)$");
-    return boost::regex_match(name, nameRe) 
-           && (!boost::regex_match(name, doubleUnderScoreRe)) 
-           && (!boost::regex_match(name, reservedRe));
-*/
-	return true;
+    regcomp(&reservedRe, "^(node|process|name|x|y|dirty)$", REG_EXTENDED|REG_NOSUB);
+    
+    return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
+           regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0 &
+           regexec(&reservedRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
 bool Field::isConnected()

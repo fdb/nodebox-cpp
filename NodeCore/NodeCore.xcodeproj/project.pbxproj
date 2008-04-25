@@ -163,6 +163,10 @@
 		611EC5510DC2575B008BE1A1 /* collectoroutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = collectoroutput.cpp; path = test/cpptest/src/collectoroutput.cpp; sourceTree = "<group>"; };
 		611EC5520DC2575B008BE1A1 /* compileroutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compileroutput.cpp; path = test/cpptest/src/compileroutput.cpp; sourceTree = "<group>"; };
 		611EC5530DC2575B008BE1A1 /* cpptest-assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "cpptest-assert.h"; path = "test/cpptest/src/cpptest-assert.h"; sourceTree = "<group>"; };
+		611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectTestSuite.h; path = test/node/ConnectTestSuite.h; sourceTree = "<group>"; };
+		611EC5860DC26042008BE1A1 /* FieldTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldTestSuite.h; path = test/node/FieldTestSuite.h; sourceTree = "<group>"; };
+		611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeTestSuite.h; path = test/node/NodeTestSuite.h; sourceTree = "<group>"; };
+		611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathElementTestSuite.h; path = test/graphics/PathElementTestSuite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +297,7 @@
 			children = (
 				611EC53D0DC25749008BE1A1 /* cpptest */,
 				611EC4860DC24E4E008BE1A1 /* graphics */,
+				611EC5680DC25D8C008BE1A1 /* node */,
 				611EC4840DC24E0A008BE1A1 /* unittest.cpp */,
 				611EC16E0DC228CF008BE1A1 /* testpdf.cpp */,
 			);
@@ -312,6 +317,7 @@
 			children = (
 				611EC4870DC24E63008BE1A1 /* BezierPathTestSuite.h */,
 				611EC4F20DC25366008BE1A1 /* CanvasTestSuite.h */,
+				611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -342,6 +348,16 @@
 				611EC5530DC2575B008BE1A1 /* cpptest-assert.h */,
 			);
 			name = cpptest;
+			sourceTree = "<group>";
+		};
+		611EC5680DC25D8C008BE1A1 /* node */ = {
+			isa = PBXGroup;
+			children = (
+				611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */,
+				611EC5860DC26042008BE1A1 /* FieldTestSuite.h */,
+				611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */,
+			);
+			name = node;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
