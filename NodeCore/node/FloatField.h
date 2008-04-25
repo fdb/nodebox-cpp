@@ -20,8 +20,6 @@
 #ifndef FloatField_h
 #define FloatField_h
 
-#include <string>
-
 #include "Field.h"
 
 namespace NodeCore {

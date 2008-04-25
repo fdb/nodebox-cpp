@@ -20,14 +20,6 @@
 #ifndef NodeLibrary_h
 #define NodeLibrary_h
 
-#include <dlfcn.h>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <exception>
-#include <sstream>
-#include <Python/Python.h>
-
 #include "Node.h"
 #include "NodeInfo.h"
 #include "PythonNode.h"
@@ -48,7 +40,10 @@ public:
           m_version_minor(version_minor),
           m_version_revision(version_revision) {}
           
-    NodeLibraryVersion() { }
+    NodeLibraryVersion()
+        : m_version_major(0),
+          m_version_minor(0),
+          m_version_revision(0) {}
     
     NodeLibraryVersion& operator=(const NodeLibraryVersion& other)
     {
@@ -64,11 +59,7 @@ public:
     int getMinor() { return m_version_minor; }
     int getRevision() { return m_version_revision; }
 
-    std::string asString() {
-        std::stringstream version(""); // TODO: remove ""?
-        version << m_version_major << "." << m_version_minor << "." << m_version_revision;
-        return version.str();
-    }
+    std::string asString();
       
 private:
     int m_version_major;

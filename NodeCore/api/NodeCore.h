@@ -16,37 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef NodeTypeManager_h
-#define NodeTypeManager_h
-
-#include "Node.h"
-
-#include <string>
-#include <map>
-#include <iostream>
-
-namespace NodeCore {
-
-class Field;
-class Node;
-
-typedef Node* (*NodeInitializer)();
-typedef std::map<std::string, NodeInitializer> NodeTypeMap;
-
-class NodeTypeManager {
-public:
-
-    static void addNodeType(NodeType name, NodeInitializer initializer);
-    
-    static NodeInitializer getInitializer(const NodeType& name);
-    static Node* initialize(const NodeType& name);
-    
-private:
-    static NodeTypeMap getNodeTypeMap();
-};
-
-
-} // namespace NodeCore
-
-#endif // NodeManager_h
+ 
+#include <NodeCore/BezierPath.h>
+#include <NodeCore/Canvas.h>
+#include <NodeCore/Grob.h>
+#include <NodeCore/PathElement.h>
+#include <NodeCore/Point.h>
+#include <NodeCore/Rect.h>
+#include <NodeCore/Transform.h>
+#include <NodeCore/Utils.h>
+#include <NodeCore/Exceptions.h>
+#include <NodeCore/Connection.h>
+#include <NodeCore/Field.h>
+#include <NodeCore/FieldTypeManager.h>
+#include <NodeCore/FloatField.h>
+#include <NodeCore/IntField.h>
+#include <NodeCore/Node.h>
+#include <NodeCore/NodeInfo.h>
+#include <NodeCore/NodeLibrary.h>
+#include <NodeCore/NodeLibraryManager.h>
+#include <NodeCore/posixutils.h>
+#include <NodeCore/PythonNode.h>
+#include <NodeCore/StringField.h>

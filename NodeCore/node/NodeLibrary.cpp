@@ -17,9 +17,26 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "NodeCore.h"
+#include "config.h"
+#include "NodeLibrary.h"
+
+#include <dlfcn.h>
+#include <sstream>
+#include <Python/Python.h>
+
+#include "Node.h"
+#include "NodeInfo.h"
+#include "PythonNode.h"
+#include "posixutils.h"
 
 namespace NodeCore {
+
+std::string NodeLibraryVersion::asString()
+{
+	std::stringstream version(""); // TODO: remove ""?
+	version << m_version_major << "." << m_version_minor << "." << m_version_revision;
+	return version.str();
+}
 
 NodeLibrary::NodeLibrary(NodeLibraryName name, int version_major, int version_minor, int version_revision, NodeLibraryPath path)
     : m_name(name), 

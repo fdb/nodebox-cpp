@@ -17,9 +17,15 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
+#include "config.h"
+#include "NodeLibraryManager.h"
 
-#include "NodeCore.h"
+#include <stdio.h>
+#include <string.h>
+
+#include "posixutils.h"
+#include "NodeLibrary.h"
+#include "Node.h"
 
 namespace NodeCore {
 

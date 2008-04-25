@@ -17,9 +17,8 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <boost/lexical_cast.hpp>
-
-#include "NodeCore.h"
+#include "config.h"
+#include "IntField.h"
 
 namespace NodeCore {
 
@@ -39,12 +38,16 @@ int IntField::asInt()
 
 float IntField::asFloat()
 {
-    return boost::lexical_cast<float>(m_value);
+	// TODO: get rid of boost::lexical_cast
+	return 0;
+    //return boost::lexical_cast<float>(m_value);
 }
 
 std::string IntField::asString()
 {
-    return boost::lexical_cast<std::string>(m_value);
+	// TODO: get rid of boost::lexical_cast
+	return "";
+    // return boost::lexical_cast<std::string>(m_value);
 }
 
 void IntField::set(int i)
@@ -64,7 +67,8 @@ void IntField::set(float f)
 void IntField::set(std::string s)
 {
     preSet();
-    m_value = boost::lexical_cast<int>(s);
+	// TODO: get rid of boost::lexical_cast
+    //m_value = boost::lexical_cast<int>(s);
     postSet();
 }
 

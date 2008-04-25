@@ -17,9 +17,11 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
+#include "config.h"
+#include "Connection.h"
 
-#include "NodeCore.h"
+#include "Field.h"
+#include "Node.h"
 
 namespace NodeCore {
 

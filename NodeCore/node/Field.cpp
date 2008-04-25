@@ -17,10 +17,10 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-//#include <boost/regex.hpp>
+#include "config.h"
+#include "Field.h"
 
-#include "NodeCore.h"
+#include "Node.h"
 
 namespace NodeCore {
 

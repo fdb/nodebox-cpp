@@ -20,10 +20,9 @@
 #ifndef PythonNode_h
 #define PythonNode_h
 
-#include <iostream>
-#include <Python/Python.h>
-
 #include "Node.h"
+
+#include <Python/Python.h>
 
 namespace NodeCore {
 

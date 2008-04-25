@@ -17,7 +17,8 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "NodeCore.h"
+#include "config.h"
+#include "PythonNode.h"
 
 namespace NodeCore {
 

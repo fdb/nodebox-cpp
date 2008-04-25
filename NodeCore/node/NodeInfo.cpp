@@ -17,10 +17,11 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-#include <Python/Python.h>
+#include "config.h"
+#include "NodeInfo.h"
 
-#include "NodeCore.h"
+#include "NodeLibrary.h"
+#include <Python/Python.h>
 
 namespace NodeCore {
 

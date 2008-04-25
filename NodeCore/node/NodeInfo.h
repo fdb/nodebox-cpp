@@ -20,8 +20,6 @@
 #ifndef NodeInfo_h
 #define NodeInfo_h
 
-#include <exception>
-
 #include "Node.h"
 
 namespace NodeCore {

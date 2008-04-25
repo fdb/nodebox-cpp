@@ -20,8 +20,6 @@
 #ifndef IntField_h
 #define IntField_h
 
-#include <string>
-
 #include "Field.h"
 
 namespace NodeCore {

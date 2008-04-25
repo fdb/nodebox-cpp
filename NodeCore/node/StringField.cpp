@@ -17,9 +17,8 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <boost/lexical_cast.hpp>
-
-#include "NodeCore.h"
+#include "config.h"
+#include "StringField.h"
 
 namespace NodeCore {
 
@@ -34,12 +33,16 @@ StringField::~StringField()
 
 int StringField::asInt()
 {
-    return boost::lexical_cast<int>(m_value);
+	// TODO: get rid of boost::lexical_cast
+	//return boost::lexical_cast<int>(m_value);
+	return 0;
 }
 
 float StringField::asFloat()
 {
-    return boost::lexical_cast<float>(m_value);
+	// TODO: get rid of boost::lexical_cast
+    //return boost::lexical_cast<float>(m_value);
+	return 0;
 }
 
 std::string StringField::asString()
@@ -50,14 +53,16 @@ std::string StringField::asString()
 void StringField::set(int i)
 {
     preSet();
-    m_value = boost::lexical_cast<std::string>(i);
+	// TODO: get rid of boost::lexical_cast
+    //m_value = boost::lexical_cast<std::string>(i);
     postSet();
 }
 
 void StringField::set(float f)
 {
     preSet();
-    m_value = boost::lexical_cast<std::string>(f);
+	// TODO: get rid of boost::lexical_cast
+    //m_value = boost::lexical_cast<std::string>(f);
     postSet();
 }
 

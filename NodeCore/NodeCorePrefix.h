@@ -17,7 +17,18 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <regex.h>
+
+#ifdef __cplusplus
+#include <exception>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <map>
+#endif
 
 #include <ApplicationServices/ApplicationServices.h>
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#endif

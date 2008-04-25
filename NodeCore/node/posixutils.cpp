@@ -17,7 +17,13 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "NodeCore.h"
+#include "config.h"
+#include "posixutils.h"
+
+#include <sys/types.h>
+#include <errno.h>
+#include <stdio.h>
+#include <string.h>
 
 posix_dirlist_t posix_listdir(const char *path, int type)
 {

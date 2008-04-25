@@ -20,8 +20,6 @@
 #ifndef StringField_h
 #define StringField_h
 
-#include <string>
-
 #include "Field.h"
 
 namespace NodeCore {

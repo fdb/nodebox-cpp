@@ -20,14 +20,6 @@
 #ifndef NodeLibraryManager_h
 #define NodeLibraryManager_h
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <exception>
-#include <stdio.h>
-#include <string.h>
-
-#include "posixutils.h"
 #include "NodeLibrary.h"
 #include "Node.h"
 

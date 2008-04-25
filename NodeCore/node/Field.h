@@ -20,9 +20,6 @@
 #ifndef Field_h
 #define Field_h
 
-#include <vector>
-#include <string>
-
 #include "Connection.h"
 
 namespace NodeCore {
@@ -43,6 +40,17 @@ public:
 private:
     std::string m_message;
 };
+
+enum FieldPolarity {
+    kIn = 1,
+    kOut = 2,
+    kInOut = 3
+};
+
+class InvalidName : public std::exception {};
+
+typedef std::string FieldName;
+typedef std::string FieldType;
 
 typedef std::vector<Connection*> DownstreamList;
 typedef DownstreamList::iterator DownstreamIterator;

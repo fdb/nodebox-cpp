@@ -7,42 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		611EBF6D0DC21190008BE1A1 /* BezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF370DC2108B008BE1A1 /* BezierPath.h */; };
-		611EBF6E0DC21190008BE1A1 /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF390DC2108B008BE1A1 /* Canvas.h */; };
-		611EBF6F0DC21190008BE1A1 /* Grob.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3B0DC2108B008BE1A1 /* Grob.h */; };
-		611EBF700DC21199008BE1A1 /* PathElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3D0DC2108B008BE1A1 /* PathElement.h */; };
-		611EBF710DC21199008BE1A1 /* Point.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3F0DC2108B008BE1A1 /* Point.h */; };
-		611EBF720DC21199008BE1A1 /* Rect.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF410DC2108B008BE1A1 /* Rect.h */; };
-		611EBF730DC21199008BE1A1 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF430DC2108B008BE1A1 /* Transform.h */; };
-		611EBF740DC21199008BE1A1 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF440DC2108B008BE1A1 /* Utils.h */; };
-		611EBF750DC211B9008BE1A1 /* Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF470DC2108B008BE1A1 /* Connection.h */; };
-		611EBF760DC211B9008BE1A1 /* Field.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF490DC2108B008BE1A1 /* Field.h */; };
-		611EBF770DC211B9008BE1A1 /* FieldTypeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */; };
-		611EBF780DC211B9008BE1A1 /* FloatField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4D0DC2108B008BE1A1 /* FloatField.h */; };
-		611EBF790DC211B9008BE1A1 /* IntField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4F0DC2108B008BE1A1 /* IntField.h */; };
-		611EBF7A0DC211B9008BE1A1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF510DC2108B008BE1A1 /* Node.h */; };
-		611EBF7B0DC211B9008BE1A1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF530DC2108B008BE1A1 /* NodeInfo.h */; };
-		611EBF7C0DC211B9008BE1A1 /* NodeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF550DC2108B008BE1A1 /* NodeLibrary.h */; };
-		611EBF7D0DC211B9008BE1A1 /* NodeLibraryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */; };
-		611EBF7E0DC211B9008BE1A1 /* NodeTypeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF590DC2108B008BE1A1 /* NodeTypeManager.h */; };
-		611EBF7F0DC211B9008BE1A1 /* posixutils.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5B0DC2108B008BE1A1 /* posixutils.h */; };
-		611EBF800DC211B9008BE1A1 /* PythonNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5D0DC2108B008BE1A1 /* PythonNode.h */; };
-		611EBF810DC211B9008BE1A1 /* StringField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5F0DC2108B008BE1A1 /* StringField.h */; };
-		611EBF9E0DC21212008BE1A1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9D0DC21210008BE1A1 /* Carbon.framework */; };
-		611EBFA00DC2121C008BE1A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */; };
-		611EBFA20DC2122F008BE1A1 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */; };
-		611EBFA40DC21241008BE1A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA30DC21240008BE1A1 /* QuartzCore.framework */; };
-		611EBFAC0DC212DC008BE1A1 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBFAB0DC212DB008BE1A1 /* config.h */; };
-		611EBFB00DC2142D008BE1A1 /* NodeCorePrefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBFAF0DC2142C008BE1A1 /* NodeCorePrefix.h */; };
-		611EBFDA0DC2165C008BE1A1 /* BezierPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF360DC2108B008BE1A1 /* BezierPath.cpp */; };
-		611EBFDB0DC2165C008BE1A1 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF380DC2108B008BE1A1 /* Canvas.cpp */; };
-		611EBFDC0DC2165C008BE1A1 /* Grob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3A0DC2108B008BE1A1 /* Grob.cpp */; };
-		611EBFDD0DC2165C008BE1A1 /* PathElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3C0DC2108B008BE1A1 /* PathElement.cpp */; };
-		611EBFDE0DC2165C008BE1A1 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3E0DC2108B008BE1A1 /* Point.cpp */; };
-		611EBFDF0DC2165C008BE1A1 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF400DC2108B008BE1A1 /* Rect.cpp */; };
-		611EBFE00DC2165C008BE1A1 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
-		611EC0330DC21847008BE1A1 /* Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC0320DC21845008BE1A1 /* Exceptions.h */; };
+		611EC2440DC22A52008BE1A1 /* testpdf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC16E0DC228CF008BE1A1 /* testpdf.cpp */; };
+		611EC3AC0DC22E7C008BE1A1 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC0DD0DC2223C008BE1A1 /* Python.framework */; };
+		611EC3AD0DC22E7C008BE1A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA30DC21240008BE1A1 /* QuartzCore.framework */; };
+		611EC3AE0DC22E7C008BE1A1 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */; };
+		611EC3AF0DC22E7C008BE1A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */; };
+		611EC3B00DC22E7C008BE1A1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9D0DC21210008BE1A1 /* Carbon.framework */; };
+		611EC3B30DC22E83008BE1A1 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */; };
+		611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC2370DC2297B008BE1A1 /* NodeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF470DC2108B008BE1A1 /* Connection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF490DC2108B008BE1A1 /* Field.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4D0DC2108B008BE1A1 /* FloatField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4F0DC2108B008BE1A1 /* IntField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF510DC2108B008BE1A1 /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF530DC2108B008BE1A1 /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF550DC2108B008BE1A1 /* NodeLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BD0DC22EA4008BE1A1 /* NodeLibraryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BE0DC22EA4008BE1A1 /* posixutils.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5B0DC2108B008BE1A1 /* posixutils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BF0DC22EA4008BE1A1 /* PythonNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5D0DC2108B008BE1A1 /* PythonNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C00DC22EA4008BE1A1 /* StringField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5F0DC2108B008BE1A1 /* StringField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C10DC22EB9008BE1A1 /* BezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF370DC2108B008BE1A1 /* BezierPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C20DC22EB9008BE1A1 /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF390DC2108B008BE1A1 /* Canvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C30DC22EB9008BE1A1 /* Grob.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3B0DC2108B008BE1A1 /* Grob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C40DC22EB9008BE1A1 /* PathElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3D0DC2108B008BE1A1 /* PathElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C50DC22EB9008BE1A1 /* Point.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3F0DC2108B008BE1A1 /* Point.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C60DC22EB9008BE1A1 /* Rect.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF410DC2108B008BE1A1 /* Rect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C70DC22EB9008BE1A1 /* Transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF430DC2108B008BE1A1 /* Transform.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C80DC22EB9008BE1A1 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF440DC2108B008BE1A1 /* Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3C90DC22EB9008BE1A1 /* Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC0320DC21845008BE1A1 /* Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3CA0DC22ED6008BE1A1 /* BezierPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF360DC2108B008BE1A1 /* BezierPath.cpp */; };
+		611EC3CB0DC22ED6008BE1A1 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF380DC2108B008BE1A1 /* Canvas.cpp */; };
+		611EC3CC0DC22ED6008BE1A1 /* Grob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3A0DC2108B008BE1A1 /* Grob.cpp */; };
+		611EC3CD0DC22ED6008BE1A1 /* PathElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3C0DC2108B008BE1A1 /* PathElement.cpp */; };
+		611EC3CE0DC22ED6008BE1A1 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3E0DC2108B008BE1A1 /* Point.cpp */; };
+		611EC3CF0DC22ED6008BE1A1 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF400DC2108B008BE1A1 /* Rect.cpp */; };
+		611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
+		611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
+		611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
+		611EC3D30DC22ED6008BE1A1 /* FieldTypeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */; };
+		611EC3D40DC22ED6008BE1A1 /* FloatField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */; };
+		611EC3D50DC22ED6008BE1A1 /* IntField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4E0DC2108B008BE1A1 /* IntField.cpp */; };
+		611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
+		611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
+		611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
+		611EC3D90DC22ED6008BE1A1 /* NodeLibraryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */; };
+		611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */; };
+		611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */; };
+		611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5E0DC2108B008BE1A1 /* StringField.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		611EC3B10DC22E7F008BE1A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 611EBF200DC20FB3008BE1A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1 /* NodeCore */;
+			remoteInfo = NodeCore;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		611EBF360DC2108B008BE1A1 /* BezierPath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierPath.cpp; sourceTree = "<group>"; };
@@ -78,15 +101,12 @@
 		611EBF550DC2108B008BE1A1 /* NodeLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeLibrary.h; sourceTree = "<group>"; };
 		611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeLibraryManager.cpp; sourceTree = "<group>"; };
 		611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeLibraryManager.h; sourceTree = "<group>"; };
-		611EBF580DC2108B008BE1A1 /* NodeTypeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeTypeManager.cpp; sourceTree = "<group>"; };
-		611EBF590DC2108B008BE1A1 /* NodeTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTypeManager.h; sourceTree = "<group>"; };
 		611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = posixutils.cpp; sourceTree = "<group>"; };
 		611EBF5B0DC2108B008BE1A1 /* posixutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = posixutils.h; sourceTree = "<group>"; };
 		611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonNode.cpp; sourceTree = "<group>"; };
 		611EBF5D0DC2108B008BE1A1 /* PythonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PythonNode.h; sourceTree = "<group>"; };
 		611EBF5E0DC2108B008BE1A1 /* StringField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringField.cpp; sourceTree = "<group>"; };
 		611EBF5F0DC2108B008BE1A1 /* StringField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringField.h; sourceTree = "<group>"; };
-		611EBF650DC210A8008BE1A1 /* NodeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NodeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		611EBF840DC211C9008BE1A1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		611EBF9D0DC21210008BE1A1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -95,17 +115,31 @@
 		611EBFAB0DC212DB008BE1A1 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		611EBFAF0DC2142C008BE1A1 /* NodeCorePrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeCorePrefix.h; sourceTree = "<group>"; };
 		611EC0320DC21845008BE1A1 /* Exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exceptions.h; sourceTree = "<group>"; };
+		611EC0DD0DC2223C008BE1A1 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = /System/Library/Frameworks/Python.framework; sourceTree = "<absolute>"; };
+		611EC16E0DC228CF008BE1A1 /* testpdf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testpdf.cpp; path = test/testpdf.cpp; sourceTree = "<group>"; };
+		611EC2370DC2297B008BE1A1 /* NodeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeCore.h; path = api/NodeCore.h; sourceTree = "<group>"; };
+		611EC23D0DC22A3C008BE1A1 /* testpdf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testpdf; sourceTree = BUILT_PRODUCTS_DIR; };
+		611EC2B80DC22E66008BE1A1 /* NodeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NodeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		611EBF630DC210A8008BE1A1 /* Frameworks */ = {
+		611EC23B0DC22A3C008BE1A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				611EBF9E0DC21212008BE1A1 /* Carbon.framework in Frameworks */,
-				611EBFA00DC2121C008BE1A1 /* Cocoa.framework in Frameworks */,
-				611EBFA20DC2122F008BE1A1 /* ApplicationServices.framework in Frameworks */,
-				611EBFA40DC21241008BE1A1 /* QuartzCore.framework in Frameworks */,
+				611EC3B30DC22E83008BE1A1 /* NodeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		611EC2B60DC22E66008BE1A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				611EC3AC0DC22E7C008BE1A1 /* Python.framework in Frameworks */,
+				611EC3AD0DC22E7C008BE1A1 /* QuartzCore.framework in Frameworks */,
+				611EC3AE0DC22E7C008BE1A1 /* ApplicationServices.framework in Frameworks */,
+				611EC3AF0DC22E7C008BE1A1 /* Cocoa.framework in Frameworks */,
+				611EC3B00DC22E7C008BE1A1 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,8 +152,10 @@
 				611EBFAB0DC212DB008BE1A1 /* config.h */,
 				611EBFAF0DC2142C008BE1A1 /* NodeCorePrefix.h */,
 				611EBF840DC211C9008BE1A1 /* Info.plist */,
+				611EC1700DC22963008BE1A1 /* api */,
 				611EBF350DC2108B008BE1A1 /* graphics */,
 				611EBF450DC2108B008BE1A1 /* node */,
+				611EC16D0DC2288F008BE1A1 /* test */,
 				611EBF9C0DC21200008BE1A1 /* Frameworks */,
 				611EBF660DC210A8008BE1A1 /* Products */,
 			);
@@ -169,8 +205,6 @@
 				611EBF550DC2108B008BE1A1 /* NodeLibrary.h */,
 				611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */,
 				611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */,
-				611EBF580DC2108B008BE1A1 /* NodeTypeManager.cpp */,
-				611EBF590DC2108B008BE1A1 /* NodeTypeManager.h */,
 				611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */,
 				611EBF5B0DC2108B008BE1A1 /* posixutils.h */,
 				611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */,
@@ -184,7 +218,8 @@
 		611EBF660DC210A8008BE1A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				611EBF650DC210A8008BE1A1 /* NodeCore.framework */,
+				611EC23D0DC22A3C008BE1A1 /* testpdf */,
+				611EC2B80DC22E66008BE1A1 /* NodeCore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +227,7 @@
 		611EBF9C0DC21200008BE1A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				611EC0DD0DC2223C008BE1A1 /* Python.framework */,
 				611EBFA30DC21240008BE1A1 /* QuartzCore.framework */,
 				611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */,
 				611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */,
@@ -200,51 +236,82 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		611EC16D0DC2288F008BE1A1 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				611EC16E0DC228CF008BE1A1 /* testpdf.cpp */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		611EC1700DC22963008BE1A1 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				611EC2370DC2297B008BE1A1 /* NodeCore.h */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		611EBF600DC210A8008BE1A1 /* Headers */ = {
+		611EC2B30DC22E66008BE1A1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				611EBF750DC211B9008BE1A1 /* Connection.h in Headers */,
-				611EBF760DC211B9008BE1A1 /* Field.h in Headers */,
-				611EBF770DC211B9008BE1A1 /* FieldTypeManager.h in Headers */,
-				611EBF780DC211B9008BE1A1 /* FloatField.h in Headers */,
-				611EBF790DC211B9008BE1A1 /* IntField.h in Headers */,
-				611EBF7A0DC211B9008BE1A1 /* Node.h in Headers */,
-				611EBF7B0DC211B9008BE1A1 /* NodeInfo.h in Headers */,
-				611EBF7C0DC211B9008BE1A1 /* NodeLibrary.h in Headers */,
-				611EBF7D0DC211B9008BE1A1 /* NodeLibraryManager.h in Headers */,
-				611EBF7E0DC211B9008BE1A1 /* NodeTypeManager.h in Headers */,
-				611EBF7F0DC211B9008BE1A1 /* posixutils.h in Headers */,
-				611EBF800DC211B9008BE1A1 /* PythonNode.h in Headers */,
-				611EBF810DC211B9008BE1A1 /* StringField.h in Headers */,
-				611EBF6D0DC21190008BE1A1 /* BezierPath.h in Headers */,
-				611EBF700DC21199008BE1A1 /* PathElement.h in Headers */,
-				611EBF710DC21199008BE1A1 /* Point.h in Headers */,
-				611EBF720DC21199008BE1A1 /* Rect.h in Headers */,
-				611EBF730DC21199008BE1A1 /* Transform.h in Headers */,
-				611EBF740DC21199008BE1A1 /* Utils.h in Headers */,
-				611EBF6E0DC21190008BE1A1 /* Canvas.h in Headers */,
-				611EBF6F0DC21190008BE1A1 /* Grob.h in Headers */,
-				611EBFAC0DC212DC008BE1A1 /* config.h in Headers */,
-				611EBFB00DC2142D008BE1A1 /* NodeCorePrefix.h in Headers */,
-				611EC0330DC21847008BE1A1 /* Exceptions.h in Headers */,
+				611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */,
+				611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */,
+				611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */,
+				611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */,
+				611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */,
+				611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */,
+				611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */,
+				611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */,
+				611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */,
+				611EC3BD0DC22EA4008BE1A1 /* NodeLibraryManager.h in Headers */,
+				611EC3BE0DC22EA4008BE1A1 /* posixutils.h in Headers */,
+				611EC3BF0DC22EA4008BE1A1 /* PythonNode.h in Headers */,
+				611EC3C00DC22EA4008BE1A1 /* StringField.h in Headers */,
+				611EC3C10DC22EB9008BE1A1 /* BezierPath.h in Headers */,
+				611EC3C20DC22EB9008BE1A1 /* Canvas.h in Headers */,
+				611EC3C30DC22EB9008BE1A1 /* Grob.h in Headers */,
+				611EC3C40DC22EB9008BE1A1 /* PathElement.h in Headers */,
+				611EC3C50DC22EB9008BE1A1 /* Point.h in Headers */,
+				611EC3C60DC22EB9008BE1A1 /* Rect.h in Headers */,
+				611EC3C70DC22EB9008BE1A1 /* Transform.h in Headers */,
+				611EC3C80DC22EB9008BE1A1 /* Utils.h in Headers */,
+				611EC3C90DC22EB9008BE1A1 /* Exceptions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		611EBF640DC210A8008BE1A1 /* NodeCore */ = {
+		611EC23C0DC22A3C008BE1A1 /* testpdf */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 611EBF6A0DC210A9008BE1A1 /* Build configuration list for PBXNativeTarget "NodeCore" */;
+			buildConfigurationList = 611EC2490DC22A81008BE1A1 /* Build configuration list for PBXNativeTarget "testpdf" */;
 			buildPhases = (
-				611EBF600DC210A8008BE1A1 /* Headers */,
-				611EBF610DC210A8008BE1A1 /* Resources */,
-				611EBF620DC210A8008BE1A1 /* Sources */,
-				611EBF630DC210A8008BE1A1 /* Frameworks */,
+				611EC23A0DC22A3C008BE1A1 /* Sources */,
+				611EC23B0DC22A3C008BE1A1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				611EC3B20DC22E7F008BE1A1 /* PBXTargetDependency */,
+			);
+			name = testpdf;
+			productName = testpdf;
+			productReference = 611EC23D0DC22A3C008BE1A1 /* testpdf */;
+			productType = "com.apple.product-type.tool";
+		};
+		611EC2B70DC22E66008BE1A1 /* NodeCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 611EC2BC0DC22E67008BE1A1 /* Build configuration list for PBXNativeTarget "NodeCore" */;
+			buildPhases = (
+				611EC2B30DC22E66008BE1A1 /* Headers */,
+				611EC2B40DC22E66008BE1A1 /* Resources */,
+				611EC2B50DC22E66008BE1A1 /* Sources */,
+				611EC2B60DC22E66008BE1A1 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,7 +319,7 @@
 			);
 			name = NodeCore;
 			productName = NodeCore;
-			productReference = 611EBF650DC210A8008BE1A1 /* NodeCore.framework */;
+			productReference = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -268,13 +335,14 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				611EBF640DC210A8008BE1A1 /* NodeCore */,
+				611EC23C0DC22A3C008BE1A1 /* testpdf */,
+				611EC2B70DC22E66008BE1A1 /* NodeCore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		611EBF610DC210A8008BE1A1 /* Resources */ = {
+		611EC2B40DC22E66008BE1A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -284,21 +352,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		611EBF620DC210A8008BE1A1 /* Sources */ = {
+		611EC23A0DC22A3C008BE1A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				611EBFDA0DC2165C008BE1A1 /* BezierPath.cpp in Sources */,
-				611EBFDB0DC2165C008BE1A1 /* Canvas.cpp in Sources */,
-				611EBFDC0DC2165C008BE1A1 /* Grob.cpp in Sources */,
-				611EBFDD0DC2165C008BE1A1 /* PathElement.cpp in Sources */,
-				611EBFDE0DC2165C008BE1A1 /* Point.cpp in Sources */,
-				611EBFDF0DC2165C008BE1A1 /* Rect.cpp in Sources */,
-				611EBFE00DC2165C008BE1A1 /* Transform.cpp in Sources */,
+				611EC2440DC22A52008BE1A1 /* testpdf.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		611EC2B50DC22E66008BE1A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				611EC3CA0DC22ED6008BE1A1 /* BezierPath.cpp in Sources */,
+				611EC3CB0DC22ED6008BE1A1 /* Canvas.cpp in Sources */,
+				611EC3CC0DC22ED6008BE1A1 /* Grob.cpp in Sources */,
+				611EC3CD0DC22ED6008BE1A1 /* PathElement.cpp in Sources */,
+				611EC3CE0DC22ED6008BE1A1 /* Point.cpp in Sources */,
+				611EC3CF0DC22ED6008BE1A1 /* Rect.cpp in Sources */,
+				611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */,
+				611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */,
+				611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */,
+				611EC3D30DC22ED6008BE1A1 /* FieldTypeManager.cpp in Sources */,
+				611EC3D40DC22ED6008BE1A1 /* FloatField.cpp in Sources */,
+				611EC3D50DC22ED6008BE1A1 /* IntField.cpp in Sources */,
+				611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */,
+				611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */,
+				611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */,
+				611EC3D90DC22ED6008BE1A1 /* NodeLibraryManager.cpp in Sources */,
+				611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */,
+				611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */,
+				611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		611EC3B20DC22E7F008BE1A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 611EC2B70DC22E66008BE1A1 /* NodeCore */;
+			targetProxy = 611EC3B10DC22E7F008BE1A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		611EBF210DC20FB3008BE1A1 /* Debug */ = {
@@ -318,55 +414,126 @@
 			};
 			name = Release;
 		};
-		611EBF680DC210A9008BE1A1 /* Debug */ = {
+		611EC23F0DC22A3D008BE1A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(NATIVE_ARCH)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/build/Debug\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = testpdf;
+			};
+			name = Debug;
+		};
+		611EC2400DC22A3D008BE1A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/build/Debug\"";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = testpdf;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		611EC2BA0DC22E67008BE1A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = NodeCorePrefix.h;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = build/Debug;
-				OTHER_LDFLAGS = (
-					"-lobjc",
-					"-sub_library",
-					libobjc,
-				);
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_CFLAGS = "-ObjC++";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = NodeCore;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
-		611EBF690DC210A9008BE1A1 /* Release */ = {
+		611EC2BB0DC22E67008BE1A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				INFOPLIST_FILE = "NodeCore-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Carbon,
-				);
+				GCC_PREFIX_HEADER = NodeCorePrefix.h;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_CFLAGS = "-objectivec";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = NodeCore;
+				WARNING_CFLAGS = "-Wall";
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -383,11 +550,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		611EBF6A0DC210A9008BE1A1 /* Build configuration list for PBXNativeTarget "NodeCore" */ = {
+		611EC2490DC22A81008BE1A1 /* Build configuration list for PBXNativeTarget "testpdf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				611EBF680DC210A9008BE1A1 /* Debug */,
-				611EBF690DC210A9008BE1A1 /* Release */,
+				611EC23F0DC22A3D008BE1A1 /* Debug */,
+				611EC2400DC22A3D008BE1A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		611EC2BC0DC22E67008BE1A1 /* Build configuration list for PBXNativeTarget "NodeCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				611EC2BA0DC22E67008BE1A1 /* Debug */,
+				611EC2BB0DC22E67008BE1A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

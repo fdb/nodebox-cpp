@@ -22,10 +22,6 @@
 
 #include "Field.h"
 
-#include <vector>
-#include <string>
-#include <map>
-
 namespace NodeCore {
 
 typedef std::map<std::string, Field*> FieldMap;
@@ -35,6 +31,19 @@ typedef FieldMap::iterator FieldIterator;
 public: \
     static Node* initialize() { return new nodeName; } \
     virtual std::string className() { return #nodeName; }
+
+typedef std::string NodeName;
+typedef std::string NodeType;
+
+class FieldNotFound : public std::exception
+{
+public:
+    FieldNotFound(const FieldName& name) : m_name(name) {}
+    virtual ~FieldNotFound() throw () {}
+    FieldName getName() { return m_name; }
+private:
+    FieldName m_name;
+};
 
 // TODO: forbidden names
 

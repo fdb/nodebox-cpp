@@ -16,22 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef posixutils_h
-#define posixutils_h
-
-#include <dirent.h>
-
-#define NAMLEN(dirent) strlen((dirent)->d_name)
-
-typedef std::vector<std::string> posix_dirlist_t;
-typedef posix_dirlist_t::iterator posix_diriter_t;
-
-const int POSIX_FILE = DT_REG;
-const int POSIX_DIR = DT_DIR;
-
-posix_dirlist_t posix_listdir(const char *path, int type=64);
-
-bool posix_file_exists(const char *path);
-
-#endif // posixutils_h
+ 
+#include <NodeCore/NodeCore.h>
+ 
+using namespace NodeCore;
+ 
+int main(int argc, char* argv[])
+{
+    Canvas c = Canvas();
+    BezierPath p1 = BezierPath();
+    p1.rect(0,0,100,100);
+    c.append(p1);
+    c.save("test.pdf");
+	std::cout << "Wrote test.pdf." << std::endl;
+}
