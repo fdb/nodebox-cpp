@@ -1,6 +1,5 @@
-#include "NodeCore.h"
-
-using namespace std;
+#include "config.h"
+#include "Canvas.h"
 
 namespace NodeCore {
 

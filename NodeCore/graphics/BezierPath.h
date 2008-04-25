@@ -1,12 +1,9 @@
 #ifndef BezierPath_h
 #define BezierPath_h
 
-#include <ApplicationServices/ApplicationServices.h>
-#include <vector>
-
-#include "graphics/Rect.h"
-#include "graphics/Grob.h"
-#include "graphics/PathElement.h"
+#include "Rect.h"
+#include "Grob.h"
+#include "PathElement.h"
 
 namespace NodeCore {
 

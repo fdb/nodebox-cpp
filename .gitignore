@@ -1,0 +1,5 @@
+.DS_Store
+build
+NodeCore/NodeCore.xcodeproj/*.mode*
+NodeCore/NodeCore.xcodeproj/*.pbxuser
+NodeCore/NodeCore.xcodeproj/*.perspective*

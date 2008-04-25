@@ -1,6 +1,5 @@
-#include <iostream>
-
-#include "NodeCore.h"
+#include "config.h"
+#include "Point.h"
 
 namespace NodeCore {
 

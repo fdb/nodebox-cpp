@@ -1,18 +1,16 @@
 #ifndef Canvas_h
 #define Canvas_h
 
-#include <ApplicationServices/ApplicationServices.h>
-#include <vector>
-
-#include "graphics/Grob.h"
-#include "graphics/BezierPath.h"
-
-using std::vector;
+#include "Grob.h"
+#include "BezierPath.h"
 
 namespace NodeCore {
 
-typedef vector<Grob*> GrobList;
-typedef vector<Grob*>::iterator GrobIterator;
+typedef std::vector<Grob*> GrobList;
+typedef std::vector<Grob*>::iterator GrobIterator;
+
+const float DEFAULT_WIDTH = 1000;
+const float DEFAULT_HEIGHT = 1000;
 
 class Canvas : public Grob {
 public:

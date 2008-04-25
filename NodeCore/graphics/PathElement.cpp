@@ -1,6 +1,7 @@
-#include <iostream>
+#include "config.h"
+#include "PathElement.h"
 
-#include "NodeCore.h"
+#include "Exceptions.h"
 
 namespace NodeCore {
 

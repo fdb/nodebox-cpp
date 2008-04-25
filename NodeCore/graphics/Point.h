@@ -1,8 +1,6 @@
 #ifndef Point_h
 #define Point_h
 
-#include <iostream>
-
 namespace NodeCore {
 
 class PathElement;

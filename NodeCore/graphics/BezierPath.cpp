@@ -1,9 +1,6 @@
-#include <ApplicationServices/ApplicationServices.h>
-#include <iostream>
+#include "config.h"
+#include "BezierPath.h"
 
-#include "NodeCore.h"
-
-using namespace std;
 namespace NodeCore {
 
 // Magic number used for drawing bezier circles.

@@ -1,8 +1,6 @@
 #ifndef Transform_h
 #define Transform_h
 
-#include <ApplicationServices/ApplicationServices.h>
-
 namespace NodeCore {
 
 class Transform {

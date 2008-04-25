@@ -1,7 +1,5 @@
-#include <iostream>
-#include <ApplicationServices/ApplicationServices.h>
-
-#include "NodeCore.h"
+#include "config.h"
+#include "Rect.h"
 
 namespace NodeCore {
 

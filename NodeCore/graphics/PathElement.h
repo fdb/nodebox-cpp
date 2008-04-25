@@ -1,9 +1,16 @@
 #ifndef PathEement_h
 #define PathEement_h
 
-#include "graphics/Point.h"
+#include "Point.h"
 
 namespace NodeCore {
+
+enum PathCommand {
+    kMoveto = 0,
+    kLineto,
+    kCurveto,
+    kClose
+};
 
 class PathElement {
 public:

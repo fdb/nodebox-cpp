@@ -1,8 +1,6 @@
 #ifndef Rect_h
 #define Rect_h
 
-#include <ApplicationServices/ApplicationServices.h>
-
 namespace NodeCore {
 
 class Rect {
