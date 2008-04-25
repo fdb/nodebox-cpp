@@ -24,17 +24,18 @@ namespace NodeCore {
 
 // Magic number used for drawing bezier circles.
 // 4 *(sqrt(2) -1)/3
-float const KAPPA = 0.5522847498;
+float const KAPPA = 0.5522847498f;
 
 BezierPath::BezierPath()
-          : m_path(CGPathCreateMutable()), 
+          : m_elements(PathElementList()),
+            m_path(CGPathCreateMutable()),
             m_dirty(true)
 {
 }
 
 BezierPath::BezierPath(const BezierPath& other)
-          : m_path(CGPathCreateMutable()), 
-            m_elements(other.m_elements), 
+          : m_elements(other.m_elements), 
+            m_path(CGPathCreateMutable()),
             m_dirty(true)
 {
 }
@@ -120,36 +121,36 @@ NodeCore::Rect BezierPath::bounds()
 CGMutablePathRef BezierPath::cgPath()
 {    
     if (!m_dirty) return m_path;
-    CGMutablePathRef cgPath = CGPathCreateMutable();
+    CGMutablePathRef p = CGPathCreateMutable();
     Point c1, c2;
     for (PathElementIterator iter=m_elements.begin(); iter != m_elements.end(); iter++) {
         PathElement el = (*iter);
         switch (el.m_cmd) {
             case kMoveto:
-                CGPathMoveToPoint(cgPath, 0, el.getX(), el.getY());
+                CGPathMoveToPoint(p, 0, el.getX(), el.getY());
                 break;
             case kLineto:
-                CGPathAddLineToPoint(cgPath, 0, el.getX(), el.getY());
+                CGPathAddLineToPoint(p, 0, el.getX(), el.getY());
                 break;
             case kCurveto:
                 c1 = el.getCtrl1();
                 c2 = el.getCtrl2();
-                CGPathAddCurveToPoint(cgPath, 0, el.getX(), el.getY(), c1.getX(), c1.getY(), c2.getX(), c2.getY());
+                CGPathAddCurveToPoint(p, 0, el.getX(), el.getY(), c1.getX(), c1.getY(), c2.getX(), c2.getY());
                 break;
             case kClose:
-                CGPathCloseSubpath(cgPath);
+                CGPathCloseSubpath(p);
                 break;
             default:
                 assert(false);
         }
     }
     CGPathRelease(m_path);
-    m_path = cgPath;
+    m_path = p;
     m_dirty = false;
     return m_path;
 }
 
-void BezierPath::transform(const Transform& transform)
+void BezierPath::transform(const Transform& t)
 {
     // Has to be done by my own functions
     // Maybe use applier to extract path element data from cgpath?
@@ -193,7 +194,7 @@ PathElement BezierPath::operator[](int n) const
 std::ostream& operator<<(std::ostream& o, const BezierPath& bp)
 {
     o << "BezierPath(";
-    for (int i=0; i < bp.m_elements.size(); i++) {
+    for (unsigned int i=0; i < bp.m_elements.size(); i++) {
         o << bp.m_elements[i] << ",";
     }
     /*

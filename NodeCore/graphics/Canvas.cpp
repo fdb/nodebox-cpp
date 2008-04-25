@@ -35,7 +35,7 @@ Canvas::Canvas(const Canvas& other)
         m_width(other.m_width),
         m_height(other.m_height)
 {
-    for(int i=0; i<other.m_grobs.size(); i++) {
+    for(unsigned int i=0; i<other.m_grobs.size(); i++) {
         Grob* newGrob = other.m_grobs[i]->clone();
         m_grobs.push_back(newGrob);
     }
@@ -80,8 +80,8 @@ void Canvas::saveAsPDF(std::string fname)
     CFRelease(info);
     CFRelease(url);
     CGContextBeginPage(pdfContext, &rect);
-    CGContextTranslateCTM(pdfContext, 0.0, m_height);
-    CGContextScaleCTM(pdfContext, 1.0, -1.0);
+    CGContextTranslateCTM(pdfContext, 0, m_height);
+    CGContextScaleCTM(pdfContext, 1, -1);
     _draw(pdfContext);
     CGContextEndPage(pdfContext);
     CGContextRelease(pdfContext);
@@ -107,7 +107,7 @@ bool Canvas::operator==(const Grob& g) const
     if (m_grobs.size() != c.m_grobs.size())
         return false;
     
-    for (int i = 0; i < m_grobs.size(); i++) {
+    for (unsigned int i = 0; i < m_grobs.size(); i++) {
         Grob* g1 = m_grobs[i];
         Grob* g2 = c.m_grobs[i];
         if (*g1 != *g2)

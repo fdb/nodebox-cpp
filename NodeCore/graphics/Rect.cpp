@@ -39,11 +39,11 @@ Rect::Rect(float x, float y, float width, float height)
 }
 
 Rect::Rect(CGRect r)
+    : m_x(r.origin.x),
+      m_y(r.origin.y),
+      m_width(r.size.width),
+      m_height(r.size.height)
 {
-    m_x = r.origin.x;
-    m_y = r.origin.y;
-    m_width = r.size.width;
-    m_height = r.size.height;
 }
 
 bool Rect::operator==(const Rect& r) const

@@ -36,6 +36,8 @@ NodeInfo::~NodeInfo()
         case kPython:
             Py_XDECREF((PyObject*)m_data);
             break;
+        default:
+            break;
     }
 }
 

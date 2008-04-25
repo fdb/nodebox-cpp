@@ -27,12 +27,13 @@ namespace NodeCore {
 Field::Field(Node *node, const FieldName& name, FieldPolarity polarity)
      : m_node(node), 
        m_name(name), 
-       m_polarity(polarity), 
        m_verboseName(""), 
        m_connectable(false),
        m_required(false),
        m_multi(false),
-       m_connection(NULL)
+       m_polarity(polarity), 
+       m_connection(NULL),
+       m_downstreams(DownstreamList())
 {
     if (validName(name)) {
         m_name = name;

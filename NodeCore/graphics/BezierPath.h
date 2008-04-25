@@ -52,7 +52,7 @@ public:
     NodeCore::Rect bounds();
     
     CGMutablePathRef cgPath();
-    void transform(const Transform& transform);
+    void transform(const Transform& t);
 
     virtual void _draw(CGContextRef ctx);
     
