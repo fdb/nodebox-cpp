@@ -620,7 +620,6 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-ObjC++";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -658,7 +657,6 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-objectivec";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
