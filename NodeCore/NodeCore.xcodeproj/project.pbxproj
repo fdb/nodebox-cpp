@@ -73,14 +73,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 611EBF200DC20FB3008BE1A1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1 /* NodeCore */;
+			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1;
 			remoteInfo = NodeCore;
 		};
 		611EC4400DC24D30008BE1A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 611EBF200DC20FB3008BE1A1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1 /* NodeCore */;
+			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1;
 			remoteInfo = NodeCore;
 		};
 /* End PBXContainerItemProxy section */
@@ -620,7 +620,6 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-ObjC++";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
