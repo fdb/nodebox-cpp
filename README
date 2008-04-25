@@ -1,0 +1,9 @@
+NodeBox is an application and framework for creating 2D visuals.
+You can use programming code or a node-based visual interface to create
+static, animated, or interactive graphics and export them to popular
+image and movie formats.
+
+NodeBox is written by Frederik De Bleser (frederik@pandora.be).
+Documentation and libraries by Tom De Smedt (tomdesmedt@organisms.be)
+
+http://nodebox.net/
