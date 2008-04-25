@@ -20,6 +20,8 @@
 #ifndef Grob_h
 #define Grob_h
 
+#include <iostream>
+
 namespace NodeCore {
 
 class Grob {

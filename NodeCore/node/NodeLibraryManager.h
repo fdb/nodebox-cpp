@@ -23,6 +23,11 @@
 #include "NodeLibrary.h"
 #include "Node.h"
 
+#include <string>
+#include <exception>
+#include <vector>
+#include <map>
+
 namespace NodeCore {
 
 const std::string NODE_LIBRARY_SEARCH_PATH = "plugins";

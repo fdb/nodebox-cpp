@@ -22,6 +22,9 @@
 
 #include "Node.h"
 
+#include <string>
+#include <exception>
+
 namespace NodeCore {
 
 class NodeLibrary;

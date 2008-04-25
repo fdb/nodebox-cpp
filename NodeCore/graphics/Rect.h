@@ -20,6 +20,8 @@
 #ifndef Rect_h
 #define Rect_h
 
+#include <iostream>
+
 namespace NodeCore {
 
 class Rect {
