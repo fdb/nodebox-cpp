@@ -21,6 +21,7 @@
 #define Rect_h
 
 #include <iostream>
+
 #include <ApplicationServices/ApplicationServices.h>
 
 namespace NodeCore {
