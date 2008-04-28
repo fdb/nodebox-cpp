@@ -46,6 +46,10 @@ protected:
     virtual void setValueFromConnection();
 
 private:
+    // Disallow copy construction or assignment
+    IntField(const IntField& other);
+    IntField& operator=(const IntField& other);
+
     int m_value;
 
     FieldTypeMacro(IntField);

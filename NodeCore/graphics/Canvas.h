@@ -29,9 +29,6 @@
 
 namespace NodeCore {
 
-typedef std::vector<Grob*> GrobList;
-typedef std::vector<Grob*>::iterator GrobIterator;
-
 const float DEFAULT_WIDTH = 1000;
 const float DEFAULT_HEIGHT = 1000;
 
@@ -58,6 +55,10 @@ public:
 
 private:
     void saveAsPDF(std::string fname);
+
+    typedef std::vector<Grob*> GrobList;
+    typedef std::vector<Grob*>::iterator GrobIterator;
+
     GrobList m_grobs;
     float m_width, m_height;
 };

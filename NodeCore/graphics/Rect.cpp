@@ -46,6 +46,24 @@ Rect::Rect(CGRect r)
 {
 }
 
+Rect::Rect(const Rect &r)
+     : m_x(r.m_x),
+       m_y(r.m_y),
+       m_width(r.m_width),
+       m_height(r.m_height)
+{
+}
+
+Rect& Rect::operator=(const Rect& r)
+{
+    if (this == &r) return *this;
+    m_x = r.m_x;
+    m_y = r.m_y;
+    m_width = r.m_width;
+    m_height = r.m_height;
+    return *this;
+}
+
 bool Rect::operator==(const Rect& r) const
 {
     return m_x == r.m_x

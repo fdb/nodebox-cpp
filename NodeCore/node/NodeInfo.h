@@ -64,6 +64,10 @@ public:
     Node* create();
 
 private:
+    // Disallow copy construction or assignment
+    NodeInfo(const NodeInfo& other);
+    NodeInfo& operator=(const NodeInfo& other);
+
     Node* createNativeNode();
     Node* createPythonNode();
 

@@ -30,6 +30,7 @@
 namespace NodeCore {
 
 NodeLibraryManager::NodeLibraryManager()
+                   : m_nodeLibraryMap(NodeLibraryMap())
 {
     lookForLibraries();
 }

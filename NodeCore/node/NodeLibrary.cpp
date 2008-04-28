@@ -39,11 +39,15 @@ std::string NodeLibraryVersion::asString()
 }
 
 NodeLibrary::NodeLibrary(NodeLibraryName name, int version_major, int version_minor, int version_revision, NodeLibraryPath path)
-    : m_name(name), 
+    : m_name(name),
+      m_nodes(NodeInfoList()),
       m_version(NodeLibraryVersion(version_major, version_minor, version_revision)),
       m_path(path),
       m_type(kUnknown),
-      m_loaded(false) { m_handle = NULL; }
+      m_loaded(false),
+      m_handle(0)
+{
+}
 
 NodeLibrary::~NodeLibrary() {
     unload();

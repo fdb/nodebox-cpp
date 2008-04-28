@@ -89,6 +89,10 @@ protected:
     virtual void process();
     
 private:
+    // Disallow copy construction or assignment
+    Node(const Node& other);
+    Node& operator=(const Node& other);
+
     float m_x, m_y;
     std::string m_name;
     FieldMap m_fields;

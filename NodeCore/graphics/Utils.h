@@ -26,12 +26,12 @@ namespace NodeCore {
 
 inline float radians(float degrees)
 {
-    return degrees * M_PI / 180;
+    return (float) (degrees * M_PI / 180);
 }
 
 inline float degrees(float radians)
 {
-    return radians * 180 / M_PI;
+    return (float) (radians * 180 / M_PI);
 }
 
 }

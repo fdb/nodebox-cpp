@@ -52,6 +52,10 @@ public:
     friend std::ostream& operator<<(std::ostream& o, const Connection& c);
 
 private:
+    // Disallow copy construction or assignment
+    Connection(const Connection& other);
+    Connection& operator=(const Connection& other);
+    
     void markDirtyDownstream();
     void update();
     

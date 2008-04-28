@@ -46,6 +46,10 @@ protected:
     virtual void setValueFromConnection();
 
 private:
+    // Disallow copy construction or assignment
+    StringField(const StringField& other);
+    StringField& operator=(const StringField& other);
+
     std::string m_value;
 
     FieldTypeMacro(StringField);

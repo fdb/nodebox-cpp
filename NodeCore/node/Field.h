@@ -105,6 +105,10 @@ protected:
     Connection* getConnection();
     
 private:
+    // Disallow copy construction or assignment
+    Field(const Field& other);
+    Field& operator=(const Field& other);
+
     void update();
     void markDirty();
     void removeFromDownstreams(Connection* conn);

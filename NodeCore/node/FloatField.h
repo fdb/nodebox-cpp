@@ -46,6 +46,10 @@ protected:
     virtual void setValueFromConnection();
 
 private:
+    // Disallow copy construction or assignment
+    FloatField(const FloatField& other);
+    FloatField& operator=(const FloatField& other);
+
     float m_value;
 
     FieldTypeMacro(FloatField);

@@ -27,6 +27,8 @@ int main(int argc, char* argv[])
     BezierPath p1 = BezierPath();
     p1.rect(0,0,100,100);
     c.append(p1);
+    Image i = Image("nodeboxicon.png", 200, 20);
+    c.append(i);
     c.save("test.pdf");
 	std::cout << "Wrote test.pdf." << std::endl;
 }

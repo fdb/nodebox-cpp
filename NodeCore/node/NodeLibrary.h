@@ -148,6 +148,10 @@ public:
     bool isLoaded();
     
 private:
+    // Disallow copy construction or assignment
+    NodeLibrary(const NodeLibrary& other);
+    NodeLibrary& operator=(const NodeLibrary& other);
+
     // A native library has one file inside of the library folder,
     // called <libname>.nbl (NodeBox Library)
     // The full path would be plugins/libname-1.2.3/libname.nbl

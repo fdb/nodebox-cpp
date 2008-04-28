@@ -66,6 +66,9 @@
 		611EC55A0DC2575B008BE1A1 /* htmloutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5480DC2575B008BE1A1 /* htmloutput.cpp */; };
 		611EC55B0DC2575B008BE1A1 /* collectoroutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5510DC2575B008BE1A1 /* collectoroutput.cpp */; };
 		611EC55C0DC2575B008BE1A1 /* compileroutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5520DC2575B008BE1A1 /* compileroutput.cpp */; };
+		616557A30DC61E9100AC5259 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = 616557A10DC61E9100AC5259 /* Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		616557A40DC61E9100AC5259 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 616557A20DC61E9100AC5259 /* Image.cpp */; };
+		6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6165582B0DC6297600AC5259 /* nodeboxicon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,17 +76,30 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 611EBF200DC20FB3008BE1A1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1 /* NodeCore */;
+			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1;
 			remoteInfo = NodeCore;
 		};
 		611EC4400DC24D30008BE1A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 611EBF200DC20FB3008BE1A1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1 /* NodeCore */;
+			remoteGlobalIDString = 611EC2B70DC22E66008BE1A1;
 			remoteInfo = NodeCore;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		616558260DC6290700AC5259 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		611EBF360DC2108B008BE1A1 /* BezierPath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierPath.cpp; sourceTree = "<group>"; };
@@ -167,6 +183,9 @@
 		611EC5860DC26042008BE1A1 /* FieldTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldTestSuite.h; path = test/node/FieldTestSuite.h; sourceTree = "<group>"; };
 		611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeTestSuite.h; path = test/node/NodeTestSuite.h; sourceTree = "<group>"; };
 		611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathElementTestSuite.h; path = test/graphics/PathElementTestSuite.h; sourceTree = "<group>"; };
+		616557A10DC61E9100AC5259 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		616557A20DC61E9100AC5259 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		6165582B0DC6297600AC5259 /* nodeboxicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeboxicon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +230,7 @@
 				611EBF350DC2108B008BE1A1 /* graphics */,
 				611EBF450DC2108B008BE1A1 /* node */,
 				611EC16D0DC2288F008BE1A1 /* test */,
+				616558290DC6296700AC5259 /* Resources */,
 				611EBF9C0DC21200008BE1A1 /* Frameworks */,
 				611EBF660DC210A8008BE1A1 /* Products */,
 			);
@@ -225,6 +245,8 @@
 				611EBF390DC2108B008BE1A1 /* Canvas.h */,
 				611EBF3A0DC2108B008BE1A1 /* Grob.cpp */,
 				611EBF3B0DC2108B008BE1A1 /* Grob.h */,
+				616557A10DC61E9100AC5259 /* Image.h */,
+				616557A20DC61E9100AC5259 /* Image.cpp */,
 				611EBF3C0DC2108B008BE1A1 /* PathElement.cpp */,
 				611EBF3D0DC2108B008BE1A1 /* PathElement.h */,
 				611EBF3E0DC2108B008BE1A1 /* Point.cpp */,
@@ -360,6 +382,14 @@
 			name = node;
 			sourceTree = "<group>";
 		};
+		616558290DC6296700AC5259 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6165582B0DC6297600AC5259 /* nodeboxicon.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -372,6 +402,7 @@
 				611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */,
 				611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */,
 				611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */,
+				616557A30DC61E9100AC5259 /* Image.h in Headers */,
 				611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */,
 				611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */,
 				611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */,
@@ -401,6 +432,7 @@
 			buildPhases = (
 				611EC23A0DC22A3C008BE1A1 /* Sources */,
 				611EC23B0DC22A3C008BE1A1 /* Frameworks */,
+				616558260DC6290700AC5259 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -509,6 +541,7 @@
 				611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */,
 				611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */,
 				611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */,
+				616557A40DC61E9100AC5259 /* Image.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +669,7 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = .;
 				OTHER_CFLAGS = "-ObjC++";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -673,6 +707,7 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = .;
 				OTHER_CFLAGS = "-objectivec";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;

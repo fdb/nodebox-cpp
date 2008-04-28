@@ -30,6 +30,7 @@ Node::Node()
     m_x(0),
     m_y(0),
     m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
+    m_fields(FieldMap()),
     m_dirty(true)
 {
 }

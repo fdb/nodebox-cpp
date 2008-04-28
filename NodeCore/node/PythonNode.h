@@ -35,6 +35,10 @@ public:
     virtual void process();
     
 private:
+    // Disallow copy construction or assignment
+    PythonNode(const PythonNode& other);
+    PythonNode& operator=(const PythonNode& other);
+
     PyObject* m_pythonObject;
 };
 

@@ -33,9 +33,6 @@ namespace NodeCore {
 class Transform;
 class PathElement;
 
-typedef std::vector<PathElement> PathElementList;
-typedef PathElementList::iterator PathElementIterator;
-
 class BezierPath : public Grob {
 public:
     BezierPath();
@@ -69,6 +66,9 @@ public:
     friend std::ostream& operator<<(std::ostream& o, const BezierPath& bp);
 
 private:
+    typedef std::vector<PathElement> PathElementList;
+    typedef PathElementList::iterator PathElementIterator;
+
     PathElementList m_elements;
     CGMutablePathRef m_path; // transient
     bool m_dirty; // transient

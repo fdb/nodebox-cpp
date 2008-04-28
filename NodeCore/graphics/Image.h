@@ -17,34 +17,40 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Rect_h
-#define Rect_h
+#ifndef Image_h
+#define Image_h
+
+#include "Grob.h"
 
 #include <iostream>
+#include <vector>
 #include <ApplicationServices/ApplicationServices.h>
 
 namespace NodeCore {
 
-class Rect {
+class Image : public Grob {
 public:
-    Rect();
-    Rect(float x, float y, float width, float height);
-    Rect(CGRect r);
-    Rect(const Rect &r);
+    Image(std::string fname, float x, float y);
+    Image(const Image &other);
+    virtual ~Image();
     
-    float getX() { return m_x; }
-    float getY() { return m_y; }
-    float getWidth() { return m_width; }
-    float getHeight() { return m_height; }
+    virtual void _draw(CGContextRef ctx);
 
-    Rect& operator=(const Rect& r);
-    bool operator==(const Rect& r) const;
-    bool operator!=(const Rect& r) const { return !operator==(r); }
-    friend std::ostream& operator<<(std::ostream& o, const Rect& bp);
+    virtual Image* clone() const;
+
+    Image& operator=(const Image& i);
+    virtual bool operator==(const Grob& i) const;
+    virtual bool operator!=(const Grob& i) const { return !operator==(i); }
+    friend std::ostream& operator<<(std::ostream& o, const Image& i);
+
 private:
+    void loadImage();
+
+    std::string m_fname;
     float m_x, m_y, m_width, m_height;
+    CGImageRef m_image; /* transient */
 };
 
 } // namespace NodeCore
 
-#endif // Rect_h
+#endif // Image_h
