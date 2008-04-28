@@ -22,6 +22,11 @@
 
 #include "Connection.h"
 
+#include <string>
+#include <exception>
+#include <iostream>
+#include <vector>
+
 namespace NodeCore {
 
 class Node;
@@ -51,6 +56,10 @@ class InvalidName : public std::exception {};
 
 typedef std::string FieldName;
 typedef std::string FieldType;
+
+const std::string kInt="core/int";
+const std::string kFloat="core/float";
+const std::string kString="core/string";
 
 typedef std::vector<Connection*> DownstreamList;
 typedef DownstreamList::iterator DownstreamIterator;

@@ -24,6 +24,10 @@
 #include "Grob.h"
 #include "PathElement.h"
 
+#include <iostream>
+#include <vector>
+#include <ApplicationServices/ApplicationServices.h>
+
 namespace NodeCore {
 
 class Transform;

@@ -60,17 +60,17 @@ void Node::setName(const NodeName& name)
 
 bool Node::validName(const NodeName& name)
 {
-/*
+    regex_t nameRe, doubleUnderScoreRe;
+
     // Only lowercase letters, digits and underscore. Start with letter or underscore.
     // Minimum 1 characters, maximum 30 characters.
-    static boost::regex nameRe("^[a-z_][a-z0-9_]{0,29}$");
+    regcomp(&nameRe, "^[a-z_][a-z0-9_]{0,29}$", REG_EXTENDED|REG_NOSUB);
+
     // No double underscore names (__reserved)
-    static boost::regex doubleUnderScoreRe("^__.*$");
-    // No reserved words
-    return boost::regex_match(name, nameRe) 
-           && (!boost::regex_match(name, doubleUnderScoreRe));
-*/
-	return true;
+    regcomp(&doubleUnderScoreRe, "^__.*$", REG_EXTENDED|REG_NOSUB);
+
+    return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
+           regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
 Field* Node::addField(const FieldName &name, FieldType type, FieldPolarity polarity)

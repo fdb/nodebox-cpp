@@ -22,6 +22,11 @@
 
 #include "Field.h"
 
+#include <string>
+#include <exception>
+#include <iostream>
+#include <map>
+
 namespace NodeCore {
 
 typedef std::map<std::string, Field*> FieldMap;

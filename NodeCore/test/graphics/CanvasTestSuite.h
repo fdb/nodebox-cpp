@@ -18,7 +18,6 @@
  */
 
 using namespace NodeCore;
-using namespace std;
 
 #include <NodeCore/NodeCore.h>
 

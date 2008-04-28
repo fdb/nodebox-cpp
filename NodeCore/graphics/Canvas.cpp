@@ -56,6 +56,9 @@ void Canvas::append(const Grob& grob)
 
 void Canvas::_draw(CGContextRef ctx)
 {
+    // Flip the canvas
+    CGContextTranslateCTM(ctx, 0, m_height);
+    CGContextScaleCTM(ctx, 1, -1);
     for (GrobIterator it = m_grobs.begin(); it != m_grobs.end(); it++) {
         (*it)->_draw(ctx);
     }
@@ -80,8 +83,6 @@ void Canvas::saveAsPDF(std::string fname)
     CFRelease(info);
     CFRelease(url);
     CGContextBeginPage(pdfContext, &rect);
-    CGContextTranslateCTM(pdfContext, 0, m_height);
-    CGContextScaleCTM(pdfContext, 1, -1);
     _draw(pdfContext);
     CGContextEndPage(pdfContext);
     CGContextRelease(pdfContext);

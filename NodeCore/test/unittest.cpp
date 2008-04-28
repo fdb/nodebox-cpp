@@ -20,6 +20,10 @@
 #include "cpptest.h"
 #include "graphics/BezierPathTestSuite.h"
 #include "graphics/CanvasTestSuite.h"
+#include "graphics/PathElementTestSuite.h"
+#include "node/ConnectTestSuite.h"
+#include "node/FieldTestSuite.h"
+#include "node/NodeTestSuite.h"
 
 using namespace std;
 
@@ -71,13 +75,19 @@ cmdline(int argc, char* argv[])
 int
 main(int argc, char* argv[])
 {
-	try
+	/*
+    try
 	{
+    */
 		// Demonstrates the ability to use multiple test suites
 		//
 		Test::Suite ts;
 		ts.add(auto_ptr<Test::Suite>(new BezierPathTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new CanvasTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new ConnectTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new FieldTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new NodeTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new PathElementTestSuite));
 
 		// Run the tests
 		//
@@ -88,12 +98,14 @@ main(int argc, char* argv[])
 			if (html)
 				html->generate(cout, true, "MyTest");
 		}
-	}
+	/*
+    }
 	catch (...)
 	{
 		cout << "unexpected exception encountered\n";
 		return EXIT_FAILURE;
 	}
+    */
 	return EXIT_SUCCESS;
 }
 
