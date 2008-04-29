@@ -167,7 +167,6 @@ bool Node::isDirty()
 void Node::markDirty()
 {
     m_dirty = true;
-    getOutputField()->markDirty();
     // TODO: make network dirty
     // TODO: dispatch/notify
 }
