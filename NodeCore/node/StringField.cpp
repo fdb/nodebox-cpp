@@ -23,7 +23,8 @@
 namespace NodeCore {
 
 StringField::StringField(Node *node, FieldName name, FieldPolarity polarity)
-            : Field(node, name, polarity)
+            : Field(node, name, polarity),
+              m_value("")
 {
 }
 
