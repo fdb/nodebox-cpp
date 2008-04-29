@@ -39,6 +39,7 @@ public:
     
 protected:
     virtual void process();
+    void setOutput(const Canvas& c);
 
 private:
     // Disallow copy construction or assignment

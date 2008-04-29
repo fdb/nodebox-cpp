@@ -24,6 +24,7 @@
 #include "node/ConnectTestSuite.h"
 #include "node/FieldTestSuite.h"
 #include "node/NodeTestSuite.h"
+#include "node/CanvasNodeTestSuite.h"
 
 using namespace std;
 
@@ -88,6 +89,7 @@ main(int argc, char* argv[])
 		ts.add(auto_ptr<Test::Suite>(new FieldTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new NodeTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new PathElementTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new CanvasNodeTestSuite));
 
 		// Run the tests
 		//

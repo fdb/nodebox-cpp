@@ -19,6 +19,7 @@
  
 #include <NodeCore/BezierPath.h>
 #include <NodeCore/Canvas.h>
+#include <NodeCore/CanvasNode.h>
 #include <NodeCore/Grob.h>
 #include <NodeCore/Image.h>
 #include <NodeCore/PathElement.h>

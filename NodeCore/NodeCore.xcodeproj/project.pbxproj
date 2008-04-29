@@ -190,6 +190,7 @@
 		6165582B0DC6297600AC5259 /* nodeboxicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeboxicon.png; sourceTree = "<group>"; };
 		61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasNode.h; sourceTree = "<group>"; };
 		61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CanvasNode.cpp; sourceTree = "<group>"; };
+		61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasNodeTestSuite.h; path = test/node/CanvasNodeTestSuite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +269,8 @@
 		611EBF450DC2108B008BE1A1 /* node */ = {
 			isa = PBXGroup;
 			children = (
+				61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */,
+				61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */,
 				611EBF460DC2108B008BE1A1 /* Connection.cpp */,
 				611EBF470DC2108B008BE1A1 /* Connection.h */,
 				611EBF480DC2108B008BE1A1 /* Field.cpp */,
@@ -292,8 +295,6 @@
 				611EBF5D0DC2108B008BE1A1 /* PythonNode.h */,
 				611EBF5E0DC2108B008BE1A1 /* StringField.cpp */,
 				611EBF5F0DC2108B008BE1A1 /* StringField.h */,
-				61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */,
-				61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */,
 			);
 			path = node;
 			sourceTree = "<group>";
@@ -381,6 +382,7 @@
 		611EC5680DC25D8C008BE1A1 /* node */ = {
 			isa = PBXGroup;
 			children = (
+				61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */,
 				611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */,
 				611EC5860DC26042008BE1A1 /* FieldTestSuite.h */,
 				611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */,

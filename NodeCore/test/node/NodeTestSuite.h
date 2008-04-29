@@ -93,11 +93,7 @@ private:
         TEST_THROWS( n->addField("1234", kInt), InvalidName );
         // Names can not be one of the reserved words.
         TEST_THROWS( n->addField("node", kInt), InvalidName );
-        TEST_THROWS( n->addField("process", kInt), InvalidName );
         TEST_THROWS( n->addField("name", kInt), InvalidName );
-        TEST_THROWS( n->addField("x", kInt), InvalidName );
-        TEST_THROWS( n->addField("y", kInt), InvalidName );
-        TEST_THROWS( n->addField("dirty", kInt), InvalidName );
         // Names can not be in uppercase or contain uppercase letters
         TEST_THROWS( n->addField("UPPERCASE", kInt), InvalidName );
         TEST_THROWS( n->addField("uPpercase", kInt), InvalidName );
@@ -121,6 +117,10 @@ private:
         TEST_THROWS_NOTHING( n->addField("_", kInt) );
         TEST_THROWS_NOTHING( n->addField("_1234", kInt) );
         TEST_THROWS_NOTHING( n->addField("a1234", kInt) );
+        TEST_THROWS_NOTHING( n->addField("x", kInt) );
+        TEST_THROWS_NOTHING( n->addField("y", kInt) );
+        TEST_THROWS_NOTHING( n->addField("dirty", kInt) );
+        TEST_THROWS_NOTHING( n->addField("process", kInt) );
     }
 
 };

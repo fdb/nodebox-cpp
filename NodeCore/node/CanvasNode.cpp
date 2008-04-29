@@ -46,9 +46,21 @@ void CanvasNode::setInput(const Canvas& canvas)
     m_input = new Canvas(canvas);
 }
 
+void CanvasNode::setOutput(const Canvas& canvas)
+{
+    if (m_output) {
+        delete m_output;
+    }
+    m_output = new Canvas(canvas);
+}
+
 Canvas CanvasNode::getOutput() const
 {
-    return *m_output;
+    if (m_output) {
+        return *m_output;
+    } else {
+        return Canvas();
+    }
 }
 
 void CanvasNode::process()

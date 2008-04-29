@@ -61,7 +61,7 @@ bool Field::validName(const FieldName& name)
     regcomp(&doubleUnderScoreRe, "^__.*$", REG_EXTENDED|REG_NOSUB);
 
     // No reserved words
-    regcomp(&reservedRe, "^(node|process|name|x|y|dirty)$", REG_EXTENDED|REG_NOSUB);
+    regcomp(&reservedRe, "^(node|name)$", REG_EXTENDED|REG_NOSUB);
     
     return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
            regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0 &
