@@ -35,6 +35,9 @@ Node::Node()
 
 Node::~Node()
 {
+    for (FieldIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+        delete (*iter).second;
+    }
 }
 
 std::string Node::getName()
@@ -129,7 +132,10 @@ void Node::set(const FieldName &name, std::string s)
 void Node::update()
 {
     if (m_dirty) {
-        
+        for (FieldIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+            Field* f = (*iter).second;
+            f->update();
+        }
         process();
         m_dirty = false;
     }
@@ -143,7 +149,10 @@ bool Node::isDirty()
 void Node::markDirty()
 {
     m_dirty = true;
-    // TODO: make downstream dirty
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        Connection* conn = (*iter);
+        conn->getInputNode()->markDirty();
+    }
     // TODO: make network dirty
     // TODO: dispatch/notify
 }
@@ -176,6 +185,15 @@ void Node::process()
     // This space intentionally left blank.
 }
 
+// Updates a connected field with the output value of this node.
+// This method gets called whenever a downstream node wants to update
+// the values of its connected fields.
+// Since we don't know anything about the output value of a node,
+// it is very important that overriding nodes implement this method.
+void Node::updateField(Field* f)
+{
+}
+
 void Node::addDownstream(Connection* c)
 {
     // TODO: Check if the connection/field is already in the list.
@@ -191,9 +209,11 @@ void Node::removeDownstream(Connection* c)
     for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
         if (*iter == c) {
             m_downstreams.erase(iter);
+            return;
         }
     }
     std::cout << m_name <<": could not remove connection" << c << std::endl;
+    assert(false);
 }
 
 std::ostream& operator<<(std::ostream& o, const Node& n)

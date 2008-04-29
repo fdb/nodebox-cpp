@@ -26,9 +26,15 @@ using namespace NodeCore;
 class IntNode : public Node
 {
 public:
+    IntNode() : m_output(0) {} 
     int getOutput() { return m_output; }
 protected:
     void setOutput(int i) { m_output = i; }
+    void updateField(Field* f)
+    {
+        assert (f->getType() == kInt);
+        f->set(m_output);
+    }
 private:
     int m_output;
 };
@@ -165,6 +171,14 @@ private:
         m->set("multiplier", 1);
         TEST_ASSERT( !ng->isDirty() );
         TEST_ASSERT( m->isDirty() );
+        // Check if disconnect nodes still propagate.
+        m->getField("number")->disconnect();
+        m->update();
+        ng->update();
+        ng->set("number", 12);
+        TEST_ASSERT( ng->isDirty() );
+        // Disconnected node should not be affected.
+        TEST_ASSERT( !m->isDirty() );
     }
 
     // Checks whether changes to one node propagates the values to downstreams
@@ -186,6 +200,13 @@ private:
         m->update();
         TEST_ASSERT( !m->isDirty() );
         TEST_ASSERT( m->getOutput() == 6 );
+        // Test if value stops propagating after disconnection.
+        m->getField("number")->disconnect();
+        TEST_ASSERT( m->isDirty() );
+        TEST_ASSERT( !ng->isDirty() );
+        ng->set("number", 3);
+        m->update();
+        TEST_ASSERT( m->getOutput() == 0 );
     }
 
     void test_disconnect()
@@ -202,9 +223,12 @@ private:
         TEST_ASSERT( m->getOutput() == 10 );
 
         m->getField("number")->disconnect();
+        TEST_ASSERT( m->isDirty() );
+        TEST_ASSERT( !ng->isDirty() );        
         TEST_ASSERT( !m->getField("number")->isConnected() );
         TEST_ASSERT( !ng->isOutputConnected() );
         // Number reverts to default after disconnection
+        m->update();
         TEST_ASSERT( m->getOutput() == 0 );
     }
 };

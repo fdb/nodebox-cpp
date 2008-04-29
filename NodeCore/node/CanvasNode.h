@@ -34,19 +34,18 @@ public:
     CanvasNode();
     virtual ~CanvasNode();
     
-    void setInput(const Canvas& c);
     Canvas getOutput() const;
     
 protected:
     virtual void process();
     void setOutput(const Canvas& c);
+    virtual void updateField(Field* f);
 
 private:
     // Disallow copy construction or assignment
     CanvasNode(const CanvasNode& other);
     CanvasNode& operator=(const CanvasNode& other);
 
-    Canvas* m_input;
     Canvas* m_output;
 };
 

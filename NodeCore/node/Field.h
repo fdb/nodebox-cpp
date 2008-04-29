@@ -73,10 +73,11 @@ public:
     
     // Connection methods
     Connection* connect(Node* node);
-    void disconnect();
+    bool disconnect();
     bool isConnected();
     bool isConnectedTo(Node* node);
     Connection* getConnection();
+    void update();
     
     static bool validName(const FieldName& name);
 

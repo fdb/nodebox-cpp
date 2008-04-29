@@ -23,27 +23,15 @@
 namespace NodeCore {
 
 CanvasNode::CanvasNode()
-          : m_input(0),
-            m_output(0)
+          : m_output(0)
 {
 }
 
 CanvasNode::~CanvasNode()
 {
-    if (m_input) {
-        delete m_input;
-    }
     if (m_output) {
         delete m_output;
     }
-}
-
-void CanvasNode::setInput(const Canvas& canvas)
-{
-    if (m_input) {
-        delete m_input;
-    }
-    m_input = new Canvas(canvas);
 }
 
 void CanvasNode::setOutput(const Canvas& canvas)
@@ -66,5 +54,13 @@ Canvas CanvasNode::getOutput() const
 void CanvasNode::process()
 {
 }
+
+void CanvasNode::updateField(Field* f)
+{
+    assert (f->getType() == kData);
+    assert (f->isConnectedTo(this));
+    f->set((void*)m_output);
+}
+
 
 } // namespace NodeCore

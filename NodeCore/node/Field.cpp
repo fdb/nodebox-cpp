@@ -90,7 +90,9 @@ void* Field::asData()
 void Field::set(int i)
 {
     if (m_type == kInt) {
+        preSet();
         m_value.i = i;
+        postSet();
     } else {
         throw ValueError("Tried setting int value on field with type " + m_type);
     }
@@ -99,7 +101,9 @@ void Field::set(int i)
 void Field::set(float f)
 {
     if (m_type == kFloat) {
+        preSet();
         m_value.f = f;
+        postSet();
     } else {
         throw ValueError("Tried setting float value on field with type " + m_type);
     }
@@ -108,10 +112,23 @@ void Field::set(float f)
 void Field::set(const std::string& s)
 {
     if (m_type == kString) {
+        preSet();
         delete m_value.s;
         m_value.s = new std::string(s);
+        postSet();
     } else {
         throw ValueError("Tried setting string value on field with type " + m_type);
+    }
+}
+
+void Field::set(void* data)
+{  
+    if (m_type == kData) {
+        preSet();
+        m_value.d = data;
+        postSet();
+    } else {
+        throw ValueError("Tried setting data value on field with type " + m_type);
     }
 }
 
@@ -141,17 +158,29 @@ bool Field::validName(const FieldName& name)
 
 Connection* Field::connect(Node* node)
 {
+    // Sanity check
+    if (node == m_node) {
+        throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to myself");
+    }    
     disconnect();
     m_connection = new Connection(node, this);
+    node->addDownstream(m_connection);
     m_node->markDirty();
     // TODO: notify
     return m_connection;
 }
 
-void Field::disconnect()
+bool Field::disconnect()
 {
-    if (m_connection)
-        delete m_connection;
+    if (!isConnected()) return false;
+    assert(m_connection->m_output->isOutputConnectedTo(this));
+    m_connection->getOutputNode()->removeDownstream(m_connection);
+    delete m_connection;
+    m_connection = 0;
+    revertToDefault();
+    m_node->markDirty();
+    // TODO: dispatch/notify
+    return true;
 }
 
 bool Field::isConnected()
@@ -169,6 +198,15 @@ bool Field::isConnectedTo(Node* node)
 Connection* Field::getConnection()
 {
     return m_connection;
+}
+
+void Field::update()
+{
+    if (isConnected()) {
+        m_connection->m_output->update();
+        m_connection->m_output->updateField(this);
+        // TODO: The output data of the upstream node becomes my value.
+    }
 }
 
 std::ostream& operator<<(std::ostream& o, const Field& f)

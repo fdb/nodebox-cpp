@@ -89,6 +89,7 @@ public:
     
 protected:
     virtual void process();
+    virtual void updateField(Field* f);
     
 private:
     // Disallow copy construction or assignment
