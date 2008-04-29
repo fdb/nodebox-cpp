@@ -31,12 +31,6 @@ namespace NodeCore {
 
 class Node;
 
-#define FieldTypeMacro(className) \
-public: \
-    static Field* initialize(Node *node, FieldName name, FieldPolarity polarity = kIn) { \
-        return new className(node, name, polarity); \
-    }
-
 class ValueError : public std::exception {
 public:
     ValueError(std::string message = "") : m_message(message) {}
@@ -46,82 +40,73 @@ private:
     std::string m_message;
 };
 
-enum FieldPolarity {
-    kIn = 1,
-    kOut = 2,
-    kInOut = 3
-};
-
 class InvalidName : public std::exception {};
 
 typedef std::string FieldName;
 typedef std::string FieldType;
 
-const std::string kInt="core/int";
-const std::string kFloat="core/float";
-const std::string kString="core/string";
-
-typedef std::vector<Connection*> DownstreamList;
-typedef DownstreamList::iterator DownstreamIterator;
+const std::string kInt = "int";
+const std::string kFloat = "float";
+const std::string kString = "string";
+const std::string kData = "data";
 
 class Field {
 public:
-    Field(Node *node, const FieldName& name, FieldPolarity polarity = kIn);
+    Field(Node *node, const FieldName& name, const FieldType& type);
     virtual ~Field();
     
     Node* getNode() const { return m_node; }
     
-    virtual int asInt() { return 0; }
-    virtual float asFloat() { return 0; }
-    virtual std::string Field::asString() { return ""; }
+    int asInt();
+    float asFloat();
+    std::string asString();
+    void* asData();
 
     // All these can throw a ValueError.
-    virtual void set(int i) = 0;
-    virtual void set(float f) = 0;
-    virtual void set(std::string s) = 0;
-    
-    virtual std::string getTypeName() = 0;
+    void set(int i);
+    void set(float f);
+    void set(const std::string& s);
+    void set(void* v);
     
     FieldName getName() const { return m_name; }
-    FieldPolarity getPolarity() const { return m_polarity; }
+    FieldType getType() const { return m_type; }
+    
+    // Connection methods
+    Connection* connect(Node* node);
+    void disconnect();
+    bool isConnected();
+    bool isConnectedTo(Node* node);
+    Connection* getConnection();
     
     static bool validName(const FieldName& name);
-
-    // Connections
-
-    bool isConnected();
-    bool isConnectedTo(Field* field);
-    Connection* connect(Node *outputNode);
-    bool disconnect(Node *outputNode);
-    bool disconnect();
 
     friend std::ostream& operator<<(std::ostream& o, const Field& f);
     
 protected:
-    virtual void revertToDefault() = 0;
-    virtual void setValueFromConnection() = 0;
+    void revertToDefault();
     void preSet();
     void postSet();
-    Connection* getConnection();
     
 private:
+    union Value {
+        int i;
+        float f;
+        std::string* s;
+        void* d;
+    };
+
     // Disallow copy construction or assignment
     Field(const Field& other);
     Field& operator=(const Field& other);
 
-    void update();
     void markDirty();
-    void removeFromDownstreams(Connection* conn);
 
     Node *m_node;
     std::string m_name;
     std::string m_verboseName;
-    bool m_connectable;
-    bool m_required;
-    bool m_multi;
-    FieldPolarity m_polarity;
+    FieldType m_type;
     Connection *m_connection;
-    DownstreamList m_downstreams;
+    Value m_value;
     // TODO: expression
     
     friend class Node;

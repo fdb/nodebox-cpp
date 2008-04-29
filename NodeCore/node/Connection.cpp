@@ -25,8 +25,8 @@
 
 namespace NodeCore {
 
-Connection::Connection(Field *outputField, Field *inputField)
-           : m_output(outputField), m_input(inputField)
+Connection::Connection(Node *outputNode, Field *inputField)
+           : m_output(outputNode), m_input(inputField)
 {
 }
 
@@ -34,19 +34,9 @@ Connection::~Connection()
 {
 }
 
-void Connection::update()
-{
-    getOutputNode()->update();
-}
-
-Field* Connection::getOutputField()
-{
-    return m_output;
-}
-
 Node* Connection::getOutputNode()
 {
-    return m_output->getNode();
+    return m_output;
 }
 
 Field* Connection::getInputField()
@@ -61,7 +51,7 @@ Node* Connection::getInputNode()
 
 std::ostream& operator<<(std::ostream& o, const Connection& c)
 {
-    o << "Connection(" << c.m_output << " -> " << c.m_input << ")";
+    o << "Connection(" << c.m_output->getName() << " -> " << c.m_input->getNode()->getName() << "." << c.m_input->getName() << ")";
     return o;
 }
 

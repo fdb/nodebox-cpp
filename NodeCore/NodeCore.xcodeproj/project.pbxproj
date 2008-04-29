@@ -17,16 +17,12 @@
 		611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC2370DC2297B008BE1A1 /* NodeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF470DC2108B008BE1A1 /* Connection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF490DC2108B008BE1A1 /* Field.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4D0DC2108B008BE1A1 /* FloatField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4F0DC2108B008BE1A1 /* IntField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF510DC2108B008BE1A1 /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF530DC2108B008BE1A1 /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF550DC2108B008BE1A1 /* NodeLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BD0DC22EA4008BE1A1 /* NodeLibraryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BE0DC22EA4008BE1A1 /* posixutils.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5B0DC2108B008BE1A1 /* posixutils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BF0DC22EA4008BE1A1 /* PythonNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5D0DC2108B008BE1A1 /* PythonNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3C00DC22EA4008BE1A1 /* StringField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5F0DC2108B008BE1A1 /* StringField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3C10DC22EB9008BE1A1 /* BezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF370DC2108B008BE1A1 /* BezierPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3C20DC22EB9008BE1A1 /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF390DC2108B008BE1A1 /* Canvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3C30DC22EB9008BE1A1 /* Grob.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3B0DC2108B008BE1A1 /* Grob.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,16 +41,12 @@
 		611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
 		611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
 		611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
-		611EC3D30DC22ED6008BE1A1 /* FieldTypeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */; };
-		611EC3D40DC22ED6008BE1A1 /* FloatField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */; };
-		611EC3D50DC22ED6008BE1A1 /* IntField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4E0DC2108B008BE1A1 /* IntField.cpp */; };
 		611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
 		611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
 		611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
 		611EC3D90DC22ED6008BE1A1 /* NodeLibraryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */; };
 		611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */; };
 		611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */; };
-		611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5E0DC2108B008BE1A1 /* StringField.cpp */; };
 		611EC4420DC24D33008BE1A1 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */; };
 		611EC4850DC24E0A008BE1A1 /* unittest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC4840DC24E0A008BE1A1 /* unittest.cpp */; };
 		611EC5540DC2575B008BE1A1 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5400DC2575B008BE1A1 /* utils.cpp */; };
@@ -123,12 +115,6 @@
 		611EBF470DC2108B008BE1A1 /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
 		611EBF480DC2108B008BE1A1 /* Field.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Field.cpp; sourceTree = "<group>"; };
 		611EBF490DC2108B008BE1A1 /* Field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Field.h; sourceTree = "<group>"; };
-		611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FieldTypeManager.cpp; sourceTree = "<group>"; };
-		611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldTypeManager.h; sourceTree = "<group>"; };
-		611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FloatField.cpp; sourceTree = "<group>"; };
-		611EBF4D0DC2108B008BE1A1 /* FloatField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatField.h; sourceTree = "<group>"; };
-		611EBF4E0DC2108B008BE1A1 /* IntField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntField.cpp; sourceTree = "<group>"; };
-		611EBF4F0DC2108B008BE1A1 /* IntField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntField.h; sourceTree = "<group>"; };
 		611EBF500DC2108B008BE1A1 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		611EBF510DC2108B008BE1A1 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeInfo.cpp; sourceTree = "<group>"; };
@@ -141,8 +127,6 @@
 		611EBF5B0DC2108B008BE1A1 /* posixutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = posixutils.h; sourceTree = "<group>"; };
 		611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonNode.cpp; sourceTree = "<group>"; };
 		611EBF5D0DC2108B008BE1A1 /* PythonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PythonNode.h; sourceTree = "<group>"; };
-		611EBF5E0DC2108B008BE1A1 /* StringField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringField.cpp; sourceTree = "<group>"; };
-		611EBF5F0DC2108B008BE1A1 /* StringField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringField.h; sourceTree = "<group>"; };
 		611EBF840DC211C9008BE1A1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		611EBF9D0DC21210008BE1A1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -275,12 +259,6 @@
 				611EBF470DC2108B008BE1A1 /* Connection.h */,
 				611EBF480DC2108B008BE1A1 /* Field.cpp */,
 				611EBF490DC2108B008BE1A1 /* Field.h */,
-				611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */,
-				611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */,
-				611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */,
-				611EBF4D0DC2108B008BE1A1 /* FloatField.h */,
-				611EBF4E0DC2108B008BE1A1 /* IntField.cpp */,
-				611EBF4F0DC2108B008BE1A1 /* IntField.h */,
 				611EBF500DC2108B008BE1A1 /* Node.cpp */,
 				611EBF510DC2108B008BE1A1 /* Node.h */,
 				611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */,
@@ -293,8 +271,6 @@
 				611EBF5B0DC2108B008BE1A1 /* posixutils.h */,
 				611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */,
 				611EBF5D0DC2108B008BE1A1 /* PythonNode.h */,
-				611EBF5E0DC2108B008BE1A1 /* StringField.cpp */,
-				611EBF5F0DC2108B008BE1A1 /* StringField.h */,
 			);
 			path = node;
 			sourceTree = "<group>";
@@ -408,17 +384,13 @@
 				611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */,
 				611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */,
 				611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */,
-				611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */,
-				611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */,
 				616557A30DC61E9100AC5259 /* Image.h in Headers */,
-				611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */,
 				611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */,
 				611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */,
 				611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */,
 				611EC3BD0DC22EA4008BE1A1 /* NodeLibraryManager.h in Headers */,
 				611EC3BE0DC22EA4008BE1A1 /* posixutils.h in Headers */,
 				611EC3BF0DC22EA4008BE1A1 /* PythonNode.h in Headers */,
-				611EC3C00DC22EA4008BE1A1 /* StringField.h in Headers */,
 				611EC3C10DC22EB9008BE1A1 /* BezierPath.h in Headers */,
 				611EC3C20DC22EB9008BE1A1 /* Canvas.h in Headers */,
 				611EC3C30DC22EB9008BE1A1 /* Grob.h in Headers */,
@@ -540,16 +512,12 @@
 				611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */,
 				611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */,
 				611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */,
-				611EC3D30DC22ED6008BE1A1 /* FieldTypeManager.cpp in Sources */,
-				611EC3D40DC22ED6008BE1A1 /* FloatField.cpp in Sources */,
-				611EC3D50DC22ED6008BE1A1 /* IntField.cpp in Sources */,
 				611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */,
 				611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */,
 				611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */,
 				611EC3D90DC22ED6008BE1A1 /* NodeLibraryManager.cpp in Sources */,
 				611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */,
 				611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */,
-				611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */,
 				616557A40DC61E9100AC5259 /* Image.cpp in Sources */,
 				61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */,
 			);

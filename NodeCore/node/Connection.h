@@ -41,10 +41,9 @@ private:
 
 class Connection {
 public:
-    Connection(Field *outputField, Field *inputField);
+    Connection(Node *outputNode, Field *inputField);
     virtual ~Connection();
 
-    Field* getOutputField();
     Node* getOutputNode();
     Field* getInputField();
     Node* getInputNode();
@@ -59,7 +58,7 @@ private:
     void markDirtyDownstream();
     void update();
     
-    Field* m_output;
+    Node* m_output;
     Field* m_input;
     
     friend class Field;

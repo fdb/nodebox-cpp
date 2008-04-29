@@ -30,13 +30,9 @@
 #include <NodeCore/Exceptions.h>
 #include <NodeCore/Connection.h>
 #include <NodeCore/Field.h>
-#include <NodeCore/FieldTypeManager.h>
-#include <NodeCore/FloatField.h>
-#include <NodeCore/IntField.h>
 #include <NodeCore/Node.h>
 #include <NodeCore/NodeInfo.h>
 #include <NodeCore/NodeLibrary.h>
 #include <NodeCore/NodeLibraryManager.h>
 #include <NodeCore/posixutils.h>
 #include <NodeCore/PythonNode.h>
-#include <NodeCore/StringField.h>

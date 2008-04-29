@@ -23,31 +23,40 @@ using namespace NodeCore;
 
 using namespace NodeCore;
 
-class NumberGenerator : public Node
+class IntNode : public Node
+{
+public:
+    int getOutput() { return m_output; }
+protected:
+    void setOutput(int i) { m_output = i; }
+private:
+    int m_output;
+};
+
+class NumberGenerator : public IntNode
 {
 public:
     NumberGenerator()
     {
         addField("number", kInt);
-        addField("out", kInt, kOut);
     }
+
 protected:
     virtual void process()
     {
         int number = asInt("number");
-        set("out", number);
+        setOutput(number);
     }
     NodeNameMacro(NumberGenerator);
 };
 
-class Multiplier : public Node
+class Multiplier : public IntNode
 {
 public:
     Multiplier()
     {
         addField("number", kInt);
         addField("multiplier", kInt);
-        addField("out", kInt, kOut);
     }
 protected:
     virtual void process()
@@ -55,7 +64,7 @@ protected:
         // Fails for big numbers
         int number = asInt("number");
         int multiplier = asInt("multiplier");
-        set("out", number * multiplier);
+        setOutput(number * multiplier);
     }
     NodeNameMacro(Multiplier);
 };
@@ -81,15 +90,15 @@ private:
         TEST_ASSERT( ng->isDirty() );
         ng->update();
         TEST_ASSERT( !ng->isDirty() );
-        TEST_ASSERT( ng->asInt("out") == 0 );
+        TEST_ASSERT( ng->getOutput() == 0 );
         ng->set("number", 12);
         TEST_ASSERT( ng->isDirty() );
         // Asking for the output value doesn't update the node implicitly.
-        TEST_ASSERT( ng->asInt("out") == 0 );
+        TEST_ASSERT( ng->getOutput() == 0 );
         // You have to explicitly update the node to get the new output value.
         ng->update();
         TEST_ASSERT( !ng->isDirty() );
-        TEST_ASSERT( ng->asInt("out") == 12 );
+        TEST_ASSERT( ng->getOutput() == 12 );
     }
 
     void test_connect()
@@ -97,24 +106,21 @@ private:
         NumberGenerator *ng = new NumberGenerator();
         Multiplier *m = new Multiplier();
         
-        // You need to connect from the downstream node
-        TEST_THROWS( ng->getField("out")->connect(m), ConnectionError );
-        
         TEST_ASSERT( !m->getField("number")->isConnected() );
-        TEST_ASSERT( !ng->getField("out")->isConnected() );
-        TEST_ASSERT( !ng->getField("out")->isConnectedTo(m->getField("number")) );
-        TEST_ASSERT( !m->getField("number")->isConnectedTo(ng->getOutputField()) );
+        TEST_ASSERT( !m->getField("number")->isConnectedTo(ng) );
+        TEST_ASSERT( !ng->isOutputConnected() );
+        TEST_ASSERT( !ng->isOutputConnectedTo(m) );
+        TEST_ASSERT( !ng->isOutputConnectedTo(m->getField("number")) );
 
         Connection* conn = m->getField("number")->connect(ng);
         TEST_ASSERT( m->getField("number")->isConnected() );
-        TEST_ASSERT( ng->getField("out")->isConnected() );
+        TEST_ASSERT( m->getField("number")->isConnectedTo(ng) );
+        TEST_ASSERT( ng->isOutputConnected() );
+        TEST_ASSERT( ng->isOutputConnectedTo(m) );
+        TEST_ASSERT( ng->isOutputConnectedTo(m->getField("number")) );
         TEST_ASSERT( m->getField("number") == conn->getInputField() );
         TEST_ASSERT( m == conn->getInputNode() );
-        TEST_ASSERT( ng->getField("out") == conn->getOutputField() );
         TEST_ASSERT( ng == conn->getOutputNode() );
-        
-        TEST_ASSERT( ng->getField("out")->isConnectedTo(m->getField("number")) );
-        TEST_ASSERT( m->getField("number")->isConnectedTo(ng->getOutputField()) );
     }
 
     // Test cyclic connections
@@ -148,7 +154,7 @@ private:
         TEST_ASSERT( !ng->isDirty() ); // This shouldn't have changed
         TEST_ASSERT( !m->isDirty() );
         // A change to the upstream node should make downstream nodes dirty.
-        ng->set("number", 12.0f);
+        ng->set("number", 12);
         TEST_ASSERT( ng->isDirty() );
         TEST_ASSERT( m->isDirty() );
         // Updating the downstream node should make all upstreams clean.
@@ -156,7 +162,7 @@ private:
         TEST_ASSERT( !ng->isDirty() );
         TEST_ASSERT( !m->isDirty() );
         // Changes to the downstream node don't affect upstreams.
-        m->set("multiplier", 1.0f);
+        m->set("multiplier", 1);
         TEST_ASSERT( !ng->isDirty() );
         TEST_ASSERT( m->isDirty() );
     }
@@ -168,18 +174,18 @@ private:
         Multiplier *m = new Multiplier();
         m->set("multiplier", 2);
         m->getField("number")->connect(ng);
-        TEST_ASSERT( m->getOutputField()->asInt() == 0 );
+        TEST_ASSERT( m->getOutput() == 0 );
         ng->set("number", 3);
-        // Asking for the output value doesn't update the node implicitly.
         TEST_ASSERT( m->isDirty() );
-        TEST_ASSERT( m->getOutputField()->asInt() == 0 );
+        // Asking for the output value doesn't update the node implicitly.
+        TEST_ASSERT( m->getOutput() == 0 );
         // Updating the NumberGenerator node has no effect on the Multiplier node.
         ng->update();
         TEST_ASSERT( m->isDirty() );
-        TEST_ASSERT( m->getOutputField()->asInt() == 0 );
+        TEST_ASSERT( m->getOutput() == 0 );
         m->update();
         TEST_ASSERT( !m->isDirty() );
-        TEST_ASSERT( m->getOutputField()->asInt() == 6 );
+        TEST_ASSERT( m->getOutput() == 6 );
     }
 
     void test_disconnect()
@@ -190,15 +196,15 @@ private:
         ng->set("number", 5);
         m->getField("number")->connect(ng);
         TEST_ASSERT( m->getField("number")->isConnected() );
-        TEST_ASSERT( ng->getOutputField()->isConnected() );
+        TEST_ASSERT( ng->isOutputConnected() );
         m->update();
         TEST_ASSERT( m->asInt("number") == 5 );
-        TEST_ASSERT( m->getOutputField()->asInt() == 10 );
+        TEST_ASSERT( m->getOutput() == 10 );
 
         m->getField("number")->disconnect();
         TEST_ASSERT( !m->getField("number")->isConnected() );
-        TEST_ASSERT( !ng->getOutputField()->isConnected() );
+        TEST_ASSERT( !ng->isOutputConnected() );
         // Number reverts to default after disconnection
-        TEST_ASSERT( m->asInt("number") == 0 );
+        TEST_ASSERT( m->getOutput() == 0 );
     }
 };

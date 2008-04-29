@@ -19,9 +19,6 @@
 
 #include "config.h"
 #include "Node.h"
-//#include <boost/regex.hpp>
-
-#include "FieldTypeManager.h"
 
 namespace NodeCore {
 
@@ -31,6 +28,7 @@ Node::Node()
     m_y(0),
     m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
     m_fields(FieldMap()),
+    m_downstreams(ConnectionList()),
     m_dirty(true)
 {
 }
@@ -74,11 +72,10 @@ bool Node::validName(const NodeName& name)
            regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
-Field* Node::addField(const FieldName &name, FieldType type, FieldPolarity polarity)
+Field* Node::addField(const FieldName &name, FieldType type)
 {
     if (hasField(name)) { throw InvalidName(); }
-    Field *f = FieldTypeManager::initialize(type, this, name, polarity);
-//new Field(this, name, type, polarity);
+    Field *f = new Field(this, name, type);
     m_fields[name] = f;
     return f;
 }
@@ -96,21 +93,6 @@ Field* Node::getField(const FieldName &name)
 bool Node::hasField(const FieldName &name)
 {
     return m_fields.count(name) == 1;
-}
-
-/**
- * Returns the first output field.
- */
-Field* Node::getOutputField()
-{
-    m_fields.begin();
-    for(FieldIterator iter=m_fields.begin(); iter != m_fields.end(); iter++) {
-        Field *f = (*iter).second;
-        if (f->getPolarity() & kOut) { // Matches kOut and kInOut
-            return f;
-        }
-    }
-    return NULL;
 }
 
 // Value shortcuts
@@ -147,13 +129,7 @@ void Node::set(const FieldName &name, std::string s)
 void Node::update()
 {
     if (m_dirty) {
-        // Update all input fields so values are up to date.
-        for (FieldIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
-            Field* f = (*iter).second;
-            if (f->m_polarity == kIn) {
-                f->update();
-            }
-        }
+        
         process();
         m_dirty = false;
     }
@@ -167,13 +143,57 @@ bool Node::isDirty()
 void Node::markDirty()
 {
     m_dirty = true;
+    // TODO: make downstream dirty
     // TODO: make network dirty
     // TODO: dispatch/notify
+}
+
+bool Node::isOutputConnected()
+{
+    return m_downstreams.size() > 0;
+}
+
+bool Node::isOutputConnectedTo(Node* node)
+{
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        if ((*iter)->getInputNode() == node)
+            return true;
+    }
+    return false;
+}
+
+bool Node::isOutputConnectedTo(Field* field)
+{
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        if ((*iter)->getInputField() == field)
+            return true;
+    }
+    return false;
 }
 
 void Node::process()
 {
     // This space intentionally left blank.
+}
+
+void Node::addDownstream(Connection* c)
+{
+    // TODO: Check if the connection/field is already in the list.
+    assert (c != 0);
+    assert (c->getOutputNode() == this);
+    assert (c->getInputNode() != this);
+    m_downstreams.push_back(c);
+}
+
+void Node::removeDownstream(Connection* c)
+{
+    assert (c != 0);
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        if (*iter == c) {
+            m_downstreams.erase(iter);
+        }
+    }
+    std::cout << m_name <<": could not remove connection" << c << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& o, const Node& n)

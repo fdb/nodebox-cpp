@@ -59,10 +59,9 @@ public:
     
     virtual NodeName defaultName() { return className(); };
 
-    Field* addField(const FieldName &name, FieldType type, FieldPolarity polarity=kIn);
+    Field* addField(const FieldName &name, FieldType type);
     Field* getField(const FieldName &name);
     bool hasField(const FieldName &name);
-    Field* getOutputField();
     
     // Value shortcuts
     int asInt(const FieldName &name);
@@ -78,10 +77,13 @@ public:
     void setName(const NodeName &name);
     static bool validName(const NodeName& name);
     
-    
     void update();
     bool isDirty();
     void markDirty();
+    
+    bool isOutputConnected();
+    bool isOutputConnectedTo(Node* node);
+    bool isOutputConnectedTo(Field* field);
 
     friend std::ostream& operator<<(std::ostream& o, const Node& n);
     
@@ -92,14 +94,22 @@ private:
     // Disallow copy construction or assignment
     Node(const Node& other);
     Node& operator=(const Node& other);
-
+    
+    void addDownstream(Connection* c);
+    void removeDownstream(Connection* c);
+    typedef std::vector<Connection*> ConnectionList;
+    typedef ConnectionList::iterator ConnectionIterator;
+    
     float m_x, m_y;
     std::string m_name;
     FieldMap m_fields;
+    ConnectionList m_downstreams;
     // TODO: add exception
     bool m_dirty;
 
     NodeNameMacro(Node);
+    
+    friend class Field;
 };
 
 } // namespace NodeCore
