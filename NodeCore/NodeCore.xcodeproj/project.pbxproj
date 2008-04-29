@@ -69,6 +69,8 @@
 		616557A30DC61E9100AC5259 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = 616557A10DC61E9100AC5259 /* Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		616557A40DC61E9100AC5259 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 616557A20DC61E9100AC5259 /* Image.cpp */; };
 		6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6165582B0DC6297600AC5259 /* nodeboxicon.png */; };
+		61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +188,8 @@
 		616557A10DC61E9100AC5259 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		616557A20DC61E9100AC5259 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		6165582B0DC6297600AC5259 /* nodeboxicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeboxicon.png; sourceTree = "<group>"; };
+		61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasNode.h; sourceTree = "<group>"; };
+		61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CanvasNode.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +292,8 @@
 				611EBF5D0DC2108B008BE1A1 /* PythonNode.h */,
 				611EBF5E0DC2108B008BE1A1 /* StringField.cpp */,
 				611EBF5F0DC2108B008BE1A1 /* StringField.h */,
+				61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */,
+				61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */,
 			);
 			path = node;
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				611EC3C70DC22EB9008BE1A1 /* Transform.h in Headers */,
 				611EC3C80DC22EB9008BE1A1 /* Utils.h in Headers */,
 				611EC3C90DC22EB9008BE1A1 /* Exceptions.h in Headers */,
+				61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +549,7 @@
 				611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */,
 				611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */,
 				616557A40DC61E9100AC5259 /* Image.cpp in Sources */,
+				61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
