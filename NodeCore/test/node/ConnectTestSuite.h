@@ -28,6 +28,10 @@ class IntNode : public Node
 public:
     IntNode() : m_output(0) {} 
     int getOutput() { return m_output; }
+    virtual bool canConnectTo(Field* f) const
+    {
+        return f->getType() == kInt;
+    }
 protected:
     void setOutput(int i) { m_output = i; }
     void updateField(Field* f)
@@ -63,6 +67,7 @@ public:
     {
         addField("number", kInt);
         addField("multiplier", kInt);
+        addField("somestring", kString);
     }
 protected:
     virtual void process()
@@ -117,6 +122,10 @@ private:
         TEST_ASSERT( !ng->isOutputConnected() );
         TEST_ASSERT( !ng->isOutputConnectedTo(m) );
         TEST_ASSERT( !ng->isOutputConnectedTo(m->getField("number")) );
+        
+        TEST_ASSERT( m->getField("number")->canConnectTo(ng) );
+        TEST_ASSERT( m->getField("multiplier")->canConnectTo(ng) );
+        TEST_ASSERT( !m->getField("somestring")->canConnectTo(ng) );
 
         Connection* conn = m->getField("number")->connect(ng);
         TEST_ASSERT( m->getField("number")->isConnected() );
@@ -127,6 +136,9 @@ private:
         TEST_ASSERT( m->getField("number") == conn->getInputField() );
         TEST_ASSERT( m == conn->getInputNode() );
         TEST_ASSERT( ng == conn->getOutputNode() );
+        
+        // The somestring field is of the wrong type, and thus cannot be connected.
+        TEST_THROWS( m->getField("somestring")->connect(ng), ConnectionError );
     }
 
     // Test cyclic connections

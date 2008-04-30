@@ -28,6 +28,8 @@
 
 namespace NodeCore {
 
+const std::string kCanvas = "Canvas";
+
 class CanvasNode : public Node
 {
 public:
@@ -35,6 +37,7 @@ public:
     virtual ~CanvasNode();
     
     Canvas getOutput() const;
+    virtual bool canConnectTo(Field* f) const;
     
 protected:
     virtual void process();

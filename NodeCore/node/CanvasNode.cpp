@@ -62,5 +62,9 @@ void CanvasNode::updateField(Field* f)
     f->set((void*)m_output);
 }
 
+bool CanvasNode::canConnectTo(Field* f) const
+{
+    return false; // f->getType() == kCanvas;
+}
 
 } // namespace NodeCore

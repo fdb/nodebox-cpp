@@ -72,6 +72,7 @@ public:
     FieldType getType() const { return m_type; }
     
     // Connection methods
+    bool canConnectTo(Node* node);
     Connection* connect(Node* node);
     bool disconnect();
     bool isConnected();

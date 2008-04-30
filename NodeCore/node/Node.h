@@ -78,9 +78,10 @@ public:
     static bool validName(const NodeName& name);
     
     void update();
-    bool isDirty();
+    bool isDirty() const;
     void markDirty();
     
+    virtual bool canConnectTo(Field* f) const;
     bool isOutputConnected();
     bool isOutputConnectedTo(Node* node);
     bool isOutputConnectedTo(Field* field);

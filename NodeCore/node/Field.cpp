@@ -156,12 +156,25 @@ bool Field::validName(const FieldName& name)
            regexec(&reservedRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
+// Checks if this field can connect to the ouput of the given node.
+// This queries the canConnectTo method on the specified node.
+bool Field::canConnectTo(Node* node)
+{
+    // Fields have no way of knowing whether they can connect to the output of a Node,
+    // since the output is not typed.
+    // Only the node itself knows whether it can connect to the field, so we ask it.
+    return node->canConnectTo(this);
+}
+
 Connection* Field::connect(Node* node)
 {
     // Sanity check
     if (node == m_node) {
         throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to myself");
-    }    
+    }
+    if (!canConnectTo(node)) {
+        throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to " + node->getName());
+    }
     disconnect();
     m_connection = new Connection(node, this);
     node->addDownstream(m_connection);

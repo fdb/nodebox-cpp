@@ -141,7 +141,7 @@ void Node::update()
     }
 }
 
-bool Node::isDirty()
+bool Node::isDirty() const
 {
     return m_dirty;
 }
@@ -192,6 +192,16 @@ void Node::process()
 // it is very important that overriding nodes implement this method.
 void Node::updateField(Field* f)
 {
+}
+
+// This method will be checked before connecting a field.
+// It reports whether the output of this node can be connected
+// to the specified field.
+// By default, it returns false: overriding nodes should implement
+// this method and do proper checking.
+bool Node::canConnectTo(Field* f) const
+{
+    return false;
 }
 
 void Node::addDownstream(Connection* c)
