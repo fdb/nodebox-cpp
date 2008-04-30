@@ -20,6 +20,8 @@
 #include "config.h"
 #include "Node.h"
 
+#include "Network.h"
+
 namespace NodeCore {
 
 Node::Node()
@@ -27,10 +29,12 @@ Node::Node()
     m_x(0),
     m_y(0),
     m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
+    m_network(NULL),
     m_fields(FieldMap()),
     m_downstreams(ConnectionList()),
     m_dirty(true)
 {
+    m_name = defaultName();
 }
 
 Node::~Node()
@@ -40,14 +44,10 @@ Node::~Node()
     }
 }
 
-std::string Node::getName()
+//// Naming
+
+std::string Node::getName() const
 {
-    // The name "" is set from the constructor.
-    // If the name is asked for the first name, it will be set
-    // to the correct name, e.g. the default name.
-    if (m_name == "") {
-        m_name = defaultName();
-    }
     return m_name;
 }
 
@@ -73,6 +73,21 @@ bool Node::validName(const NodeName& name)
 
     return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
            regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0;
+}
+
+//// Network
+
+void Node::setNetwork(Network* network)
+{
+    if (m_network && m_network != network) {
+        m_network->remove(this);
+    }
+    m_network->add(this);
+}
+
+Network* Node::getNetwork()
+{
+    return m_network;
 }
 
 Field* Node::addField(const FieldName &name, FieldType type)
@@ -148,12 +163,17 @@ bool Node::isDirty() const
 
 void Node::markDirty()
 {
+    if (m_dirty) return;
     m_dirty = true;
     for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
         Connection* conn = (*iter);
         conn->getInputNode()->markDirty();
     }
-    // TODO: make network dirty
+    if (m_network && !m_network->isDirty()) {
+        // TODO: this is not ideal, since only changes to the rendered node should
+        // make the network dirty.
+        m_network->markDirty();
+    }
     // TODO: dispatch/notify
 }
 

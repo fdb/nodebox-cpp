@@ -29,8 +29,6 @@ namespace NodeCore {
 
 class NodeLibrary;
 
-typedef std::string NodeName;
-
 typedef Node* (*NodeCreator)();
 
 enum NodeLibraryType {

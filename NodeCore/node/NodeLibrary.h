@@ -89,16 +89,6 @@ public:
 };
 
 
-class NodeProcessingError : public std::exception
-{
-public:
-    NodeProcessingError(const Node& node, std::string msg="")
-            : m_node(node), m_msg(msg) {}
-    virtual ~NodeProcessingError() throw() {}
-    const Node& m_node;
-    std::string m_msg;
-};
-
 class NodeInfoNotFound : public std::exception
 {
 public:

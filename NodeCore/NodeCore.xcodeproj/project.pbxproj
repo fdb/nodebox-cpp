@@ -63,6 +63,8 @@
 		6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6165582B0DC6297600AC5259 /* nodeboxicon.png */; };
 		61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
+		61936C480DC86FA80034D23C /* Network.h in Headers */ = {isa = PBXBuildFile; fileRef = 61936C460DC86FA80034D23C /* Network.h */; };
+		61936C490DC86FA80034D23C /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61936C470DC86FA80034D23C /* Network.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +177,8 @@
 		61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasNode.h; sourceTree = "<group>"; };
 		61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CanvasNode.cpp; sourceTree = "<group>"; };
 		61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasNodeTestSuite.h; path = test/node/CanvasNodeTestSuite.h; sourceTree = "<group>"; };
+		61936C460DC86FA80034D23C /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		61936C470DC86FA80034D23C /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +263,8 @@
 				611EBF470DC2108B008BE1A1 /* Connection.h */,
 				611EBF480DC2108B008BE1A1 /* Field.cpp */,
 				611EBF490DC2108B008BE1A1 /* Field.h */,
+				61936C460DC86FA80034D23C /* Network.h */,
+				61936C470DC86FA80034D23C /* Network.cpp */,
 				611EBF500DC2108B008BE1A1 /* Node.cpp */,
 				611EBF510DC2108B008BE1A1 /* Node.h */,
 				611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */,
@@ -401,6 +407,7 @@
 				611EC3C80DC22EB9008BE1A1 /* Utils.h in Headers */,
 				611EC3C90DC22EB9008BE1A1 /* Exceptions.h in Headers */,
 				61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */,
+				61936C480DC86FA80034D23C /* Network.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +527,7 @@
 				611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */,
 				616557A40DC61E9100AC5259 /* Image.cpp in Sources */,
 				61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */,
+				61936C490DC86FA80034D23C /* Network.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,7 +35,7 @@ typedef FieldMap::iterator FieldIterator;
 #define NodeNameMacro(nodeName) \
 public: \
     static Node* initialize() { return new nodeName; } \
-    virtual std::string className() { return #nodeName; }
+    virtual std::string className() const { return #nodeName; }
 
 typedef std::string NodeName;
 typedef std::string NodeType;
@@ -50,14 +50,34 @@ private:
     FieldName m_name;
 };
 
-// TODO: forbidden names
+class NodeProcessingError : public std::exception
+{
+public:
+    NodeProcessingError(Node* node, const std::string& msg="")
+            : m_node(node), m_message(msg) {}
+    virtual ~NodeProcessingError() throw() {}
+    Node* getNode() { return m_node; }
+    std::string getMessage() { return m_message; }
+private:
+    Node* m_node;
+    std::string m_message;
+};
+
+class Network;
 
 class Node {
 public:
     Node();
     virtual ~Node();
     
-    virtual NodeName defaultName() { return className(); };
+    virtual NodeName defaultName() const { return className(); };
+    
+    NodeName getName() const;
+    void setName(const NodeName &name);
+    static bool validName(const NodeName& name);
+    
+    void setNetwork(Network* network);
+    Network* getNetwork();
 
     Field* addField(const FieldName &name, FieldType type);
     Field* getField(const FieldName &name);
@@ -72,10 +92,6 @@ public:
     void set(const FieldName &name, int i);
     void set(const FieldName &name, float f);
     void set(const FieldName &name, std::string s);
-    
-    NodeName getName();
-    void setName(const NodeName &name);
-    static bool validName(const NodeName& name);
     
     void update();
     bool isDirty() const;
@@ -104,6 +120,7 @@ private:
     
     float m_x, m_y;
     std::string m_name;
+    Network* m_network;
     FieldMap m_fields;
     ConnectionList m_downstreams;
     // TODO: add exception
@@ -112,6 +129,7 @@ private:
     NodeNameMacro(Node);
     
     friend class Field;
+    friend class Network;
 };
 
 } // namespace NodeCore
