@@ -30,6 +30,7 @@
 #include <NodeCore/Exceptions.h>
 #include <NodeCore/Connection.h>
 #include <NodeCore/Field.h>
+#include <NodeCore/Network.h>
 #include <NodeCore/Node.h>
 #include <NodeCore/NodeInfo.h>
 #include <NodeCore/NodeLibrary.h>

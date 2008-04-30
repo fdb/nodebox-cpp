@@ -82,7 +82,9 @@ void Node::setNetwork(Network* network)
     if (m_network && m_network != network) {
         m_network->remove(this);
     }
-    m_network->add(this);
+    if (network) {
+        m_network->add(this);
+    }
 }
 
 Network* Node::getNetwork()

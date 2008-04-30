@@ -23,6 +23,7 @@
 #include "graphics/PathElementTestSuite.h"
 #include "node/ConnectTestSuite.h"
 #include "node/FieldTestSuite.h"
+#include "node/NetworkTestSuite.h"
 #include "node/NodeTestSuite.h"
 #include "node/CanvasNodeTestSuite.h"
 
@@ -83,12 +84,15 @@ main(int argc, char* argv[])
 		// Demonstrates the ability to use multiple test suites
 		//
 		Test::Suite ts;
+        // Graphical tests
 		ts.add(auto_ptr<Test::Suite>(new BezierPathTestSuite));
-		ts.add(auto_ptr<Test::Suite>(new CanvasTestSuite));
-		ts.add(auto_ptr<Test::Suite>(new ConnectTestSuite));
-		ts.add(auto_ptr<Test::Suite>(new FieldTestSuite));
-		ts.add(auto_ptr<Test::Suite>(new NodeTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new PathElementTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new CanvasTestSuite));
+        // Node tests
+		ts.add(auto_ptr<Test::Suite>(new NodeTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new FieldTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new ConnectTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new NetworkTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new CanvasNodeTestSuite));
 
 		// Run the tests
