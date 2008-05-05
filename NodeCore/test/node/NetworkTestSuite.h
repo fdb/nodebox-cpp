@@ -54,6 +54,15 @@ private:
         net->add(n2);
         TEST_ASSERT( !net->isEmpty() );
         TEST_ASSERT( net->size() == 2 );
+        TEST_ASSERT( n1->getNetwork() == net );
+        TEST_ASSERT( n2->getNetwork() == net );
+        TEST_ASSERT( net->getNode("node1") == n1 );
+        TEST_ASSERT( net->getNode("node2") == n2 );
+        net->remove(n1);
+        TEST_ASSERT( n1->getNetwork() == NULL );
+        TEST_ASSERT( net->size() == 1 );
+        TEST_ASSERT( net->getNode("node1") == NULL );
+        TEST_ASSERT( net->getNode("nonexistantnode") == NULL );
     }
 
 };

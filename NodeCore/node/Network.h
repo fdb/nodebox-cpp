@@ -55,7 +55,7 @@ public:
     // void rename(Node* node, const NodeName& name);
     bool contains(Node* node);
     // bool contains(const NodeName& name);
-    // Node* getNode(const NodeName& name);
+    Node* getNode(const NodeName& name);
 
     Node* getRenderedNode() const;
     void setRenderedNode(Node* node);

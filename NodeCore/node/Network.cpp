@@ -86,6 +86,11 @@ bool Network::contains(Node* node)
     return m_nodes.count(node->getName()) == 1;
 }
 
+Node* Network::getNode(const NodeName& name)
+{
+    return m_nodes[name];
+}
+
 //// Rendered node
 
 Node* Network::getRenderedNode() const
