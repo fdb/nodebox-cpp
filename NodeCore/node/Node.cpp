@@ -34,7 +34,6 @@ Node::Node()
     m_downstreams(ConnectionList()),
     m_dirty(true)
 {
-    m_name = defaultName();
 }
 
 Node::~Node()
@@ -48,7 +47,11 @@ Node::~Node()
 
 std::string Node::getName() const
 {
-    return m_name;
+    if (m_name == "") {
+        return defaultName();
+    } else {
+        return m_name;
+    }
 }
 
 void Node::setName(const NodeName& name)
