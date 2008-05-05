@@ -124,6 +124,15 @@ void Network::process()
     }
     assert(contains(m_renderedNode));
     m_renderedNode->update();
+    if (m_renderedNode->getOutputType() == kInt) {
+        setOutput(m_renderedNode->outputAsInt());
+    } else if (m_renderedNode->getOutputType() == kFloat) {
+        setOutput(m_renderedNode->outputAsFloat());
+    } else if (m_renderedNode->getOutputType() == kString) {
+        setOutput(m_renderedNode->outputAsString());
+    } else {
+        setOutput(m_renderedNode->outputAsData());
+    }
 }
 
 } // namespace NodeCore

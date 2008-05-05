@@ -125,7 +125,7 @@ private:
         net->setRenderedNode(m);
         net->update();
         TEST_ASSERT( m->outputAsInt() == 15 );
-        // TODO: Cannot get output of network.
+        TEST_ASSERT( net->outputAsInt() == 15 );
         TEST_ASSERT( !net->isDirty() );
         ng2->set("number", 88);
         // Because we changed a node in the network that is not connected to the 
@@ -134,6 +134,7 @@ private:
         ng->set("number", 11);
         net->update();
         TEST_ASSERT( m->outputAsInt() == 33 );
+        TEST_ASSERT( net->outputAsInt() == 33 );
     }
 
 };

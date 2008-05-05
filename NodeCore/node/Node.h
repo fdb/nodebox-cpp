@@ -92,6 +92,7 @@ public:
     Field* getField(const FieldName &name) const;
     bool hasField(const FieldName &name) const;
     Field* getOutputField() const { return m_outputField; }
+    FieldType getOutputType() const { return m_outputField->getType(); }
     
     // Value shortcuts
     int asInt(const FieldName &name);
