@@ -48,14 +48,21 @@ typedef std::string FieldType;
 const std::string kInt = "int";
 const std::string kFloat = "float";
 const std::string kString = "string";
-const std::string kData = "data";
+
+enum FieldDirection {
+    kIn = 1,
+    kOut = 2
+};
 
 class Field {
 public:
-    Field(Node *node, const FieldName& name, const FieldType& type);
+    Field(Node *node, const FieldName& name, const FieldType& type, FieldDirection dir = kIn);
     virtual ~Field();
     
     Node* getNode() const { return m_node; }
+    FieldDirection getDirection() const { return m_direction; }
+    bool isInputField() const { return m_direction == kIn; }
+    bool isOutputField() const { return m_direction == kOut; }
     
     int asInt();
     float asFloat();
@@ -107,6 +114,7 @@ private:
     std::string m_name;
     std::string m_verboseName;
     FieldType m_type;
+    FieldDirection m_direction;
     Connection *m_connection;
     Value m_value;
     // TODO: expression

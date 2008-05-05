@@ -24,30 +24,10 @@
 
 using namespace NodeCore;
 
-class IntNode : public Node
+class NumberGenerator : public Node
 {
 public:
-    IntNode() : m_output(0) {} 
-    int getOutput() { return m_output; }
-    virtual bool canConnectTo(Field* f) const
-    {
-        return f->getType() == kInt;
-    }
-protected:
-    void setOutput(int i) { m_output = i; }
-    virtual void updateField(Field* f)
-    {
-        assert (f->getType() == kInt);
-        f->set(m_output);
-    }
-private:
-    int m_output;
-};
-
-class NumberGenerator : public IntNode
-{
-public:
-    NumberGenerator()
+    NumberGenerator() : Node(kInt)
     {
         addField("number", kInt);
     }
@@ -61,10 +41,10 @@ protected:
     NodeNameMacro(NumberGenerator);
 };
 
-class Multiplier : public IntNode
+class Multiplier : public Node
 {
 public:
-    Multiplier()
+    Multiplier() : Node(kInt)
     {
         addField("number", kInt);
         addField("multiplier", kInt);
@@ -83,7 +63,8 @@ protected:
 
 class ValueNode : public Node {
 public:
-    ValueNode() {
+    ValueNode() : Node(kInt)
+    {
         f_int = addField("int", kInt);
         f_float = addField("float", kFloat);
         f_string = addField("string", kString);

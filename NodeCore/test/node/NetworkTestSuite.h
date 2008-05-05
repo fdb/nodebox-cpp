@@ -46,9 +46,9 @@ private:
     void test_container()
     {
         Network* net = new Network();
-        Node* n1 = new Node();
+        Node* n1 = new Node(kInt);
         n1->setName("node1");
-        Node* n2 = new Node();
+        Node* n2 = new Node(kInt);
         n2->setName("node2");
         TEST_ASSERT( net->isEmpty() );
         TEST_ASSERT( net->size() == 0 );
@@ -74,9 +74,9 @@ private:
         Network* net = new Network();
         TEST_ASSERT( net->isDirty() );
         TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
-        Node* n1 = new Node();
+        Node* n1 = new Node(kInt);
         n1->setName("node1");
-        Node* n2 = new Node();
+        Node* n2 = new Node(kInt);
         n2->setName("node2");
         net->add(n1);
         net->add(n2);
@@ -94,7 +94,7 @@ private:
     void test_rendered_node()
     {
         Network* net = new Network();
-        Node* n1 = new Node();
+        Node* n1 = new Node(kInt);
         n1->setName("node1");
         TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
         TEST_THROWS( net->setRenderedNode(n1), NodeNotInNetwork );
@@ -124,7 +124,7 @@ private:
         TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
         net->setRenderedNode(m);
         net->update();
-        TEST_ASSERT( m->getOutput() == 15 );
+        TEST_ASSERT( m->outputAsInt() == 15 );
         // TODO: Cannot get output of network.
         TEST_ASSERT( !net->isDirty() );
         ng2->set("number", 88);
@@ -133,7 +133,7 @@ private:
         TEST_ASSERT( !net->isDirty() );
         ng->set("number", 11);
         net->update();
-        TEST_ASSERT( m->getOutput() == 33 );
+        TEST_ASSERT( m->outputAsInt() == 33 );
     }
 
 };

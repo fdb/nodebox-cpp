@@ -22,8 +22,9 @@
 
 namespace NodeCore {
 
-Network::Network()
-       : m_nodes(NodeMap()),
+Network::Network(const FieldType& outputType)
+       : Node(outputType),
+         m_nodes(NodeMap()),
          m_renderedNode(NULL)
 {
 }
@@ -108,13 +109,6 @@ void Network::setRenderedNode(Node* node)
     markDirty();
 }
 
-bool Network::canConnectTo(Field* f) const
-{
-    if (m_renderedNode == NULL)
-        return false;
-    return m_renderedNode->canConnectTo(f);
-}
-
 std::ostream& operator<<(std::ostream& o, const Network& n)
 {
     o << "Network(" << n.getName() << ")";
@@ -130,13 +124,6 @@ void Network::process()
     }
     assert(contains(m_renderedNode));
     m_renderedNode->update();
-}
-
-void Network::updateField(Field* f)
-{
-    if (m_renderedNode == NULL)
-        return;
-    m_renderedNode->updateField(f);
 }
 
 } // namespace NodeCore

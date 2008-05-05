@@ -22,9 +22,12 @@
 
 #include "Node.h"
 
+#include <string>
 #include <Python/Python.h>
 
 namespace NodeCore {
+
+const std::string kPyObject = "PyObject";
 
 class PythonNode : public Node
 {

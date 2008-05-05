@@ -43,15 +43,15 @@ private:
         TEST_ASSERT( ng->isDirty() );
         ng->update();
         TEST_ASSERT( !ng->isDirty() );
-        TEST_ASSERT( ng->getOutput() == 0 );
+        TEST_ASSERT( ng->outputAsInt() == 0 );
         ng->set("number", 12);
         TEST_ASSERT( ng->isDirty() );
         // Asking for the output value doesn't update the node implicitly.
-        TEST_ASSERT( ng->getOutput() == 0 );
+        TEST_ASSERT( ng->outputAsInt() == 0 );
         // You have to explicitly update the node to get the new output value.
         ng->update();
         TEST_ASSERT( !ng->isDirty() );
-        TEST_ASSERT( ng->getOutput() == 12 );
+        TEST_ASSERT( ng->outputAsInt() == 12 );
     }
 
     void test_connect()
@@ -142,25 +142,25 @@ private:
         Multiplier *m = new Multiplier();
         m->set("multiplier", 2);
         m->getField("number")->connect(ng);
-        TEST_ASSERT( m->getOutput() == 0 );
+        TEST_ASSERT( m->outputAsInt() == 0 );
         ng->set("number", 3);
         TEST_ASSERT( m->isDirty() );
         // Asking for the output value doesn't update the node implicitly.
-        TEST_ASSERT( m->getOutput() == 0 );
+        TEST_ASSERT( m->outputAsInt() == 0 );
         // Updating the NumberGenerator node has no effect on the Multiplier node.
         ng->update();
         TEST_ASSERT( m->isDirty() );
-        TEST_ASSERT( m->getOutput() == 0 );
+        TEST_ASSERT( m->outputAsInt() == 0 );
         m->update();
         TEST_ASSERT( !m->isDirty() );
-        TEST_ASSERT( m->getOutput() == 6 );
+        TEST_ASSERT( m->outputAsInt() == 6 );
         // Test if value stops propagating after disconnection.
         m->getField("number")->disconnect();
         TEST_ASSERT( m->isDirty() );
         TEST_ASSERT( !ng->isDirty() );
         ng->set("number", 3);
         m->update();
-        TEST_ASSERT( m->getOutput() == 0 );
+        TEST_ASSERT( m->outputAsInt() == 0 );
     }
 
     void test_disconnect()
@@ -174,7 +174,7 @@ private:
         TEST_ASSERT( ng->isOutputConnected() );
         m->update();
         TEST_ASSERT( m->asInt("number") == 5 );
-        TEST_ASSERT( m->getOutput() == 10 );
+        TEST_ASSERT( m->outputAsInt() == 10 );
 
         m->getField("number")->disconnect();
         TEST_ASSERT( m->isDirty() );
@@ -183,6 +183,6 @@ private:
         TEST_ASSERT( !ng->isOutputConnected() );
         // Number reverts to default after disconnection
         m->update();
-        TEST_ASSERT( m->getOutput() == 0 );
+        TEST_ASSERT( m->outputAsInt() == 0 );
     }
 };

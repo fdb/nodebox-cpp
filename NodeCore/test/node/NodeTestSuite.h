@@ -40,7 +40,7 @@ private:
 
     void test_naming()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
 
         TEST_ASSERT( n->defaultName() == "Node" );
         TEST_ASSERT( n->className() == "Node" );
@@ -49,7 +49,7 @@ private:
 
     void test_fields()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         TEST_THROWS( n->getField("f1"), FieldNotFound );
         Field *f1 = n->addField("f1", kInt);
         TEST_ASSERT( n->hasField("f1") );
@@ -60,7 +60,7 @@ private:
 
     void test_node_naming()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         // Names can not start with a digit.
         TEST_THROWS( n->setName("1234"), InvalidName );
         // Names can not be in uppercase or contain uppercase letters
@@ -86,7 +86,7 @@ private:
 
     void test_field_naming()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         // Names can not start with a digit.
         TEST_THROWS( n->addField("1234", kInt), InvalidName );
         // Names can not be one of the reserved words.
@@ -123,7 +123,7 @@ private:
     
     void test_dirty()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         TEST_ASSERT( n->isDirty() );
         n->update();
         TEST_ASSERT( !n->isDirty() );

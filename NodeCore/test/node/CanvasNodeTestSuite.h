@@ -66,13 +66,13 @@ private:
         TEST_ASSERT( n->f_y->asFloat() == 0 );
         TEST_ASSERT( n->f_width->asFloat() == 0 );
         TEST_ASSERT( n->f_height->asFloat() == 0 );
-        TEST_ASSERT( n->getOutput() == Canvas() );
+        TEST_ASSERT( n->outputAsCanvas() == Canvas() );
         n->set("x", 10.0f);
         n->set("y", 20.0f);
         n->set("width", 30.0f);
         n->set("height", 40.0f);
         n->update();
-        Canvas c = n->getOutput();
+        Canvas c = n->outputAsCanvas();
         BezierPath r = BezierPath();
         r.rect(10, 20, 30, 40);
         TEST_ASSERT( c.size() == 1 );

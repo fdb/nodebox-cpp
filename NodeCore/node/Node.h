@@ -34,7 +34,7 @@ typedef FieldMap::iterator FieldIterator;
 
 #define NodeNameMacro(nodeName) \
 public: \
-    static Node* initialize() { return new nodeName; } \
+    static Node* initialize() { return new nodeName(); } \
     virtual std::string className() const { return #nodeName; }
 
 typedef std::string NodeName;
@@ -55,9 +55,18 @@ class NodeProcessingError : public std::exception
 public:
     NodeProcessingError(Node* node, const std::string& msg="")
             : m_node(node), m_message(msg) {}
+    NodeProcessingError(const NodeProcessingError& other)
+            : m_node(other.m_node), m_message(other.m_message) {}
     virtual ~NodeProcessingError() throw() {}
     Node* getNode() { return m_node; }
     std::string getMessage() { return m_message; }
+    NodeProcessingError& operator=(const NodeProcessingError& other)
+    {
+        if(this == &other) return *this;
+        m_node = other.m_node;
+        m_message = other.m_message;
+        return *this;
+    }
 private:
     Node* m_node;
     std::string m_message;
@@ -67,7 +76,7 @@ class Network;
 
 class Node {
 public:
-    Node();
+    Node(const FieldType& outputType = kInt);
     virtual ~Node();
     
     virtual NodeName defaultName() const { return className(); };
@@ -79,25 +88,32 @@ public:
     void setNetwork(Network* network);
     Network* getNetwork();
 
-    Field* addField(const FieldName &name, FieldType type);
-    Field* getField(const FieldName &name);
-    bool hasField(const FieldName &name);
+    Field* addField(const FieldName &name, const FieldType& type);
+    Field* getField(const FieldName &name) const;
+    bool hasField(const FieldName &name) const;
+    Field* getOutputField() const { return m_outputField; }
     
     // Value shortcuts
     int asInt(const FieldName &name);
     float asFloat(const FieldName &name);
     std::string asString(const FieldName &name);
+    void* asData(const FieldName &name);
+    
+    int outputAsInt() const;
+    float outputAsFloat() const;
+    std::string outputAsString() const;
+    void* outputAsData() const;
 
     // All these can throw a ValueError.
     void set(const FieldName &name, int i);
     void set(const FieldName &name, float f);
-    void set(const FieldName &name, std::string s);
+    void set(const FieldName &name, const std::string& s);
+    void set(const FieldName &name, void* d);
     
     void update();
     bool isDirty() const;
     void markDirty();
     
-    virtual bool canConnectTo(Field* f) const;
     bool isOutputConnected();
     bool isOutputConnectedTo(Node* node);
     bool isOutputConnectedTo(Field* field);
@@ -106,7 +122,12 @@ public:
     
 protected:
     virtual void process();
-    virtual void updateField(Field* f);
+    void setOutput(int i);
+    void setOutput(float f);
+    void setOutput(std::string s);
+    void setOutput(void* d);
+    // Needed for setOutput overrides
+    void setOutputAsData(void* d) { setOutput(d); }
     
 private:
     // Disallow copy construction or assignment
@@ -122,6 +143,7 @@ private:
     std::string m_name;
     Network* m_network;
     FieldMap m_fields;
+    Field* m_outputField;
     ConnectionList m_downstreams;
     // TODO: add exception
     bool m_dirty;

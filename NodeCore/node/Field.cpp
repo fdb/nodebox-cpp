@@ -24,11 +24,12 @@
 
 namespace NodeCore {
 
-Field::Field(Node *node, const FieldName& name, const FieldType& type)
-     : m_node(node), 
+Field::Field(Node *node, const FieldName& name, const FieldType& type, FieldDirection direction)
+     : m_node(node),
        m_name(name),
        m_verboseName(""),
        m_type(type),
+       m_direction(direction),
        m_connection(0)
 {
     if (validName(name)) {
@@ -42,7 +43,7 @@ Field::Field(Node *node, const FieldName& name, const FieldType& type)
         m_value.f = 0;
     } else if (m_type == kString) {
         m_value.s = new std::string;
-    } else if (m_type == kData) {
+    } else {
         m_value.d = 0;
     }
 }
@@ -80,11 +81,7 @@ std::string Field::asString()
 
 void* Field::asData()
 {
-    if (m_type == kData) {
-        return m_value.d;
-    } else {
-        return 0;
-    }
+    return m_value.d;
 }
 
 void Field::set(int i)
@@ -123,13 +120,9 @@ void Field::set(const std::string& s)
 
 void Field::set(void* data)
 {  
-    if (m_type == kData) {
-        preSet();
-        m_value.d = data;
-        postSet();
-    } else {
-        throw ValueError("Tried setting data value on field with type " + m_type);
-    }
+    preSet();
+    m_value.d = data;
+    postSet();
 }
 
 Field::~Field()
@@ -157,18 +150,19 @@ bool Field::validName(const FieldName& name)
 }
 
 // Checks if this field can connect to the ouput of the given node.
-// This queries the canConnectTo method on the specified node.
+// This compares the types of the relevant input and output fields.
 bool Field::canConnectTo(Node* node)
 {
-    // Fields have no way of knowing whether they can connect to the output of a Node,
-    // since the output is not typed.
-    // Only the node itself knows whether it can connect to the field, so we ask it.
-    return node->canConnectTo(this);
+    if (isOutputField()) return false;
+    return  node->getOutputField()->getType() == getType();
 }
 
 Connection* Field::connect(Node* node)
 {
     // Sanity check
+    if (!isInputField()) {
+        throw ConnectionError(m_node->getName() + "." + m_name + ": can only connect input nodes");        
+    }
     if (node == m_node) {
         throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to myself");
     }
@@ -176,7 +170,7 @@ Connection* Field::connect(Node* node)
         throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to " + node->getName());
     }
     disconnect();
-    m_connection = new Connection(node, this);
+    m_connection = new Connection(node->getOutputField(), this);
     node->addDownstream(m_connection);
     m_node->markDirty();
     // TODO: notify
@@ -185,8 +179,9 @@ Connection* Field::connect(Node* node)
 
 bool Field::disconnect()
 {
+    assert(isInputField()); // TODO: also support disconnecting output fields.
     if (!isConnected()) return false;
-    assert(m_connection->m_output->isOutputConnectedTo(this));
+    assert(m_connection->getOutputNode()->isOutputConnectedTo(this));
     m_connection->getOutputNode()->removeDownstream(m_connection);
     delete m_connection;
     m_connection = 0;
@@ -205,7 +200,7 @@ bool Field::isConnectedTo(Node* node)
 {
     if (!m_connection)
         return false;
-    return m_connection->m_output == node;
+    return m_connection->getOutputNode() == node;
 }
 
 Connection* Field::getConnection()
@@ -216,9 +211,17 @@ Connection* Field::getConnection()
 void Field::update()
 {
     if (isConnected()) {
-        m_connection->m_output->update();
-        m_connection->m_output->updateField(this);
-        // TODO: The output data of the upstream node becomes my value.
+        m_connection->getOutputNode()->update();
+        assert(m_connection->getOutputField()->getType() == getType());
+        if (m_type == kInt) {
+            set(m_connection->getOutputField()->asInt());
+        } else if (m_type == kFloat) {
+            set(m_connection->getOutputField()->asFloat());
+        } else if (m_type == kString) {
+            set(m_connection->getOutputField()->asString());
+        } else {
+            set(m_connection->getOutputField()->asData());
+        }
     }
 }
 

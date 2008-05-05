@@ -22,7 +22,9 @@
 
 namespace NodeCore {
 
-PythonNode::PythonNode(PyObject* pythonObject) : m_pythonObject(pythonObject)
+PythonNode::PythonNode(PyObject* pythonObject)
+          : Node(kPyObject), 
+            m_pythonObject(pythonObject)
 {
 }
 

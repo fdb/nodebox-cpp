@@ -33,9 +33,17 @@ class DuplicateName : public std::exception
 {
 public:
     DuplicateName(Node* node, const NodeName& name) : m_node(node), m_name(name) {}
+    DuplicateName(const DuplicateName& other) : m_node(other.m_node), m_name(other.m_name) {}
     virtual ~DuplicateName() throw () {}
     Node* getNode() { return m_node; }
     NodeName getName() { return m_name; }
+    DuplicateName& operator=(const DuplicateName& other)
+    {
+        if(this == &other) return *this;
+        m_node = other.m_node;
+        m_name = other.m_name;
+        return *this;
+    }
 private:
     Node* m_node;
     NodeName m_name;
@@ -45,9 +53,17 @@ class NodeNotInNetwork : public std::exception
 {
 public:
     NodeNotInNetwork(Network* network, Node* node) : m_network(network), m_node(node) {}
+    NodeNotInNetwork(const NodeNotInNetwork& other) : m_network(other.m_network), m_node(other.m_node) {}
     virtual ~NodeNotInNetwork() throw () {}
     Network* getNetwork() { return m_network; }
     Node* getNode() { return m_node; }
+    NodeNotInNetwork& operator=(const NodeNotInNetwork& other)
+    {
+        if(this == &other) return *this;
+        m_network = other.m_network;
+        m_node = other.m_node;
+        return *this;
+    }
 private:
     Network* m_network;
     Node* m_node;
@@ -55,7 +71,7 @@ private:
 
 class Network: public Node {
 public:
-    Network();
+    Network(const FieldType& outputType = kInt);
     virtual ~Network();
     
     bool isEmpty();
@@ -71,14 +87,11 @@ public:
 
     Node* getRenderedNode() const;
     void setRenderedNode(Node* node);
-    
-    virtual bool canConnectTo(Field* f) const;
-        
+            
     friend std::ostream& operator<<(std::ostream& o, const Node& n);
     
 protected:
     virtual void process();
-    virtual void updateField(Field* f);
     
 private:
     // Disallow copy construction or assignment

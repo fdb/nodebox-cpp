@@ -41,12 +41,13 @@ private:
 
 class Connection {
 public:
-    Connection(Node *outputNode, Field *inputField);
+    Connection(Field *outputField, Field *inputField);
     virtual ~Connection();
 
-    Node* getOutputNode();
-    Field* getInputField();
-    Node* getInputNode();
+    Field* getOutputField() const;
+    Node* getOutputNode() const;
+    Field* getInputField() const;
+    Node* getInputNode() const;
 
     friend std::ostream& operator<<(std::ostream& o, const Connection& c);
 
@@ -58,7 +59,7 @@ private:
     void markDirtyDownstream();
     void update();
     
-    Node* m_output;
+    Field* m_output;
     Field* m_input;
     
     friend class Field;

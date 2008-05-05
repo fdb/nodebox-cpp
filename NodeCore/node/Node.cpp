@@ -24,16 +24,18 @@
 
 namespace NodeCore {
 
-Node::Node()
+Node::Node(const FieldType& outputType)
     :
     m_x(0),
     m_y(0),
     m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
     m_network(NULL),
     m_fields(FieldMap()),
+    m_outputField(0),
     m_downstreams(ConnectionList()),
     m_dirty(true)
 {
+    m_outputField = new Field(this, "out", outputType, kOut);
 }
 
 Node::~Node()
@@ -97,7 +99,7 @@ Network* Node::getNetwork()
     return m_network;
 }
 
-Field* Node::addField(const FieldName &name, FieldType type)
+Field* Node::addField(const FieldName &name, const FieldType& type)
 {
     if (hasField(name)) { throw InvalidName(); }
     Field *f = new Field(this, name, type);
@@ -106,17 +108,17 @@ Field* Node::addField(const FieldName &name, FieldType type)
     return f;
 }
 
-Field* Node::getField(const FieldName &name)
+Field* Node::getField(const FieldName &name) const
 {
     if (hasField(name)) {
-        Field* f = m_fields[name];
-        return f;
+        FieldMap* fields = const_cast<FieldMap*>(&m_fields);
+        return (*fields)[name];
     } else {
         throw FieldNotFound(name);
     }
 }
 
-bool Node::hasField(const FieldName &name)
+bool Node::hasField(const FieldName &name) const
 {
     return m_fields.count(name) == 1;
 }
@@ -137,6 +139,31 @@ std::string Node::asString(const FieldName &name)
     return getField(name)->asString();
 }
 
+void* Node::asData(const FieldName &name)
+{
+    return getField(name)->asData();
+}
+
+int Node::outputAsInt() const
+{
+    return m_outputField->asInt();
+}
+
+float Node::outputAsFloat() const
+{
+    return m_outputField->asFloat();
+}
+
+std::string Node::outputAsString() const
+{
+    return m_outputField->asString();
+}
+
+void* Node::outputAsData() const
+{
+    return m_outputField->asData();
+}
+
 void Node::set(const FieldName &name, int i)
 {
     getField(name)->set(i);
@@ -147,9 +174,14 @@ void Node::set(const FieldName &name, float f)
     getField(name)->set(f);
 }
 
-void Node::set(const FieldName &name, std::string s)
+void Node::set(const FieldName &name, const std::string& s)
 {
     getField(name)->set(s);
+}
+
+void Node::set(const FieldName &name, void* d)
+{
+    getField(name)->set(d);
 }
 
 void Node::update()
@@ -213,23 +245,24 @@ void Node::process()
     // This space intentionally left blank.
 }
 
-// Updates a connected field with the output value of this node.
-// This method gets called whenever a downstream node wants to update
-// the values of its connected fields.
-// Since we don't know anything about the output value of a node,
-// it is very important that overriding nodes implement this method.
-void Node::updateField(Field* f)
+void Node::setOutput(int i)
 {
+    m_outputField->set(i);
 }
 
-// This method will be checked before connecting a field.
-// It reports whether the output of this node can be connected
-// to the specified field.
-// By default, it returns false: overriding nodes should implement
-// this method and do proper checking.
-bool Node::canConnectTo(Field* f) const
+void Node::setOutput(float f)
 {
-    return false;
+    m_outputField->set(f);
+}
+
+void Node::setOutput(std::string s)
+{
+    m_outputField->set(s);
+}
+
+void Node::setOutput(void* d)
+{
+    m_outputField->set(d);
 }
 
 void Node::addDownstream(Connection* c)

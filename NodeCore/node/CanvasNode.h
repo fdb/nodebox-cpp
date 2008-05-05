@@ -36,20 +36,16 @@ public:
     CanvasNode();
     virtual ~CanvasNode();
     
-    Canvas getOutput() const;
-    virtual bool canConnectTo(Field* f) const;
-    
+    Canvas outputAsCanvas() const;
+
 protected:
     virtual void process();
     void setOutput(const Canvas& c);
-    virtual void updateField(Field* f);
 
 private:
     // Disallow copy construction or assignment
     CanvasNode(const CanvasNode& other);
     CanvasNode& operator=(const CanvasNode& other);
-
-    Canvas* m_output;
 };
 
 } // namespace NodeCore
