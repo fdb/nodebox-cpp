@@ -33,9 +33,7 @@ public:
         TEST_ADD(NodeTestSuite::test_node_naming);
         TEST_ADD(NodeTestSuite::test_field_naming);
         TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
+        TEST_ADD(NodeTestSuite::test_dirty);
     }
 
 private:
@@ -121,6 +119,26 @@ private:
         TEST_THROWS_NOTHING( n->addField("y", kInt) );
         TEST_THROWS_NOTHING( n->addField("dirty", kInt) );
         TEST_THROWS_NOTHING( n->addField("process", kInt) );
+    }
+    
+    void test_dirty()
+    {
+        Node *n = new Node();
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );
+        n->addField("test", kInt);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );
+        n->set("test", 12);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );
+        n->getField("test")->set(12);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );        
     }
 
 };

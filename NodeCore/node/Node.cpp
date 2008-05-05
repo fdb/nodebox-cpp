@@ -100,6 +100,7 @@ Field* Node::addField(const FieldName &name, FieldType type)
     if (hasField(name)) { throw InvalidName(); }
     Field *f = new Field(this, name, type);
     m_fields[name] = f;
+    markDirty();
     return f;
 }
 
