@@ -32,7 +32,7 @@ Network::Network(const FieldType& outputType)
 Network::~Network()
 {
     // Delete all nodes in the node map
-    for (NodeIterator iter = m_nodes.begin(); iter != m_nodes.end(); ++iter) {
+    for (NodeMapIterator iter = m_nodes.begin(); iter != m_nodes.end(); ++iter) {
         delete (*iter).second;
     }
 }
@@ -65,6 +65,17 @@ std::string Network::setUniqueNodeName(Node* node)
         }
         ++counter;
     }
+}
+
+bool Network::rename(Node* node, const NodeName& name)
+{
+    assert(contains(node));
+    if (node->getName() == name) return true;
+    if (contains(name)) return false;
+    m_nodes.erase(node->getName());
+    node->_setName(name);
+    m_nodes[name] = node;
+    return true;
 }
 
 // throws DuplicateName if a node with this name is already in the network.
@@ -116,15 +127,13 @@ Node* Network::getNode(const NodeName& name)
     return m_nodes[name];
 }
 
-bool Network::rename(Node* node, const NodeName& name)
+NodeList Network::getNodes()
 {
-    assert(contains(node));
-    if (node->getName() == name) return true;
-    if (contains(name)) return false;
-    m_nodes.erase(node->getName());
-    node->_setName(name);
-    m_nodes[name] = node;
-    return true;
+    NodeList nodes = NodeList();
+    for (NodeMapIterator iter = m_nodes.begin(); iter != m_nodes.end(); ++iter) {
+        nodes.push_back((*iter).second);
+    }
+    return nodes;
 }
 
 //// Rendered node

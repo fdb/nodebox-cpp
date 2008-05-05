@@ -45,9 +45,11 @@ class InvalidName : public std::exception {};
 typedef std::string FieldName;
 typedef std::string FieldType;
 
-const std::string kInt = "int";
-const std::string kFloat = "float";
-const std::string kString = "string";
+const FieldType kInt = "int";
+const FieldType kFloat = "float";
+const FieldType kString = "string";
+const FieldType kNode = "Node";
+const FieldType kNetwork = "Network";
 
 enum FieldDirection {
     kIn = 1,

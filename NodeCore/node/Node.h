@@ -87,6 +87,11 @@ public:
     
     void setNetwork(Network* network);
     Network* getNetwork();
+        
+    float getX() const { return m_x; }
+    float getY() const { return m_y; }
+    void setX(float x);
+    void setY(float y);
 
     Field* addField(const FieldName &name, const FieldType& type);
     Field* getField(const FieldName &name) const;

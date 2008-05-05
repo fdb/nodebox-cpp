@@ -163,7 +163,7 @@ void BezierPath::transform(const Transform& t)
 
 void BezierPath::_draw(CGContextRef ctx)
 {
-    CGColorRef color = CGColorCreateGenericRGB(1, 0, 0, 1);
+    CGColorRef color = CGColorCreateGenericRGB(0, 0, 0, 1);
     CGContextSetFillColorWithColor(ctx, color);
     CGColorRelease(color);
     CGContextBeginPath(ctx);

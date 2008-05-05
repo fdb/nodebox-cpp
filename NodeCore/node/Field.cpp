@@ -87,6 +87,7 @@ void* Field::asData()
 void Field::set(int i)
 {
     if (m_type == kInt) {
+        // TODO: lazy setting
         preSet();
         m_value.i = i;
         postSet();
@@ -98,6 +99,7 @@ void Field::set(int i)
 void Field::set(float f)
 {
     if (m_type == kFloat) {
+        // TODO: lazy setting
         preSet();
         m_value.f = f;
         postSet();
@@ -109,6 +111,7 @@ void Field::set(float f)
 void Field::set(const std::string& s)
 {
     if (m_type == kString) {
+        // TODO: lazy setting
         preSet();
         delete m_value.s;
         m_value.s = new std::string(s);
@@ -120,6 +123,7 @@ void Field::set(const std::string& s)
 
 void Field::set(void* data)
 {  
+    // TODO: lazy setting
     preSet();
     m_value.d = data;
     postSet();

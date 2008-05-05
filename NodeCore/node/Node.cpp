@@ -114,6 +114,20 @@ Network* Node::getNetwork()
     return m_network;
 }
 
+//// X/Y position
+
+void Node::setX(float x)
+{
+    m_x = x;
+    // TODO: notify
+}
+
+void Node::setY(float y)
+{
+    m_y = y;
+    // TODO: notify
+}
+
 Field* Node::addField(const FieldName &name, const FieldType& type)
 {
     if (hasField(name)) { throw InvalidName(); }
