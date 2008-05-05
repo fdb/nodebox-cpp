@@ -180,6 +180,7 @@
 		61936C460DC86FA80034D23C /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		61936C470DC86FA80034D23C /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 		61936CE90DC884570034D23C /* NetworkTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkTestSuite.h; path = test/node/NetworkTestSuite.h; sourceTree = "<group>"; };
+		61FA165A0DCF06830056A7C6 /* TestNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestNodes.h; path = test/node/TestNodes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +366,7 @@
 		611EC5680DC25D8C008BE1A1 /* node */ = {
 			isa = PBXGroup;
 			children = (
+				61FA165A0DCF06830056A7C6 /* TestNodes.h */,
 				61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */,
 				611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */,
 				611EC5860DC26042008BE1A1 /* FieldTestSuite.h */,

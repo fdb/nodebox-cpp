@@ -17,13 +17,10 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using namespace NodeCore;
-
 #include <iostream>
-using namespace std;
-
 #include <NodeCore/NodeCore.h>
 
+using namespace std;
 using namespace NodeCore;
 
 class RectNode : public CanvasNode {

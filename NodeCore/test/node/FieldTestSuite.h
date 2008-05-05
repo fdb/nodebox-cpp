@@ -17,31 +17,9 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using namespace NodeCore;
-
 #include <NodeCore/NodeCore.h>
 
 using namespace NodeCore;
-
-class ValueNode : public Node {
-public:
-    ValueNode() {
-        f_int = addField("int", kInt);
-        f_float = addField("float", kFloat);
-        f_string = addField("string", kString);
-    }
-    virtual ~ValueNode() {}
-
-protected:
-    virtual void process() { }
-
-public:
-    Field *f_int;
-    Field *f_float;
-    Field *f_string;
-
-    NodeNameMacro(ValueNode);
-};
 
 class FieldTestSuite : public Test::Suite
 {

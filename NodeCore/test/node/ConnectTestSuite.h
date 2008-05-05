@@ -17,68 +17,10 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using namespace NodeCore;
-
 #include <NodeCore/NodeCore.h>
+#include "TestNodes.h"
 
 using namespace NodeCore;
-
-class IntNode : public Node
-{
-public:
-    IntNode() : m_output(0) {} 
-    int getOutput() { return m_output; }
-    virtual bool canConnectTo(Field* f) const
-    {
-        return f->getType() == kInt;
-    }
-protected:
-    void setOutput(int i) { m_output = i; }
-    void updateField(Field* f)
-    {
-        assert (f->getType() == kInt);
-        f->set(m_output);
-    }
-private:
-    int m_output;
-};
-
-class NumberGenerator : public IntNode
-{
-public:
-    NumberGenerator()
-    {
-        addField("number", kInt);
-    }
-
-protected:
-    virtual void process()
-    {
-        int number = asInt("number");
-        setOutput(number);
-    }
-    NodeNameMacro(NumberGenerator);
-};
-
-class Multiplier : public IntNode
-{
-public:
-    Multiplier()
-    {
-        addField("number", kInt);
-        addField("multiplier", kInt);
-        addField("somestring", kString);
-    }
-protected:
-    virtual void process()
-    {
-        // Fails for big numbers
-        int number = asInt("number");
-        int multiplier = asInt("multiplier");
-        setOutput(number * multiplier);
-    }
-    NodeNameMacro(Multiplier);
-};
 
 class ConnectTestSuite : public Test::Suite
 {

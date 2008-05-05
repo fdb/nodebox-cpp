@@ -17,9 +17,8 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using namespace NodeCore;
-
 #include <NodeCore/NodeCore.h>
+#include "TestNodes.h"
 
 using namespace NodeCore;
 
@@ -32,6 +31,7 @@ public:
 		TEST_ADD(NetworkTestSuite::test_container);
 		TEST_ADD(NetworkTestSuite::test_dirty);
 		TEST_ADD(NetworkTestSuite::test_rendered_node);
+		TEST_ADD(NetworkTestSuite::test_processing);
 	}
 
 private:
@@ -105,6 +105,35 @@ private:
         TEST_ASSERT( net->getRenderedNode() == NULL );
         TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
         TEST_THROWS( net->setRenderedNode(n1), NodeNotInNetwork );
+    }
+    
+    void test_processing()
+    {
+        Network* net = new Network();
+        NumberGenerator *ng = new NumberGenerator();
+        Multiplier *m = new Multiplier();
+        NumberGenerator *ng2 = new NumberGenerator(); // A node out of the connected stream
+        ng2->setName("ng2");
+        net->add(ng);
+        net->add(m);
+        net->add(ng2);
+        ng->set("number", 5);
+        m->getField("number")->connect(ng);
+        m->set("multiplier", 3);
+        TEST_ASSERT( net->isDirty() );
+        TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
+        net->setRenderedNode(m);
+        net->update();
+        TEST_ASSERT( m->getOutput() == 15 );
+        // TODO: Cannot get output of network.
+        TEST_ASSERT( !net->isDirty() );
+        ng2->set("number", 88);
+        // Because we changed a node in the network that is not connected to the 
+        // rendered node, the network does not become dirty.
+        TEST_ASSERT( !net->isDirty() );
+        ng->set("number", 11);
+        net->update();
+        TEST_ASSERT( m->getOutput() == 33 );
     }
 
 };
