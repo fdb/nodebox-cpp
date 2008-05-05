@@ -86,7 +86,7 @@ void Node::setNetwork(Network* network)
         m_network->remove(this);
     }
     if (network) {
-        m_network->add(this);
+        network->add(this);
     }
 }
 

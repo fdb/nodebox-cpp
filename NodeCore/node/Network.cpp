@@ -60,7 +60,7 @@ bool Network::add(Node* node)
         throw DuplicateName(node, node->getName());
     }
     assert(m_nodes.count(node->getName()) == 0);
-    node->setNetwork(this);
+    node->m_network = this;
     m_nodes[node->getName()] = node;
     return true;
 }

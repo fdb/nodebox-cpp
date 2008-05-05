@@ -29,7 +29,8 @@ public:
 	NetworkTestSuite()
 	{
 		TEST_ADD(NetworkTestSuite::test_naming);
-		//TEST_ADD(NetworkTestSuite::test_container);
+		TEST_ADD(NetworkTestSuite::test_container);
+		TEST_ADD(NetworkTestSuite::test_dirty);
 	}
 
 private:
@@ -63,6 +64,28 @@ private:
         TEST_ASSERT( net->size() == 1 );
         TEST_ASSERT( net->getNode("node1") == NULL );
         TEST_ASSERT( net->getNode("nonexistantnode") == NULL );
+    }
+    
+    void test_dirty()
+    {
+        Network* net = new Network();
+        TEST_ASSERT( net->isDirty() );
+        TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
+        Node* n1 = new Node();
+        n1->setName("node1");
+        Node* n2 = new Node();
+        n2->setName("node2");
+        net->add(n1);
+        net->add(n2);
+        TEST_THROWS( net->update(), NodeProcessingError ); // Not set as rendered node
+        net->setRenderedNode(n1);
+        TEST_ASSERT( net->isDirty() );
+        TEST_ASSERT( n1->isDirty() );
+        TEST_ASSERT( n2->isDirty() );
+        TEST_THROWS_NOTHING( net->update() );
+        TEST_ASSERT( !net->isDirty() );
+        TEST_ASSERT( !n1->isDirty() );
+        TEST_ASSERT( n2->isDirty() ); // n2 was not updated
     }
 
 };
