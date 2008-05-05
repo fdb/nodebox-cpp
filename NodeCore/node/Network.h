@@ -41,6 +41,18 @@ private:
     NodeName m_name;
 };
 
+class NodeNotInNetwork : public std::exception
+{
+public:
+    NodeNotInNetwork(Network* network, Node* node) : m_network(network), m_node(node) {}
+    virtual ~NodeNotInNetwork() throw () {}
+    Network* getNetwork() { return m_network; }
+    Node* getNode() { return m_node; }
+private:
+    Network* m_network;
+    Node* m_node;
+};
+
 class Network: public Node {
 public:
     Network();

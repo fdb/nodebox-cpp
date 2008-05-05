@@ -86,6 +86,8 @@ void Node::setNetwork(Network* network)
         m_network->remove(this);
     }
     if (network) {
+        // Network->add checks if this node was already added in the network,
+        // so we don't need to check it here.
         network->add(this);
     }
 }

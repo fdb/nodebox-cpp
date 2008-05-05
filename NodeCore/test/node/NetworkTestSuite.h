@@ -31,6 +31,7 @@ public:
 		TEST_ADD(NetworkTestSuite::test_naming);
 		TEST_ADD(NetworkTestSuite::test_container);
 		TEST_ADD(NetworkTestSuite::test_dirty);
+		TEST_ADD(NetworkTestSuite::test_rendered_node);
 	}
 
 private:
@@ -51,14 +52,16 @@ private:
         n2->setName("node2");
         TEST_ASSERT( net->isEmpty() );
         TEST_ASSERT( net->size() == 0 );
-        net->add(n1);
-        net->add(n2);
+        TEST_ASSERT( net->add(n1) );
+        TEST_ASSERT( net->add(n2) );
         TEST_ASSERT( !net->isEmpty() );
         TEST_ASSERT( net->size() == 2 );
         TEST_ASSERT( n1->getNetwork() == net );
         TEST_ASSERT( n2->getNetwork() == net );
         TEST_ASSERT( net->getNode("node1") == n1 );
-        TEST_ASSERT( net->getNode("node2") == n2 );
+        TEST_ASSERT( net->getNode("node2") == n2 );        
+        TEST_ASSERT( !net->add(n1) ); // Try adding an already added node.
+        TEST_ASSERT( net->size() == 2 );
         net->remove(n1);
         TEST_ASSERT( n1->getNetwork() == NULL );
         TEST_ASSERT( net->size() == 1 );
@@ -86,6 +89,22 @@ private:
         TEST_ASSERT( !net->isDirty() );
         TEST_ASSERT( !n1->isDirty() );
         TEST_ASSERT( n2->isDirty() ); // n2 was not updated
+    }
+    
+    void test_rendered_node()
+    {
+        Network* net = new Network();
+        Node* n1 = new Node();
+        n1->setName("node1");
+        TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
+        TEST_THROWS( net->setRenderedNode(n1), NodeNotInNetwork );
+        n1->setNetwork(net);
+        TEST_THROWS_NOTHING( net->setRenderedNode(n1) );
+        TEST_THROWS_NOTHING( net->update() );
+        net->remove(n1);
+        TEST_ASSERT( net->getRenderedNode() == NULL );
+        TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
+        TEST_THROWS( net->setRenderedNode(n1), NodeNotInNetwork );
     }
 
 };

@@ -82,7 +82,7 @@ bool Network::remove(Node* node)
 
 bool Network::contains(Node* node)
 {
-    assert(node != NULL);
+    if (node == NULL) return false;
     return m_nodes.count(node->getName()) == 1;
 }
 
@@ -100,7 +100,9 @@ Node* Network::getRenderedNode() const
 
 void Network::setRenderedNode(Node* node)
 {
-    assert(contains(node));
+    if (node != NULL && !contains(node)) {
+        throw NodeNotInNetwork(this, node);
+    }
     if (m_renderedNode == node) return;
     m_renderedNode = node;
     markDirty();
