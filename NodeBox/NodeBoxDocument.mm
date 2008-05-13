@@ -19,12 +19,12 @@ NSString *NodeType = @"NodeType";
     if (self) {
         network = new NodeCore::Network();
         NodeCore::Node* n1 = new NodeCore::Node();
-        n1->setName("node1");
+        network->setUniqueNodeName(n1);
         n1->setX(20);
         n1->setY(30);
         network->add(n1);
         NodeCore::Node* n2 = new NodeCore::Node();
-        n2->setName("node2");
+        network->setUniqueNodeName(n2);
         n2->setX(220);
         n2->setY(30);
         network->add(n2);
