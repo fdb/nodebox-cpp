@@ -17,6 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         visualiser = new NetworkVisualiser();
+        [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];
     }
     return self;
 }
@@ -59,6 +60,42 @@
     if (document == doc) return;
     document = doc;
     [self setNeedsDisplay:true];
+}
+
+#pragma mark Drag And Drop
+
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
+{
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+ 
+    sourceDragMask = [sender draggingSourceOperationMask];
+    pboard = [sender draggingPasteboard];
+ 
+    if ( [[pboard types] containsObject:NodeType] ) {
+        return NSDragOperationCopy;
+    }
+    return NSDragOperationNone;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{
+    NSPasteboard *pboard;
+    NSDragOperation sourceDragMask;
+ 
+    sourceDragMask = [sender draggingSourceOperationMask];
+    pboard = [sender draggingPasteboard];
+ 
+    if ( [[pboard types] containsObject:NodeType] ) {
+        NSPoint dragPoint = [sender draggingLocation];
+        dragPoint = [self convertPointFromBase:dragPoint];
+        [[self document] createNodeAt:dragPoint];
+        [self setNeedsDisplay:TRUE];
+        // Only a copy operation allowed so just copy the data
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

@@ -10,6 +10,8 @@
 #import <Cocoa/Cocoa.h>
 #import <NodeCore/NodeCore.h>
 
+extern NSString *NodeType;
+
 @class NetworkView;
 
 @interface NodeBoxDocument : NSDocument
@@ -21,6 +23,7 @@
 
 -(NodeCore::Network*) network;
 -(NodeCore::Node*) createNode;
+-(NodeCore::Node*) createNodeAt:(NSPoint)point;
 -(void) addNode:(NodeCore::Node *)node;
 -(BOOL) removeNode:(NodeCore::Node *)node;
 @end

@@ -32,13 +32,13 @@
 
 - (void)windowDidBecomeKey:(NSNotification *)notification
 {
-    NSLog(@"did become key");
+    // We need to redraw the selected LibraryNodeViews.
     [collectionView setNeedsDisplay:TRUE];
 }
 
 - (void)windowDidResignKey:(NSNotification *)notification
 {
-    NSLog(@"lost key");
+    // We need to redraw the selected LibraryNodeViews.
     [collectionView setNeedsDisplay:TRUE];
 }
 

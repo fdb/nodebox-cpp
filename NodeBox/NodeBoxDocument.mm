@@ -9,6 +9,8 @@
 #import "NodeBoxDocument.h"
 #import "NodeBoxWindowController.h"
 
+NSString *NodeType = @"NodeType";
+
 @implementation NodeBoxDocument
 
 - (id)init
@@ -104,9 +106,15 @@
 
 -(NodeCore::Node*) createNode
 {
+    return [self createNodeAt:NSMakePoint(30, 30)];
+}
+
+-(NodeCore::Node*) createNodeAt:(NSPoint)point
+{
+    NSLog(@"Create node at %f, %f", point.x, point.y);
     NodeCore::Node *node = new NodeCore::Node();
-    node->setX(30);
-    node->setY(50);
+    node->setX(point.x);
+    node->setY(point.y);
     NSUndoManager *undo = [self undoManager];
     [[undo prepareWithInvocationTarget:self] removeNode:node];
     if (![undo isUndoing]) {
@@ -125,6 +133,7 @@
         [undo setActionName:@"Add Node"];
     }
     network->add(node);
+    [networkView setNeedsDisplay:TRUE];
 }
 
 -(BOOL) removeNode:(NodeCore::Node *)node
@@ -138,6 +147,7 @@
         [undo setActionName:@"Remove Node"];
     }
     network->remove(node);
+    [networkView setNeedsDisplay:TRUE];
     // Not deleting the node, since the undoManager needs it.
     return true;
 }
