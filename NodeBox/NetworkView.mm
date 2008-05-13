@@ -10,6 +10,9 @@
 #import "NodeBoxDocument.h"
 #import "NetworkVisualiser.h"
 
+float NODE_WIDTH = 100;
+float NODE_HEIGHT = 25;
+
 @implementation NetworkView
 
 - (id)initWithFrame:(NSRect)frame
@@ -41,11 +44,17 @@
         [[NSColor whiteColor] set];
         NSRectFill(rect);
         NodeCore::Network* network = [document network];
-        visualiser->set("network", (void*)network);
-        visualiser->update();
-        NodeCore::Canvas canvas = visualiser->outputAsCanvas();
-        CGContextRef ctx = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
-        canvas._draw(ctx);
+        NodeCore::NodeList nodes = network->getNodes();
+        for (NodeCore::NodeIterator iter = nodes.begin(); iter != nodes.end(); ++iter) {
+            NodeCore::Node* node = (*iter);
+            NSRect r = NSMakeRect(node->getX(), node->getY(), NODE_WIDTH, NODE_HEIGHT);
+            NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:r xRadius:2 yRadius:2];
+            [[NSColor lightGrayColor] set];
+            [path fill];
+            NSString *s = [NSString stringWithCString:node->getName().c_str()];
+            [[NSColor blackColor] set];
+            [s drawAtPoint:NSMakePoint(node->getX()+5, node->getY()+5) withAttributes:NULL];
+        }
     }
 }
 
