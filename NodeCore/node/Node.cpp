@@ -21,6 +21,7 @@
 #include "Node.h"
 
 #include "Network.h"
+#include "stringutils.h"
 
 namespace NodeCore {
 
@@ -46,6 +47,11 @@ Node::~Node()
 }
 
 //// Naming
+
+NodeName Node::defaultName() const
+{
+    return string_to_lower(className());
+}
 
 std::string Node::getName() const
 {

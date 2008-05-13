@@ -32,7 +32,6 @@ public:
         TEST_ADD(NodeTestSuite::test_fields);
         TEST_ADD(NodeTestSuite::test_node_naming);
         TEST_ADD(NodeTestSuite::test_field_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
         TEST_ADD(NodeTestSuite::test_dirty);
     }
 
@@ -42,9 +41,9 @@ private:
     {
         Node *n = new Node(kInt);
 
-        TEST_ASSERT( n->defaultName() == "Node" );
+        TEST_ASSERT( n->defaultName() == "node" );
         TEST_ASSERT( n->className() == "Node" );
-        TEST_ASSERT( n->getName() == "Node" );
+        TEST_ASSERT( n->getName() == "node" );
     }
 
     void test_fields()

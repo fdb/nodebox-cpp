@@ -58,6 +58,8 @@
 		611EC55A0DC2575B008BE1A1 /* htmloutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5480DC2575B008BE1A1 /* htmloutput.cpp */; };
 		611EC55B0DC2575B008BE1A1 /* collectoroutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5510DC2575B008BE1A1 /* collectoroutput.cpp */; };
 		611EC55C0DC2575B008BE1A1 /* compileroutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5520DC2575B008BE1A1 /* compileroutput.cpp */; };
+		615500070DDA02D300708CBC /* stringutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 615500050DDA02D300708CBC /* stringutils.cpp */; };
+		615500080DDA02D300708CBC /* stringutils.h in Headers */ = {isa = PBXBuildFile; fileRef = 615500060DDA02D300708CBC /* stringutils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		616557A30DC61E9100AC5259 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = 616557A10DC61E9100AC5259 /* Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		616557A40DC61E9100AC5259 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 616557A20DC61E9100AC5259 /* Image.cpp */; };
 		6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6165582B0DC6297600AC5259 /* nodeboxicon.png */; };
@@ -171,6 +173,9 @@
 		611EC5860DC26042008BE1A1 /* FieldTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldTestSuite.h; path = test/node/FieldTestSuite.h; sourceTree = "<group>"; };
 		611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeTestSuite.h; path = test/node/NodeTestSuite.h; sourceTree = "<group>"; };
 		611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathElementTestSuite.h; path = test/graphics/PathElementTestSuite.h; sourceTree = "<group>"; };
+		615500050DDA02D300708CBC /* stringutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stringutils.cpp; path = util/stringutils.cpp; sourceTree = "<group>"; };
+		615500060DDA02D300708CBC /* stringutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringutils.h; path = util/stringutils.h; sourceTree = "<group>"; };
+		6155000A0DDA02FE00708CBC /* StringUtilsTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtilsTestSuite.h; sourceTree = "<group>"; };
 		616557A10DC61E9100AC5259 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		616557A20DC61E9100AC5259 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		6165582B0DC6297600AC5259 /* nodeboxicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeboxicon.png; sourceTree = "<group>"; };
@@ -224,6 +229,7 @@
 				611EC1700DC22963008BE1A1 /* api */,
 				611EBF350DC2108B008BE1A1 /* graphics */,
 				611EBF450DC2108B008BE1A1 /* node */,
+				6155FFF70DDA02A100708CBC /* utils */,
 				611EC16D0DC2288F008BE1A1 /* test */,
 				616558290DC6296700AC5259 /* Resources */,
 				611EBF9C0DC21200008BE1A1 /* Frameworks */,
@@ -311,6 +317,7 @@
 				611EC53D0DC25749008BE1A1 /* cpptest */,
 				611EC4860DC24E4E008BE1A1 /* graphics */,
 				611EC5680DC25D8C008BE1A1 /* node */,
+				615500090DDA02FE00708CBC /* util */,
 				611EC4840DC24E0A008BE1A1 /* unittest.cpp */,
 				611EC16E0DC228CF008BE1A1 /* testpdf.cpp */,
 			);
@@ -376,6 +383,24 @@
 			name = node;
 			sourceTree = "<group>";
 		};
+		615500090DDA02FE00708CBC /* util */ = {
+			isa = PBXGroup;
+			children = (
+				6155000A0DDA02FE00708CBC /* StringUtilsTestSuite.h */,
+			);
+			name = util;
+			path = test/util;
+			sourceTree = "<group>";
+		};
+		6155FFF70DDA02A100708CBC /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				615500050DDA02D300708CBC /* stringutils.cpp */,
+				615500060DDA02D300708CBC /* stringutils.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		616558290DC6296700AC5259 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +437,7 @@
 				611EC3C80DC22EB9008BE1A1 /* Utils.h in Headers */,
 				611EC3C90DC22EB9008BE1A1 /* Exceptions.h in Headers */,
 				61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */,
+				615500080DDA02D300708CBC /* stringutils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +558,7 @@
 				616557A40DC61E9100AC5259 /* Image.cpp in Sources */,
 				61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */,
 				61936C490DC86FA80034D23C /* Network.cpp in Sources */,
+				615500070DDA02D300708CBC /* stringutils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

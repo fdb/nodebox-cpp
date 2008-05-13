@@ -51,13 +51,16 @@ unsigned int Network::size()
 
 std::string Network::setUniqueNodeName(Node* node)
 {
-    assert(contains(node));
+    // The node doesn't have to be in the network, but it will
+    // get a name that is unique for this network.
     int counter = 1;
     while (true) {
-        std::string suggestedName = node->defaultName();
-        suggestedName += counter;
+        std::stringstream suggestedNameStream;
+        suggestedNameStream << node->defaultName() << counter;
+        std::string suggestedName = suggestedNameStream.str();
         if (!contains(suggestedName)) {
-            rename(node, suggestedName);
+            // We don't use rename here, since it assumes the node will be in this network.
+            node->setName(suggestedName);
             return suggestedName;
         }
         ++counter;
@@ -99,16 +102,17 @@ bool Network::remove(Node* node)
 bool Network::contains(Node* node)
 {
     if (node == NULL) return false;
-    return m_nodes.count(node->getName()) == 1;
+    return contains(node->getName());
 }
 
 bool Network::contains(const NodeName& name)
 {
-    return getNode(name) != NULL;
+    return m_nodes.count(name) == 1;
 }
 
 Node* Network::getNode(const NodeName& name)
 {
+    if (!contains(name)) return NULL;
     return m_nodes[name];
 }
 

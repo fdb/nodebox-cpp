@@ -79,7 +79,7 @@ public:
     Node(const FieldType& outputType = kInt);
     virtual ~Node();
     
-    virtual NodeName defaultName() const { return className(); };
+    virtual NodeName defaultName() const;
     
     NodeName getName() const;
     void setName(const NodeName &name);

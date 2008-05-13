@@ -29,6 +29,7 @@ public:
 	{
 		TEST_ADD(NetworkTestSuite::test_naming);
 		TEST_ADD(NetworkTestSuite::test_rename);
+		TEST_ADD(NetworkTestSuite::test_unique_name);
 		TEST_ADD(NetworkTestSuite::test_container);
 		TEST_ADD(NetworkTestSuite::test_dirty);
 		TEST_ADD(NetworkTestSuite::test_rendered_node);
@@ -39,9 +40,9 @@ private:
     void test_naming()
     {
         Network* net = new Network();
-        TEST_ASSERT( net->defaultName() == "Network" );
+        TEST_ASSERT( net->defaultName() == "network" );
         TEST_ASSERT( net->className() == "Network" );
-        TEST_ASSERT( net->getName() == "Network" );
+        TEST_ASSERT( net->getName() == "network" );
     }
     
     void test_rename()
@@ -51,6 +52,7 @@ private:
         n1->setName("node1");
         net->add(n1);
         TEST_ASSERT( net->rename(n1, "node1") );
+        TEST_ASSERT( net->contains("node1") );
         TEST_ASSERT( n1->getName() == "node1" );
         TEST_ASSERT( net->rename(n1, "node768") );
         TEST_ASSERT( n1->getName() == "node768" );
@@ -65,6 +67,25 @@ private:
         // Setting the name from a node also calls rename on the network
         n2->setName("node1");
         TEST_ASSERT( n2->getName() == "node2" );
+    }
+    
+    void test_unique_name()
+    {
+        Network* net = new Network();
+        Node* n1 = new Node();
+        net->setUniqueNodeName(n1);
+        TEST_ASSERT( !net->contains(n1) );
+        TEST_ASSERT( n1->getName() == "node1" );
+        TEST_ASSERT( net->add(n1) );
+        Node* n2 = new Node();
+        net->setUniqueNodeName(n2);
+        TEST_ASSERT( n2->getName() == "node2" );
+        TEST_ASSERT( net->add(n2) );
+        net->remove(n1);
+        Node* n3 = new Node();
+        net->setUniqueNodeName(n3);
+        TEST_ASSERT( n3->getName() == "node1" );
+        TEST_ASSERT( net->add(n3) );
     }
     
     void test_container()

@@ -26,6 +26,7 @@
 #include "node/NetworkTestSuite.h"
 #include "node/NodeTestSuite.h"
 #include "node/CanvasNodeTestSuite.h"
+#include "util/StringUtilsTestSuite.h"
 
 using namespace std;
 
@@ -84,6 +85,8 @@ main(int argc, char* argv[])
 		// Demonstrates the ability to use multiple test suites
 		//
 		Test::Suite ts;
+        // Utility tests
+		ts.add(auto_ptr<Test::Suite>(new StringUtilsTestSuite));
         // Graphical tests
 		ts.add(auto_ptr<Test::Suite>(new BezierPathTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new PathElementTestSuite));

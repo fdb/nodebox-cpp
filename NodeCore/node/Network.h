@@ -23,6 +23,7 @@
 #include "Node.h"
 
 #include <string>
+#include <sstream>
 #include <exception>
 #include <iostream>
 #include <map>
