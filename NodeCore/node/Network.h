@@ -77,13 +77,14 @@ public:
     bool isEmpty();
     unsigned int size();
     // Node* create(const NodeLibraryName& libraryName, const NodeName& nodeName);
-    // std::string setUniqueNodeName(Node* node);
+    std::string setUniqueNodeName(Node* node);
     bool add(Node* node); // throws DuplicateName if a node with this name is already in the network.
     bool remove(Node* node);
     // void rename(Node* node, const NodeName& name);
     bool contains(Node* node);
-    // bool contains(const NodeName& name);
+    bool contains(const NodeName& name);
     Node* getNode(const NodeName& name);
+    bool rename(Node* node, const NodeName& name);
 
     Node* getRenderedNode() const;
     void setRenderedNode(Node* node);

@@ -49,6 +49,21 @@ unsigned int Network::size()
     return m_nodes.size();
 }
 
+std::string Network::setUniqueNodeName(Node* node)
+{
+    assert(contains(node));
+    int counter = 1;
+    while (true) {
+        std::string suggestedName = node->defaultName();
+        suggestedName += counter;
+        if (!contains(suggestedName)) {
+            rename(node, suggestedName);
+            return suggestedName;
+        }
+        ++counter;
+    }
+}
+
 // throws DuplicateName if a node with this name is already in the network.
 // Nodes in this network will be automatically deleted.
 bool Network::add(Node* node)
@@ -87,9 +102,25 @@ bool Network::contains(Node* node)
     return m_nodes.count(node->getName()) == 1;
 }
 
+bool Network::contains(const NodeName& name)
+{
+    return getNode(name) != NULL;
+}
+
 Node* Network::getNode(const NodeName& name)
 {
     return m_nodes[name];
+}
+
+bool Network::rename(Node* node, const NodeName& name)
+{
+    assert(contains(node));
+    if (node->getName() == name) return true;
+    if (contains(name)) return false;
+    m_nodes.erase(node->getName());
+    node->_setName(name);
+    m_nodes[name] = node;
+    return true;
 }
 
 //// Rendered node

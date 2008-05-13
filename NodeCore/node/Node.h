@@ -135,6 +135,8 @@ private:
     Node(const Node& other);
     Node& operator=(const Node& other);
     
+    void Node::_setName(const NodeName& name);
+
     void addDownstream(Connection* c);
     void removeDownstream(Connection* c);
     typedef std::vector<Connection*> ConnectionList;

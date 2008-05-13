@@ -28,6 +28,7 @@ public:
 	NetworkTestSuite()
 	{
 		TEST_ADD(NetworkTestSuite::test_naming);
+		TEST_ADD(NetworkTestSuite::test_rename);
 		TEST_ADD(NetworkTestSuite::test_container);
 		TEST_ADD(NetworkTestSuite::test_dirty);
 		TEST_ADD(NetworkTestSuite::test_rendered_node);
@@ -41,6 +42,29 @@ private:
         TEST_ASSERT( net->defaultName() == "Network" );
         TEST_ASSERT( net->className() == "Network" );
         TEST_ASSERT( net->getName() == "Network" );
+    }
+    
+    void test_rename()
+    {
+        Network* net = new Network();
+        Node* n1 = new Node(kInt);
+        n1->setName("node1");
+        net->add(n1);
+        TEST_ASSERT( net->rename(n1, "node1") );
+        TEST_ASSERT( n1->getName() == "node1" );
+        TEST_ASSERT( net->rename(n1, "node768") );
+        TEST_ASSERT( n1->getName() == "node768" );
+        TEST_ASSERT( net->contains("node768") );
+        TEST_ASSERT( !net->contains("node1") );
+        Node* n2 = new Node(kInt);
+        n2->setName("node2");
+        net->add(n2);
+        TEST_ASSERT( net->rename(n1, "node1") );
+        TEST_ASSERT( !net->rename(n1, "node2") );
+        TEST_ASSERT( n1->getName() == "node1" );
+        // Setting the name from a node also calls rename on the network
+        n2->setName("node1");
+        TEST_ASSERT( n2->getName() == "node2" );
     }
     
     void test_container()

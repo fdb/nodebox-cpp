@@ -58,6 +58,15 @@ std::string Node::getName() const
 
 void Node::setName(const NodeName& name)
 {
+    if (m_network) {
+        m_network->rename(this, name);
+    } else {
+        _setName(name);
+    }
+}
+
+void Node::_setName(const NodeName& name)
+{    
     if (validName(name)) {
         m_name = name;
     } else {
