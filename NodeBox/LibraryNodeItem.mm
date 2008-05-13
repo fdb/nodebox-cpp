@@ -14,7 +14,7 @@
 - (void)setSelected:(BOOL)flag
 {
     [super setSelected:flag];
-    LibraryNodeView *view = (LibraryNodeView* ) [self view];
+    LibraryNodeView *view = (LibraryNodeView* )[self view];
     [view setSelected:flag];
     [view setNeedsDisplay:YES];
 }
@@ -23,7 +23,7 @@
 {
     NSLog(@"Represented object %@", object);
     [super setRepresentedObject:object];
-    LibraryNodeView *view = (LibraryNodeView* ) [self view];
+    LibraryNodeView *view = (LibraryNodeView* )[self view];
     [view setDescription:[object description]];
 }
 

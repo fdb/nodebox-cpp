@@ -30,6 +30,18 @@
     [collectionView setContent:arr];
 }
 
+- (void)windowDidBecomeKey:(NSNotification *)notification
+{
+    NSLog(@"did become key");
+    [collectionView setNeedsDisplay:TRUE];
+}
+
+- (void)windowDidResignKey:(NSNotification *)notification
+{
+    NSLog(@"lost key");
+    [collectionView setNeedsDisplay:TRUE];
+}
+
 - (IBAction)showPanel:(id)sender
 {
     [[self window] makeKeyAndOrderFront:sender];

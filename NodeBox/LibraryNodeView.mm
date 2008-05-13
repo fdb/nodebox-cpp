@@ -21,15 +21,14 @@
   return selected;
 }
 
-- (void)awakeFromNib
-{
-    NSLog(@"LibraryNodeView awoke from nib");
-}
-
 - (void)drawRect:(NSRect)rect
 {
     if (selected) {
-        [[NSColor selectedControlColor] set];
+        if ([[self window] isKeyWindow]) {
+            [[NSColor selectedControlColor] set];
+        } else {
+            [[NSColor colorForControlTint:NSClearControlTint] set];
+        }
         NSRectFill([self bounds]);    
     }
     [super drawRect:rect];
