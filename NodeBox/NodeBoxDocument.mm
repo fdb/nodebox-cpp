@@ -121,6 +121,7 @@ NSString *NodeType = @"NodeType";
         [undo setActionName:@"Create Node"];
     }
     network->add(node);
+    network->setUniqueNodeName(node);
     [networkView setNeedsDisplay:TRUE];
     return node;
 }
