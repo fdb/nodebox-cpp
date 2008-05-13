@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">9C7010</string>
-		<string key="IBDocument.InterfaceBuilderVersion">649</string>
+		<string key="IBDocument.InterfaceBuilderVersion">658</string>
 		<string key="IBDocument.AppKitVersion">949.26</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
@@ -17,7 +17,7 @@
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="580458321">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSCustomObject" id="512844837">
-				<string key="NSClassName">NodeBoxDocument</string>
+				<string key="NSClassName">NodeBoxWindowController</string>
 			</object>
 			<object class="NSCustomObject" id="613418571">
 				<string key="NSClassName">FirstResponder</string>
@@ -38,10 +38,41 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSCustomView" id="307278042">
 							<reference key="NSNextResponder" ref="568628114"/>
-							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{20, 20}, {676, 478}}</string>
+							<int key="NSvFlags">8466</int>
+							<string key="NSFrame">{{20, 20}, {676, 453}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<string key="NSClassName">NetworkView</string>
+						</object>
+						<object class="NSPathControl" id="88321748">
+							<reference key="NSNextResponder" ref="568628114"/>
+							<int key="NSvFlags">270</int>
+							<object class="NSMutableSet" key="NSDragTypes">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSMutableArray" key="set.sortedObjects">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>Apple URL pasteboard type</string>
+									<string>NSFilenamesPboardType</string>
+								</object>
+							</object>
+							<string key="NSFrame">{{19, 479}, {179, 20}}</string>
+							<reference key="NSSuperview" ref="568628114"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSPathCell" key="NSCell" id="500005653">
+								<int key="NSCellFlags">337772033</int>
+								<int key="NSCellFlags2">163840</int>
+								<object class="NSFont" key="NSSupport">
+									<string key="NSName">LucidaGrande</string>
+									<double key="NSSize">1.100000e+01</double>
+									<int key="NSfFlags">3100</int>
+								</object>
+								<string key="NSPlaceholderString">/root/test</string>
+								<reference key="NSControlView" ref="88321748"/>
+								<object class="NSMutableArray" key="NSPathComponentCells">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+								</object>
+								<int key="NSPathStyle">1</int>
+								<reference key="NSDelegate" ref="88321748"/>
+							</object>
 						</object>
 					</object>
 					<string key="NSFrameSize">{716, 518}</string>
@@ -80,7 +111,23 @@
 						<reference key="source" ref="512844837"/>
 						<reference key="destination" ref="307278042"/>
 					</object>
-					<int key="connectionID">100024</int>
+					<int key="connectionID">100025</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">networkPath</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="88321748"/>
+					</object>
+					<int key="connectionID">100030</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pathChanged:</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="88321748"/>
+					</object>
+					<int key="connectionID">100031</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -121,6 +168,7 @@
 						<reference key="object" ref="568628114"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="88321748"/>
 							<reference ref="307278042"/>
 						</object>
 						<reference key="parent" ref="275939982"/>
@@ -136,6 +184,20 @@
 						<reference key="object" ref="307278042"/>
 						<reference key="parent" ref="568628114"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100028</int>
+						<reference key="object" ref="88321748"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="500005653"/>
+						</object>
+						<reference key="parent" ref="568628114"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100029</int>
+						<reference key="object" ref="500005653"/>
+						<reference key="parent" ref="88321748"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -149,6 +211,8 @@
 					<string>100023.IBViewIntegration.shadowColor</string>
 					<string>100023.IBViewIntegration.shadowOffsetHeight</string>
 					<string>100023.IBViewIntegration.shadowOffsetWidth</string>
+					<string>100028.IBPluginDependency</string>
+					<string>100029.IBPluginDependency</string>
 					<string>5.IBEditorWindowLastContentRect</string>
 					<string>5.IBPluginDependency</string>
 					<string>5.IBWindowTemplateEditedContentRect</string>
@@ -169,17 +233,19 @@
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MAA</bytes>
 					</object>
-					<real value="1.000000e+00"/>
-					<real value="1.000000e+00"/>
-					<string>{{312, 417}, {716, 518}}</string>
+					<real value="1.000000e+00" id="961880958"/>
+					<reference ref="961880958"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{312, 417}, {716, 518}}</string>
-					<integer value="1" id="5"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{75, 338}, {716, 518}}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{75, 338}, {716, 518}}</string>
+					<reference ref="961880958"/>
 					<string>{{201, 387}, {507, 413}}</string>
-					<reference ref="5"/>
+					<reference ref="961880958"/>
 					<string>{94, 86}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<reference ref="5"/>
+					<reference ref="961880958"/>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -202,7 +268,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100024</int>
+			<int key="maxID">100031</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -216,18 +282,36 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NodeBoxDocument</string>
-					<string key="superclassName">NSDocument</string>
+					<string key="className">NodeBoxWindowController</string>
+					<string key="superclassName">NSWindowController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">createNode:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">NodeBoxDocument.h</string>
+						<string key="minorKey">NodeBoxWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NodeBoxDocument</string>
+					<string key="className">NodeBoxWindowController</string>
+					<string key="superclassName">NSWindowController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">pathChanged:</string>
+						<string key="NS.object.0">id</string>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">networkView</string>
-						<string key="NS.object.0">NetworkView</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>networkPath</string>
+							<string>networkView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>NetworkView</string>
+						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>

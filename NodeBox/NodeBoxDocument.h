@@ -20,4 +20,7 @@
 }
 
 -(NodeCore::Network*) network;
+-(NodeCore::Node*) createNode;
+-(void) addNode:(NodeCore::Node *)node;
+-(BOOL) removeNode:(NodeCore::Node *)node;
 @end

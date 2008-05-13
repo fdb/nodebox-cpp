@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
+		618A9EA30DD348240098409B /* NodeBoxWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 618A9EA20DD348240098409B /* NodeBoxWindowController.mm */; };
 		61936BEE0DC867AC0034D23C /* NodeBoxDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61936BEC0DC867AC0034D23C /* NodeBoxDocument.xib */; };
 		61936BF10DC867FC0034D23C /* NodeBoxDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */; };
 		61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */; };
@@ -44,6 +45,8 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* NodeBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBox_Prefix.pch; sourceTree = "<group>"; };
+		618A9EA10DD348240098409B /* NodeBoxWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxWindowController.h; sourceTree = "<group>"; };
+		618A9EA20DD348240098409B /* NodeBoxWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxWindowController.mm; sourceTree = "<group>"; };
 		61936BED0DC867AC0034D23C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NodeBoxDocument.xib; sourceTree = "<group>"; };
 		61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxDocument.mm; sourceTree = "<group>"; };
 		61936BF00DC867FC0034D23C /* NodeBoxDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxDocument.h; sourceTree = "<group>"; };
@@ -98,6 +101,8 @@
 				61FA1AAA0DCF36B90056A7C6 /* NetworkView.mm */,
 				61C16CC00DCF4CCB000CC18E /* NetworkVisualiser.h */,
 				61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */,
+				618A9EA10DD348240098409B /* NodeBoxWindowController.h */,
+				618A9EA20DD348240098409B /* NodeBoxWindowController.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 				61936BF10DC867FC0034D23C /* NodeBoxDocument.mm in Sources */,
 				61FA1AAB0DCF36B90056A7C6 /* NetworkView.mm in Sources */,
 				61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */,
+				618A9EA30DD348240098409B /* NodeBoxWindowController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

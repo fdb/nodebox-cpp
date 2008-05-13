@@ -7,6 +7,7 @@
 //
 
 #import "NodeBoxDocument.h"
+#import "NodeBoxWindowController.h"
 
 @implementation NodeBoxDocument
 
@@ -43,11 +44,20 @@
     [super finalize];
 }
 
+/*
 - (NSString *)windowNibName
 {
     // Override returning the nib file name of the document
     // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
     return @"NodeBoxDocument";
+}
+*/
+
+- (void)makeWindowControllers
+{
+    NSLog(@"Making window controllers");
+    NodeBoxWindowController *controller = [[[NodeBoxWindowController alloc] init] autorelease];
+    [self addWindowController:controller];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
@@ -89,6 +99,47 @@
 -(NodeCore::Network*) network
 {
     return network;
+}
+
+
+-(NodeCore::Node*) createNode
+{
+    NodeCore::Node *node = new NodeCore::Node();
+    node->setX(30);
+    node->setY(50);
+    NSUndoManager *undo = [self undoManager];
+    [[undo prepareWithInvocationTarget:self] removeNode:node];
+    if (![undo isUndoing]) {
+        [undo setActionName:@"Create Node"];
+    }
+    network->add(node);
+    [networkView setNeedsDisplay:TRUE];
+    return node;
+}
+
+-(void) addNode:(NodeCore::Node*) node
+{
+    NSUndoManager *undo = [self undoManager];
+    [[undo prepareWithInvocationTarget:self] removeNode:node];
+    if (![undo isUndoing]) {
+        [undo setActionName:@"Add Node"];
+    }
+    network->add(node);
+}
+
+-(BOOL) removeNode:(NodeCore::Node *)node
+{
+    if (node->getNetwork() != network) {
+        return false;
+    }
+    NSUndoManager *undo = [self undoManager];
+    [[undo prepareWithInvocationTarget:self] removeNode:node];
+    if (![undo isUndoing]) {
+        [undo setActionName:@"Remove Node"];
+    }
+    network->remove(node);
+    // Not deleting the node, since the undoManager needs it.
+    return true;
 }
 
 @end
