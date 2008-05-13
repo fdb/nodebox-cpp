@@ -22,7 +22,6 @@
     [super windowDidLoad];
     NSLog(@"windowDidLoad");
     [networkView setDocument:(NodeBoxDocument *)[self document]];
-    //[networkPath setURL:[[NSURL alloc] initWithString:@"nbox://root"]];
     [networkPath setURL:[[NSURL alloc] initWithString:@"doc://doc/root/test/hello"]];
 }
 
@@ -37,6 +36,7 @@
     NSLog(@"path changed %@", sender);
     NSLog(@"path %@", [networkPath objectValue]);
     NSLog(@"cell %@", [[networkPath clickedPathComponentCell] URL]);
+    NSLog(@"relative path %@", [[[networkPath clickedPathComponentCell] URL] relativePath]);
 }
 
 @end

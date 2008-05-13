@@ -10,10 +10,12 @@
 
 @class NetworkView;
 
-@interface NodeBoxWindowController : NSWindowController {
+@interface NodeBoxWindowController : NSWindowController
+{
     NetworkView *networkView;
     NSPathControl *networkPath;
 }
+
 - (IBAction)createNode:(id)sender;
 - (IBAction)pathChanged:(id)sender;
 
