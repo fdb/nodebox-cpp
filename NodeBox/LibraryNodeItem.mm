@@ -21,7 +21,6 @@
 
 - (void)setRepresentedObject:(id)object
 {
-    NSLog(@"Represented object %@", object);
     [super setRepresentedObject:object];
     LibraryNodeView *view = (LibraryNodeView* )[self view];
     [view setDescription:[object description]];

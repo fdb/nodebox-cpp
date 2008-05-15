@@ -40,12 +40,6 @@
     [myLabel setTitleWithMnemonic:description];
 }
 
-- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
-{
-    NSLog(@"prepare dragging");
-    return YES;
-}
-
 #pragma mark Drag and Drop
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
@@ -53,9 +47,13 @@
     return TRUE;
 }
 
+- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
+{
+    return YES;
+}
+
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSLog(@"dragging");
     NSRect r = [self bounds];
     NSImage *dragImage = [[NSImage alloc] initWithSize:NSMakeSize(r.size.width, r.size.height)];
     [dragImage lockFocus];
