@@ -12,8 +12,7 @@
 
 @interface NodeBoxWindowController : NSWindowController
 {
-    NetworkView *networkView;
-    NSPathControl *networkPath;
+    NSMutableArray *paneWrappers;
 }
 
 - (IBAction)createNode:(id)sender;
