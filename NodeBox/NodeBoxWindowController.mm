@@ -31,8 +31,8 @@
     [contentView addSubview:splitView];
     PaneWrapperController *c1 = [[PaneWrapperController alloc] init];
     PaneWrapperController *c2 = [[PaneWrapperController alloc] init];
-    [splitView addSubview:[c1 paneWrapper]];
-    [splitView addSubview:[c2 paneWrapper]];
+    [splitView addSubview:[c1 viewPane]];
+    [splitView addSubview:[c2 viewPane]];
     //[networkView setDocument:(NodeBoxDocument *)[self document]];
     //[networkPath setURL:[[NSURL alloc] initWithString:@"doc://doc/root/test/hello"]];
 }

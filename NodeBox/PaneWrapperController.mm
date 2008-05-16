@@ -27,9 +27,9 @@
     return _type;
 }
 
-- (NSView *)paneWrapper
+- (NSView *)viewPane
 {
-    return paneWrapper;
+    return viewPane;
 }
 
 - (void)setViewType:(enum ViewType)type
@@ -40,23 +40,28 @@
         case NetworkViewType:
             NSLog(@"Switching to network view");
             _controller = [[NetworkViewController alloc] init];
-            [paneWrapper replaceSubview:contentView with:[_controller view]];
+            [viewPane replaceSubview:contentView with:[_controller view]];
             contentView = [_controller view];
             break;
         case ParameterViewType:
             NSLog(@"Switching to parameter view");
             _controller = [[ParameterViewController alloc] init];
-            [paneWrapper replaceSubview:contentView with:[_controller view]];
+            [viewPane replaceSubview:contentView with:[_controller view]];
             contentView = [_controller view];
             break;
         case CanvasViewType:
             NSLog(@"Switching to canvas view");
             _controller = [[CanvasViewController alloc] init];
-            [paneWrapper replaceSubview:contentView with:[_controller view]];
+            [viewPane replaceSubview:contentView with:[_controller view]];
             contentView = [_controller view];
             break;
         default:
             NSLog(@"Switching to default view");
+            // TODO: This empty view will leak.
+            NSView *emptyView = [[NSView alloc] init];
+            _controller = NULL;
+            [viewPane replaceSubview:contentView with:emptyView];
+            contentView = emptyView;
             break;
     }
 }

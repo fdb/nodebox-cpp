@@ -20,13 +20,13 @@ enum ViewType {
 @interface PaneWrapperController : NSObject {
     IBOutlet NSPopUpButton *viewTypePopup;
     IBOutlet NSButton *splitButton;
-    IBOutlet NSView *paneWrapper;
+    IBOutlet NSView *viewPane;
     IBOutlet NSView *contentView;
     enum ViewType _type;
     ViewController *_controller;    
 }
 
-- (NSView *)paneWrapper;
+- (NSView *)viewPane;
 - (enum ViewType)viewType;
 - (void)setViewType:(enum ViewType)type;
 - (void)switchType:(id)sender;
