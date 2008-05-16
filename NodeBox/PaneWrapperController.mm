@@ -18,7 +18,7 @@
     if (![NSBundle loadNibNamed:@"PaneWrapper" owner:self]) {
         NSLog(@"Could not load nib PaneWrapper");
     }
-    NSLog(@"Viewpane %@", viewPane);
+    NSLog(@"Content view %@", contentView);
     return self;
 }
 
@@ -34,37 +34,30 @@
 
 - (void)setViewType:(enum ViewType)type
 {
-    [self removeAllSubviews];
     if (_controller)
         [_controller release];
     switch (type) {
         case NetworkViewType:
             NSLog(@"Switching to network view");
             _controller = [[NetworkViewController alloc] init];
-            [viewPane addSubview:[_controller view]];
+            [paneWrapper replaceSubview:contentView with:[_controller view]];
+            contentView = [_controller view];
             break;
         case ParameterViewType:
             NSLog(@"Switching to parameter view");
             _controller = [[ParameterViewController alloc] init];
-            [viewPane addSubview:[_controller view]];
+            [paneWrapper replaceSubview:contentView with:[_controller view]];
+            contentView = [_controller view];
             break;
         case CanvasViewType:
             NSLog(@"Switching to canvas view");
             _controller = [[CanvasViewController alloc] init];
-            [viewPane addSubview:[_controller view]];
+            [paneWrapper replaceSubview:contentView with:[_controller view]];
+            contentView = [_controller view];
             break;
         default:
             NSLog(@"Switching to default view");
             break;
-    }
-}
-
-- (void)removeAllSubviews
-{
-    NSEnumerator *subviewEnumerator = [[viewPane subviews] objectEnumerator];
-    NSView *subview;
-    while (subview = [subviewEnumerator nextObject]) {
-        [subview removeFromSuperview];
     }
 }
 
