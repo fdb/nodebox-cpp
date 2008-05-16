@@ -7,7 +7,6 @@
     if (![NSBundle loadNibNamed:@"ParameterView" owner:self]) {
         NSLog(@"Could not load nib ParameterView");
     }
-    NSLog(@"View self %@", _view);
     return self;
 }
 

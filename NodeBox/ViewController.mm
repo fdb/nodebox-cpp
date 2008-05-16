@@ -7,43 +7,62 @@
 //
 
 #import "ViewController.h"
-
+#import "NodeBoxWindowController.h"
 
 @implementation ViewController
 
 - (NSView *)view
 {
-return NULL;
+    return NULL;
+}
+
+- (NodeBoxWindowController *)windowController
+{
+    return _windowController;
+}
+
+- (void)setWindowController:(NodeBoxWindowController *)windowController
+{
+    _windowController = windowController;
 }
 
 - (NodeCore::Network *)rootNetwork
 {
-    return _rootNetwork;
-}
-
-- (void)setRootNetwork:(NodeCore::Network *)network
-{
-    _rootNetwork = network;
+    return [_windowController rootNetwork];
 }
 
 - (NodeCore::Network *)activeNetwork
 {
-    return _activeNetwork;
+    return [_windowController activeNetwork];
 }
 
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
 {
-    _activeNetwork = activeNetwork;
+    [_windowController setActiveNetwork:activeNetwork];
+}
+
+- (void)activeNetworkChanged
+{
+    if (NSView *v = [self view]) {
+        [v setNeedsDisplay:TRUE];
+    }
 }
 
 - (NodeCore::Node *)activeNode
 {
-    return _activeNode;
+    return [_windowController activeNode];
 }
 
-- (void)setActiveNode:(NodeCore::Node *)node
+- (void)setActiveNode:(NodeCore::Node *)activeNode
 {
-    _activeNode = node;
+    [_windowController setActiveNode:activeNode];
+}
+
+- (void)activeNodeChanged
+{
+    if (NSView *v = [self view]) {
+        [v setNeedsDisplay:TRUE];
+    }
 }
 
 @end

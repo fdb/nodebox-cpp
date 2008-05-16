@@ -17,17 +17,17 @@ NSString *NodeType = @"NodeType";
 {
     self = [super init];
     if (self) {
-        network = new NodeCore::Network();
+        _rootNetwork = new NodeCore::Network();
         NodeCore::Node* n1 = new NodeCore::Node();
-        network->setUniqueNodeName(n1);
+        _rootNetwork->setUniqueNodeName(n1);
         n1->setX(20);
         n1->setY(30);
-        network->add(n1);
+        _rootNetwork->add(n1);
         NodeCore::Node* n2 = new NodeCore::Node();
-        network->setUniqueNodeName(n2);
+        _rootNetwork->setUniqueNodeName(n2);
         n2->setX(220);
         n2->setY(30);
-        network->add(n2);
+        _rootNetwork->add(n2);
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.    
     }
@@ -36,13 +36,13 @@ NSString *NodeType = @"NodeType";
 
 - (void)dealloc
 {
-    delete network;
+    delete _rootNetwork;
     [super dealloc];
 }
 
 - (void)finalize
 {
-    delete network;
+    delete _rootNetwork;
     [super finalize];
 }
 
@@ -57,7 +57,6 @@ NSString *NodeType = @"NodeType";
 
 - (void)makeWindowControllers
 {
-    NSLog(@"Making window controllers");
     NodeBoxWindowController *controller = [[[NodeBoxWindowController alloc] init] autorelease];
     [self addWindowController:controller];
 }
@@ -65,8 +64,7 @@ NSString *NodeType = @"NodeType";
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
     [super windowControllerDidLoadNib:aController];
-    NSLog(@"setting network view");
-    [networkView setDocument:self];
+    // [networkView setDocument:self];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
 
@@ -98,9 +96,9 @@ NSString *NodeType = @"NodeType";
     return YES;
 }
 
--(NodeCore::Network*) network
+-(NodeCore::Network*) rootNetwork
 {
-    return network;
+    return _rootNetwork;
 }
 
 
@@ -120,9 +118,9 @@ NSString *NodeType = @"NodeType";
     if (![undo isUndoing]) {
         [undo setActionName:@"Create Node"];
     }
-    network->add(node);
-    network->setUniqueNodeName(node);
-    [networkView setNeedsDisplay:TRUE];
+    _rootNetwork->add(node);
+    _rootNetwork->setUniqueNodeName(node);
+    // [networkView setNeedsDisplay:TRUE];
     return node;
 }
 
@@ -133,13 +131,13 @@ NSString *NodeType = @"NodeType";
     if (![undo isUndoing]) {
         [undo setActionName:@"Add Node"];
     }
-    network->add(node);
-    [networkView setNeedsDisplay:TRUE];
+    _rootNetwork->add(node);
+    //[networkView setNeedsDisplay:TRUE];
 }
 
 -(BOOL) removeNode:(NodeCore::Node *)node
 {
-    if (node->getNetwork() != network) {
+    if (node->getNetwork() != _rootNetwork) {
         return false;
     }
     NSUndoManager *undo = [self undoManager];
@@ -147,8 +145,8 @@ NSString *NodeType = @"NodeType";
     if (![undo isUndoing]) {
         [undo setActionName:@"Remove Node"];
     }
-    network->remove(node);
-    [networkView setNeedsDisplay:TRUE];
+    _rootNetwork->remove(node);
+    //[networkView setNeedsDisplay:TRUE];
     // Not deleting the node, since the undoManager needs it.
     return true;
 }

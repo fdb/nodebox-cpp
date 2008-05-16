@@ -36,7 +36,6 @@
 
 - (void)setDescription:(NSString*)description
 {
-    NSLog(@"setting description to %@ %@", description, myLabel);
     [myLabel setTitleWithMnemonic:description];
 }
 

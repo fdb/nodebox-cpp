@@ -15,7 +15,7 @@
 - (id)init
 {
     self = [super initWithWindowNibName:@"NodeBoxDocument"];
-    paneWrappers = [[NSMutableArray alloc] init];
+    viewPaneControllers = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -31,10 +31,13 @@
     [contentView addSubview:splitView];
     ViewPaneController *c1 = [[ViewPaneController alloc] init];
     ViewPaneController *c2 = [[ViewPaneController alloc] init];
+    [viewPaneControllers addObject:c1];
+    [viewPaneControllers addObject:c2];
     [c1 setViewType:NetworkViewType];
     [c2 setViewType:ParameterViewType];
     [splitView addSubview:[c1 viewPane]];
     [splitView addSubview:[c2 viewPane]];
+    [self setActiveNetwork:[(NodeBoxDocument *)[self document] rootNetwork]];
     //[networkView setDocument:(NodeBoxDocument *)[self document]];
     //[networkPath setURL:[[NSURL alloc] initWithString:@"doc://doc/root/test/hello"]];
 }
@@ -52,5 +55,42 @@
     //NSLog(@"cell %@", [[networkPath clickedPathComponentCell] URL]);
     //NSLog(@"relative path %@", [[[networkPath clickedPathComponentCell] URL] relativePath]);
 }
+
+- (NodeCore::Network *)rootNetwork
+{
+    return [[self document] rootNetwork];
+}
+
+- (NodeCore::Network *)activeNetwork
+{
+    return _activeNetwork;
+}
+
+- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
+{
+    // TODO: Assert that active network is in root network.
+    _activeNetwork = activeNetwork;
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] setActiveNetwork:activeNetwork];
+    }
+}
+
+- (NodeCore::Node *)activeNode
+{
+    return _activeNode;
+}
+
+- (void)setActiveNode:(NodeCore::Node *)activeNode
+{
+    _activeNode = activeNode;
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] setActiveNode:activeNode];
+    }
+}
+
 
 @end

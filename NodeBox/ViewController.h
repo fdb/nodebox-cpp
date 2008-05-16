@@ -9,18 +9,21 @@
 #import <Cocoa/Cocoa.h>
 #import <NodeCore/NodeCore.h>
 
+@class NodeBoxWindowController;
+
 @interface ViewController : NSObject {
-    NodeCore::Network *_rootNetwork;
-    NodeCore::Network *_activeNetwork;
-    NodeCore::Node *_activeNode;
+    NodeBoxWindowController *_windowController;
 }
 
 - (NSView *)view;
+- (NodeBoxWindowController *)windowController;
+- (void)setWindowController:(NodeBoxWindowController *)windowController;
 - (NodeCore::Network *)rootNetwork;
-- (void)setRootNetwork:(NodeCore::Network *)network;
 - (NodeCore::Network *)activeNetwork;
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork;
+- (void)activeNetworkChanged;
 - (NodeCore::Node *)activeNode;
-- (void)setActiveNode:(NodeCore::Node *)node;
+- (void)setActiveNode:(NodeCore::Node *)activeNode;
+- (void)activeNodeChanged;
 
 @end

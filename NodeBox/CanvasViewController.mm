@@ -7,7 +7,6 @@
     if (![NSBundle loadNibNamed:@"CanvasView" owner:self]) {
         NSLog(@"Could not load nib CanvasView");
     }
-    NSLog(@"View self %@", _view);
     return self;
 }
 

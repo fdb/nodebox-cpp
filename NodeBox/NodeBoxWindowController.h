@@ -7,15 +7,24 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <NodeCore/NodeCore.h>
 
 @class NetworkView;
 
 @interface NodeBoxWindowController : NSWindowController
 {
-    NSMutableArray *paneWrappers;
+    NSMutableArray *viewPaneControllers;
+    NodeCore::Network *_activeNetwork;
+    NodeCore::Node *_activeNode;
 }
 
 - (IBAction)createNode:(id)sender;
 - (IBAction)pathChanged:(id)sender;
+
+- (NodeCore::Network *)rootNetwork;
+- (NodeCore::Network *)activeNetwork;
+- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork;
+- (NodeCore::Node *)activeNode;
+- (void)setActiveNode:(NodeCore::Node *)activeNode;
 
 @end

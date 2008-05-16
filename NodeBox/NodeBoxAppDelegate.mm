@@ -21,7 +21,6 @@
 
 - (IBAction)showLibraryPanel:(id)sender
 {
-    NSLog(@"Showing panel");
     [libraryPanelController showPanel:sender];
 }
 

@@ -15,6 +15,7 @@ enum ViewType {
     CanvasViewType = 3
 };
 
+@class NodeBoxWindowController;
 @class ViewController;
 
 @interface ViewPaneController : NSObject {
@@ -23,12 +24,16 @@ enum ViewType {
     IBOutlet NSView *viewPane;
     IBOutlet NSView *contentView;
     enum ViewType _type;
-    ViewController *_controller;    
+    NodeBoxWindowController *_windowController;
+    ViewController *_viewController;
 }
 
 - (NSView *)viewPane;
 - (enum ViewType)viewType;
 - (void)setViewType:(enum ViewType)type;
 - (void)switchType:(id)sender;
+- (NodeBoxWindowController *)windowController;
+- (void)setWindowController:(NodeBoxWindowController *)windowController;
+- (ViewController *)viewController;
 
 @end

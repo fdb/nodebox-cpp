@@ -22,7 +22,6 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    NSLog(@"LPC: windowDidLoad");    
     [treeView setDataSource:self];
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     [arr addObject:@"Test Node"];

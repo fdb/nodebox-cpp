@@ -17,11 +17,10 @@ extern NSString *NodeType;
 @interface NodeBoxDocument : NSDocument
 {
 @public
-    NodeCore::Network* network;
-    NetworkView* networkView;
+    NodeCore::Network *_rootNetwork;
 }
 
--(NodeCore::Network*) network;
+-(NodeCore::Network*) rootNetwork;
 -(NodeCore::Node*) createNode;
 -(NodeCore::Node*) createNodeAt:(NSPoint)point;
 -(void) addNode:(NodeCore::Node *)node;

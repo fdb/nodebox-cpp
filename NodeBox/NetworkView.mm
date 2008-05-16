@@ -43,7 +43,7 @@ float NODE_HEIGHT = 25;
     if (document) {
         [[NSColor whiteColor] set];
         NSRectFill(rect);
-        NodeCore::Network* network = [document network];
+        NodeCore::Network* network = [document rootNetwork];
         NodeCore::NodeList nodes = network->getNodes();
         for (NodeCore::NodeIterator iter = nodes.begin(); iter != nodes.end(); ++iter) {
             NodeCore::Node* node = (*iter);
