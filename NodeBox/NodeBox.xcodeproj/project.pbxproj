@@ -20,11 +20,8 @@
 		619CC13F0DDC8F7C00A69DA2 /* NetworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1380DDC8F7C00A69DA2 /* NetworkView.xib */; };
 		619CC1400DDC8F7C00A69DA2 /* ViewPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC13A0DDC8F7C00A69DA2 /* ViewPane.xib */; };
 		619CC1410DDC8F7C00A69DA2 /* ParameterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC13C0DDC8F7C00A69DA2 /* ParameterView.xib */; };
-		619CC1610DDC8FB700A69DA2 /* CanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 619CC1430DDC8FB700A69DA2 /* CanvasViewController.m */; };
-		619CC1620DDC8FB700A69DA2 /* CanvasView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1450DDC8FB700A69DA2 /* CanvasView.xib */; };
-		619CC1630DDC8FB700A69DA2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1470DDC8FB700A69DA2 /* Credits.rtf */; };
-		619CC1640DDC8FB700A69DA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1490DDC8FB700A69DA2 /* InfoPlist.strings */; };
-		619CC16B0DDC8FB700A69DA2 /* GradientBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 619CC1580DDC8FB700A69DA2 /* GradientBar.m */; };
+		619CC1610DDC8FB700A69DA2 /* CanvasViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC1430DDC8FB700A69DA2 /* CanvasViewController.mm */; };
+		619CC16B0DDC8FB700A69DA2 /* GradientBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC1580DDC8FB700A69DA2 /* GradientBar.mm */; };
 		619CC16C0DDC8FB700A69DA2 /* NetworkViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC15A0DDC8FB700A69DA2 /* NetworkViewController.mm */; };
 		619CC16D0DDC8FB700A69DA2 /* ViewPaneController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC15C0DDC8FB700A69DA2 /* ViewPaneController.mm */; };
 		619CC16E0DDC8FB700A69DA2 /* ParameterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC15E0DDC8FB700A69DA2 /* ParameterViewController.mm */; };
@@ -82,18 +79,9 @@
 		619CC13B0DDC8F7C00A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ViewPane.xib; sourceTree = "<group>"; };
 		619CC13D0DDC8F7C00A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ParameterView.xib; sourceTree = "<group>"; };
 		619CC1420DDC8FB700A69DA2 /* CanvasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasViewController.h; sourceTree = "<group>"; };
-		619CC1430DDC8FB700A69DA2 /* CanvasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasViewController.m; sourceTree = "<group>"; };
-		619CC1460DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = CanvasView.xib; sourceTree = "<group>"; };
-		619CC1480DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
-		619CC14A0DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
-		619CC14C0DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = LibraryPanel.xib; sourceTree = "<group>"; };
-		619CC14E0DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MainMenu.xib; sourceTree = "<group>"; };
-		619CC1500DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = NetworkView.xib; sourceTree = "<group>"; };
-		619CC1520DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = NodeBoxDocument.xib; sourceTree = "<group>"; };
-		619CC1540DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = PaneWrapper.xib; sourceTree = "<group>"; };
-		619CC1560DDC8FB700A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ParameterView.xib; sourceTree = "<group>"; };
+		619CC1430DDC8FB700A69DA2 /* CanvasViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CanvasViewController.mm; sourceTree = "<group>"; };
 		619CC1570DDC8FB700A69DA2 /* GradientBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientBar.h; sourceTree = "<group>"; };
-		619CC1580DDC8FB700A69DA2 /* GradientBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientBar.m; sourceTree = "<group>"; };
+		619CC1580DDC8FB700A69DA2 /* GradientBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GradientBar.mm; sourceTree = "<group>"; };
 		619CC1590DDC8FB700A69DA2 /* NetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkViewController.h; sourceTree = "<group>"; };
 		619CC15A0DDC8FB700A69DA2 /* NetworkViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkViewController.mm; sourceTree = "<group>"; };
 		619CC15B0DDC8FB700A69DA2 /* ViewPaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPaneController.h; sourceTree = "<group>"; };
@@ -140,7 +128,6 @@
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				6155FC640DD9BEBB00708CBC /* LibraryPanel.xib */,
 			);
 			name = NodeBox;
 			sourceTree = "<group>";
@@ -149,10 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				619CC1420DDC8FB700A69DA2 /* CanvasViewController.h */,
-				619CC1430DDC8FB700A69DA2 /* CanvasViewController.m */,
-				619CC1440DDC8FB700A69DA2 /* English.lproj */,
+				619CC1430DDC8FB700A69DA2 /* CanvasViewController.mm */,
 				619CC1570DDC8FB700A69DA2 /* GradientBar.h */,
-				619CC1580DDC8FB700A69DA2 /* GradientBar.m */,
+				619CC1580DDC8FB700A69DA2 /* GradientBar.mm */,
 				619CC1590DDC8FB700A69DA2 /* NetworkViewController.h */,
 				619CC15A0DDC8FB700A69DA2 /* NetworkViewController.mm */,
 				619CC15B0DDC8FB700A69DA2 /* ViewPaneController.h */,
@@ -161,8 +147,8 @@
 				619CC15E0DDC8FB700A69DA2 /* ParameterViewController.mm */,
 				619CC15F0DDC8FB700A69DA2 /* ViewController.h */,
 				619CC1600DDC8FB700A69DA2 /* ViewController.mm */,
-				61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */,
 				61936BF00DC867FC0034D23C /* NodeBoxDocument.h */,
+				61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */,
 				61FA1AA90DCF36B90056A7C6 /* NetworkView.h */,
 				61FA1AAA0DCF36B90056A7C6 /* NetworkView.mm */,
 				61C16CC00DCF4CCB000CC18E /* NetworkVisualiser.h */,
@@ -194,14 +180,15 @@
 			isa = PBXGroup;
 			children = (
 				619CC1360DDC8F7C00A69DA2 /* CanvasView.xib */,
-				619CC1380DDC8F7C00A69DA2 /* NetworkView.xib */,
-				619CC13A0DDC8F7C00A69DA2 /* ViewPane.xib */,
-				619CC13C0DDC8F7C00A69DA2 /* ParameterView.xib */,
-				61936BEC0DC867AC0034D23C /* NodeBoxDocument.xib */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+				6155FC640DD9BEBB00708CBC /* LibraryPanel.xib */,
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
+				619CC1380DDC8F7C00A69DA2 /* NetworkView.xib */,
+				61936BEC0DC867AC0034D23C /* NodeBoxDocument.xib */,
+				619CC13C0DDC8F7C00A69DA2 /* ParameterView.xib */,
+				619CC13A0DDC8F7C00A69DA2 /* ViewPane.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -216,22 +203,6 @@
 				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		619CC1440DDC8FB700A69DA2 /* English.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				619CC1450DDC8FB700A69DA2 /* CanvasView.xib */,
-				619CC1470DDC8FB700A69DA2 /* Credits.rtf */,
-				619CC1490DDC8FB700A69DA2 /* InfoPlist.strings */,
-				619CC14B0DDC8FB700A69DA2 /* LibraryPanel.xib */,
-				619CC14D0DDC8FB700A69DA2 /* MainMenu.xib */,
-				619CC14F0DDC8FB700A69DA2 /* NetworkView.xib */,
-				619CC1510DDC8FB700A69DA2 /* NodeBoxDocument.xib */,
-				619CC1530DDC8FB700A69DA2 /* PaneWrapper.xib */,
-				619CC1550DDC8FB700A69DA2 /* ParameterView.xib */,
-			);
-			path = English.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,9 +258,6 @@
 				619CC13F0DDC8F7C00A69DA2 /* NetworkView.xib in Resources */,
 				619CC1400DDC8F7C00A69DA2 /* ViewPane.xib in Resources */,
 				619CC1410DDC8F7C00A69DA2 /* ParameterView.xib in Resources */,
-				619CC1620DDC8FB700A69DA2 /* CanvasView.xib in Resources */,
-				619CC1630DDC8FB700A69DA2 /* Credits.rtf in Resources */,
-				619CC1640DDC8FB700A69DA2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,8 +277,8 @@
 				6155FC6C0DD9BF6400708CBC /* LibraryPanelController.mm in Sources */,
 				6155FD040DD9D84900708CBC /* LibraryNodeItem.mm in Sources */,
 				6155FD070DD9D87100708CBC /* LibraryNodeView.mm in Sources */,
-				619CC1610DDC8FB700A69DA2 /* CanvasViewController.m in Sources */,
-				619CC16B0DDC8FB700A69DA2 /* GradientBar.m in Sources */,
+				619CC1610DDC8FB700A69DA2 /* CanvasViewController.mm in Sources */,
+				619CC16B0DDC8FB700A69DA2 /* GradientBar.mm in Sources */,
 				619CC16C0DDC8FB700A69DA2 /* NetworkViewController.mm in Sources */,
 				619CC16D0DDC8FB700A69DA2 /* ViewPaneController.mm in Sources */,
 				619CC16E0DDC8FB700A69DA2 /* ParameterViewController.mm in Sources */,
@@ -389,78 +357,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				619CC13D0DDC8F7C00A69DA2 /* English */,
-			);
-			name = ParameterView.xib;
-			sourceTree = "<group>";
-		};
-		619CC1450DDC8FB700A69DA2 /* CanvasView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC1460DDC8FB700A69DA2 /* English */,
-			);
-			name = CanvasView.xib;
-			sourceTree = "<group>";
-		};
-		619CC1470DDC8FB700A69DA2 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC1480DDC8FB700A69DA2 /* English */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		619CC1490DDC8FB700A69DA2 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC14A0DDC8FB700A69DA2 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		619CC14B0DDC8FB700A69DA2 /* LibraryPanel.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC14C0DDC8FB700A69DA2 /* English */,
-			);
-			name = LibraryPanel.xib;
-			sourceTree = "<group>";
-		};
-		619CC14D0DDC8FB700A69DA2 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC14E0DDC8FB700A69DA2 /* English */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		619CC14F0DDC8FB700A69DA2 /* NetworkView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC1500DDC8FB700A69DA2 /* English */,
-			);
-			name = NetworkView.xib;
-			sourceTree = "<group>";
-		};
-		619CC1510DDC8FB700A69DA2 /* NodeBoxDocument.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC1520DDC8FB700A69DA2 /* English */,
-			);
-			name = NodeBoxDocument.xib;
-			sourceTree = "<group>";
-		};
-		619CC1530DDC8FB700A69DA2 /* PaneWrapper.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC1540DDC8FB700A69DA2 /* English */,
-			);
-			name = PaneWrapper.xib;
-			sourceTree = "<group>";
-		};
-		619CC1550DDC8FB700A69DA2 /* ParameterView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				619CC1560DDC8FB700A69DA2 /* English */,
 			);
 			name = ParameterView.xib;
 			sourceTree = "<group>";

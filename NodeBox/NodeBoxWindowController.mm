@@ -31,6 +31,8 @@
     [contentView addSubview:splitView];
     ViewPaneController *c1 = [[ViewPaneController alloc] init];
     ViewPaneController *c2 = [[ViewPaneController alloc] init];
+    [c1 setViewType:NetworkViewType];
+    [c2 setViewType:ParameterViewType];
     [splitView addSubview:[c1 viewPane]];
     [splitView addSubview:[c2 viewPane]];
     //[networkView setDocument:(NodeBoxDocument *)[self document]];
