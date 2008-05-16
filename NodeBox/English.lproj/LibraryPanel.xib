@@ -29,8 +29,8 @@
 			<object class="NSWindowTemplate" id="637125157">
 				<int key="NSWindowStyleMask">31</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 131}, {315, 379}}</string>
-				<int key="NSWTFlags">-1275068416</int>
+				<string key="NSWindowRect">{{1079, 457}, {315, 379}}</string>
+				<int key="NSWTFlags">-1271922688</int>
 				<string key="NSWindowTitle">Library</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
@@ -589,9 +589,9 @@
 					<string>LibraryNodeItem</string>
 					<string>LibraryNodeView</string>
 					<string>{{63, 738}, {153, 38}}</string>
-					<string>{{101, 136}, {315, 379}}</string>
+					<string>{{476, 270}, {315, 379}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{101, 136}, {315, 379}}</string>
+					<string>{{476, 270}, {315, 379}}</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

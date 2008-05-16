@@ -21,8 +21,4 @@ extern NSString *NodeType;
 }
 
 -(NodeCore::Network*) rootNetwork;
--(NodeCore::Node*) createNode;
--(NodeCore::Node*) createNodeAt:(NSPoint)point;
--(void) addNode:(NodeCore::Node *)node;
--(BOOL) removeNode:(NodeCore::Node *)node;
 @end

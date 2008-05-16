@@ -13,11 +13,12 @@
 
 @implementation ViewPaneController
 
-- (id)init
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
 {
     if (![NSBundle loadNibNamed:@"ViewPane" owner:self]) {
         NSLog(@"Could not load nib ViewPane");
     }
+    _windowController = windowController;
     return self;
 }
 
@@ -39,6 +40,7 @@
         case NetworkViewType:
             NSLog(@"Switching to network view");
             _viewController = [[NetworkViewController alloc] init];
+            [_viewController setWindowController:_windowController];
             [viewPane replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
@@ -46,6 +48,7 @@
         case ParameterViewType:
             NSLog(@"Switching to parameter view");
             _viewController = [[ParameterViewController alloc] init];
+            [_viewController setWindowController:_windowController];
             [viewPane replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
@@ -53,6 +56,7 @@
         case CanvasViewType:
             NSLog(@"Switching to canvas view");
             _viewController = [[CanvasViewController alloc] init];
+            [_viewController setWindowController:_windowController];
             [viewPane replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];

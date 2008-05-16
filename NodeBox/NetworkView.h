@@ -8,14 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class NetworkViewController;
 @class NodeBoxDocument;
 class NetworkVisualiser;
 
 @interface NetworkView : NSView {
+    IBOutlet NetworkViewController *viewController;
     NodeBoxDocument* document;
     NetworkVisualiser* visualiser;
 }
 
-- (NodeBoxDocument*)document;
-- (void)setDocument:(NodeBoxDocument*)document;
+- (NetworkViewController*)controller;
+- (void)setController:(NetworkViewController *)controller;
 @end

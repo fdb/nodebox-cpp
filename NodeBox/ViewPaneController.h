@@ -28,6 +28,7 @@ enum ViewType {
     ViewController *_viewController;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)viewPane;
 - (enum ViewType)viewType;
 - (void)setViewType:(enum ViewType)type;

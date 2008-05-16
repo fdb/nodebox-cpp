@@ -25,5 +25,6 @@
 - (NodeCore::Node *)activeNode;
 - (void)setActiveNode:(NodeCore::Node *)activeNode;
 - (void)activeNodeChanged;
+- (void)activeNetworkModified;
 
 @end

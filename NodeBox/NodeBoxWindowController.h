@@ -18,9 +18,13 @@
     NodeCore::Node *_activeNode;
 }
 
-- (IBAction)createNode:(id)sender;
-- (IBAction)pathChanged:(id)sender;
+-(NodeCore::Node*) createNode;
+-(NodeCore::Node*) createNodeAt:(NSPoint)point;
+-(void) addNode:(NodeCore::Node *)node;
+-(BOOL) removeNode:(NodeCore::Node *)node;
+- (void)activeNetworkModified; // TODO not the best name
 
+- (IBAction)pathChanged:(id)sender; // TODO should be renamed
 - (NodeCore::Network *)rootNetwork;
 - (NodeCore::Network *)activeNetwork;
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork;
