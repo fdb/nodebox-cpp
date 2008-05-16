@@ -1,22 +1,22 @@
 //
-//  PaneWrapperController.m
+//  ViewPaneController.m
 //  switcher
 //
 //  Created by Frederik on 15/05/08.
 //  Copyright 2008 __MyCompanyName__. All rights reserved.
 //
 
-#import "PaneWrapperController.h"
+#import "ViewPaneController.h"
 #import "NetworkViewController.h"
 #import "ParameterViewController.h"
 #import "CanvasViewController.h"
 
-@implementation PaneWrapperController
+@implementation ViewPaneController
 
 - (id)init
 {
-    if (![NSBundle loadNibNamed:@"PaneWrapper" owner:self]) {
-        NSLog(@"Could not load nib PaneWrapper");
+    if (![NSBundle loadNibNamed:@"ViewPane" owner:self]) {
+        NSLog(@"Could not load nib ViewPane");
     }
     NSLog(@"Content view %@", contentView);
     return self;

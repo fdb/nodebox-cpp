@@ -8,7 +8,7 @@
 
 #import "NodeBoxWindowController.h"
 #import "NodeBoxDocument.h"
-#import "PaneWrapperController.h"
+#import "ViewPaneController.h"
 
 @implementation NodeBoxWindowController
 
@@ -29,8 +29,8 @@
     [splitView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [splitView setVertical:TRUE];
     [contentView addSubview:splitView];
-    PaneWrapperController *c1 = [[PaneWrapperController alloc] init];
-    PaneWrapperController *c2 = [[PaneWrapperController alloc] init];
+    ViewPaneController *c1 = [[ViewPaneController alloc] init];
+    ViewPaneController *c2 = [[ViewPaneController alloc] init];
     [splitView addSubview:[c1 viewPane]];
     [splitView addSubview:[c2 viewPane]];
     //[networkView setDocument:(NodeBoxDocument *)[self document]];

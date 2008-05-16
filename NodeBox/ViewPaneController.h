@@ -1,5 +1,5 @@
 //
-//  PaneWrapperController.h
+//  ViewPaneController.h
 //  switcher
 //
 //  Created by Frederik on 15/05/08.
@@ -17,7 +17,7 @@ enum ViewType {
 
 @class ViewController;
 
-@interface PaneWrapperController : NSObject {
+@interface ViewPaneController : NSObject {
     IBOutlet NSPopUpButton *viewTypePopup;
     IBOutlet NSButton *splitButton;
     IBOutlet NSView *viewPane;
