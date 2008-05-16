@@ -26,14 +26,13 @@
     // This will normally be set up from a config file with a layout.
     NSView *contentView = [[self window] contentView];
     NSSplitView *splitView = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
+    [splitView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [splitView setVertical:TRUE];
     [contentView addSubview:splitView];
-    NSLog(@"split subs %@", [splitView subviews]);
     PaneWrapperController *c1 = [[PaneWrapperController alloc] init];
     PaneWrapperController *c2 = [[PaneWrapperController alloc] init];
     [splitView addSubview:[c1 paneWrapper]];
     [splitView addSubview:[c2 paneWrapper]];
-    //[splitView replaceSubview:firstSplit with:[c1 paneWrapper]];
-    //[splitView replaceSubview:secondSplit with:[c2 paneWrapper]];
     //[networkView setDocument:(NodeBoxDocument *)[self document]];
     //[networkPath setURL:[[NSURL alloc] initWithString:@"doc://doc/root/test/hello"]];
 }
