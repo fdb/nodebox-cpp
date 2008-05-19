@@ -13,12 +13,15 @@
 class NetworkVisualiser;
 
 enum DragModeType {
-    kNotDragging,
+    kDragModeNotDragging = 0,
+    kDragModeNode = 1,
+    kDragModeConnect = 2
 };
 
 @interface NetworkView : NSView {
     IBOutlet NetworkViewController *viewController;
     NetworkVisualiser* visualiser;
+    DragModeType _dragMode;
     NodeCore::Node *_draggingNode;
     NodeCore::Node *_dragOverNode;
     NSPoint _dragPoint;

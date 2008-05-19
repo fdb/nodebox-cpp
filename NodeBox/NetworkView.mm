@@ -12,8 +12,10 @@
 #import "NodeBoxDocument.h"
 #import "NodeBoxWindowController.h"
 
-float NODE_WIDTH = 100;
-float NODE_HEIGHT = 25;
+float NODE_WIDTH = 121;
+float NODE_HEIGHT = 30;
+float CONNECTOR_RADIUS = 5;
+float DRAG_START = 5;
 
 @implementation NetworkView
 
@@ -21,6 +23,13 @@ float NODE_HEIGHT = 25;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _dragMode = kDragModeNotDragging;
+        _draggingNode = NULL;
+        _dragOverNode = NULL;
+        _dragPoint = NSMakePoint(0, 0);
+        _startedDragging = false;
+        _deferredDraggingNode = NULL;
+        _clickPoint = NSMakePoint(0, 0);
         visualiser = new NetworkVisualiser();
         [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];
     }
@@ -34,6 +43,16 @@ float NODE_HEIGHT = 25;
 }
 
 -(BOOL)isFlipped
+{
+    return TRUE;
+}
+
+-(BOOL)canBecomeKeyView
+{
+    return TRUE;
+}
+
+-(BOOL)acceptsFirstResponder
 {
     return TRUE;
 }
@@ -78,17 +97,43 @@ float NODE_HEIGHT = 25;
         NodeCore::Node* node = (*iter);
         [self _drawNode:node];
     }
+    if (_startedDragging && _dragMode == kDragModeConnect) {
+        NSPoint p1 = NSMakePoint(_draggingNode->getX() + NODE_WIDTH / 2, _draggingNode->getY() + NODE_HEIGHT);
+        [self _drawConnectionLineFrom:p1 to:_dragPoint];
+    }
 }
 
 - (void)_drawNode:(NodeCore::Node *)node
 {
+    NSColor *nodeColor;
+    if (node == _dragOverNode) {
+        nodeColor = [NSColor blueColor];
+    //} else if (node->hasError) {
+    //    [[NSColor redColor] set];
+    } else {
+        nodeColor = [NSColor blackColor];
+    }
+    [nodeColor set];
     NSRect r = NSMakeRect(node->getX(), node->getY(), NODE_WIDTH, NODE_HEIGHT);
     NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:r xRadius:2 yRadius:2];
-    [[NSColor lightGrayColor] set];
     [path fill];
+    if (node == [viewController activeNode]) {
+        [path setLineWidth:3.0];
+        [[NSColor colorWithDeviceWhite:0.8 alpha:1.0] set];
+    } else {
+        [path setLineWidth:1.0];
+        [[NSColor colorWithDeviceWhite:0.3 alpha:1.0] set];
+    }
+    [path stroke];
+    NSRect connectorRect = NSMakeRect(node->getX() + NODE_WIDTH / 2 - CONNECTOR_RADIUS, node->getY() + NODE_HEIGHT - CONNECTOR_RADIUS - 1,
+               CONNECTOR_RADIUS * 2, CONNECTOR_RADIUS * 2);
+    NSBezierPath *connectorPath = [NSBezierPath bezierPathWithOvalInRect:connectorRect];
+    [nodeColor set];
+    [connectorPath fill];
     NSString *s = [NSString stringWithCString:node->getName().c_str()];
-    [[NSColor blackColor] set];
-    [s drawAtPoint:NSMakePoint(node->getX()+5, node->getY()+5) withAttributes:NULL];
+    NSColor *c= [NSColor colorWithDeviceWhite:0.9 alpha:1.0];
+    NSDictionary *attrs = [NSDictionary dictionaryWithObject:c forKey:NSForegroundColorAttributeName];
+    [s drawAtPoint:NSMakePoint(node->getX()+5, node->getY()+5) withAttributes:attrs];
 }
 
 - (void)_drawConnectionWithInputField:(NodeCore::Field *)input outputField:(NodeCore::Field *)output
@@ -97,7 +142,6 @@ float NODE_HEIGHT = 25;
     NodeCore::Node *outputNode = output->getNode();
     NSPoint p1 = NSMakePoint(outputNode->getX() + NODE_WIDTH / 2, outputNode->getY() + NODE_HEIGHT);
     NSPoint p2 = NSMakePoint(inputNode->getX() + NODE_WIDTH / 2, inputNode->getY());
-    NSLog(@"p1: %.2f,%.2f p2: %.2f,%.2f", p1.x, p1.y, p2.x, p2.y);
     [self _drawConnectionLineFrom:p1 to:p2];
 }
 
@@ -148,6 +192,89 @@ float NODE_HEIGHT = 25;
     } else {
         return NO;
     }
+}
+
+#pragma mark Dragging
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    _draggingNode = NULL;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NodeCore::NodeList nodes = network->getNodes();
+    for (NodeCore::NodeIterator nodeIter = nodes.begin(); nodeIter != nodes.end(); ++nodeIter) {
+        NodeCore::Node* node = (*nodeIter);
+        if (pt.x >= node->getX() && pt.y >= node->getY() 
+            && pt.x <= node->getX() + NODE_WIDTH && pt.y <= node->getY() + NODE_HEIGHT) {
+            _startedDragging = false;
+            _draggingNode = node;
+            _dragMode = kDragModeNode;
+            _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
+            _dragPoint = pt;
+            NSLog(@"Down on node %s", node->getName().c_str());
+        } else if (pt.x >= node->getX() && pt.y >= node->getY() 
+            && pt.x <= node->getX() + NODE_WIDTH && pt.y <= node->getY() + NODE_HEIGHT + CONNECTOR_RADIUS) {
+            _startedDragging = false;
+            _draggingNode = node;
+            _dragMode = kDragModeConnect;
+            _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
+            _dragPoint = pt;            
+        }
+    }
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    if (_draggingNode == NULL) return;
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    
+    if (!_startedDragging &&
+        abs(pt.x + _clickPoint.x - _draggingNode->getX()) > DRAG_START ||
+        abs(pt.y + _clickPoint.y - _draggingNode->getY()) > DRAG_START) {
+        _startedDragging = true;
+    }
+    if (_startedDragging) {
+        _dragPoint = pt;
+        if (_dragMode == kDragModeNode) {
+            NSLog(@"Dragging node %s", _draggingNode->getName().c_str());
+            _draggingNode->setX(pt.x + _clickPoint.x);
+            _draggingNode->setY(pt.y + _clickPoint.y);
+        } else if (_dragMode == kDragModeConnect) {
+            _dragOverNode = [self findNodeAt:pt];
+            if (_dragOverNode) { 
+                NSLog(@"Drag over connection %s", _dragOverNode->getName().c_str());
+            }
+        }
+    }
+    [self setNeedsDisplay:TRUE];    
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+}
+
+- (NodeCore::Node *)findNodeAt:(NSPoint) point
+{
+    if (!viewController) return NULL;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return NULL;
+    NodeCore::NodeList nodes = network->getNodes();
+    for (NodeCore::NodeIterator nodeIter = nodes.begin(); nodeIter != nodes.end(); ++nodeIter) {
+        NodeCore::Node* node = (*nodeIter);
+        if (point.x >= node->getX() && point.y >= node->getY() 
+            && point.x <= node->getX() + NODE_WIDTH && point.y <= node->getY() + NODE_HEIGHT) {
+            return node;
+        }
+    }
+    return NULL;
 }
 
 @end
