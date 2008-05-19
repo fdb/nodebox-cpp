@@ -17,22 +17,6 @@ float NODE_HEIGHT = 30;
 float CONNECTOR_RADIUS = 5;
 float DRAG_START = 5;
 
-@implementation FieldWrapper
-
-- (id)initWithField:(NodeCore::Field *)field
-{
-    self = [super init];
-    _field = field;
-    return self;
-}
-
-- (NodeCore::Field*)field
-{
-    return _field;
-}
-
-@end
-
 @implementation NetworkView
 
 - (id)initWithFrame:(NSRect)frame
@@ -234,6 +218,18 @@ float DRAG_START = 5;
             _dragPoint = pt;            
         }
     }
+}
+
+- (void)rightMouseDown:(NSEvent *)theEvent
+{
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    NodeCore::Node *node = [self findNodeAt:pt];
+    if (!node) return;
+    [(NetworkViewController *)viewController contextMenuForNode:node event:theEvent];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
