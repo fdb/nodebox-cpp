@@ -119,7 +119,7 @@ float DRAG_START = 5;
     [path fill];
     if (node == [viewController activeNode]) {
         [path setLineWidth:3.0];
-        [[NSColor colorWithDeviceWhite:0.8 alpha:1.0] set];
+        [[NSColor colorWithDeviceRed:0.8 green:0.8 blue:0.9 alpha:1.0] set];
     } else {
         [path setLineWidth:1.0];
         [[NSColor colorWithDeviceWhite:0.3 alpha:1.0] set];
@@ -253,12 +253,34 @@ float DRAG_START = 5;
                 NSLog(@"Drag over connection %s", _dragOverNode->getName().c_str());
             }
         }
+        // TODO: this should be settable from the viewController
+        [[viewController windowController] activeNetworkModified];
     }
-    [self setNeedsDisplay:TRUE];    
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    if (_startedDragging && _dragMode == kDragModeConnect && _dragOverNode != NULL && _dragOverNode != _draggingNode) {
+        // Make a connection
+        // TODO: popup menu
+    } else if ([theEvent clickCount] == 1) {
+        NSLog(@"up");
+        // Select a node
+        NodeCore::Node *n = [self findNodeAt:pt];
+        if (n) {   
+            NSLog(@"Node clicked %s", n->getName().c_str());
+        } else {
+            NSLog(@"no node clicked");
+            }
+        [viewController setActiveNode:[self findNodeAt:pt]];
+        // TODO: This should normally be triggered by the viewController.
+        // [self setNeedsDisplay:TRUE];
+    }
 }
 
 - (NodeCore::Node *)findNodeAt:(NSPoint) point
