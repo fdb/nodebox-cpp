@@ -41,7 +41,7 @@ Node::Node(const FieldType& outputType)
 
 Node::~Node()
 {
-    for (FieldIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+    for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
         delete (*iter).second;
     }
 }
@@ -152,6 +152,15 @@ bool Node::hasField(const FieldName &name) const
     return m_fields.count(name) == 1;
 }
 
+FieldList Node::getFields()
+{
+    FieldList fieldList = FieldList();
+    for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+        fieldList.push_back((*iter).second);
+    }
+    return fieldList;
+}
+
 // Value shortcuts
 int Node::asInt(const FieldName &name)
 {
@@ -216,7 +225,7 @@ void Node::set(const FieldName &name, void* d)
 void Node::update()
 {
     if (m_dirty) {
-        for (FieldIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+        for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
             Field* f = (*iter).second;
             f->update();
         }

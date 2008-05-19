@@ -30,7 +30,7 @@
 namespace NodeCore {
 
 typedef std::map<std::string, Field*> FieldMap;
-typedef FieldMap::iterator FieldIterator;
+typedef FieldMap::iterator FieldMapIterator;
 
 #define NodeNameMacro(nodeName) \
 public: \
@@ -74,6 +74,8 @@ private:
 
 class Network;
 
+typedef std::vector<Field*> FieldList;
+typedef FieldList::iterator FieldIterator;
 typedef std::vector<Connection*> ConnectionList;
 typedef ConnectionList::iterator ConnectionIterator;
 
@@ -101,6 +103,7 @@ public:
     bool hasField(const FieldName &name) const;
     Field* getOutputField() const { return m_outputField; }
     FieldType getOutputType() const { return m_outputField->getType(); }
+    FieldList getFields();
     
     // Value shortcuts
     int asInt(const FieldName &name);
