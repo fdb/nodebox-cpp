@@ -269,6 +269,11 @@ bool Node::isOutputConnectedTo(Field* field)
     return false;
 }
 
+ConnectionList Node::getOutputConnections()
+{
+    return m_downstreams;
+}
+
 void Node::process()
 {
     // This space intentionally left blank.

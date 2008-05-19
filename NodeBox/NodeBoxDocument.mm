@@ -25,9 +25,11 @@ NSString *NodeType = @"NodeType";
         _rootNetwork->add(n1);
         NodeCore::Node* n2 = new NodeCore::Node();
         _rootNetwork->setUniqueNodeName(n2);
-        n2->setX(220);
-        n2->setY(30);
+        n2->setX(50);
+        n2->setY(100);
         _rootNetwork->add(n2);
+        NodeCore::Field *f = n2->addField("number", NodeCore::kInt);
+        f->connect(n1);
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.    
     }

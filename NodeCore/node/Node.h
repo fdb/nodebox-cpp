@@ -74,6 +74,9 @@ private:
 
 class Network;
 
+typedef std::vector<Connection*> ConnectionList;
+typedef ConnectionList::iterator ConnectionIterator;
+
 class Node {
 public:
     Node(const FieldType& outputType = kInt);
@@ -123,6 +126,7 @@ public:
     bool isOutputConnected();
     bool isOutputConnectedTo(Node* node);
     bool isOutputConnectedTo(Field* field);
+    ConnectionList getOutputConnections();
 
     friend std::ostream& operator<<(std::ostream& o, const Node& n);
     
@@ -144,8 +148,6 @@ private:
 
     void addDownstream(Connection* c);
     void removeDownstream(Connection* c);
-    typedef std::vector<Connection*> ConnectionList;
-    typedef ConnectionList::iterator ConnectionIterator;
     
     float m_x, m_y;
     std::string m_name;
