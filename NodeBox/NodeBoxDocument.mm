@@ -18,24 +18,24 @@ NSString *NodeType = @"NodeType";
     self = [super init];
     if (self) {
         _rootNetwork = new NodeCore::Network();
-        NodeCore::Node* n1 = new NodeCore::Node();
+        NodeCore::Node* n1 = new NodeCore::Node(NodeCore::kFloat);
         _rootNetwork->setUniqueNodeName(n1);
         n1->setX(20);
         n1->setY(30);
         _rootNetwork->add(n1);
-        NodeCore::Node* n2 = new NodeCore::Node();
+        NodeCore::Node* n2 = new NodeCore::Node(NodeCore::kFloat);
         _rootNetwork->setUniqueNodeName(n2);
         n2->setX(50);
         n2->setY(100);
         _rootNetwork->add(n2);
-        NodeCore::Field *f = n2->addField("number", NodeCore::kInt);
+        NodeCore::Field *f = n2->addField("number", NodeCore::kFloat);
         f->connect(n1);
-        NodeCore::Node* n3 = new NodeCore::Node();
+        NodeCore::Node* n3 = new NodeCore::Node(NodeCore::kFloat);
         _rootNetwork->setUniqueNodeName(n3);
         n3->setX(200);
         n3->setY(100);
         _rootNetwork->add(n3);
-        n3->addField("number", NodeCore::kInt);
+        n3->addField("number", NodeCore::kFloat);
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.    
     }

@@ -3,6 +3,7 @@
 
 @interface ParameterViewController : ViewController {
     IBOutlet NSView *_view;
+    IBOutlet NSTableView *tableView;
 }
 
 - (NSView *)view;
