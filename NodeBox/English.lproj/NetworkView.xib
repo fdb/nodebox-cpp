@@ -28,36 +28,36 @@
 			</object>
 			<object class="NSCustomView" id="1005">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">268</int>
+				<int key="NSvFlags">286</int>
 				<string key="NSFrameSize">{480, 272}</string>
 				<reference key="NSSuperview"/>
 				<string key="NSClassName">NetworkView</string>
 			</object>
-			<object class="NSMenu" id="277270971">
+			<object class="NSMenu" id="574001011">
 				<string key="NSTitle"/>
 				<object class="NSMutableArray" key="NSMenuItems">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSMenuItem" id="1050877816">
-						<reference key="NSMenu" ref="277270971"/>
+					<object class="NSMenuItem" id="605325559">
+						<reference key="NSMenu" ref="574001011"/>
 						<string key="NSTitle">Delete</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSOnImage" id="71356496">
+						<object class="NSCustomResource" key="NSOnImage" id="735238971">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuCheckmark</string>
 						</object>
-						<object class="NSCustomResource" key="NSMixedImage" id="255963778">
+						<object class="NSCustomResource" key="NSMixedImage" id="822734077">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuMixedState</string>
 						</object>
 					</object>
-					<object class="NSMenuItem" id="237996815">
-						<reference key="NSMenu" ref="277270971"/>
+					<object class="NSMenuItem" id="413613124">
+						<reference key="NSMenu" ref="574001011"/>
 						<string key="NSTitle">Rename</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="71356496"/>
-						<reference key="NSMixedImage" ref="255963778"/>
+						<reference key="NSOnImage" ref="735238971"/>
+						<reference key="NSMixedImage" ref="822734077"/>
 					</object>
 				</object>
 			</object>
@@ -85,7 +85,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">deleteNode:</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1050877816"/>
+						<reference key="destination" ref="605325559"/>
 					</object>
 					<int key="connectionID">21</int>
 				</object>
@@ -93,7 +93,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">renameNode:</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="237996815"/>
+						<reference key="destination" ref="413613124"/>
 					</object>
 					<int key="connectionID">22</int>
 				</object>
@@ -101,7 +101,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nodeContextMenu</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="277270971"/>
+						<reference key="destination" ref="574001011"/>
 					</object>
 					<int key="connectionID">23</int>
 				</object>
@@ -146,24 +146,24 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
-						<reference key="object" ref="277270971"/>
+						<reference key="object" ref="574001011"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1050877816"/>
-							<reference ref="237996815"/>
+							<reference ref="605325559"/>
+							<reference ref="413613124"/>
 						</object>
 						<reference key="parent" ref="1002"/>
 						<string key="objectName">Node Contextual Menu</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="1050877816"/>
-						<reference key="parent" ref="277270971"/>
+						<reference key="object" ref="605325559"/>
+						<reference key="parent" ref="574001011"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
-						<reference key="object" ref="237996815"/>
-						<reference key="parent" ref="277270971"/>
+						<reference key="object" ref="413613124"/>
+						<reference key="parent" ref="574001011"/>
 					</object>
 				</object>
 			</object>

@@ -41,6 +41,7 @@
             NSLog(@"Switching to network view");
             _viewController = [[NetworkViewController alloc] init];
             [_viewController setWindowController:_windowController];
+            [[_viewController view] setFrame:[contentView frame]];
             [viewPane replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
@@ -49,6 +50,7 @@
             NSLog(@"Switching to parameter view");
             _viewController = [[ParameterViewController alloc] init];
             [_viewController setWindowController:_windowController];
+            [[_viewController view] setFrame:[contentView frame]];
             [viewPane replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
@@ -57,6 +59,7 @@
             NSLog(@"Switching to canvas view");
             _viewController = [[CanvasViewController alloc] init];
             [_viewController setWindowController:_windowController];
+            [[_viewController view] setFrame:[contentView frame]];
             [viewPane replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
