@@ -23,7 +23,6 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    NSLog(@"windowDidLoad %@", [[self window] contentView]);
     // This will normally be set up from a config file with a layout.
     NSView *contentView = [[self window] contentView];
     NSSplitView *splitView = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
@@ -59,8 +58,8 @@
     if (![undo isUndoing]) {
         [undo setActionName:@"Create Node"];
     }
-    [self activeNetwork]->add(node);
     [self activeNetwork]->setUniqueNodeName(node);
+    [self activeNetwork]->add(node);
     [self activeNetworkModified];
     return node;
 }

@@ -17,6 +17,22 @@ float NODE_HEIGHT = 30;
 float CONNECTOR_RADIUS = 5;
 float DRAG_START = 5;
 
+@implementation FieldWrapper
+
+- (id)initWithField:(NodeCore::Field *)field
+{
+    self = [super init];
+    _field = field;
+    return self;
+}
+
+- (NodeCore::Field*)field
+{
+    return _field;
+}
+
+@end
+
 @implementation NetworkView
 
 - (id)initWithFrame:(NSRect)frame
@@ -55,11 +71,6 @@ float DRAG_START = 5;
 -(BOOL)acceptsFirstResponder
 {
     return TRUE;
-}
-
-- (void)awakeFromNib
-{
-    NSLog(@"NetworkView awakened contr %@", viewController);
 }
 
 - (NetworkViewController*)controller
@@ -214,7 +225,6 @@ float DRAG_START = 5;
             _dragMode = kDragModeNode;
             _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
             _dragPoint = pt;
-            NSLog(@"Down on node %s", node->getName().c_str());
         } else if (pt.x >= node->getX() && pt.y >= node->getY() 
             && pt.x <= node->getX() + NODE_WIDTH && pt.y <= node->getY() + NODE_HEIGHT + CONNECTOR_RADIUS) {
             _startedDragging = false;
@@ -244,14 +254,10 @@ float DRAG_START = 5;
     if (_startedDragging) {
         _dragPoint = pt;
         if (_dragMode == kDragModeNode) {
-            NSLog(@"Dragging node %s", _draggingNode->getName().c_str());
             _draggingNode->setX(pt.x + _clickPoint.x);
             _draggingNode->setY(pt.y + _clickPoint.y);
         } else if (_dragMode == kDragModeConnect) {
             _dragOverNode = [self findNodeAt:pt];
-            if (_dragOverNode) { 
-                NSLog(@"Drag over connection %s", _dragOverNode->getName().c_str());
-            }
         }
         // TODO: this should be settable from the viewController
         [[viewController windowController] activeNetworkModified];
@@ -268,18 +274,25 @@ float DRAG_START = 5;
     if (_startedDragging && _dragMode == kDragModeConnect && _dragOverNode != NULL && _dragOverNode != _draggingNode) {
         // Make a connection
         // TODO: popup menu
+        _deferredDraggingNode = _draggingNode;
+        NSMenu *fieldMenu = [[NSMenu alloc] init];
+        SEL connectSelector = @selector(connectNodeToField:);
+        NodeCore::FieldList fields = _dragOverNode->getFields();
+        for (NodeCore::FieldIterator fieldIter = fields.begin(); fieldIter != fields.end(); ++fieldIter) {
+            NodeCore::Field *field = *fieldIter;
+            NSMenuItem *item = [fieldMenu addItemWithTitle:[NSString stringWithCString:field->getName().c_str()] action:connectSelector keyEquivalent:@""];
+            FieldWrapper *fieldWrapper = [[FieldWrapper alloc] initWithField:field];
+            [item setRepresentedObject:fieldWrapper];
+        }
+        [NSMenu popUpContextMenu:fieldMenu withEvent:theEvent forView:self];
+        _draggingNode = NULL;
+        _startedDragging = false;
+        _dragMode = kDragModeNotDragging;
+        _dragOverNode = NULL;
+        [self setNeedsDisplay:TRUE];
     } else if ([theEvent clickCount] == 1) {
-        NSLog(@"up");
         // Select a node
-        NodeCore::Node *n = [self findNodeAt:pt];
-        if (n) {   
-            NSLog(@"Node clicked %s", n->getName().c_str());
-        } else {
-            NSLog(@"no node clicked");
-            }
         [viewController setActiveNode:[self findNodeAt:pt]];
-        // TODO: This should normally be triggered by the viewController.
-        // [self setNeedsDisplay:TRUE];
     }
 }
 
@@ -297,6 +310,18 @@ float DRAG_START = 5;
         }
     }
     return NULL;
+}
+
+- (void)connectNodeToField:(NSMenuItem *)menuItem
+{
+    if (!_deferredDraggingNode) return;
+    NodeCore::Field *field = [(FieldWrapper *)[menuItem representedObject] field];
+    if (!field) return;
+    field->connect(_deferredDraggingNode);
+    _deferredDraggingNode = NULL;
+    // TODO: this should be triggered automatically by field->connect.
+    // TODO: get access to activeNetworkModified from the viewController.
+    [[viewController windowController] activeNetworkModified];
 }
 
 @end

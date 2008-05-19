@@ -43,7 +43,6 @@
 
 - (void)activeNetworkChanged
 {
-    NSLog(@"ANC view controller wc %@", _windowController);
     if (NSView *v = [self view]) {
         [v setNeedsDisplay:TRUE];
     }

@@ -18,6 +18,13 @@ enum DragModeType {
     kDragModeConnect = 2
 };
 
+@interface FieldWrapper : NSObject {
+    NodeCore::Field *_field;
+}
+- (id)initWithField:(NodeCore::Field *)field;
+- (NodeCore::Field*)field;
+@end
+
 @interface NetworkView : NSView {
     IBOutlet NetworkViewController *viewController;
     NetworkVisualiser* visualiser;
@@ -37,4 +44,5 @@ enum DragModeType {
 - (void)_drawNode:(NodeCore::Node *)node;
 - (void)_drawConnectionWithInputField:(NodeCore::Field *)input outputField:(NodeCore::Field *)output;
 - (void)_drawConnectionLineFrom:(NSPoint)p1 to:(NSPoint)p2;
+- (void)connectNodeToField:(NSMenuItem *)menuItem;
 @end
