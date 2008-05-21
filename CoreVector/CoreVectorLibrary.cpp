@@ -26,7 +26,7 @@ Node* createRectNode() {
     return new RectNode();
 }
 
-extern "C" void node_library_info(NodeLibrary& lib)
+extern "C" void nodeLibraryInfo(NodeLibrary& lib)
 {
     lib.addNodeInfo("RectNode", createRectNode);
 }

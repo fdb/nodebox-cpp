@@ -17,6 +17,16 @@
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		61E9CD710DE42D810051BD90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC09C05546B4700DB518D /* CoreVector */;
+			remoteInfo = CoreVector;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		32BAE0B70371A74B00C91783 /* CoreVectorPrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreVectorPrefix.h; sourceTree = "<group>"; };
@@ -133,6 +143,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				61E9CD720DE42D810051BD90 /* PBXTargetDependency */,
 			);
 			name = test;
 			productName = test;
@@ -195,11 +206,20 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		61E9CD720DE42D810051BD90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC09C05546B4700DB518D /* CoreVector */;
+			targetProxy = 61E9CD710DE42D810051BD90 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB916108733D950010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/plugins/$(PRODUCT_NAME)-1.0.0";
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_EXTENSION = nbl;
 				FRAMEWORK_SEARCH_PATHS = (
