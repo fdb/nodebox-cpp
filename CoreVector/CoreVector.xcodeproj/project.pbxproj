@@ -1,0 +1,341 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50149BDA09E781A5002DEE6A /* CoreVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 50149BD909E781A5002DEE6A /* CoreVector.h */; };
+		61E9CCEC0DE4267B0051BD90 /* CoreVectorLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CCEB0DE4267B0051BD90 /* CoreVectorLibrary.cpp */; };
+		61E9CD010DE426C70051BD90 /* RectNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61E9CCFF0DE426C70051BD90 /* RectNode.h */; };
+		61E9CD020DE426C70051BD90 /* RectNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CD000DE426C70051BD90 /* RectNode.cpp */; };
+		61E9CD050DE42A230051BD90 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
+		61E9CD3B0DE42AE80051BD90 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CD3A0DE42AE80051BD90 /* test.cpp */; };
+		61E9CD440DE42BE00051BD90 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
+		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		32BAE0B70371A74B00C91783 /* CoreVectorPrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreVectorPrefix.h; sourceTree = "<group>"; };
+		50149BD909E781A5002DEE6A /* CoreVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreVector.h; sourceTree = "<group>"; };
+		61E9CCEB0DE4267B0051BD90 /* CoreVectorLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreVectorLibrary.cpp; sourceTree = "<group>"; };
+		61E9CCFF0DE426C70051BD90 /* RectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectNode.h; sourceTree = "<group>"; };
+		61E9CD000DE426C70051BD90 /* RectNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectNode.cpp; sourceTree = "<group>"; };
+		61E9CD040DE42A230051BD90 /* NodeCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeCore.framework; path = ../NodeCore/build/Debug/NodeCore.framework; sourceTree = SOURCE_ROOT; };
+		61E9CD0B0DE42A7F0051BD90 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		61E9CD3A0DE42AE80051BD90 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
+		D2AAC09D05546B4700DB518D /* corevector.nbl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = corevector.nbl; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		61E9CD090DE42A7F0051BD90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61E9CD440DE42BE00051BD90 /* NodeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09B05546B4700DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */,
+				61E9CD050DE42A230051BD90 /* NodeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC09D05546B4700DB518D /* corevector.nbl */,
+				61E9CD0B0DE42A7F0051BD90 /* test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* CoreVector */ = {
+			isa = PBXGroup;
+			children = (
+				32BAE0B70371A74B00C91783 /* CoreVectorPrefix.h */,
+				61E9CD110DE42AA80051BD90 /* library */,
+				61E9CD0F0DE42A990051BD90 /* nodes */,
+				61E9CD390DE42AD80051BD90 /* test */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = CoreVector;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61E9CD040DE42A230051BD90 /* NodeCore.framework */,
+				08FB77AAFE841565C02AAC07 /* Carbon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61E9CD0F0DE42A990051BD90 /* nodes */ = {
+			isa = PBXGroup;
+			children = (
+				61E9CCFF0DE426C70051BD90 /* RectNode.h */,
+				61E9CD000DE426C70051BD90 /* RectNode.cpp */,
+			);
+			name = nodes;
+			sourceTree = "<group>";
+		};
+		61E9CD110DE42AA80051BD90 /* library */ = {
+			isa = PBXGroup;
+			children = (
+				50149BD909E781A5002DEE6A /* CoreVector.h */,
+				61E9CCEB0DE4267B0051BD90 /* CoreVectorLibrary.cpp */,
+			);
+			name = library;
+			sourceTree = "<group>";
+		};
+		61E9CD390DE42AD80051BD90 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				61E9CD3A0DE42AE80051BD90 /* test.cpp */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC09905546B4700DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50149BDA09E781A5002DEE6A /* CoreVector.h in Headers */,
+				61E9CD010DE426C70051BD90 /* RectNode.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		61E9CD0A0DE42A7F0051BD90 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61E9CD100DE42A990051BD90 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				61E9CD080DE42A7F0051BD90 /* Sources */,
+				61E9CD090DE42A7F0051BD90 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = test;
+			productReference = 61E9CD0B0DE42A7F0051BD90 /* test */;
+			productType = "com.apple.product-type.tool";
+		};
+		D2AAC09C05546B4700DB518D /* CoreVector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "CoreVector" */;
+			buildPhases = (
+				D2AAC09905546B4700DB518D /* Headers */,
+				D2AAC09B05546B4700DB518D /* Frameworks */,
+				D2AAC09A05546B4700DB518D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreVector;
+			productName = libCoreVector;
+			productReference = D2AAC09D05546B4700DB518D /* corevector.nbl */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB916408733D950010E9CD /* Build configuration list for PBXProject "CoreVector" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* CoreVector */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC09C05546B4700DB518D /* CoreVector */,
+				61E9CD0A0DE42A7F0051BD90 /* test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		61E9CD080DE42A7F0051BD90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61E9CD3B0DE42AE80051BD90 /* test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09A05546B4700DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61E9CCEC0DE4267B0051BD90 /* CoreVectorLibrary.cpp in Sources */,
+				61E9CD020DE426C70051BD90 /* RectNode.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB916108733D950010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = nbl;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../NodeCore/build/Debug\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CoreVectorPrefix.h;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
+				PRODUCT_NAME = corevector;
+			};
+			name = Debug;
+		};
+		1DEB916208733D950010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = nbl;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../NodeCore/build/Debug\"",
+				);
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CoreVectorPrefix.h;
+				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
+				PRODUCT_NAME = corevector;
+				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Release;
+		};
+		1DEB916508733D950010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB916608733D950010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+		61E9CD0D0DE42A7F0051BD90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../NodeCore/build/Debug\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = test;
+			};
+			name = Debug;
+		};
+		61E9CD0E0DE42A7F0051BD90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../NodeCore/build/Debug\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = test;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "CoreVector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB916108733D950010E9CD /* Debug */,
+				1DEB916208733D950010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB916408733D950010E9CD /* Build configuration list for PBXProject "CoreVector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB916508733D950010E9CD /* Debug */,
+				1DEB916608733D950010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61E9CD100DE42A990051BD90 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61E9CD0D0DE42A7F0051BD90 /* Debug */,
+				61E9CD0E0DE42A7F0051BD90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
