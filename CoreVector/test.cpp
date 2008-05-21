@@ -29,10 +29,10 @@ int main(int argc, char* argv[])
     NodeLibraryManager *manager = new NodeLibraryManager();
     NodeLibrary *coreVectorLibrary = manager->loadLatest("corevector");
     Node *rectNode = coreVectorLibrary->createNode("RectNode");
-    rectNode->set("x", 10);
-    rectNode->set("y", 10);
-    rectNode->set("width", 10);
-    rectNode->set("height", 10);
+    rectNode->set("x", 10.0F);
+    rectNode->set("y", 10.0F);
+    rectNode->set("width", 100.0F);
+    rectNode->set("height", 100.0F);
     Canvas *c = (Canvas *)rectNode->outputAsData();
     c->save("test.pdf");
 	cout << "Wrote test.pdf." << endl;

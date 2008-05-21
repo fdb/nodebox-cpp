@@ -23,7 +23,12 @@
 namespace CoreVector {
 
 RectNode::RectNode()
+        : Node(kCanvas)
 {
+    addField("x", kFloat);
+    addField("y", kFloat);
+    addField("width", kFloat);
+    addField("height", kFloat);
 }
 
 RectNode::~RectNode()
@@ -32,6 +37,12 @@ RectNode::~RectNode()
 
 void RectNode::process()
 {
+    BezierPath path = BezierPath();
+    path.rect(asFloat("x"), asFloat("y"), asFloat("width"), asFloat("height"));
+    Canvas c = Canvas();
+    c.append(path);
+    // TODO need pointers, not stack-allocated objects
+    // setOutput(c);
 }
 
 } // namespace CoreVector

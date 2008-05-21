@@ -25,7 +25,7 @@ using namespace NodeCore;
 
 namespace CoreVector {
 
-const FieldType kBezierPath = "bezierpath";
+const FieldType kCanvas = "canvas";
 
 } // namespace CoreVector
 
