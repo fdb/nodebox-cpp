@@ -14,6 +14,7 @@
 		61E9CD050DE42A230051BD90 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
 		61E9CD3B0DE42AE80051BD90 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CD3A0DE42AE80051BD90 /* test.cpp */; };
 		61E9CD440DE42BE00051BD90 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
+		61E9CD970DE42EF00051BD90 /* NodeCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,19 @@
 			remoteInfo = CoreVector;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		61E9CD950DE42ED90051BD90 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = ../Frameworks;
+			dstSubfolderSpec = 16;
+			files = (
+				61E9CD970DE42EF00051BD90 /* NodeCore.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -139,6 +153,7 @@
 			buildPhases = (
 				61E9CD080DE42A7F0051BD90 /* Sources */,
 				61E9CD090DE42A7F0051BD90 /* Frameworks */,
+				61E9CD950DE42ED90051BD90 /* CopyFiles */,
 			);
 			buildRules = (
 			);
