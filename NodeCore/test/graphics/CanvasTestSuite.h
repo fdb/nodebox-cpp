@@ -29,7 +29,9 @@ public:
 	CanvasTestSuite()
 	{
 		TEST_ADD(CanvasTestSuite::test_size);
+		TEST_ADD(CanvasTestSuite::test_add_pointers);
 		TEST_ADD(CanvasTestSuite::test_copy);
+		TEST_ADD(CanvasTestSuite::test_copy_pointers);
 		TEST_ADD(CanvasTestSuite::test_accessors);
 		TEST_ADD(CanvasTestSuite::test_equality);
 	}
@@ -49,6 +51,20 @@ private:
         c.clear();
         TEST_ASSERT( c.size() == 0 );
     }
+    
+    void test_add_pointers()
+    {
+        Canvas *c = new Canvas();
+        TEST_ASSERT( c->size() == 0 );
+        BezierPath *p1 = new BezierPath();
+        c->append(*p1);
+        TEST_ASSERT( c->size() == 1 );
+        BezierPath *p2 = new BezierPath();
+        c->append(*p2);
+        TEST_ASSERT( c->size() == 2 );
+        c->clear();
+        TEST_ASSERT( c->size() == 0 );
+    }
 
     void test_copy()
     {
@@ -61,6 +77,19 @@ private:
         c1.clear();
         TEST_ASSERT( c1.size() == 0 );
         TEST_ASSERT( c2.size() == 1 );    
+    }
+    
+    void test_copy_pointers()
+    {
+        Canvas *c1 = new Canvas();    
+        BezierPath *p1 = new BezierPath();
+        c1->append(*p1);
+        TEST_ASSERT( c1->size() == 1 );
+        Canvas *c2 = new Canvas(*c1);
+        TEST_ASSERT( c2->size() == 1 );
+        c1->clear();
+        TEST_ASSERT( c1->size() == 0 );
+        TEST_ASSERT( c2->size() == 1 );
     }
 
     void test_accessors()
