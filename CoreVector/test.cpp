@@ -26,7 +26,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    NodeLibraryManager *manager = new NodeLibraryManager();
+    NodeLibraryManager *manager = new NodeLibraryManager("plugins");
     NodeLibrary *coreVectorLibrary = manager->loadLatest("corevector");
     Node *rectNode = coreVectorLibrary->createNode("RectNode");
     rectNode->set("x", 10.0F);

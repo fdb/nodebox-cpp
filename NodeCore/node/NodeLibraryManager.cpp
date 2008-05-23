@@ -29,21 +29,24 @@
 
 namespace NodeCore {
 
-NodeLibraryManager::NodeLibraryManager()
-                   : m_nodeLibraryMap(NodeLibraryMap())
+NodeLibraryManager::NodeLibraryManager(std::string searchPath)
+                   : m_searchPaths(SearchPathList()),
+                     m_nodeLibraryMap(NodeLibraryMap()),
+                     m_lookedForLibraries(false)
+                   
 {
-    lookForLibraries();
+    m_searchPaths.push_back(searchPath);
 }
 
 NodeLibraryManager::~NodeLibraryManager()
 {
     NodeLibraryMap::iterator iter = m_nodeLibraryMap.begin();
-    for(;iter!=m_nodeLibraryMap.end(); ++iter) {
+    for (;iter!=m_nodeLibraryMap.end(); ++iter) {
         delete (*iter).second;
     }
 }
 
-NodeLibrary* dirname_to_library(std::string dirname)
+NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname)
 {
     char c_dirname[64];
     char name[32];
@@ -60,14 +63,16 @@ NodeLibrary* dirname_to_library(std::string dirname)
         sscanf(pch, "%i", &revision);
 
     // TODO: last argument shouldn't be here, but loaded from somewhere else, or dirname should be full.
-    return new NodeLibrary(std::string(name), major, minor, revision, NODE_LIBRARY_SEARCH_PATH + PATH_SEP + dirname);
+    return new NodeLibrary(std::string(name), major, minor, revision, searchPath + PATH_SEP + dirname);
 }
 
 NodeLibraryList NodeLibraryManager::libraries()
 {
+    if (!m_lookedForLibraries)
+        lookForLibraries();
     NodeLibraryList libs;
     NodeLibraryMap::iterator iter = m_nodeLibraryMap.begin();
-    for(;iter!=m_nodeLibraryMap.end(); ++iter) {
+    for (;iter!=m_nodeLibraryMap.end(); ++iter) {
         NodeLibrary* pLib = (*iter).second;
         libs.push_back(pLib);
     }
@@ -76,6 +81,8 @@ NodeLibraryList NodeLibraryManager::libraries()
 
 NodeLibrary* NodeLibraryManager::loadLatest(NodeLibraryName name)
 {
+    if (!m_lookedForLibraries)
+        lookForLibraries();
     if (m_nodeLibraryMap.count(name) == 0) {
         throw NodeLibraryNotFound(name);
     }
@@ -87,16 +94,28 @@ NodeLibrary* NodeLibraryManager::loadLatest(NodeLibraryName name)
     return lib;
 }
 
+void NodeLibraryManager::appendSearchPath(std::string path)
+{
+    assert(!m_lookedForLibraries);
+}
+
 // Searches for available libraries in the plugin search path.
 void NodeLibraryManager::lookForLibraries()
 {
-    m_nodeLibraryMap.clear();
-    posix_dirlist_t dirs = posix_listdir(NODE_LIBRARY_SEARCH_PATH.c_str(), POSIX_DIR);
-    for(posix_diriter_t iter=dirs.begin(); iter!=dirs.end(); ++iter) {
-        std::string dirname = (*iter);
-        NodeLibrary* lib = dirname_to_library(dirname);
-        m_nodeLibraryMap.insert(std::pair<const NodeLibraryName, NodeLibrary*>(lib->getName(), lib));
+    assert(!m_lookedForLibraries);
+    
+    SearchPathList::iterator pathIter = m_searchPaths.begin();
+    for (;pathIter!=m_searchPaths.end(); ++pathIter) {
+        std::string searchPath = (*pathIter);
+        posix_dirlist_t dirs = posix_listdir(searchPath.c_str(), POSIX_DIR);
+        for (posix_diriter_t dirIter=dirs.begin(); dirIter!=dirs.end(); ++dirIter) {
+            std::string dirname = (*dirIter);
+            NodeLibrary* lib = dirname_to_library(searchPath, dirname);
+            m_nodeLibraryMap.insert(std::pair<const NodeLibraryName, NodeLibrary*>(lib->getName(), lib));
+        }
     }
+    
+    m_lookedForLibraries = true;
 }
 
 } // namespace NodeCore
