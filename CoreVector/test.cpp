@@ -33,6 +33,7 @@ int main(int argc, char* argv[])
     rectNode->set("y", 10.0F);
     rectNode->set("width", 100.0F);
     rectNode->set("height", 100.0F);
+    rectNode->update();
     Canvas *c = (Canvas *)rectNode->outputAsData();
     c->save("test.pdf");
 	cout << "Wrote test.pdf." << endl;

@@ -33,16 +33,19 @@ RectNode::RectNode()
 
 RectNode::~RectNode()
 {
+    if (outputAsData())
+        delete (Canvas *)outputAsData();
 }
 
 void RectNode::process()
 {
+    if (outputAsData())
+        delete (Canvas *)outputAsData();
     BezierPath path = BezierPath();
     path.rect(asFloat("x"), asFloat("y"), asFloat("width"), asFloat("height"));
-    Canvas c = Canvas();
-    c.append(path);
-    // TODO need pointers, not stack-allocated objects
-    // setOutput(c);
+    Canvas *c = new Canvas();
+    c->append(path);
+    setOutput(c);
 }
 
 } // namespace CoreVector
