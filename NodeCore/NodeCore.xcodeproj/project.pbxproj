@@ -200,6 +200,7 @@
 		618C8BE10DE832E30096A514 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		618C8D8A0DE875900096A514 /* ImageTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTestSuite.h; path = test/graphics/ImageTestSuite.h; sourceTree = "<group>"; };
 		618C8DB00DE876770096A514 /* testimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testimage.png; path = test/testimage.png; sourceTree = "<group>"; };
+		618C8E230DE87C860096A514 /* RectTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RectTestSuite.h; path = test/graphics/RectTestSuite.h; sourceTree = "<group>"; };
 		61936C460DC86FA80034D23C /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		61936C470DC86FA80034D23C /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 		61936CE90DC884570034D23C /* NetworkTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkTestSuite.h; path = test/node/NetworkTestSuite.h; sourceTree = "<group>"; };
@@ -359,6 +360,7 @@
 				611EC4F20DC25366008BE1A1 /* CanvasTestSuite.h */,
 				618C8D8A0DE875900096A514 /* ImageTestSuite.h */,
 				611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */,
+				618C8E230DE87C860096A514 /* RectTestSuite.h */,
 			);
 			name = graphics;
 			sourceTree = "<group>";

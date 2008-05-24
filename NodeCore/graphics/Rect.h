@@ -22,6 +22,8 @@
 
 #include <iostream>
 
+#include "Point.h"
+
 #include <ApplicationServices/ApplicationServices.h>
 
 namespace NodeCore {
@@ -40,7 +42,10 @@ public:
     
     bool isEmpty() const;
     Rect normalized() const;
-    Rect united(const Rect &r) const;
+    Rect united(const Rect& r) const;
+    bool intersects(const Rect& r) const;
+    bool contains(const NodeCore::Point& p) const;
+    bool contains(const Rect& r) const;
 
     Rect& operator=(const Rect& r);
     bool operator==(const Rect& r) const;

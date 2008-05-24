@@ -29,7 +29,9 @@ namespace NodeCore {
 class Grob {
 public:
     virtual ~Grob();
+
     virtual NodeCore::Rect bounds() = 0;
+
     virtual void _draw(CGContextRef ctx) = 0;
 
     virtual Grob* clone() const = 0;

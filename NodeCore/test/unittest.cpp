@@ -22,6 +22,7 @@
 #include "graphics/CanvasTestSuite.h"
 #include "graphics/ImageTestSuite.h"
 #include "graphics/PathElementTestSuite.h"
+#include "graphics/RectTestSuite.h"
 #include "node/ConnectTestSuite.h"
 #include "node/FieldTestSuite.h"
 #include "node/NetworkTestSuite.h"
@@ -89,6 +90,7 @@ main(int argc, char* argv[])
         // Utility tests
 		ts.add(auto_ptr<Test::Suite>(new StringUtilsTestSuite));
         // Graphical tests
+		ts.add(auto_ptr<Test::Suite>(new RectTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new BezierPathTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new PathElementTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new ImageTestSuite));

@@ -43,8 +43,8 @@ public:
     ~PathElement();
     
     PathCommand getCmd() { return m_cmd; }
-    float getX() { return m_point.m_x; }
-    float getY() { return m_point.m_y; }
+    float getX() { return m_point.getX(); }
+    float getY() { return m_point.getY(); }
     Point getPoint() { return m_point; }
     Point getCtrl1() { return m_ctrl1; }
     Point getCtrl2() { return m_ctrl2; }

@@ -25,6 +25,7 @@
 namespace NodeCore {
 
 class PathElement;
+class Rect;
 
 class Point {
 public:
@@ -32,17 +33,14 @@ public:
     Point(const Point &point) : m_x(point.m_x), m_y(point.m_y) {}
     ~Point() {}
     
-    float getX() { return m_x; }
+    float getX() const { return m_x; }
     void setX(float x) { m_x = x; }
-    float getY() { return m_y; }
+    float getY() const { return m_y; }
     void setY(float y) { m_y = y; }
     
     Point& operator=(const Point& p);
     bool operator==(const Point& p) const;
     friend std::ostream& operator<<(std::ostream& o, const Point& p);
-    friend std::ostream& operator<<(std::ostream& o, const PathElement& p);
-
-    friend class PathElement;
 
 private:
     float m_x;
