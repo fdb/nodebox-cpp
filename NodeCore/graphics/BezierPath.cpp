@@ -28,13 +28,15 @@ float const KAPPA = 0.5522847498f;
 
 BezierPath::BezierPath()
           : m_elements(PathElementList()),
+            m_fillColor(Color()),
             m_path(CGPathCreateMutable()),
             m_dirty(true)
 {
 }
 
 BezierPath::BezierPath(const BezierPath& other)
-          : m_elements(other.m_elements), 
+          : m_elements(other.m_elements),
+            m_fillColor(Color(other.m_fillColor)),
             m_path(CGPathCreateMutable()),
             m_dirty(true)
 {
@@ -77,7 +79,19 @@ void BezierPath::rect(float x, float y, float width, float height)
     lineto(x, y + height);
     close();
 }
-    
+
+void BezierPath::roundedRect(float x, float y, float width, float height, float roundness)
+{
+    float cv = width < height ? width*roundness : height*roundness;
+    moveto(x, y+cv);
+    curveto(x, y, x, y, x+cv, y);
+    lineto(x+width-cv, y);
+    curveto(x+width, y+height, x+width, y+height, x+width-cv, y+height);
+    lineto(x+cv, y+height);
+    curveto(x, y+height, x, y+height, x, y+height-cv);
+    close();
+}
+
 void BezierPath::oval(float x, float y, float width, float height)
 {
     float hdiff = width / 2 * KAPPA;
@@ -95,6 +109,12 @@ void BezierPath::oval(float x, float y, float width, float height)
     curveto(x + width, y + height / 2 + vdiff,
             x + width / 2 + hdiff, y + height,
             x + width / 2, y + height);
+}
+
+void BezierPath::line(float x1, float y1, float x2, float y2)
+{
+    moveto(x1, y1);
+    lineto(x2, y2);
 }
 
 void BezierPath::clear()
@@ -116,6 +136,16 @@ NodeCore::Rect BezierPath::bounds()
 {
     CGRect r = CGPathGetBoundingBox(cgPath());
     return Rect(r);
+}
+
+void BezierPath::setFillColor(const Color& c)
+{
+    m_fillColor = c;
+}
+
+Color BezierPath::fillColor()
+{
+    return m_fillColor;
 }
 
 CGMutablePathRef BezierPath::cgPath()
@@ -163,12 +193,11 @@ void BezierPath::transform(const Transform& t)
 
 void BezierPath::_draw(CGContextRef ctx)
 {
-    CGColorRef color = CGColorCreateGenericRGB(0, 0, 0, 1);
-    CGContextSetFillColorWithColor(ctx, color);
-    CGColorRelease(color);
+    CGContextSetFillColorWithColor(ctx, m_fillColor._cgColorRef());
+    //CGContextSetStrokeColorWithColor(ctx, m_strokeColor->_cgColorRef());
     CGContextBeginPath(ctx);
     CGContextAddPath(ctx, cgPath());
-    CGContextFillPath(ctx);
+    CGContextDrawPath(ctx, kCGPathFill); // kCGPathFillStroke
 }
 
 bool BezierPath::operator==(const Grob& g) const

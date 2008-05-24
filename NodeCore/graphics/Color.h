@@ -16,20 +16,37 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#include <NodeCore/NodeCore.h>
- 
-using namespace NodeCore;
- 
-int main(int argc, char* argv[])
-{
-    Canvas c = Canvas();
-    BezierPath p1 = BezierPath();
-    p1.rect(0,0,100,100);
-    p1.setFillColor(Color(0.5));
-    c.append(p1);
-    Image i = Image("nodeboxicon.png", 200, 20);
-    c.append(i);
-    c.save("test.pdf");
-	std::cout << "Wrote test.pdf." << std::endl;
-}
+
+#ifndef Color_h
+#define Color_h
+
+#include <iostream>
+#include <ApplicationServices/ApplicationServices.h>
+
+namespace NodeCore {
+
+class Color {
+public:
+    Color();
+    Color(float v1);
+    Color(float v1, float v2);
+    Color(const Color &other);
+    virtual ~Color();
+    
+    // virtual void _set(CGContextRef ctx);
+    CGColorRef _cgColorRef();
+    
+    virtual Color* clone() const;
+
+    Color& operator=(const Color& other);
+    virtual bool operator==(const Color& other) const;
+    virtual bool operator!=(const Color& other) const { return !operator==(other); }
+    friend std::ostream& operator<<(std::ostream& o, const Color& c);
+
+private:
+    CGColorRef m_color;
+};
+
+} // namespace NodeCore
+
+#endif // Color_h

@@ -23,6 +23,7 @@
 #include "Rect.h"
 #include "Grob.h"
 #include "PathElement.h"
+#include "Color.h"
 
 #include <iostream>
 #include <vector>
@@ -45,12 +46,17 @@ public:
     void close();
     
     void rect(float x, float y, float width, float height);
+    void roundedRect(float x, float y, float width, float height, float roundness);
     void oval(float x, float y, float width, float height);
+    void line(float x1, float y1, float x2, float y2);
     
     void clear();
     unsigned int size();
     bool isempty();
     NodeCore::Rect bounds();
+    
+    void setFillColor(const Color& c);
+    Color fillColor();
     
     CGMutablePathRef cgPath();
     void transform(const Transform& t);
@@ -70,6 +76,7 @@ private:
     typedef PathElementList::iterator PathElementIterator;
 
     PathElementList m_elements;
+    Color m_fillColor;
     CGMutablePathRef m_path; // transient
     bool m_dirty; // transient
 };
