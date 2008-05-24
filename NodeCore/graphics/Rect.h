@@ -37,6 +37,10 @@ public:
     float getY() { return m_y; }
     float getWidth() { return m_width; }
     float getHeight() { return m_height; }
+    
+    bool isEmpty() const;
+    Rect normalized() const;
+    Rect united(const Rect &r) const;
 
     Rect& operator=(const Rect& r);
     bool operator==(const Rect& r) const;

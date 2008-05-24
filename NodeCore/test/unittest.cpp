@@ -20,6 +20,7 @@
 #include "cpptest.h"
 #include "graphics/BezierPathTestSuite.h"
 #include "graphics/CanvasTestSuite.h"
+#include "graphics/ImageTestSuite.h"
 #include "graphics/PathElementTestSuite.h"
 #include "node/ConnectTestSuite.h"
 #include "node/FieldTestSuite.h"
@@ -90,6 +91,7 @@ main(int argc, char* argv[])
         // Graphical tests
 		ts.add(auto_ptr<Test::Suite>(new BezierPathTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new PathElementTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new ImageTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new CanvasTestSuite));
         // Node tests
 		ts.add(auto_ptr<Test::Suite>(new NodeTestSuite));

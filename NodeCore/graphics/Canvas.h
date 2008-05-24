@@ -42,6 +42,8 @@ public:
     unsigned int size() { return m_grobs.size(); };
     void clear() { m_grobs.clear(); };
 
+    virtual NodeCore::Rect bounds();
+
     virtual void _draw(CGContextRef ctx);
     void save(std::string fname);
 

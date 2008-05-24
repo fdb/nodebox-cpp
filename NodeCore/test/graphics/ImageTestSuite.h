@@ -17,28 +17,26 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Grob_h
-#define Grob_h
+#include <NodeCore/NodeCore.h>
 
-#include <iostream>
+using namespace NodeCore;
 
-#include "Rect.h"
-
-namespace NodeCore {
-
-class Grob {
+class ImageTestSuite : public Test::Suite
+{
 public:
-    virtual ~Grob();
-    virtual NodeCore::Rect bounds() = 0;
-    virtual void _draw(CGContextRef ctx) = 0;
+	ImageTestSuite()
+	{
+		TEST_ADD(ImageTestSuite::test_bounds);
+	}
 
-    virtual Grob* clone() const = 0;
-
-    virtual bool operator==(const Grob& g) const = 0;
-    virtual bool operator!=(const Grob& g) const = 0;
-    friend std::ostream& operator<<(std::ostream& o, const Grob& bp);
+private:
+    void test_bounds()
+    {
+        Image i = Image("testimage.png", 17, 29);
+        TEST_ASSERT( i.bounds() == NodeCore::Rect(17, 29, 47, 67) );
+        // TODO: enable the following test once width/height are implemented.
+        //Image i2 = Image("testimage.png", 17, 29);
+        // i2.setWidth(470);
+        // TEST_ASSERT( i2.bounds() == NodeCore::Rect(17, 29, 470, 670) );
+    }    
 };
-
-} // namespace NodeCore
-
-#endif // Grob_h

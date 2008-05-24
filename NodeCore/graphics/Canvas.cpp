@@ -54,6 +54,16 @@ void Canvas::append(const Grob& grob)
     m_grobs.push_back(grobCopy);
 }
 
+NodeCore::Rect Canvas::bounds()
+{
+    // TODO: We're running bounds() twice on the first element.
+    Rect r = m_grobs[0]->bounds();
+    for (GrobIterator it = m_grobs.begin(); it != m_grobs.end(); ++it) {
+        r = r.united((*it)->bounds());
+    }
+    return r;
+}
+
 void Canvas::_draw(CGContextRef ctx)
 {
     // Flip the canvas

@@ -19,6 +19,7 @@
 
 #include "config.h"
 #include "Rect.h"
+#include <math.h>
 
 namespace NodeCore {
 
@@ -52,6 +53,38 @@ Rect::Rect(const Rect &r)
        m_width(r.m_width),
        m_height(r.m_height)
 {
+}
+
+bool Rect::isEmpty() const
+{
+    Rect n = normalized();
+    return n.m_width <= 0.0F || n.m_height <= 0.0F;
+}
+
+Rect Rect::normalized() const
+{
+    Rect r = *this;
+    if (r.m_width < 0) {
+        r.m_x += r.m_width;
+        r.m_width = -r.m_width;
+    }
+    if (r.m_height < 0) {
+        r.m_y += r.m_height;
+        r.m_height = -r.m_height;
+    }
+    return r;
+}
+
+Rect Rect::united(const Rect &r) const
+{
+    Rect r1 = normalized();
+    Rect r2 = r.normalized();
+    Rect u;
+    u.m_x = fminf(r1.m_x, r2.m_x);
+    u.m_y = fminf(r1.m_y, r2.m_y);
+    u.m_width = fmaxf(r1.m_x + r1.m_width, r2.m_x + r2.m_width) - u.m_x;
+    u.m_height = fmaxf(r1.m_y + r1.m_height, r2.m_y + r2.m_height) - u.m_y;
+    return u;
 }
 
 Rect& Rect::operator=(const Rect& r)

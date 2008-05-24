@@ -34,6 +34,7 @@ public:
 		TEST_ADD(CanvasTestSuite::test_copy_pointers);
 		TEST_ADD(CanvasTestSuite::test_accessors);
 		TEST_ADD(CanvasTestSuite::test_equality);
+		TEST_ADD(CanvasTestSuite::test_bounds);        
 	}
 
 private:
@@ -129,5 +130,17 @@ private:
         TEST_ASSERT( c1 == c2 );
         Canvas c3 = Canvas();
         TEST_ASSERT( !(c1 == c3) );
+    }
+    
+    void test_bounds()
+    {
+        Canvas c = Canvas();
+        BezierPath p1 = BezierPath();
+        BezierPath p2 = BezierPath();
+        p1.rect(10, 20, 30, 40);
+        p2.rect(100, 200, 300, 400);
+        c.append(p1);
+        c.append(p2);
+        TEST_ASSERT( c.bounds() == NodeCore::Rect(10, 20, 390, 580) );
     }
 };

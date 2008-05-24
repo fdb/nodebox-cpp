@@ -67,6 +67,8 @@
 		61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
 		618C8BE20DE832E30096A514 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8BE00DE832E30096A514 /* Color.h */; };
 		618C8BE30DE832E30096A514 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618C8BE10DE832E30096A514 /* Color.cpp */; };
+		618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8D8A0DE875900096A514 /* ImageTestSuite.h */; };
+		618C8DB20DE876880096A514 /* testimage.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 618C8DB00DE876770096A514 /* testimage.png */; };
 		61936C480DC86FA80034D23C /* Network.h in Headers */ = {isa = PBXBuildFile; fileRef = 61936C460DC86FA80034D23C /* Network.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61936C490DC86FA80034D23C /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61936C470DC86FA80034D23C /* Network.cpp */; };
 /* End PBXBuildFile section */
@@ -96,6 +98,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 				6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		618C8DB10DE876770096A514 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				618C8DB20DE876880096A514 /* testimage.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +198,8 @@
 		61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasNodeTestSuite.h; path = test/node/CanvasNodeTestSuite.h; sourceTree = "<group>"; };
 		618C8BE00DE832E30096A514 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		618C8BE10DE832E30096A514 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
+		618C8D8A0DE875900096A514 /* ImageTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTestSuite.h; path = test/graphics/ImageTestSuite.h; sourceTree = "<group>"; };
+		618C8DB00DE876770096A514 /* testimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testimage.png; path = test/testimage.png; sourceTree = "<group>"; };
 		61936C460DC86FA80034D23C /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		61936C470DC86FA80034D23C /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 		61936CE90DC884570034D23C /* NetworkTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkTestSuite.h; path = test/node/NetworkTestSuite.h; sourceTree = "<group>"; };
@@ -343,6 +357,7 @@
 			children = (
 				611EC4870DC24E63008BE1A1 /* BezierPathTestSuite.h */,
 				611EC4F20DC25366008BE1A1 /* CanvasTestSuite.h */,
+				618C8D8A0DE875900096A514 /* ImageTestSuite.h */,
 				611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */,
 			);
 			name = graphics;
@@ -411,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				6165582B0DC6297600AC5259 /* nodeboxicon.png */,
+				618C8DB00DE876770096A514 /* testimage.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -445,6 +461,7 @@
 				61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */,
 				615500080DDA02D300708CBC /* stringutils.h in Headers */,
 				618C8BE20DE832E30096A514 /* Color.h in Headers */,
+				618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +510,7 @@
 			buildPhases = (
 				611EC4390DC24D23008BE1A1 /* Sources */,
 				611EC43A0DC24D23008BE1A1 /* Frameworks */,
+				618C8DB10DE876770096A514 /* CopyFiles */,
 			);
 			buildRules = (
 			);

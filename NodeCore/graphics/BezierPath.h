@@ -53,7 +53,7 @@ public:
     void clear();
     unsigned int size();
     bool isempty();
-    NodeCore::Rect bounds();
+    virtual NodeCore::Rect bounds();
     
     Color fillColor();
     void setFillColor(const Color& c);

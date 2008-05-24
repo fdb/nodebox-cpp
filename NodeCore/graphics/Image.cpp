@@ -48,6 +48,13 @@ Image::~Image()
     CGImageRelease(m_image);
 }
 
+NodeCore::Rect Image::bounds()
+{
+    loadImage();
+    // TODO: If width and height are implemented, this will change.
+    return Rect(m_x, m_y, CGImageGetWidth(m_image), CGImageGetHeight(m_image));
+}
+
 Image* Image::clone() const
 {
     return new Image(*this);

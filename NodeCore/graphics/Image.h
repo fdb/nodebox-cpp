@@ -34,6 +34,7 @@ public:
     Image(const Image &other);
     virtual ~Image();
     
+    virtual NodeCore::Rect bounds();
     virtual void _draw(CGContextRef ctx);
 
     virtual Image* clone() const;
