@@ -56,6 +56,7 @@ public:
     NodeCore::Rect bounds();
     
     void setFillColor(const Color& c);
+    void noFill();
     Color fillColor();
     
     CGMutablePathRef cgPath();

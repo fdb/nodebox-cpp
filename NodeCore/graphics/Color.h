@@ -20,20 +20,32 @@
 #ifndef Color_h
 #define Color_h
 
+#include <string>
 #include <iostream>
 #include <ApplicationServices/ApplicationServices.h>
 
 namespace NodeCore {
 
+typedef std::string ColorMode;
+const ColorMode kGray = "Gray";
+const ColorMode kRGB = "RGB";
+const ColorMode kCMYK = "CMYK";
+
 class Color {
 public:
     Color();
-    Color(float v1);
-    Color(float v1, float v2);
+    Color(const ColorMode& mode, float v1);
+    Color(const ColorMode& mode, float v1, float v2);
+    Color(const ColorMode& mode, float v1, float v2, float v3);
+    Color(const ColorMode& mode, float v1, float v2, float v3, float v4);
+    Color(const ColorMode& mode, float v1, float v2, float v3, float v4, float v5);
     Color(const Color &other);
     virtual ~Color();
     
-    // virtual void _set(CGContextRef ctx);
+    static Color grayColor(float gray, float alpha=1.0);
+    static Color rgbColor(float red, float green, float blue, float alpha=1.0);
+    static Color cmykColor(float cyan, float magenta, float yellow, float black, float alpha=1.0);
+    
     CGColorRef _cgColorRef();
     
     virtual Color* clone() const;

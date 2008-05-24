@@ -27,19 +27,59 @@ Color::Color()
 {
 }
 
-Color::Color(float v1)
+Color::Color(const ColorMode& mode, float v1)
      : m_color(CGColorCreateGenericGray(v1, 1.0F))
 {
+    assert(mode == kGray);
 }
 
-Color::Color(float v1, float v2)
+Color::Color(const ColorMode& mode, float v1, float v2)
      : m_color(CGColorCreateGenericGray(v1, v2))
 {
+    assert(mode == kGray);
+}
+
+Color::Color(const ColorMode& mode, float v1, float v2, float v3)
+     : m_color(CGColorCreateGenericRGB(v1, v2, v3, 1.0F))
+{
+    assert(mode == kRGB);
+}
+
+Color::Color(const ColorMode& mode, float v1, float v2, float v3, float v4)
+     : m_color(0)
+{
+    assert(mode == kRGB || mode == kCMYK);
+    if (mode == kRGB) {
+        m_color = CGColorCreateGenericRGB(v1, v2, v3, v4);
+    } else {
+        m_color = CGColorCreateGenericCMYK(v1, v2, v3, v4, 1.0F);
+    }
+}
+
+Color::Color(const ColorMode& mode, float v1, float v2, float v3, float v4, float v5)
+     : m_color(CGColorCreateGenericCMYK(v1, v2, v3, v4, v5))
+{
+    assert(mode == kCMYK);
 }
 
 Color::Color(const Color& other)
      : m_color(CGColorCreateCopy(other.m_color))
 {
+}
+
+Color Color::grayColor(float gray, float alpha)
+{
+    return Color(kGray, gray, alpha);
+}
+
+Color Color::rgbColor(float red, float green, float blue, float alpha)
+{
+    return Color(kRGB, red, green, blue, alpha);
+}
+
+Color Color::cmykColor(float cyan, float magenta, float yellow, float black, float alpha)
+{
+    return Color(kCMYK, cyan, magenta, yellow, black, alpha);
 }
 
 Color::~Color()

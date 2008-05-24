@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     Canvas c = Canvas();
     BezierPath p1 = BezierPath();
     p1.rect(0,0,100,100);
-    p1.setFillColor(Color(0.5));
+    p1.setFillColor(Color::rgbColor(1.0, 0.2, 0.5));
     c.append(p1);
     Image i = Image("nodeboxicon.png", 200, 20);
     c.append(i);
