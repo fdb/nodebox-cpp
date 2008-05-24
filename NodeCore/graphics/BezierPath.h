@@ -55,9 +55,14 @@ public:
     bool isempty();
     NodeCore::Rect bounds();
     
+    Color fillColor();
     void setFillColor(const Color& c);
     void noFill();
-    Color fillColor();
+    Color strokeColor();
+    void setStrokeColor(const Color& c);
+    void noStroke();
+    float strokeWidth();
+    void setStrokeWidth(float width);
     
     CGMutablePathRef cgPath();
     void transform(const Transform& t);
@@ -77,7 +82,11 @@ private:
     typedef PathElementList::iterator PathElementIterator;
 
     PathElementList m_elements;
+    bool m_fill;
     Color m_fillColor;
+    bool m_stroke;
+    Color m_strokeColor;
+    float m_strokeWidth;
     CGMutablePathRef m_path; // transient
     bool m_dirty; // transient
 };

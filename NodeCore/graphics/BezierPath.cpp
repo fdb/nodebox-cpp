@@ -28,7 +28,11 @@ float const KAPPA = 0.5522847498f;
 
 BezierPath::BezierPath()
           : m_elements(PathElementList()),
+            m_fill(true),
             m_fillColor(Color()),
+            m_stroke(false),
+            m_strokeColor(Color()),
+            m_strokeWidth(1.0F),
             m_path(CGPathCreateMutable()),
             m_dirty(true)
 {
@@ -36,7 +40,11 @@ BezierPath::BezierPath()
 
 BezierPath::BezierPath(const BezierPath& other)
           : m_elements(other.m_elements),
-            m_fillColor(Color(other.m_fillColor)),
+            m_fill(other.m_fill),
+            m_fillColor(other.m_fillColor),
+            m_stroke(other.m_stroke),
+            m_strokeColor(other.m_strokeColor),
+            m_strokeWidth(other.m_strokeWidth),
             m_path(CGPathCreateMutable()),
             m_dirty(true)
 {
@@ -138,14 +146,46 @@ NodeCore::Rect BezierPath::bounds()
     return Rect(r);
 }
 
-void BezierPath::setFillColor(const Color& c)
-{
-    m_fillColor = c;
-}
-
 Color BezierPath::fillColor()
 {
     return m_fillColor;
+}
+
+void BezierPath::setFillColor(const Color& c)
+{
+    m_fill = true;
+    m_fillColor = c;
+}
+
+void BezierPath::noFill()
+{
+    m_fill = false;
+}
+
+Color BezierPath::strokeColor()
+{
+    return m_strokeColor;
+}
+
+void BezierPath::setStrokeColor(const Color& c)
+{
+    m_stroke = true;
+    m_strokeColor = c;
+}
+
+void BezierPath::noStroke()
+{
+    m_stroke = false;
+}
+
+float BezierPath::strokeWidth()
+{
+    return m_strokeWidth;
+}
+
+void BezierPath::setStrokeWidth(float width)
+{
+    m_strokeWidth = width;
 }
 
 CGMutablePathRef BezierPath::cgPath()
@@ -193,11 +233,26 @@ void BezierPath::transform(const Transform& t)
 
 void BezierPath::_draw(CGContextRef ctx)
 {
-    CGContextSetFillColorWithColor(ctx, m_fillColor._cgColorRef());
-    //CGContextSetStrokeColorWithColor(ctx, m_strokeColor->_cgColorRef());
+    if (m_fill) {
+        CGContextSetFillColorWithColor(ctx, m_fillColor._cgColorRef());
+    }
+    if (m_stroke) {
+        CGContextSetStrokeColorWithColor(ctx, m_strokeColor._cgColorRef());
+        CGContextSetLineWidth(ctx, m_strokeWidth);
+    }
+    CGPathDrawingMode mode;
+    if (m_fill && m_stroke) {
+        mode = kCGPathFillStroke;
+    } else if (m_fill) {
+        mode = kCGPathFill;
+    } else if (m_stroke) {
+        mode = kCGPathStroke;
+    } else {
+        return;
+    }
     CGContextBeginPath(ctx);
     CGContextAddPath(ctx, cgPath());
-    CGContextDrawPath(ctx, kCGPathFill); // kCGPathFillStroke
+    CGContextDrawPath(ctx, mode);
 }
 
 bool BezierPath::operator==(const Grob& g) const
@@ -211,6 +266,11 @@ BezierPath& BezierPath::operator=(const BezierPath& bp)
 {
     if (this == &bp) return *this;
     m_elements = bp.m_elements;
+    m_fill = bp.m_fill;
+    m_fillColor = bp.m_fillColor;
+    m_stroke = bp.m_stroke;
+    m_strokeColor = bp.m_strokeColor;
+    m_strokeWidth = bp.m_strokeWidth;
     m_dirty = true;
     return *this;
 }
