@@ -28,6 +28,7 @@ public:
 	{
 		TEST_ADD(BezierPathTestSuite::test_size);
 		TEST_ADD(BezierPathTestSuite::test_copy);
+		TEST_ADD(BezierPathTestSuite::test_copy_pointers);
 		TEST_ADD(BezierPathTestSuite::test_accessors);
 		TEST_ADD(BezierPathTestSuite::test_equality);
 		TEST_ADD(BezierPathTestSuite::test_bounds);
@@ -36,14 +37,15 @@ public:
 private:
     void test_size()
     {
-        BezierPath p = BezierPath();
-        TEST_ASSERT( p.size() == 0 );
-        p.moveto(0, 0);
-        TEST_ASSERT( p.size() == 1 );
-        p.lineto(100, 100);
-        TEST_ASSERT( p.size() == 2 );
-        p.clear();
-        TEST_ASSERT( p.size() == 0 );
+        BezierPath *p = new BezierPath();
+        TEST_ASSERT( p->size() == 0 );
+        p->moveto(0, 0);
+        TEST_ASSERT( p->size() == 1 );
+        p->lineto(100, 100);
+        TEST_ASSERT( p->size() == 2 );
+        p->clear();
+        TEST_ASSERT( p->size() == 0 );
+        delete p;
     }
     
     void test_copy()
@@ -57,6 +59,20 @@ private:
         p1.clear();
         TEST_ASSERT( p1.size() == 0 );
         TEST_ASSERT( p2.size() == 2 );
+    }
+    
+    void test_copy_pointers()
+    {
+        BezierPath *p1 = new BezierPath();
+        p1->moveto(0, 0);
+        p1->lineto(100, 100);
+        TEST_ASSERT( p1->size() == 2 );
+        BezierPath *p2 = new BezierPath(*p1);
+        TEST_ASSERT( p2->size() == 2 );
+        p1->clear();
+        TEST_ASSERT( p1->size() == 0 );
+        TEST_ASSERT( p2->size() == 2 );
+        delete p1, p2;
     }
 
     void test_accessors()
