@@ -17,23 +17,31 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+class Transform {
+public:
+    Transform();
+    Transform(CGAffineTransform transform);
+    Transform(const Transform &path);
+    
+    bool isidentity() const;
+    void reset();
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+//    Transform& multiply(const Transform&);
+    Transform& scale(float s); 
+//    Transform& scale(double sx, double sy); 
+//    Transform& scalenonuniform(double sx, double sy);
+    Transform& rotate(float v);
+//    Transform& rotateFromVector(double x, double y);
+//    Transform& translate(double tx, double ty);
+//    Transform& shear(double sx, double sy);
+//    Transform& flipx();
+//    Transform& flipy();
+//    Transform& skew(double angleX, double angleY);
+//    Transform& skewx(double angle);
+//    Transform& skewy(double angle);
+
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

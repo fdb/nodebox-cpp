@@ -17,23 +17,29 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+class Rect {
+public:
+    Rect();
+    Rect(float x, float y, float width, float height);
+    Rect(CGRect r);
+    Rect(const Rect &r);
+    
+    float getX() { return m_x; }
+    float getY() { return m_y; }
+    float getWidth() { return m_width; }
+    float getHeight() { return m_height; }
+    
+    bool isEmpty() const;
+    Rect normalized() const;
+    Rect united(const Rect& r) const;
+    bool intersects(const Rect& r) const;
+    bool contains(const NodeCore::Point& p) const;
+    bool contains(const Rect& r) const;
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+    bool operator==(const Rect& r) const;
+    bool operator!=(const Rect& r) const { return !operator==(r); }
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

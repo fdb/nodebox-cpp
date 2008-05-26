@@ -17,53 +17,16 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
-#include "Transform.h"
-
-#include "Utils.h"
-
 namespace NodeCore {
 
-Transform::Transform()
-         :  m_transform(CGAffineTransformIdentity)
+inline float radians(float degrees)
 {
+    return (float) (degrees * M_PI / 180);
 }
 
-Transform::Transform(CGAffineTransform t)
-         : m_transform(t)
+inline float degrees(float radians)
 {
-}
-
-Transform::Transform(const Transform& t)
-         : m_transform(t.m_transform)
-{
-}
-
-bool Transform::isidentity() const
-{
-    return CGAffineTransformIsIdentity(m_transform);
-}
-
-void Transform::reset()
-{
-    m_transform = CGAffineTransformIdentity;
-}
-
-Transform &Transform::scale(float v)
-{
-    m_transform = CGAffineTransformScale(m_transform, v, v);
-    return *this;
-}
-
-Transform &Transform::rotate(float v)
-{
-    m_transform = CGAffineTransformRotate(m_transform, radians(v));
-    return *this;
-}
-
-Transform::operator CGAffineTransform() const
-{
-    return m_transform;
+    return (float) (radians * 180 / M_PI);
 }
 
 } // namespace NodeCore

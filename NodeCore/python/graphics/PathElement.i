@@ -17,23 +17,34 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+enum PathCommand {
+    kMoveto = 0,
+    kLineto,
+    kCurveto,
+    kClose
+};
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+class PathElement {
+public:
+    PathElement();
+    PathElement(PathCommand cmd);
+    PathElement(PathCommand cmd, float x, float y);
+    PathElement(PathCommand cmd, float x1, float y1, float x2, float y2, float x3, float y3);
+    PathElement(const PathElement &path);
+    ~PathElement();
+    
+    PathCommand getCmd() { return m_cmd; }
+    float getX() { return m_point.getX(); }
+    float getY() { return m_point.getY(); }
+    NodeCore::Point getPoint() { return m_point; }
+    NodeCore::Point getCtrl1() { return m_ctrl1; }
+    NodeCore::Point getCtrl2() { return m_ctrl2; }
+    
+    bool operator==(const PathElement& pe) const;
+    
+    friend class BezierPath;
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

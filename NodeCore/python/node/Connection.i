@@ -17,23 +17,33 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
+    
+class Field;
+class Node;
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+class Connection {
+public:
+    Connection(Field *outputField, Field *inputField);
+    virtual ~Connection();
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+    Field* getOutputField() const;
+    Node* getOutputNode() const;
+    Field* getInputField() const;
+    Node* getInputNode() const;
+
+private:
+    // Disallow copy construction or assignment
+    Connection(const Connection& other);
+    Connection& operator=(const Connection& other);
+    
+    void markDirtyDownstream();
+    void update();
+    
+    Field* m_output;
+    Field* m_input;
+    
+    friend class Field;
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

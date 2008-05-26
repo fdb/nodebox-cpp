@@ -17,23 +17,20 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+class Grob {
+public:
+    virtual ~Grob();
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+    virtual NodeCore::Rect bounds() = 0;
+
+    virtual void _draw(CGContextRef ctx) = 0;
+
+    virtual Grob* clone() const = 0;
+
+    virtual bool operator==(const Grob& g) const = 0;
+    virtual bool operator!=(const Grob& g) const = 0;
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

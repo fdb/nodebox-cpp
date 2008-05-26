@@ -16,24 +16,31 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
+ 
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+const float DEFAULT_WIDTH = 1000;
+const float DEFAULT_HEIGHT = 1000;
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+class Canvas : public Grob {
+public:
+    Canvas(float width=DEFAULT_WIDTH, float height=DEFAULT_HEIGHT);
+    Canvas(const Canvas &other);
+    virtual ~Canvas();
+    
+    void append(const Grob& grob);
+    unsigned int size() { return m_grobs.size(); };
+    void clear() { m_grobs.clear(); };
+
+    virtual NodeCore::Rect bounds();
+
+    virtual void _draw(CGContextRef ctx);
+    void save(std::string fname);
+
+    virtual Canvas* clone() const;
+
+    virtual bool operator==(const Grob& g) const;
+    virtual bool operator!=(const Grob& g) const { return !operator==(g); }
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		611EC2440DC22A52008BE1A1 /* testpdf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC16E0DC228CF008BE1A1 /* testpdf.cpp */; };
 		611EC3AC0DC22E7C008BE1A1 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC0DD0DC2223C008BE1A1 /* Python.framework */; };
-		611EC3AD0DC22E7C008BE1A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA30DC21240008BE1A1 /* QuartzCore.framework */; };
 		611EC3AE0DC22E7C008BE1A1 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */; };
-		611EC3AF0DC22E7C008BE1A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */; };
-		611EC3B00DC22E7C008BE1A1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9D0DC21210008BE1A1 /* Carbon.framework */; };
 		611EC3B30DC22E83008BE1A1 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */; };
 		611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC2370DC2297B008BE1A1 /* NodeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF470DC2108B008BE1A1 /* Connection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -65,12 +62,36 @@
 		6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6165582B0DC6297600AC5259 /* nodeboxicon.png */; };
 		61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
-		618C8BE20DE832E30096A514 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8BE00DE832E30096A514 /* Color.h */; };
+		618C8BE20DE832E30096A514 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8BE00DE832E30096A514 /* Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		618C8BE30DE832E30096A514 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618C8BE10DE832E30096A514 /* Color.cpp */; };
-		618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8D8A0DE875900096A514 /* ImageTestSuite.h */; };
+		618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8D8A0DE875900096A514 /* ImageTestSuite.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		618C8DB20DE876880096A514 /* testimage.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 618C8DB00DE876770096A514 /* testimage.png */; };
 		61936C480DC86FA80034D23C /* Network.h in Headers */ = {isa = PBXBuildFile; fileRef = 61936C460DC86FA80034D23C /* Network.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61936C490DC86FA80034D23C /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61936C470DC86FA80034D23C /* Network.cpp */; };
+		6195F7520DEAC52D00F3771B /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC0DD0DC2223C008BE1A1 /* Python.framework */; };
+		6195F7710DEAC89300F3771B /* nodecore_wrap.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 6195F7700DEAC89300F3771B /* nodecore_wrap.cxx */; };
+		6195F8120DEACCB000F3771B /* nodecore.py in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6195F8100DEACCAD00F3771B /* nodecore.py */; };
+		6195F8300DEACD9B00F3771B /* BezierPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF360DC2108B008BE1A1 /* BezierPath.cpp */; };
+		6195F8310DEACD9B00F3771B /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF380DC2108B008BE1A1 /* Canvas.cpp */; };
+		6195F8320DEACD9B00F3771B /* Grob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3A0DC2108B008BE1A1 /* Grob.cpp */; };
+		6195F8330DEACD9B00F3771B /* PathElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3C0DC2108B008BE1A1 /* PathElement.cpp */; };
+		6195F8340DEACD9B00F3771B /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3E0DC2108B008BE1A1 /* Point.cpp */; };
+		6195F8350DEACD9B00F3771B /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF400DC2108B008BE1A1 /* Rect.cpp */; };
+		6195F8360DEACD9B00F3771B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
+		6195F8370DEACD9B00F3771B /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
+		6195F8380DEACD9B00F3771B /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
+		6195F8390DEACD9B00F3771B /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
+		6195F83A0DEACD9B00F3771B /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
+		6195F83B0DEACD9B00F3771B /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
+		6195F83C0DEACD9B00F3771B /* NodeLibraryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */; };
+		6195F83D0DEACD9B00F3771B /* posixutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */; };
+		6195F83E0DEACD9B00F3771B /* PythonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */; };
+		6195F83F0DEACD9B00F3771B /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 616557A20DC61E9100AC5259 /* Image.cpp */; };
+		6195F8400DEACD9B00F3771B /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
+		6195F8410DEACD9B00F3771B /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61936C470DC86FA80034D23C /* Network.cpp */; };
+		6195F8420DEACD9B00F3771B /* stringutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 615500050DDA02D300708CBC /* stringutils.cpp */; };
+		6195F8430DEACD9B00F3771B /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618C8BE10DE832E30096A514 /* Color.cpp */; };
+		6195F8460DEACDB900F3771B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +129,16 @@
 			dstSubfolderSpec = 6;
 			files = (
 				618C8DB20DE876880096A514 /* testimage.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F8110DEACCAD00F3771B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				6195F8120DEACCB000F3771B /* nodecore.py in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +235,13 @@
 		61936C460DC86FA80034D23C /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		61936C470DC86FA80034D23C /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 		61936CE90DC884570034D23C /* NetworkTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkTestSuite.h; path = test/node/NetworkTestSuite.h; sourceTree = "<group>"; };
+		6195F72F0DEAC50300F3771B /* _nodecore.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = _nodecore.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		6195F7700DEAC89300F3771B /* nodecore_wrap.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = nodecore_wrap.cxx; path = python/nodecore_wrap.cxx; sourceTree = "<group>"; };
+		6195F7F10DEACBFB00F3771B /* connection.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; name = connection.i; path = python/connection.i; sourceTree = "<group>"; };
+		6195F7F20DEACBFB00F3771B /* field.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; name = field.i; path = python/field.i; sourceTree = "<group>"; };
+		6195F7F30DEACBFB00F3771B /* node.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; name = node.i; path = python/node.i; sourceTree = "<group>"; };
+		6195F7F40DEACBFB00F3771B /* nodecore.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; name = nodecore.i; path = python/nodecore.i; sourceTree = "<group>"; };
+		6195F8100DEACCAD00F3771B /* nodecore.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = nodecore.py; path = python/nodecore.py; sourceTree = "<group>"; };
 		61FA165A0DCF06830056A7C6 /* TestNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestNodes.h; path = test/node/TestNodes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,10 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				611EC3AC0DC22E7C008BE1A1 /* Python.framework in Frameworks */,
-				611EC3AD0DC22E7C008BE1A1 /* QuartzCore.framework in Frameworks */,
 				611EC3AE0DC22E7C008BE1A1 /* ApplicationServices.framework in Frameworks */,
-				611EC3AF0DC22E7C008BE1A1 /* Cocoa.framework in Frameworks */,
-				611EC3B00DC22E7C008BE1A1 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +268,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				611EC4420DC24D33008BE1A1 /* NodeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F72D0DEAC50300F3771B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6195F8460DEACDB900F3771B /* ApplicationServices.framework in Frameworks */,
+				6195F7520DEAC52D00F3771B /* Python.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +293,7 @@
 				611EBF350DC2108B008BE1A1 /* graphics */,
 				611EBF450DC2108B008BE1A1 /* node */,
 				6155FFF70DDA02A100708CBC /* utils */,
+				6195F7250DEAC4CE00F3771B /* python */,
 				611EC16D0DC2288F008BE1A1 /* test */,
 				616558290DC6296700AC5259 /* Resources */,
 				611EBF9C0DC21200008BE1A1 /* Frameworks */,
@@ -316,6 +361,7 @@
 				611EC23D0DC22A3C008BE1A1 /* testpdf */,
 				611EC2B80DC22E66008BE1A1 /* NodeCore.framework */,
 				611EC43C0DC24D23008BE1A1 /* unittest */,
+				6195F72F0DEAC50300F3771B /* _nodecore.so */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -433,6 +479,19 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		6195F7250DEAC4CE00F3771B /* python */ = {
+			isa = PBXGroup;
+			children = (
+				6195F8100DEACCAD00F3771B /* nodecore.py */,
+				6195F7F10DEACBFB00F3771B /* connection.i */,
+				6195F7F20DEACBFB00F3771B /* field.i */,
+				6195F7F30DEACBFB00F3771B /* node.i */,
+				6195F7F40DEACBFB00F3771B /* nodecore.i */,
+				6195F7700DEAC89300F3771B /* nodecore_wrap.cxx */,
+			);
+			name = python;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -464,6 +523,13 @@
 				615500080DDA02D300708CBC /* stringutils.h in Headers */,
 				618C8BE20DE832E30096A514 /* Color.h in Headers */,
 				618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F72B0DEAC50300F3771B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +590,25 @@
 			productReference = 611EC43C0DC24D23008BE1A1 /* unittest */;
 			productType = "com.apple.product-type.tool";
 		};
+		6195F72E0DEAC50300F3771B /* Python Wrapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6195F7550DEAC54600F3771B /* Build configuration list for PBXNativeTarget "Python Wrapper" */;
+			buildPhases = (
+				6195F78B0DEAC8AF00F3771B /* SWIG */,
+				6195F72B0DEAC50300F3771B /* Headers */,
+				6195F72C0DEAC50300F3771B /* Sources */,
+				6195F72D0DEAC50300F3771B /* Frameworks */,
+				6195F8110DEACCAD00F3771B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Python Wrapper";
+			productName = "Python Wrapper";
+			productReference = 6195F72F0DEAC50300F3771B /* _nodecore.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -540,6 +625,7 @@
 				611EC2B70DC22E66008BE1A1 /* NodeCore */,
 				611EC23C0DC22A3C008BE1A1 /* testpdf */,
 				611EC43B0DC24D23008BE1A1 /* unittest */,
+				6195F72E0DEAC50300F3771B /* Python Wrapper */,
 			);
 		};
 /* End PBXProject section */
@@ -553,6 +639,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6195F78B0DEAC8AF00F3771B /* SWIG */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/python/nodecore.i",
+			);
+			name = SWIG;
+			outputPaths = (
+				"$(SRCROOT)/python/nodecore_wrap.cxx",
+				"$(SRCROOT)/python/nodecore.py",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swig -python -c++ -shadow -Wall -I- -Ipython -o python/nodecore_wrap.cxx nodecore.i";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		611EC23A0DC22A3C008BE1A1 /* Sources */ = {
@@ -604,6 +710,34 @@
 				611EC55A0DC2575B008BE1A1 /* htmloutput.cpp in Sources */,
 				611EC55B0DC2575B008BE1A1 /* collectoroutput.cpp in Sources */,
 				611EC55C0DC2575B008BE1A1 /* compileroutput.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F72C0DEAC50300F3771B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6195F8300DEACD9B00F3771B /* BezierPath.cpp in Sources */,
+				6195F8310DEACD9B00F3771B /* Canvas.cpp in Sources */,
+				6195F8320DEACD9B00F3771B /* Grob.cpp in Sources */,
+				6195F8330DEACD9B00F3771B /* PathElement.cpp in Sources */,
+				6195F8340DEACD9B00F3771B /* Point.cpp in Sources */,
+				6195F8350DEACD9B00F3771B /* Rect.cpp in Sources */,
+				6195F8360DEACD9B00F3771B /* Transform.cpp in Sources */,
+				6195F8370DEACD9B00F3771B /* Connection.cpp in Sources */,
+				6195F8380DEACD9B00F3771B /* Field.cpp in Sources */,
+				6195F8390DEACD9B00F3771B /* Node.cpp in Sources */,
+				6195F83A0DEACD9B00F3771B /* NodeInfo.cpp in Sources */,
+				6195F83B0DEACD9B00F3771B /* NodeLibrary.cpp in Sources */,
+				6195F83C0DEACD9B00F3771B /* NodeLibraryManager.cpp in Sources */,
+				6195F83D0DEACD9B00F3771B /* posixutils.cpp in Sources */,
+				6195F83E0DEACD9B00F3771B /* PythonNode.cpp in Sources */,
+				6195F83F0DEACD9B00F3771B /* Image.cpp in Sources */,
+				6195F8400DEACD9B00F3771B /* CanvasNode.cpp in Sources */,
+				6195F8410DEACD9B00F3771B /* Network.cpp in Sources */,
+				6195F8420DEACD9B00F3771B /* stringutils.cpp in Sources */,
+				6195F8430DEACD9B00F3771B /* Color.cpp in Sources */,
+				6195F7710DEAC89300F3771B /* nodecore_wrap.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +931,40 @@
 			};
 			name = Release;
 		};
+		6195F7300DEAC50300F3771B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = _;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = /System/Library/Frameworks/Python.framework/Versions/2.5/include/python2.5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = nodecore;
+			};
+			name = Debug;
+		};
+		6195F7310DEAC50300F3771B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = "Python Wrapper";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -832,6 +1000,15 @@
 			buildConfigurations = (
 				611EC43E0DC24D23008BE1A1 /* Debug */,
 				611EC43F0DC24D23008BE1A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6195F7550DEAC54600F3771B /* Build configuration list for PBXNativeTarget "Python Wrapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6195F7300DEAC50300F3771B /* Debug */,
+				6195F7310DEAC50300F3771B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

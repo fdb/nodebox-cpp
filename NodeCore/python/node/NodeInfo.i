@@ -17,23 +17,42 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+class NodeLibrary;
 
-inline float degrees(float radians)
+typedef Node* (*NodeCreator)();
+
+enum NodeLibraryType {
+    kUnknown = 0,
+    kNative,
+    kPython,
+    kUnsupported
+};
+
+typedef std::string NodeLibraryName;
+
+class NodeInfo
 {
-    return (float) (radians * 180 / M_PI);
-}
+public:
+    NodeInfo(NodeLibrary& library, NodeName name, void* data);
+    ~NodeInfo();
+    
+    NodeLibrary& getLibrary();
+    NodeName getName();
+    Node* create();
+
+private:
+    // Disallow copy construction or assignment
+    NodeInfo(const NodeInfo& other);
+    NodeInfo& operator=(const NodeInfo& other);
+
+    Node* createNativeNode();
+    Node* createPythonNode();
+
+    NodeLibrary& m_library;
+    NodeName m_name;
+    void* m_data;
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h

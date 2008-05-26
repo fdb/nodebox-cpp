@@ -17,23 +17,23 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Utils_h
-#define Utils_h
-
-#include <cmath>
-
 namespace NodeCore {
 
-inline float radians(float degrees)
-{
-    return (float) (degrees * M_PI / 180);
-}
+class PathElement;
+class Rect;
 
-inline float degrees(float radians)
-{
-    return (float) (radians * 180 / M_PI);
-}
+class Point {
+public:
+    Point(float x=0, float y=0) : m_x(x), m_y(y) {}
+    Point(const Point &point) : m_x(point.m_x), m_y(point.m_y) {}
+    ~Point() {}
+    
+    float getX() const { return m_x; }
+    void setX(float x) { m_x = x; }
+    float getY() const { return m_y; }
+    void setY(float y) { m_y = y; }
+
+    bool operator==(const Point& p) const;
+};
 
 } // namespace NodeCore
-
-#endif // Utils_h
