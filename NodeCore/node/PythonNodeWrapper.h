@@ -17,8 +17,8 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PythonNode_h
-#define PythonNode_h
+#ifndef PythonNodeWrapper_h
+#define PythonNodeWrapper_h
 
 #include "Node.h"
 
@@ -29,22 +29,22 @@ namespace NodeCore {
 
 const std::string kPyObject = "PyObject";
 
-class PythonNode : public Node
+class PythonNodeWrapper : public Node
 {
 public:
-    PythonNode(PyObject* pythonObject);
-    virtual ~PythonNode();
+    PythonNodeWrapper(PyObject* pythonObject);
+    virtual ~PythonNodeWrapper();
 
     virtual void process();
     
 private:
     // Disallow copy construction or assignment
-    PythonNode(const PythonNode& other);
-    PythonNode& operator=(const PythonNode& other);
+    PythonNodeWrapper(const PythonNodeWrapper& other);
+    PythonNodeWrapper& operator=(const PythonNodeWrapper& other);
 
     PyObject* m_pythonObject;
 };
 
 } // namespace NodeCore
 
-#endif // PythonNode_h
+#endif // PythonNodeWrapper_h

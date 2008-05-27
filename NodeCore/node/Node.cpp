@@ -288,22 +288,22 @@ void Node::process()
     // This space intentionally left blank.
 }
 
-void Node::setOutput(int i)
+void Node::_setOutput(int i)
 {
     m_outputField->set(i);
 }
 
-void Node::setOutput(float f)
+void Node::_setOutput(float f)
 {
     m_outputField->set(f);
 }
 
-void Node::setOutput(std::string s)
+void Node::_setOutput(std::string s)
 {
     m_outputField->set(s);
 }
 
-void Node::setOutput(void* d)
+void Node::_setOutput(void* d)
 {
     m_outputField->set(d);
 }

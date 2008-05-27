@@ -61,10 +61,32 @@ Node* NodeInfo::createNativeNode() {
     return creator();
 }
 
+typedef struct swig_type_info *(*swig_dycast_func)(void **);
+
+typedef struct {
+  PyObject_HEAD
+  void *ptr;
+  swig_type_info *ty;
+  int own;
+  PyObject *next;
+} PySwigObject;
+
 Node* NodeInfo::createPythonNode() {
     PyObject* node_obj = PyType_GenericNew((PyTypeObject*)m_data, NULL, NULL);
+    PyObject_Print(node_obj, stderr, Py_PRINT_RAW);
+    PyObject* node_this = PyObject_GetAttrString(node_obj, "this");
+    if (!node_this) {
+        std::cout << "no node.this" << std::endl;
+        return 0;
+    }
+    std::cout << "node.this" << std::endl;
+
+    PySwigObject* swigger = reinterpret_cast<PySwigObject*> (node_this);
+    Node* node_native = reinterpret_cast<Node*> (swigger->ptr);
+    return node_native;
+    //swigger
     // Decreffing the obj is the task of the new PythonNode obj.
-    return new PythonNode(node_obj);
+    //return new PythonNode(node_obj);
 }
 
 } // namespace NodeCore

@@ -32,6 +32,7 @@ typedef FieldList::iterator FieldIterator;
 typedef std::vector<Connection*> ConnectionList;
 typedef ConnectionList::iterator ConnectionIterator;
 
+%feature("director") Node;
 class Node {
 public:
     Node(const FieldType& outputType = kInt);
@@ -64,11 +65,6 @@ public:
     std::string asString(const FieldName &name);
     void* asData(const FieldName &name);
     
-    int outputAsInt() const;
-    float outputAsFloat() const;
-    std::string outputAsString() const;
-    void* outputAsData() const;
-
     // All these can throw a ValueError.
     void set(const FieldName &name, int i);
     void set(const FieldName &name, float f);
@@ -84,15 +80,20 @@ public:
     bool isOutputConnectedTo(Field* field);
     ConnectionList getOutputConnections();
 
+    int outputAsInt() const;
+    float outputAsFloat() const;
+    std::string outputAsString() const;
+    void* outputAsData() const;
+
+    void _setOutput(int i);
+    void _setOutput(float f);
+    void _setOutput(std::string s);
+    void _setOutput(void* d);
+    // Needed for setOutput overrides
+    void _setOutputAsData(void* d) { setOutput(d); }
     
 protected:
     virtual void process();
-    void setOutput(int i);
-    void setOutput(float f);
-    void setOutput(std::string s);
-    void setOutput(void* d);
-    // Needed for setOutput overrides
-    void setOutputAsData(void* d) { setOutput(d); }
 };
 
 } // namespace NodeCore

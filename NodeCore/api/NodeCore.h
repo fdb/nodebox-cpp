@@ -36,4 +36,4 @@
 #include <NodeCore/NodeLibrary.h>
 #include <NodeCore/NodeLibraryManager.h>
 #include <NodeCore/posixutils.h>
-#include <NodeCore/PythonNode.h>
+#include <NodeCore/PythonNodeWrapper.h>

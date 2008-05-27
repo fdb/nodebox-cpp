@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
+		613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */; };
 		6155FC660DD9BEBB00708CBC /* LibraryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6155FC640DD9BEBB00708CBC /* LibraryPanel.xib */; };
 		6155FC690DD9BED800708CBC /* NodeBoxAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FC680DD9BED800708CBC /* NodeBoxAppDelegate.mm */; };
 		6155FC6C0DD9BF6400708CBC /* LibraryPanelController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FC6B0DD9BF6400708CBC /* LibraryPanelController.mm */; };
@@ -37,6 +38,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		61A4C37F0DE72BFA00B49E3C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "corevector-1.0.0";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61FA1A800DCF32B60056A7C6 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -60,6 +70,8 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* NodeBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBox_Prefix.pch; sourceTree = "<group>"; };
+		613ABCB90DEC1414009CC02E /* NodeInfoWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfoWrapper.h; sourceTree = "<group>"; };
+		613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeInfoWrapper.mm; sourceTree = "<group>"; };
 		6155FC650DD9BEBB00708CBC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryPanel.xib; sourceTree = "<group>"; };
 		6155FC670DD9BED800708CBC /* NodeBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxAppDelegate.h; sourceTree = "<group>"; };
 		6155FC680DD9BED800708CBC /* NodeBoxAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxAppDelegate.mm; sourceTree = "<group>"; };
@@ -163,6 +175,8 @@
 				6155FD030DD9D84900708CBC /* LibraryNodeItem.mm */,
 				6155FD050DD9D87100708CBC /* LibraryNodeView.h */,
 				6155FD060DD9D87100708CBC /* LibraryNodeView.mm */,
+				613ABCB90DEC1414009CC02E /* NodeInfoWrapper.h */,
+				613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -216,6 +230,7 @@
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				61FA1A800DCF32B60056A7C6 /* Copy Frameworks */,
+				61A4C37F0DE72BFA00B49E3C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -283,6 +298,7 @@
 				619CC16D0DDC8FB700A69DA2 /* ViewPaneController.mm in Sources */,
 				619CC16E0DDC8FB700A69DA2 /* ParameterViewController.mm in Sources */,
 				619CC16F0DDC8FB700A69DA2 /* ViewController.mm in Sources */,
+				613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +397,10 @@
 				GCC_PREFIX_HEADER = NodeBox_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../CoreVector/build/Debug/plugins/corevector-1.0.0\"",
+				);
 				PRODUCT_NAME = NodeBox;
 			};
 			name = Debug;
@@ -399,6 +419,10 @@
 				GCC_PREFIX_HEADER = NodeBox_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../CoreVector/build/Debug/plugins/corevector-1.0.0\"",
+				);
 				PRODUCT_NAME = NodeBox;
 			};
 			name = Release;

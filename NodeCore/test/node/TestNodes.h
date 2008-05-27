@@ -36,7 +36,7 @@ protected:
     virtual void process()
     {
         int number = asInt("number");
-        setOutput(number);
+        _setOutput(number);
     }
     NodeNameMacro(NumberGenerator);
 };
@@ -56,7 +56,7 @@ protected:
         // Fails for big numbers
         int number = asInt("number");
         int multiplier = asInt("multiplier");
-        setOutput(number * multiplier);
+        _setOutput(number * multiplier);
     }
     NodeNameMacro(Multiplier);
 };

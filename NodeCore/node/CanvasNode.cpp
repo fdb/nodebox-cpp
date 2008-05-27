@@ -47,10 +47,10 @@ Canvas CanvasNode::outputAsCanvas() const {
     }
 }
 
-void CanvasNode::setOutput(const Canvas& c)
+void CanvasNode::_setOutput(const Canvas& c)
 {
     Canvas* myCanvas = new Canvas(c);
-    setOutputAsData((void*)myCanvas);
+    _setOutputAsData((void*)myCanvas);
 }
 
 } // namespace NodeCore

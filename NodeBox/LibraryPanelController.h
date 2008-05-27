@@ -7,11 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <NodeCore/NodeCore.h>
 
 @interface LibraryPanelController : NSWindowController {
+    NodeCore::NodeLibraryManager *nodeLibraryManager;
     NSMutableArray *rootItems;
     IBOutlet NSOutlineView *treeView;
     IBOutlet NSCollectionView *collectionView;
+    IBOutlet NSArrayController *nodeInfoController;
 }
 - (IBAction)showPanel:(id)sender;
 @end

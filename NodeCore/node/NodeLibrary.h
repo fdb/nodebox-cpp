@@ -22,7 +22,7 @@
 
 #include "Node.h"
 #include "NodeInfo.h"
-#include "PythonNode.h"
+#include "PythonNodeWrapper.h"
 #include "posixutils.h"
 
 #include <string>

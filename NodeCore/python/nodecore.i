@@ -1,4 +1,4 @@
-%module nodecore
+%module(directors="1") nodecore
 
 // This code makes sure std::exceptions are wrapped in SWIG runtime exceptions,
 // instead of crashing the application.

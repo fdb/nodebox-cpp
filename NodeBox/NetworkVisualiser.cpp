@@ -30,5 +30,5 @@ void NetworkVisualiser::process()
         p.rect(node->getX(), node->getY(), NODE_WIDTH, NODE_HEIGHT);
         c.append(p);
     }
-    setOutput(c);
+    _setOutput(c);
 }

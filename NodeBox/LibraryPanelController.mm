@@ -7,26 +7,41 @@
 //
 
 #import "LibraryPanelController.h"
-
+#import "NodeInfoWrapper.h"
 
 @implementation LibraryPanelController
 
 - (id)init
 {
     self = [super initWithWindowNibName:@"LibraryPanel"];
+    nodeLibraryManager = new NodeCore::NodeLibraryManager("/Users/fdb/Projects/nodebox2/NodeBox/build/Debug/NodeBox.app/Contents/PlugIns");
     rootItems = [[NSMutableArray alloc] init];
     [rootItems addObject:@"Library"];
     return self;
+}
+
+- (void)dealloc
+{
+    delete nodeLibraryManager;
+    [super dealloc];
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
     [treeView setDataSource:self];
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    [arr addObject:@"Test Node"];
-    [arr addObject:@"Another Node"];
-    [collectionView setContent:arr];
+    
+    NodeCore::NodeLibraryList libs = nodeLibraryManager->libraries();
+    for(NodeCore::NodeLibraryIterator libIter = libs.begin(); libIter != libs.end(); ++libIter) {
+        NodeCore::NodeLibrary *lib = (*libIter);
+        NSLog(@"Library %s", lib->getName().c_str());
+        NodeCore::NodeInfoList nodeInfos = lib->getNodeInfoList();
+        for (NodeCore::NodeInfoIterator nodeInfoIter = nodeInfos.begin(); nodeInfoIter != nodeInfos.end(); ++nodeInfoIter) {
+            NodeCore::NodeInfo *nodeInfo = (*nodeInfoIter);
+            NSLog(@"  Node %s", nodeInfo->getName().c_str());
+            [nodeInfoController addObject:[[NodeInfoWrapper alloc] initWithNodeInfo:nodeInfo]];
+        }
+    }
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification

@@ -18,22 +18,22 @@
  */
 
 #include "config.h"
-#include "PythonNode.h"
+#include "PythonNodeWrapper.h"
 
 namespace NodeCore {
 
-PythonNode::PythonNode(PyObject* pythonObject)
+PythonNodeWrapper::PythonNodeWrapper(PyObject* pythonObject)
           : Node(kPyObject), 
             m_pythonObject(pythonObject)
 {
 }
 
-PythonNode::~PythonNode()
+PythonNodeWrapper::~PythonNodeWrapper()
 {
     Py_DECREF(m_pythonObject);
 }
 
-void PythonNode::process()
+void PythonNodeWrapper::process()
 {
     PyObject* str =  PyObject_Str(m_pythonObject);
     std::cout << "[PN] Processing " << PyString_AsString(str) << std::endl;

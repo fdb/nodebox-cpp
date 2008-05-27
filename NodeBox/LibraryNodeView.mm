@@ -56,9 +56,13 @@
     NSRect r = [self bounds];
     NSImage *dragImage = [[NSImage alloc] initWithSize:NSMakeSize(r.size.width, r.size.height)];
     [dragImage lockFocus];
-    [[NSColor redColor] set];
+    [[[NSColor whiteColor] colorWithAlphaComponent:0.8] set];
     NSRectFill(r);
-    [self drawRect:[self bounds]];
+    [[[NSColor lightGrayColor] colorWithAlphaComponent:0.8] set];
+    NSFrameRect(r);
+    NSColor *c= [[NSColor darkGrayColor] colorWithAlphaComponent:0.8];
+    NSDictionary *attrs = [NSDictionary dictionaryWithObject:c forKey:NSForegroundColorAttributeName];
+    [[myLabel stringValue] drawAtPoint:NSMakePoint(10, 50) withAttributes:attrs];
     [dragImage unlockFocus];
 
     NSPasteboard *pboard;

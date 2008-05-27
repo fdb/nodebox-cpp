@@ -40,7 +40,7 @@ protected:
         BezierPath p = BezierPath();
         p.rect(f_x->asFloat(), f_y->asFloat(), f_width->asFloat(), f_height->asFloat());
         c.append(p);
-        setOutput(c);
+        _setOutput(c);
     }
 
 public:

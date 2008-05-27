@@ -122,8 +122,7 @@
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
 {
     const char *c_name = activeNetwork->getName().c_str();
-    NSString *name = [NSString stringWithCString:c_name];
-    NSLog(@"setting active network to %s", name);
+    NSLog(@"setting active network to %s", c_name);
     // TODO: Assert that active network is in the root network.
     _activeNetwork = activeNetwork;
     NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
