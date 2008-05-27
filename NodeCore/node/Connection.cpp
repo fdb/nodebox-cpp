@@ -43,6 +43,7 @@ Field* Connection::getOutputField() const
 
 Node* Connection::getOutputNode() const
 {
+    if (!hasOutput()) return NULL;
     return m_output->getNode();
 }
 
@@ -54,6 +55,12 @@ Field* Connection::getInputField() const
 Node* Connection::getInputNode() const
 {
     return m_input->getNode();
+}
+
+bool Connection::hasOutput() const
+{
+    // The output field can be set to null by the output node when it is deleting itself.
+    return m_output != 0;
 }
 
 std::ostream& operator<<(std::ostream& o, const Connection& c)

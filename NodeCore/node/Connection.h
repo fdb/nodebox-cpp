@@ -48,6 +48,7 @@ public:
     Node* getOutputNode() const;
     Field* getInputField() const;
     Node* getInputNode() const;
+    bool hasOutput() const;
 
     friend std::ostream& operator<<(std::ostream& o, const Connection& c);
 
@@ -63,6 +64,7 @@ private:
     Field* m_input;
     
     friend class Field;
+    friend class Node;
 };
 
 } // namespace NodeCore

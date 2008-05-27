@@ -34,6 +34,7 @@ public:
 		TEST_ADD(NetworkTestSuite::test_dirty);
 		TEST_ADD(NetworkTestSuite::test_rendered_node);
 		TEST_ADD(NetworkTestSuite::test_processing);
+		TEST_ADD(NetworkTestSuite::test_destruction);
 	}
 
 private:
@@ -180,6 +181,21 @@ private:
         net->update();
         TEST_ASSERT( m->outputAsInt() == 33 );
         TEST_ASSERT( net->outputAsInt() == 33 );
+    }
+    
+    void test_destruction()
+    {
+        Network *_rootNetwork = new Network();
+        Node* n1 = new Node(kFloat);
+        _rootNetwork->setUniqueNodeName(n1);
+        _rootNetwork->add(n1);
+        Node* n2 = new Node(kFloat);
+        _rootNetwork->setUniqueNodeName(n2);
+        _rootNetwork->add(n2);
+        Field *f = n2->addField("number", kFloat);
+        Connection* conn = f->connect(n1);
+        TEST_ASSERT(n1->isOutputConnectedTo(f));
+        delete _rootNetwork;
     }
 
 };

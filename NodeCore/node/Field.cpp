@@ -185,8 +185,10 @@ bool Field::disconnect()
 {
     assert(isInputField()); // TODO: also support disconnecting output fields.
     if (!isConnected()) return false;
-    assert(m_connection->getOutputNode()->isOutputConnectedTo(this));
-    m_connection->getOutputNode()->removeDownstream(m_connection);
+    if (m_connection->hasOutput()) {
+        assert(m_connection->getOutputNode()->isOutputConnectedTo(this));
+        m_connection->getOutputNode()->removeDownstream(m_connection);
+    }
     delete m_connection;
     m_connection = 0;
     revertToDefault();

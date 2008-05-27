@@ -44,6 +44,10 @@ Node::~Node()
     for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
         delete (*iter).second;
     }
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        Connection* conn = (*iter);
+        conn->m_output = 0;
+    }
 }
 
 //// Naming

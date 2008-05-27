@@ -33,6 +33,7 @@ Network::~Network()
 {
     // Delete all nodes in the node map
     for (NodeMapIterator iter = m_nodes.begin(); iter != m_nodes.end(); ++iter) {
+        std::cout << "Deleting node " << (*iter).second->getName() << std::endl;
         delete (*iter).second;
     }
 }
