@@ -16,17 +16,37 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import <Cocoa/Cocoa.h>
+
+#import "CanvasView.h"
 #import <NodeCore/NodeCore.h>
 
-@class LibraryPanelController;
+@implementation CanvasView
 
-@interface NodeBoxAppDelegate : NSObject {
-    NodeCore::NodeLibraryManager *_nodeLibraryManager;
-    LibraryPanelController *libraryPanelController;
+- (id)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+    }
+    return self;
 }
 
-- (IBAction)showLibraryPanel:(id)sender;
-- (NodeCore::NodeLibraryManager *)nodeLibraryManager;
+- (BOOL)isFlipped
+{
+    return YES;
+}
+
+- (void)drawRect:(NSRect)rect {
+    [[NSColor redColor] set];
+    NSRectFill(rect);
+    NodeCore::Node *renderedNode = [viewController renderedNode];
+    if (!renderedNode) return;
+    renderedNode->update();
+    if (renderedNode->getOutputType() == NodeCore::kCanvas) {
+        CGContextRef ctx = (CGContext *) [[NSGraphicsContext currentContext] graphicsPort];
+        [[NSColor grayColor] set];
+        NSRectFill(rect);
+        NodeCore::Canvas *canvas = (NodeCore::Canvas *) renderedNode->outputAsData();
+        canvas->_draw(ctx);
+    }
+}
+
 @end

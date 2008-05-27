@@ -21,6 +21,7 @@
 #import "NodeBoxDocument.h"
 #import "ViewPaneController.h"
 #import "ViewController.h"
+#import "NodeBoxAppDelegate.h"
 
 @implementation NodeBoxWindowController
 
@@ -36,18 +37,26 @@
     [super windowDidLoad];
     // This will normally be set up from a config file with a layout.
     NSView *contentView = [[self window] contentView];
-    NSSplitView *splitView = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
-    [splitView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [splitView setVertical:TRUE];
-    [contentView addSubview:splitView];
-    ViewPaneController *c1 = [[ViewPaneController alloc] initWithWindowController:self];
-    ViewPaneController *c2 = [[ViewPaneController alloc] initWithWindowController:self];
-    [viewPaneControllers addObject:c1];
-    [viewPaneControllers addObject:c2];
-    [c1 setViewType:NetworkViewType];
-    [c2 setViewType:ParameterViewType];
-    [splitView addSubview:[c1 viewPane]];
-    [splitView addSubview:[c2 viewPane]];
+    NSSplitView *primarySplit = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
+    [primarySplit setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [primarySplit setVertical:TRUE];
+    [contentView addSubview:primarySplit];
+    NSSplitView *secondarySplit = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
+    [secondarySplit setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [secondarySplit setVertical:FALSE];
+    ViewPaneController *canvasView = [[ViewPaneController alloc] initWithWindowController:self];
+    ViewPaneController *parameterView = [[ViewPaneController alloc] initWithWindowController:self];
+    ViewPaneController *networkView = [[ViewPaneController alloc] initWithWindowController:self];
+    [viewPaneControllers addObject:canvasView];
+    [viewPaneControllers addObject:parameterView];
+    [viewPaneControllers addObject:networkView];
+    [canvasView setViewType:CanvasViewType];
+    [parameterView setViewType:ParameterViewType];
+    [networkView setViewType:NetworkViewType];
+    [primarySplit addSubview:[canvasView viewPane]];
+    [primarySplit addSubview:secondarySplit];
+    [secondarySplit addSubview:[parameterView viewPane]];
+    [secondarySplit addSubview:[networkView viewPane]];
     [self setActiveNetwork:[(NodeBoxDocument *)[self document] rootNetwork]];
     //[networkView setDocument:(NodeBoxDocument *)[self document]];
     //[networkPath setURL:[[NSURL alloc] initWithString:@"doc://doc/root/test/hello"]];
@@ -56,6 +65,23 @@
 -(NodeCore::Node*) createNode
 {
     return [self createNodeAt:NSMakePoint(30, 30)];
+}
+
+-(NodeCore::Node*) createNode:(NodeCore::NodeInfo *)info at:(NSPoint)point
+{
+    NSLog(@"Create node %s at %f, %f", info->getName().c_str(), point.x, point.y);
+    NodeCore::Node *node = info->create();
+    node->setX(point.x);
+    node->setY(point.y);
+    NSUndoManager *undo = [self undoManager];
+    [[undo prepareWithInvocationTarget:self] removeNode:node];
+    if (![undo isUndoing]) {
+        [undo setActionName:@"Create Node"];
+    }
+    [self activeNetwork]->setUniqueNodeName(node);
+    [self activeNetwork]->add(node);
+    [self activeNetworkModified];
+    return node;    
 }
 
 -(NodeCore::Node*) createNodeAt:(NSPoint)point
@@ -157,6 +183,30 @@
     while (c = [enumerator nextObject]) {
         [[c viewController] activeNodeChanged];
     }
+}
+
+- (NodeCore::Node *)renderedNode
+{
+    if (!_activeNetwork) return NULL;
+    return _activeNetwork->getRenderedNode();
+}
+
+- (void)setRenderedNode:(NodeCore::Node *)renderedNode
+{
+    NSLog(@"Setting rendered node to %s", renderedNode->getName().c_str());
+    if (!_activeNetwork) return;
+    _activeNetwork->setRenderedNode(renderedNode);
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] renderedNodeChanged];
+    }
+}
+
+- (NodeCore::NodeLibraryManager*)nodeLibraryManager
+{
+    NodeBoxAppDelegate *delegate = [[NSApplication sharedApplication] delegate];
+    return [delegate nodeLibraryManager];
 }
 
 @end

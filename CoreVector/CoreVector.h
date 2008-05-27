@@ -25,7 +25,7 @@ using namespace NodeCore;
 
 namespace CoreVector {
 
-const FieldType kCanvas = "canvas";
+const FieldType kCanvas = "Canvas";
 
 } // namespace CoreVector
 

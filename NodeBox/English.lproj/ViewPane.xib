@@ -39,7 +39,7 @@
 						<object class="NSPopUpButtonCell" key="NSCell" id="129756001">
 							<int key="NSCellFlags">-2076049856</int>
 							<int key="NSCellFlags2">264192</int>
-							<object class="NSFont" key="NSSupport" id="22">
+							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">9.000000e+00</double>
 								<int key="NSfFlags">3614</int>
@@ -124,26 +124,6 @@
 						<reference key="NSSuperview" ref="1005"/>
 						<string key="NSClassName">NSView</string>
 					</object>
-					<object class="NSButton" id="497443869">
-						<reference key="NSNextResponder" ref="1005"/>
-						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{394, 401}, {106, 17}}</string>
-						<reference key="NSSuperview" ref="1005"/>
-						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="760943847">
-							<int key="NSCellFlags">-2080244224</int>
-							<int key="NSCellFlags2">134479872</int>
-							<string key="NSContents">split horizontal</string>
-							<reference key="NSSupport" ref="22"/>
-							<reference key="NSControlView" ref="497443869"/>
-							<int key="NSButtonFlags">-2033434369</int>
-							<int key="NSButtonFlags2">162</int>
-							<string key="NSAlternateContents"/>
-							<string key="NSKeyEquivalent"/>
-							<int key="NSPeriodicDelay">400</int>
-							<int key="NSPeriodicInterval">75</int>
-						</object>
-					</object>
 				</object>
 				<string key="NSFrameSize">{510, 427}</string>
 				<reference key="NSSuperview"/>
@@ -160,14 +140,6 @@
 						<reference key="destination" ref="518808326"/>
 					</object>
 					<int key="connectionID">12</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">splitButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="497443869"/>
-					</object>
-					<int key="connectionID">14</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -230,7 +202,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="489789080"/>
 							<reference ref="518808326"/>
-							<reference ref="497443869"/>
 						</object>
 						<reference key="parent" ref="1002"/>
 						<string key="objectName">View Pane</string>
@@ -290,20 +261,6 @@
 						<reference key="object" ref="489789080"/>
 						<reference key="parent" ref="1005"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="497443869"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="760943847"/>
-						</object>
-						<reference key="parent" ref="1005"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">11</int>
-						<reference key="object" ref="760943847"/>
-						<reference key="parent" ref="497443869"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -317,8 +274,6 @@
 					<string>1.IBPluginDependency</string>
 					<string>1.WindowOrigin</string>
 					<string>1.editorWindowContentRectSynchronizationRect</string>
-					<string>10.IBPluginDependency</string>
-					<string>11.IBPluginDependency</string>
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBEditorWindowLastContentRect</string>
@@ -338,8 +293,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{628, 654}</string>
 					<string>{{357, 416}, {480, 272}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{363, 680}, {108, 63}}</string>

@@ -69,6 +69,16 @@
     [_windowController setActiveNode:activeNode];
 }
 
+- (NodeCore::Node *)renderedNode
+{
+    return [_windowController renderedNode];
+}
+
+- (void)setRenderedNode:(NodeCore::Node *)renderedNode
+{
+    [_windowController setRenderedNode:renderedNode];
+}
+
 - (void)activeNodeChanged
 {
     if (NSView *v = [self view]) {
@@ -77,6 +87,13 @@
 }
 
 - (void)activeNetworkModified
+{
+    if (NSView *v = [self view]) {
+        [v setNeedsDisplay:TRUE];
+    }
+}
+
+- (void)renderedNodeChanged
 {
     if (NSView *v = [self view]) {
         [v setNeedsDisplay:TRUE];

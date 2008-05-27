@@ -10,6 +10,7 @@
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */; };
 		613ABF240DEC59F0009CC02E /* corevector.nbl in Copy CoreVector */ = {isa = PBXBuildFile; fileRef = 613ABF210DEC59E0009CC02E /* corevector.nbl */; };
+		613ABFD80DEC7F96009CC02E /* CanvasView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 613ABFD70DEC7F96009CC02E /* CanvasView.mm */; };
 		6155FC660DD9BEBB00708CBC /* LibraryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6155FC640DD9BEBB00708CBC /* LibraryPanel.xib */; };
 		6155FC690DD9BED800708CBC /* NodeBoxAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FC680DD9BED800708CBC /* NodeBoxAppDelegate.mm */; };
 		6155FC6C0DD9BF6400708CBC /* LibraryPanelController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FC6B0DD9BF6400708CBC /* LibraryPanelController.mm */; };
@@ -76,6 +77,8 @@
 		613ABCB90DEC1414009CC02E /* NodeInfoWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfoWrapper.h; sourceTree = "<group>"; };
 		613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeInfoWrapper.mm; sourceTree = "<group>"; };
 		613ABF210DEC59E0009CC02E /* corevector.nbl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = corevector.nbl; path = "../CoreVector/build/Debug/plugins/corevector-1.0.0/corevector.nbl"; sourceTree = SOURCE_ROOT; };
+		613ABFD60DEC7F96009CC02E /* CanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasView.h; sourceTree = "<group>"; };
+		613ABFD70DEC7F96009CC02E /* CanvasView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CanvasView.mm; sourceTree = "<group>"; };
 		6155FC650DD9BEBB00708CBC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryPanel.xib; sourceTree = "<group>"; };
 		6155FC670DD9BED800708CBC /* NodeBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxAppDelegate.h; sourceTree = "<group>"; };
 		6155FC680DD9BED800708CBC /* NodeBoxAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxAppDelegate.mm; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				6155FD060DD9D87100708CBC /* LibraryNodeView.mm */,
 				613ABCB90DEC1414009CC02E /* NodeInfoWrapper.h */,
 				613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */,
+				613ABFD60DEC7F96009CC02E /* CanvasView.h */,
+				613ABFD70DEC7F96009CC02E /* CanvasView.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				619CC16E0DDC8FB700A69DA2 /* ParameterViewController.mm in Sources */,
 				619CC16F0DDC8FB700A69DA2 /* ViewController.mm in Sources */,
 				613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */,
+				613ABFD80DEC7F96009CC02E /* CanvasView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -79,7 +79,11 @@
     NSPasteboard *pboard;
     pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
     [pboard declareTypes:[NSArray arrayWithObject:NodeType]  owner:self];
-    [pboard setString:@"NodeString" forType:NodeType];
+    // Get the node info
+    NSArray *nodeDescriptor = [NSArray arrayWithObjects:@"CoreVector", @"RectNode"];
+    NSLog(@"Node descriptor: %@", nodeDescriptor);
+    [pboard setPropertyList:nodeDescriptor forType:NodeType];
+    [pboard setString:@"RectNode" forType:NodeType];
     
     [self dragImage:dragImage at:NSZeroPoint offset:NSZeroSize
         event:theEvent pasteboard:pboard source:self slideBack:YES];

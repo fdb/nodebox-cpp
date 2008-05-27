@@ -35,7 +35,10 @@
 - (void)activeNetworkChanged;
 - (NodeCore::Node *)activeNode;
 - (void)setActiveNode:(NodeCore::Node *)activeNode;
+- (NodeCore::Node *)renderedNode;
+- (void)setRenderedNode:(NodeCore::Node *)renderedNode;
 - (void)activeNodeChanged;
+- (void)renderedNodeChanged;
 - (void)activeNetworkModified;
 
 @end

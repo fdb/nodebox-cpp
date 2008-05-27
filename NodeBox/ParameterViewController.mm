@@ -83,6 +83,7 @@
     if ([objectValue respondsToSelector:@selector(floatValue)]) {
         NSLog(@"Setting value to %@", objectValue);
         field->set([objectValue floatValue]);
+        [[self windowController] activeNetworkModified]; 
     }
 }
 

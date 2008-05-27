@@ -30,6 +30,7 @@
 }
 
 -(NodeCore::Node*) createNode;
+-(NodeCore::Node*) createNode:(NodeCore::NodeInfo *)info at:(NSPoint)point;
 -(NodeCore::Node*) createNodeAt:(NSPoint)point;
 -(void) addNode:(NodeCore::Node *)node;
 -(BOOL) removeNode:(NodeCore::Node *)node;
@@ -41,5 +42,8 @@
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork;
 - (NodeCore::Node *)activeNode;
 - (void)setActiveNode:(NodeCore::Node *)activeNode;
+- (NodeCore::Node *)renderedNode;
+- (void)setRenderedNode:(NodeCore::Node *)renderedNode;
 
+- (NodeCore::NodeLibraryManager*)nodeLibraryManager;
 @end

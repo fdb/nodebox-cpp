@@ -27,5 +27,6 @@
     IBOutlet NSCollectionView *collectionView;
     IBOutlet NSArrayController *nodeInfoController;
 }
+- (id)initWithNodeLibraryManager:(NodeCore::NodeLibraryManager*)manager;
 - (IBAction)showPanel:(id)sender;
 @end

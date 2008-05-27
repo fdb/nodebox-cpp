@@ -29,6 +29,8 @@ RectNode::RectNode()
     addField("y", kFloat);
     addField("width", kFloat);
     addField("height", kFloat);
+    set("width", 100.0F);
+    set("height", 100.0F);
 }
 
 RectNode::~RectNode()
@@ -43,9 +45,9 @@ void RectNode::process()
         delete (Canvas *)outputAsData();
     BezierPath path = BezierPath();
     path.rect(asFloat("x"), asFloat("y"), asFloat("width"), asFloat("height"));
-    Canvas *c = new Canvas();
+    Canvas *c = new Canvas(200, 200);
     c->append(path);
-    setOutput(c);
+    _setOutputAsData(c);
 }
 
 } // namespace CoreVector

@@ -140,6 +140,11 @@ float DRAG_START = 5;
     NSColor *c= [NSColor colorWithDeviceWhite:0.9 alpha:1.0];
     NSDictionary *attrs = [NSDictionary dictionaryWithObject:c forKey:NSForegroundColorAttributeName];
     [s drawAtPoint:NSMakePoint(node->getX()+5, node->getY()+5) withAttributes:attrs];
+    if (node->getNetwork()->getRenderedNode() == node) {
+        NSLog(@"%s is the rendered node", node->getName().c_str());
+        [[NSColor whiteColor] set];
+        [[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(node->getX()+2, node->getY()+2, 5, 5)] fill];
+    }
 }
 
 - (void)_drawConnectionWithInputField:(NodeCore::Field *)input outputField:(NodeCore::Field *)output
@@ -189,9 +194,14 @@ float DRAG_START = 5;
     pboard = [sender draggingPasteboard];
  
     if ( [[pboard types] containsObject:NodeType] ) {
+        NSString *nodeName = [pboard stringForType:NodeType];
+        NodeCore::NodeLibraryManager *manager = [[viewController windowController] nodeLibraryManager];
+        NodeCore::NodeLibrary *lib = manager->loadLatest("corevector");
+        NodeCore::NodeInfo *info = lib->getNodeInfo([nodeName UTF8String]);
         NSPoint dragPoint = [sender draggingLocation];
         dragPoint = [self convertPointFromBase:dragPoint];
-        [[viewController windowController] createNodeAt:dragPoint];
+        [[viewController windowController] createNode:info at:dragPoint];
+        //[[viewController windowController] createNodeAt:dragPoint];
         [self setNeedsDisplay:TRUE];
         // Only a copy operation allowed so just copy the data
         return YES;
@@ -300,8 +310,14 @@ float DRAG_START = 5;
     } else if ([theEvent clickCount] == 1) {
         // Select a node
         [viewController setActiveNode:[self findNodeAt:pt]];
+    } else { // Doubleclick
+        NodeCore::Node* node = [self findNodeAt:pt];
+        if (!node) return;
+        [viewController setRenderedNode:node];
     }
 }
+
+
 
 - (NodeCore::Node *)findNodeAt:(NSPoint) point
 {

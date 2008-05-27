@@ -22,9 +22,10 @@
 
 @implementation LibraryPanelController
 
-- (id)init
+- (id)initWithNodeLibraryManager:(NodeCore::NodeLibraryManager*)manager
 {
     self = [super initWithWindowNibName:@"LibraryPanel"];
+    nodeLibraryManager = manager;
     NSString *plugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
     nodeLibraryManager = new NodeCore::NodeLibraryManager([plugInsPath UTF8String]);
     rootItems = [[NSMutableArray alloc] init];
@@ -34,7 +35,6 @@
 
 - (void)dealloc
 {
-    delete nodeLibraryManager;
     [super dealloc];
 }
 

@@ -25,14 +25,28 @@
 - (id)init
 { 
     self = [super init];
-    libraryPanelController = [[LibraryPanelController alloc] init];
+    NSString *plugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
+    _nodeLibraryManager = new NodeCore::NodeLibraryManager([plugInsPath UTF8String]);
+    libraryPanelController = [[LibraryPanelController alloc] initWithNodeLibraryManager:_nodeLibraryManager];
     [self showLibraryPanel:NULL];
     return self;
+}
+
+- (void)dealloc
+{
+    delete _nodeLibraryManager;
+    [libraryPanelController release];
+    [super dealloc];
 }
 
 - (IBAction)showLibraryPanel:(id)sender
 {
     [libraryPanelController showPanel:sender];
+}
+
+- (NodeCore::NodeLibraryManager *)nodeLibraryManager
+{
+    return _nodeLibraryManager;
 }
 
 @end
