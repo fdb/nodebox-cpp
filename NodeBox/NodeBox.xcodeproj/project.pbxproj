@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */; };
+		613ABF240DEC59F0009CC02E /* corevector.nbl in Copy CoreVector */ = {isa = PBXBuildFile; fileRef = 613ABF210DEC59E0009CC02E /* corevector.nbl */; };
 		6155FC660DD9BEBB00708CBC /* LibraryPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6155FC640DD9BEBB00708CBC /* LibraryPanel.xib */; };
 		6155FC690DD9BED800708CBC /* NodeBoxAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FC680DD9BED800708CBC /* NodeBoxAppDelegate.mm */; };
 		6155FC6C0DD9BF6400708CBC /* LibraryPanelController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FC6B0DD9BF6400708CBC /* LibraryPanelController.mm */; };
@@ -38,13 +39,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		61A4C37F0DE72BFA00B49E3C /* CopyFiles */ = {
+		61A4C37F0DE72BFA00B49E3C /* Copy CoreVector */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "corevector-1.0.0";
 			dstSubfolderSpec = 13;
 			files = (
+				613ABF240DEC59F0009CC02E /* corevector.nbl in Copy CoreVector */,
 			);
+			name = "Copy CoreVector";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		61FA1A800DCF32B60056A7C6 /* Copy Frameworks */ = {
@@ -72,6 +75,7 @@
 		32DBCF750370BD2300C91783 /* NodeBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBox_Prefix.pch; sourceTree = "<group>"; };
 		613ABCB90DEC1414009CC02E /* NodeInfoWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfoWrapper.h; sourceTree = "<group>"; };
 		613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeInfoWrapper.mm; sourceTree = "<group>"; };
+		613ABF210DEC59E0009CC02E /* corevector.nbl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = corevector.nbl; path = "../CoreVector/build/Debug/plugins/corevector-1.0.0/corevector.nbl"; sourceTree = SOURCE_ROOT; };
 		6155FC650DD9BEBB00708CBC /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LibraryPanel.xib; sourceTree = "<group>"; };
 		6155FC670DD9BED800708CBC /* NodeBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxAppDelegate.h; sourceTree = "<group>"; };
 		6155FC680DD9BED800708CBC /* NodeBoxAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxAppDelegate.mm; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
+				613ABF230DEC59E5009CC02E /* Plugins */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			name = NodeBox;
@@ -219,6 +224,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		613ABF230DEC59E5009CC02E /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				613ABF210DEC59E0009CC02E /* corevector.nbl */,
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,7 +243,7 @@
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				61FA1A800DCF32B60056A7C6 /* Copy Frameworks */,
-				61A4C37F0DE72BFA00B49E3C /* CopyFiles */,
+				61A4C37F0DE72BFA00B49E3C /* Copy CoreVector */,
 			);
 			buildRules = (
 			);

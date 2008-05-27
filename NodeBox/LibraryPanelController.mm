@@ -25,7 +25,8 @@
 - (id)init
 {
     self = [super initWithWindowNibName:@"LibraryPanel"];
-    nodeLibraryManager = new NodeCore::NodeLibraryManager("/Users/fdb/Projects/nodebox2/NodeBox/build/Debug/NodeBox.app/Contents/PlugIns");
+    NSString *plugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
+    nodeLibraryManager = new NodeCore::NodeLibraryManager([plugInsPath UTF8String]);
     rootItems = [[NSMutableArray alloc] init];
     [rootItems addObject:@"Library"];
     return self;

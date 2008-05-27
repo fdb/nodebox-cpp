@@ -47,8 +47,6 @@ NSString *NodeType = @"NodeType";
         n3->setY(100);
         _rootNetwork->add(n3);
         n3->addField("number", NodeCore::kFloat);
-        // Add your subclass-specific initialization here.
-        // If an error occurs here, send a [self release] message and return nil.    
     }
     return self;
 }
