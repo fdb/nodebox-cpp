@@ -70,6 +70,14 @@
             value = @"<object>";
         }
         return value;
+    } else if ([[aTableColumn identifier] isEqualToString:@"stepper"]) {
+        if (field->getType() == NodeCore::kInt) {
+            return [NSNumber numberWithInt:field->asInt()];
+        } else if (field->getType() == NodeCore::kFloat) {
+            return [NSNumber numberWithFloat:field->asFloat()];
+        } else {
+            return 0;
+        }
     } else {
         return @"invalid";
     }
@@ -79,7 +87,8 @@
 {
     if (![self activeNode]) return;
     NodeCore::Field *field = [self activeNode]->getFields()[rowIndex];
-    if (![[aTableColumn identifier] isEqualToString:@"value"]) return;
+    NSString *identifier = [aTableColumn identifier];
+    if (!([identifier isEqualToString:@"value"] | [identifier isEqualToString:@"stepper"])) return; 
     if ([objectValue respondsToSelector:@selector(floatValue)]) {
         NSLog(@"Setting value to %@", objectValue);
         field->set([objectValue floatValue]);

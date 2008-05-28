@@ -17,6 +17,7 @@
 		6155FD040DD9D84900708CBC /* LibraryNodeItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FD030DD9D84900708CBC /* LibraryNodeItem.mm */; };
 		6155FD070DD9D87100708CBC /* LibraryNodeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6155FD060DD9D87100708CBC /* LibraryNodeView.mm */; };
 		618A9EA30DD348240098409B /* NodeBoxWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 618A9EA20DD348240098409B /* NodeBoxWindowController.mm */; };
+		618FA2F00DED84F8006F4B48 /* ValueLadderCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 618FA2EF0DED84F8006F4B48 /* ValueLadderCell.mm */; };
 		61936BEE0DC867AC0034D23C /* NodeBoxDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61936BEC0DC867AC0034D23C /* NodeBoxDocument.xib */; };
 		61936BF10DC867FC0034D23C /* NodeBoxDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */; };
 		619CC13E0DDC8F7C00A69DA2 /* CanvasView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1360DDC8F7C00A69DA2 /* CanvasView.xib */; };
@@ -90,6 +91,8 @@
 		6155FD060DD9D87100708CBC /* LibraryNodeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LibraryNodeView.mm; sourceTree = "<group>"; };
 		618A9EA10DD348240098409B /* NodeBoxWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxWindowController.h; sourceTree = "<group>"; };
 		618A9EA20DD348240098409B /* NodeBoxWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxWindowController.mm; sourceTree = "<group>"; };
+		618FA2EE0DED84F8006F4B48 /* ValueLadderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueLadderCell.h; sourceTree = "<group>"; };
+		618FA2EF0DED84F8006F4B48 /* ValueLadderCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ValueLadderCell.mm; sourceTree = "<group>"; };
 		61936BED0DC867AC0034D23C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NodeBoxDocument.xib; sourceTree = "<group>"; };
 		61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxDocument.mm; sourceTree = "<group>"; };
 		61936BF00DC867FC0034D23C /* NodeBoxDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxDocument.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				613ABCBA0DEC1414009CC02E /* NodeInfoWrapper.mm */,
 				613ABFD60DEC7F96009CC02E /* CanvasView.h */,
 				613ABFD70DEC7F96009CC02E /* CanvasView.mm */,
+				618FA2EE0DED84F8006F4B48 /* ValueLadderCell.h */,
+				618FA2EF0DED84F8006F4B48 /* ValueLadderCell.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				619CC16F0DDC8FB700A69DA2 /* ViewController.mm in Sources */,
 				613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */,
 				613ABFD80DEC7F96009CC02E /* CanvasView.mm in Sources */,
+				618FA2F00DED84F8006F4B48 /* ValueLadderCell.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
