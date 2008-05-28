@@ -22,32 +22,14 @@
 
 @implementation LibraryNodeView
 
-- (void)setSelected:(BOOL)flag
+- (void)setNodeInfoWrapper:(NodeInfoWrapper*)info
 {
-  selected = flag;
+    nodeInfoWrapper = info;
 }
 
-- (BOOL)selected
+- (NodeInfoWrapper *)nodeInfoWrapper
 {
-  return selected;
-}
-
-- (void)drawRect:(NSRect)rect
-{
-    if (selected) {
-        if ([[self window] isKeyWindow]) {
-            [[NSColor selectedControlColor] set];
-        } else {
-            [[NSColor colorForControlTint:NSClearControlTint] set];
-        }
-        NSRectFill([self bounds]);    
-    }
-    [super drawRect:rect];
-}
-
-- (void)setDescription:(NSString*)description
-{
-    [myLabel setTitleWithMnemonic:description];
+    return nodeInfoWrapper;
 }
 
 #pragma mark Drag and Drop
@@ -73,17 +55,16 @@
     NSFrameRect(r);
     NSColor *c= [[NSColor darkGrayColor] colorWithAlphaComponent:0.8];
     NSDictionary *attrs = [NSDictionary dictionaryWithObject:c forKey:NSForegroundColorAttributeName];
-    [[myLabel stringValue] drawAtPoint:NSMakePoint(10, 50) withAttributes:attrs];
+    
+    [[nodeInfoWrapper nodeName] drawAtPoint:NSMakePoint(10, 50) withAttributes:attrs];
     [dragImage unlockFocus];
 
     NSPasteboard *pboard;
     pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
     [pboard declareTypes:[NSArray arrayWithObject:NodeType]  owner:self];
     // Get the node info
-    NSArray *nodeDescriptor = [NSArray arrayWithObjects:@"CoreVector", @"RectNode"];
-    NSLog(@"Node descriptor: %@", nodeDescriptor);
-    [pboard setPropertyList:nodeDescriptor forType:NodeType];
-    [pboard setString:@"RectNode" forType:NodeType];
+    NSLog(@"Node identifier: %@", [[self nodeInfoWrapper] identifier]);
+    [pboard setString:[[self nodeInfoWrapper] identifier] forType:NodeType];
     
     [self dragImage:dragImage at:NSZeroPoint offset:NSZeroSize
         event:theEvent pasteboard:pboard source:self slideBack:YES];

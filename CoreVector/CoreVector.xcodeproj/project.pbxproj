@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		50149BDA09E781A5002DEE6A /* CoreVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 50149BD909E781A5002DEE6A /* CoreVector.h */; };
+		618FA2B00DED81E7006F4B48 /* OvalNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 618FA2AE0DED81E7006F4B48 /* OvalNode.h */; };
+		618FA2B10DED81E7006F4B48 /* OvalNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618FA2AF0DED81E7006F4B48 /* OvalNode.cpp */; };
 		61E9CCEC0DE4267B0051BD90 /* CoreVectorLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CCEB0DE4267B0051BD90 /* CoreVectorLibrary.cpp */; };
 		61E9CD010DE426C70051BD90 /* RectNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61E9CCFF0DE426C70051BD90 /* RectNode.h */; };
 		61E9CD020DE426C70051BD90 /* RectNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CD000DE426C70051BD90 /* RectNode.cpp */; };
@@ -45,6 +47,8 @@
 		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		32BAE0B70371A74B00C91783 /* CoreVectorPrefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreVectorPrefix.h; sourceTree = "<group>"; };
 		50149BD909E781A5002DEE6A /* CoreVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreVector.h; sourceTree = "<group>"; };
+		618FA2AE0DED81E7006F4B48 /* OvalNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvalNode.h; sourceTree = "<group>"; };
+		618FA2AF0DED81E7006F4B48 /* OvalNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OvalNode.cpp; sourceTree = "<group>"; };
 		61E9CCEB0DE4267B0051BD90 /* CoreVectorLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreVectorLibrary.cpp; sourceTree = "<group>"; };
 		61E9CCFF0DE426C70051BD90 /* RectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectNode.h; sourceTree = "<group>"; };
 		61E9CD000DE426C70051BD90 /* RectNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectNode.cpp; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			children = (
 				61E9CCFF0DE426C70051BD90 /* RectNode.h */,
 				61E9CD000DE426C70051BD90 /* RectNode.cpp */,
+				618FA2AE0DED81E7006F4B48 /* OvalNode.h */,
+				618FA2AF0DED81E7006F4B48 /* OvalNode.cpp */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -141,6 +147,7 @@
 			files = (
 				50149BDA09E781A5002DEE6A /* CoreVector.h in Headers */,
 				61E9CD010DE426C70051BD90 /* RectNode.h in Headers */,
+				618FA2B00DED81E7006F4B48 /* OvalNode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +223,7 @@
 			files = (
 				61E9CCEC0DE4267B0051BD90 /* CoreVectorLibrary.cpp in Sources */,
 				61E9CD020DE426C70051BD90 /* RectNode.cpp in Sources */,
+				618FA2B10DED81E7006F4B48 /* OvalNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

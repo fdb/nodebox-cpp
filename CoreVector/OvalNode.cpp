@@ -16,17 +16,38 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import "LibraryNodeItem.h"
-#import "LibraryNodeView.h"
 
-@implementation LibraryNodeItem
+#include "CoreVector.h"
+#include "OvalNode.h"
 
-- (void)setRepresentedObject:(id)object
+namespace CoreVector {
+
+OvalNode::OvalNode()
+        : Node(kCanvas)
 {
-    [super setRepresentedObject:object];
-    LibraryNodeView *view = (LibraryNodeView* )[self view];
-    [view setNodeInfoWrapper:(NodeInfoWrapper *)object];
+    addField("x", kFloat);
+    addField("y", kFloat);
+    addField("width", kFloat);
+    addField("height", kFloat);
+    set("width", 100.0F);
+    set("height", 100.0F);
 }
 
-@end
+OvalNode::~OvalNode()
+{
+    if (outputAsData())
+        delete (Canvas *)outputAsData();
+}
+
+void OvalNode::process()
+{
+    if (outputAsData())
+        delete (Canvas *)outputAsData();
+    BezierPath path = BezierPath();
+    path.oval(asFloat("x"), asFloat("y"), asFloat("width"), asFloat("height"));
+    Canvas *c = new Canvas(200, 200);
+    c->append(path);
+    _setOutputAsData(c);
+}
+
+} // namespace CoreVector

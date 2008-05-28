@@ -16,17 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import "LibraryNodeItem.h"
-#import "LibraryNodeView.h"
 
-@implementation LibraryNodeItem
+#ifndef OvalNode_h
+#define OvalNode_h
 
-- (void)setRepresentedObject:(id)object
+#include <NodeCore/NodeCore.h>
+using namespace NodeCore;
+
+namespace CoreVector {
+
+class OvalNode : public Node
 {
-    [super setRepresentedObject:object];
-    LibraryNodeView *view = (LibraryNodeView* )[self view];
-    [view setNodeInfoWrapper:(NodeInfoWrapper *)object];
-}
+public:
+    OvalNode();
+    virtual ~OvalNode();
+    virtual void process();
+};
 
-@end
+} // namespace CoreVector
+
+#endif

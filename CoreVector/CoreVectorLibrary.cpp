@@ -19,6 +19,7 @@
 
 #include "CoreVector.h"
 #include "RectNode.h"
+#include "OvalNode.h"
 
 using namespace CoreVector;
 
@@ -26,7 +27,12 @@ Node* createRectNode() {
     return new RectNode();
 }
 
+Node* createOvalNode() {
+    return new OvalNode();
+}
+
 extern "C" void nodeLibraryInfo(NodeLibrary& lib)
 {
     lib.addNodeInfo("RectNode", createRectNode);
+    lib.addNodeInfo("OvalNode", createOvalNode);
 }

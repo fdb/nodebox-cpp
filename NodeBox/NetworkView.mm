@@ -22,6 +22,7 @@
 #import "NetworkVisualiser.h"
 #import "NodeBoxDocument.h"
 #import "NodeBoxWindowController.h"
+#import "NodeInfoWrapper.h"
 
 float NODE_WIDTH = 121;
 float NODE_HEIGHT = 30;
@@ -194,16 +195,15 @@ float DRAG_START = 5;
     pboard = [sender draggingPasteboard];
  
     if ( [[pboard types] containsObject:NodeType] ) {
-        NSString *nodeName = [pboard stringForType:NodeType];
-        NodeCore::NodeLibraryManager *manager = [[viewController windowController] nodeLibraryManager];
-        NodeCore::NodeLibrary *lib = manager->loadLatest("corevector");
-        NodeCore::NodeInfo *info = lib->getNodeInfo([nodeName UTF8String]);
+    
+        NSString *identifier = [pboard stringForType:NodeType];
+        NodeInfoWrapper *wrapper = [NodeInfoWrapper wrapperWithIdentifier:identifier];
+        if (!wrapper) return NO;
         NSPoint dragPoint = [sender draggingLocation];
         dragPoint = [self convertPointFromBase:dragPoint];
-        [[viewController windowController] createNode:info at:dragPoint];
-        //[[viewController windowController] createNodeAt:dragPoint];
+        [[viewController windowController] createNode:[wrapper nodeInfo] at:dragPoint];
         [self setNeedsDisplay:TRUE];
-        // Only a copy operation allowed so just copy the data
+        [wrapper dealloc];
         return YES;
     } else {
         return NO;

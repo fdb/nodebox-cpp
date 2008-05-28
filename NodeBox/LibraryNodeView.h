@@ -18,14 +18,13 @@
  */
  
 #import <Cocoa/Cocoa.h>
+#import "NodeInfoWrapper.h"
 
 @interface LibraryNodeView : NSView {
-    BOOL selected;
-    IBOutlet NSTextField *myLabel;
+    NodeInfoWrapper* nodeInfoWrapper;
 }
 
-- (void)setSelected:(BOOL)flag;
-- (BOOL)selected;
-- (void)setDescription:(NSString*)description;
+- (void)setNodeInfoWrapper:(NodeInfoWrapper*)info;
+- (NodeInfoWrapper *)nodeInfoWrapper;
 
 @end

@@ -18,20 +18,53 @@
  */
  
 #import "NodeInfoWrapper.h"
+#import "NodeBoxAppDelegate.h"
 
 @implementation NodeInfoWrapper
 
++ (NodeInfoWrapper *)wrapperWithIdentifier:(NSString *)identifier
+{
+    NSArray *idArray = [identifier componentsSeparatedByString:@":"];
+    if ([idArray count] != 2) {
+        NSLog(@"NodeInfoWrapper: Invalid identifier '%@'", identifier);
+        return NULL;
+    }
+    NSString *libName = [idArray objectAtIndex:0];
+    NSString *nodeName = [idArray objectAtIndex:1];
 
-- (id)initWithNodeInfo:(NodeCore::NodeInfo *)info
+    NodeBoxAppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];    
+    NodeCore::NodeLibraryManager *manager = [appDelegate nodeLibraryManager];
+    NodeCore::NodeLibrary *lib = manager->loadLatest([libName UTF8String]);
+    // TODO: Memory leak -- who will delete this info obj?
+    NodeCore::NodeInfo *info = lib->getNodeInfo([nodeName UTF8String]);
+    return [[NodeInfoWrapper alloc] initWithNodeInfo:info];
+}
+
+- (id)initWithNodeInfo:(NodeCore::NodeInfo *)aInfo
 {
     self = [super init];
-    name = [NSString stringWithCString:info->getName().c_str()];
+    info = aInfo;
     return self;
 }
 
-- (NSString *)name
+- (NodeCore::NodeInfo *)nodeInfo
 {
-    return name;
+    return info;
+}
+
+- (NSString *)libraryName
+{
+    return [NSString stringWithCString:info->getLibrary().getName().c_str()];
+}
+
+- (NSString *)nodeName
+{
+    return [NSString stringWithCString:info->getName().c_str()];
+}
+
+- (NSString *)identifier
+{
+    return [NSString stringWithFormat:@"%@:%@", [self libraryName], [self nodeName]];
 }
 
 @end

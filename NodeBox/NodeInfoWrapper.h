@@ -21,9 +21,12 @@
 #import <NodeCore/NodeCore.h>
 
 @interface NodeInfoWrapper : NSObject {
-    NSString *name;
+    NodeCore::NodeInfo *info;
 }
-
++ (NodeInfoWrapper *)wrapperWithIdentifier:(NSString *)identifier;
 - (id)initWithNodeInfo:(NodeCore::NodeInfo *)info;
-- (NSString *)name;
+- (NodeCore::NodeInfo *)nodeInfo;
+- (NSString *)libraryName;
+- (NSString *)nodeName;
+- (NSString *)identifier;
 @end
