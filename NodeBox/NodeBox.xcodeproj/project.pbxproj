@@ -33,6 +33,7 @@
 		61B0EB800DEED11700F09919 /* NetworkView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EB7F0DEED11700F09919 /* NetworkView.mm */; };
 		61B0EB8C0DEED15F00F09919 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B0EB8B0DEED15F00F09919 /* QuartzCore.framework */; };
 		61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EB960DEED21C00F09919 /* CGColorHelper.mm */; };
+		61B0EE990DEF13F700F09919 /* NodeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EE980DEF13F700F09919 /* NodeLayer.mm */; };
 		61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */; };
 		61FA1A440DCF31CE0056A7C6 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
 		61FA1A520DCF325A0056A7C6 /* NodeCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
@@ -119,6 +120,8 @@
 		61B0EB8B0DEED15F00F09919 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		61B0EB950DEED21C00F09919 /* CGColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGColorHelper.h; sourceTree = "<group>"; };
 		61B0EB960DEED21C00F09919 /* CGColorHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CGColorHelper.mm; sourceTree = "<group>"; };
+		61B0EE970DEF13F700F09919 /* NodeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeLayer.h; sourceTree = "<group>"; };
+		61B0EE980DEF13F700F09919 /* NodeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeLayer.mm; sourceTree = "<group>"; };
 		61C16CC00DCF4CCB000CC18E /* NetworkVisualiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkVisualiser.h; sourceTree = "<group>"; };
 		61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkVisualiser.cpp; sourceTree = "<group>"; };
 		61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeCore.framework; path = ../NodeCore/build/Debug/NodeCore.framework; sourceTree = SOURCE_ROOT; };
@@ -200,6 +203,8 @@
 				61B0EB7F0DEED11700F09919 /* NetworkView.mm */,
 				61B0EB950DEED21C00F09919 /* CGColorHelper.h */,
 				61B0EB960DEED21C00F09919 /* CGColorHelper.mm */,
+				61B0EE970DEF13F700F09919 /* NodeLayer.h */,
+				61B0EE980DEF13F700F09919 /* NodeLayer.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				618FA2F00DED84F8006F4B48 /* ValueLadderCell.mm in Sources */,
 				61B0EB800DEED11700F09919 /* NetworkView.mm in Sources */,
 				61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */,
+				61B0EE990DEF13F700F09919 /* NodeLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

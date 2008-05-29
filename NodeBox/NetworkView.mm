@@ -24,14 +24,11 @@
 #import "NodeInfoWrapper.h"
 #import "NodeBoxWindowController.h"
 #import "NodeBoxDocument.h"
-
-static float kNodeWidth = 80.0f;
-static float kNodeHeight = 24.0f;
+#import "NodeLayer.h"
 
 @interface NetworkView(Private)
 
     - (void)addLayerForNode:(NodeCore::Node *)node;
-    - (CGImageRef)imageForNode:(NodeCore::Node *)node;
     - (void)deselect;
     - (void)select:(NodeCore::Node *)node;
     - (CALayer *)findLayerForNode:(NodeCore::Node *)node;
@@ -67,12 +64,10 @@ static float kNodeHeight = 24.0f;
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSLog(@"Canvas view mouse down");
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    NSLog(@"mouseup");
     NSPoint eventPoint = [theEvent locationInWindow];
     NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
     if (!viewController) return;
@@ -137,40 +132,16 @@ static float kNodeHeight = 24.0f;
 - (NodeCore::Node *)findNodeAt:(NSPoint) point
 {
     CALayer *hit = [rootNetworkLayer hitTest:CGPointMake(point.x, point.y)];
-    NSLog(@"hit %@", hit.name);
     if (!hit) return NULL;
     NodeCore::Node *node = [viewController rootNetwork]->getNode([[hit name] UTF8String]);
-    if (node) {
-        NSLog(@"found %s", node->getName().c_str());
-    } else {
-        NSLog(@"didnt find");
-    }
     return node;
 }
 
 - (void)activeNodeChanged:(NodeCore::Node *)activeNode
 {
-    NSLog(@"active changed");
     [self deselect];
     [self select:activeNode];
 }
-
-+ (NSDictionary *)deselectedStyle
-{
-    return [NSDictionary dictionaryWithObjectsAndKeys: (id)[CGColorHelper black], @"borderColor",
-                                                0.0f, @"borderWidth",
-                                                0.2f, @"shadowOpacity",
-                                                nil, nil];
-}
-
-+ (NSDictionary *)selectedStyle
-{
-    return [NSDictionary dictionaryWithObjectsAndKeys: (id)[CGColorHelper blue], @"borderColor",
-                                                2.0f, @"borderWidth",
-                                                1.0f, @"shadowOpacity",
-                                                nil, nil];
-}
-
 
 - (void)clearLayers
 {
@@ -188,7 +159,6 @@ static float kNodeHeight = 24.0f;
     NodeCore::NodeList nodes = network->getNodes();
     for (NodeCore::NodeIterator nodeIter = nodes.begin(); nodeIter != nodes.end(); ++nodeIter) {
         NodeCore::Node* node = (*nodeIter);
-        NSLog(@"Adding node %s", node->getName().c_str());
         [self addLayerForNode:node];
     }
 }
@@ -199,56 +169,24 @@ static float kNodeHeight = 24.0f;
 
 - (void)addLayerForNode:(NodeCore::Node *)node
 {
-    NSLog(@"Adding layer %s", node->getName().c_str());
-    CALayer *nodeLayer = [CALayer layer];
-    nodeLayer.name = [NSString stringWithCString:node->getName().c_str()];
-    nodeLayer.frame = CGRectMake(node->getX(), node->getY(), kNodeWidth, kNodeHeight);
-    //nodeLayer.position = CGPointMake(node->getX(), NSHeight(self.bounds) - node->getY());
-    nodeLayer.backgroundColor = [CGColorHelper halfBlue];
-    nodeLayer.shadowColor = [CGColorHelper black];
-    nodeLayer.shadowOpacity = 0.5f;
-    nodeLayer.cornerRadius = 3.0f;
-    nodeLayer.shadowOffset = CGSizeMake(1.0f, -1.0f);
-    nodeLayer.shadowRadius = 2.0f;
-    nodeLayer.contents = (id)[self imageForNode:node];
+    NodeLayer *nodeLayer  = [[NodeLayer alloc] initWithNode:node];
     [rootNetworkLayer addSublayer:nodeLayer];    
-}
-
-- (CGImageRef)imageForNode:(NodeCore::Node *)node
-{
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-    CGContextRef context = CGBitmapContextCreate(NULL, kNodeWidth, 
-                                                 kNodeHeight, 8, 0, 
-                                                 colorSpace, 
-                                                 kCGImageAlphaPremultipliedFirst);
-    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
-    CGContextSetFillColorWithColor(context, [CGColorHelper black]);
-    CGContextSelectFont(context, "Lucida Grande", 13, kCGEncodingMacRoman);
-    CGContextShowTextAtPoint(context, 10.0f, 5.0f, node->getName().c_str(), node->getName().length());
-    CGContextFlush(context);
-    CGImageRef image = CGBitmapContextCreateImage(context);
-	CGContextRelease (context);    
-    return image;
 }
 
 - (void)deselect
 {
     NSArray *sublayers = [rootNetworkLayer sublayers];
     for (int i=0; i < [sublayers count]; i++) {
-        CALayer *sublayer = (CALayer *)[sublayers objectAtIndex:i];
-        sublayer.style = [NetworkView deselectedStyle];
-        sublayer.borderWidth = 0.0f;
-        sublayer.borderColor = [CGColorHelper black];
+        NodeLayer *sublayer = (NodeLayer *)[sublayers objectAtIndex:i];
+        sublayer.selected = FALSE;
     }
     
 }
 
 - (void)select:(NodeCore::Node *)node
 {
-    CALayer *layer = [self findLayerForNode:node];
-    layer.style = [NetworkView selectedStyle];
-    layer.borderWidth = 2.0f;
-    layer.borderColor = [CGColorHelper black];
+    NodeLayer *layer = (NodeLayer *)[self findLayerForNode:node];
+    layer.selected = TRUE;
 }
 
 - (CALayer *)findLayerForNode:(NodeCore::Node *)node

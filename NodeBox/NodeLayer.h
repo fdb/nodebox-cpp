@@ -18,27 +18,18 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <QuartzCore/QuartzCore.h>
 #import <NodeCore/NodeCore.h>
+#import <QuartzCore/QuartzCore.h>
 
-@class NetworkViewController;
 
-enum DragModeType {
-    kDragModeNotDragging = 0,
-    kDragModeNode = 1,
-    kDragModeConnect = 2
-};
-
-@interface NetworkView : NSView {
-    IBOutlet NetworkViewController *viewController;
-    CALayer *rootNetworkLayer;
+@interface NodeLayer : CALayer {
+    NodeCore::Node *node;
+    BOOL selected;
 }
 
-- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
-- (NetworkViewController*)controller;
-- (void)setController:(NetworkViewController *)controller;
-- (NodeCore::Node *)findNodeAt:(NSPoint) point;
-- (void)clearLayers;
-- (void)rebuildNetwork;
+- (id)initWithNode:(NodeCore::Node *)node;
+
+@property(readonly) NodeCore::Node *node;
+@property(readwrite) BOOL selected;
 
 @end
