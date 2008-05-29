@@ -30,10 +30,12 @@
 		619CC16D0DDC8FB700A69DA2 /* ViewPaneController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC15C0DDC8FB700A69DA2 /* ViewPaneController.mm */; };
 		619CC16E0DDC8FB700A69DA2 /* ParameterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC15E0DDC8FB700A69DA2 /* ParameterViewController.mm */; };
 		619CC16F0DDC8FB700A69DA2 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 619CC1600DDC8FB700A69DA2 /* ViewController.mm */; };
+		61B0EB800DEED11700F09919 /* NetworkView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EB7F0DEED11700F09919 /* NetworkView.mm */; };
+		61B0EB8C0DEED15F00F09919 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B0EB8B0DEED15F00F09919 /* QuartzCore.framework */; };
+		61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EB960DEED21C00F09919 /* CGColorHelper.mm */; };
 		61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */; };
 		61FA1A440DCF31CE0056A7C6 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
 		61FA1A520DCF325A0056A7C6 /* NodeCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
-		61FA1AAB0DCF36B90056A7C6 /* NetworkView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61FA1AAA0DCF36B90056A7C6 /* NetworkView.mm */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -112,11 +114,14 @@
 		619CC15E0DDC8FB700A69DA2 /* ParameterViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ParameterViewController.mm; sourceTree = "<group>"; };
 		619CC15F0DDC8FB700A69DA2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		619CC1600DDC8FB700A69DA2 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		61B0EB7E0DEED11700F09919 /* NetworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkView.h; sourceTree = "<group>"; };
+		61B0EB7F0DEED11700F09919 /* NetworkView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkView.mm; sourceTree = "<group>"; };
+		61B0EB8B0DEED15F00F09919 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		61B0EB950DEED21C00F09919 /* CGColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGColorHelper.h; sourceTree = "<group>"; };
+		61B0EB960DEED21C00F09919 /* CGColorHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CGColorHelper.mm; sourceTree = "<group>"; };
 		61C16CC00DCF4CCB000CC18E /* NetworkVisualiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkVisualiser.h; sourceTree = "<group>"; };
 		61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkVisualiser.cpp; sourceTree = "<group>"; };
 		61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeCore.framework; path = ../NodeCore/build/Debug/NodeCore.framework; sourceTree = SOURCE_ROOT; };
-		61FA1AA90DCF36B90056A7C6 /* NetworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkView.h; sourceTree = "<group>"; };
-		61FA1AAA0DCF36B90056A7C6 /* NetworkView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkView.mm; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* NodeBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +133,7 @@
 			files = (
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				61FA1A440DCF31CE0056A7C6 /* NodeCore.framework in Frameworks */,
+				61B0EB8C0DEED15F00F09919 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +178,6 @@
 				619CC1600DDC8FB700A69DA2 /* ViewController.mm */,
 				61936BF00DC867FC0034D23C /* NodeBoxDocument.h */,
 				61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */,
-				61FA1AA90DCF36B90056A7C6 /* NetworkView.h */,
-				61FA1AAA0DCF36B90056A7C6 /* NetworkView.mm */,
 				61C16CC00DCF4CCB000CC18E /* NetworkVisualiser.h */,
 				61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */,
 				618A9EA10DD348240098409B /* NodeBoxWindowController.h */,
@@ -192,6 +196,10 @@
 				613ABFD70DEC7F96009CC02E /* CanvasView.mm */,
 				618FA2EE0DED84F8006F4B48 /* ValueLadderCell.h */,
 				618FA2EF0DED84F8006F4B48 /* ValueLadderCell.mm */,
+				61B0EB7E0DEED11700F09919 /* NetworkView.h */,
+				61B0EB7F0DEED11700F09919 /* NetworkView.mm */,
+				61B0EB950DEED21C00F09919 /* CGColorHelper.h */,
+				61B0EB960DEED21C00F09919 /* CGColorHelper.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61B0EB8B0DEED15F00F09919 /* QuartzCore.framework */,
 				61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */,
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
@@ -308,7 +317,6 @@
 			files = (
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				61936BF10DC867FC0034D23C /* NodeBoxDocument.mm in Sources */,
-				61FA1AAB0DCF36B90056A7C6 /* NetworkView.mm in Sources */,
 				61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */,
 				618A9EA30DD348240098409B /* NodeBoxWindowController.mm in Sources */,
 				6155FC690DD9BED800708CBC /* NodeBoxAppDelegate.mm in Sources */,
@@ -324,6 +332,8 @@
 				613ABCBB0DEC1414009CC02E /* NodeInfoWrapper.mm in Sources */,
 				613ABFD80DEC7F96009CC02E /* CanvasView.mm in Sources */,
 				618FA2F00DED84F8006F4B48 /* ValueLadderCell.mm in Sources */,
+				61B0EB800DEED11700F09919 /* NetworkView.mm in Sources */,
+				61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

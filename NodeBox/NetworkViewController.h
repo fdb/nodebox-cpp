@@ -20,6 +20,7 @@
 #import <NodeCore/NodeCore.h>
 #import <Cocoa/Cocoa.h>
 #import "ViewController.h"
+#import "NetworkView.h"
 
 @interface NodeWrapper : NSObject {
     NodeCore::Node *_theNode;
@@ -36,11 +37,12 @@
 @end
 
 @interface NetworkViewController : ViewController {
-    IBOutlet NSView *_view;
+    IBOutlet NetworkView *_view;
     IBOutlet NSMenu *nodeContextMenu;
     NodeCore::Node *_contextNode;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)view;
 - (void)contextMenuForNode:(NodeCore::Node *)node event:(NSEvent *)theEvent;
 - (void)deleteNode:(id)sender;

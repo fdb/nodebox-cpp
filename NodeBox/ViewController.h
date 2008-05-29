@@ -26,6 +26,7 @@
     NodeBoxWindowController *_windowController;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)view;
 - (NodeBoxWindowController *)windowController;
 - (void)setWindowController:(NodeBoxWindowController *)windowController;
@@ -37,8 +38,8 @@
 - (void)setActiveNode:(NodeCore::Node *)activeNode;
 - (NodeCore::Node *)renderedNode;
 - (void)setRenderedNode:(NodeCore::Node *)renderedNode;
-- (void)activeNodeChanged;
-- (void)renderedNodeChanged;
+- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
+- (void)renderedNodeChanged:(NodeCore::Node *)renderedNode;
 - (void)activeNetworkModified;
 
 @end

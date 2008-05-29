@@ -24,6 +24,7 @@
     IBOutlet NSView *_view;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)view;
 
 @end

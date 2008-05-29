@@ -181,7 +181,7 @@
     NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
     ViewPaneController *c;
     while (c = [enumerator nextObject]) {
-        [[c viewController] activeNodeChanged];
+        [[c viewController] activeNodeChanged:activeNode];
     }
 }
 
@@ -193,13 +193,17 @@
 
 - (void)setRenderedNode:(NodeCore::Node *)renderedNode
 {
-    NSLog(@"Setting rendered node to %s", renderedNode->getName().c_str());
+    if (renderedNode != NULL) {
+        NSLog(@"Setting rendered node to %s", renderedNode->getName().c_str());
+    } else {
+        NSLog(@"Setting rendered node to null"  );
+    }
     if (!_activeNetwork) return;
     _activeNetwork->setRenderedNode(renderedNode);
     NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
     ViewPaneController *c;
     while (c = [enumerator nextObject]) {
-        [[c viewController] renderedNodeChanged];
+        [[c viewController] renderedNodeChanged:renderedNode];
     }
 }
 

@@ -56,9 +56,9 @@
 
 @implementation NetworkViewController
 
-- (id)init
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
 {
-    self = [super init];
+    self = [super initWithWindowController:windowController];
     if (![NSBundle loadNibNamed:@"NetworkView" owner:self]) {
         NSLog(@"Could not load nib NetworkView");
     }
@@ -69,6 +69,16 @@
 - (NSView *)view
 {
     return _view;
+}
+
+- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
+{
+    [_view activeNodeChanged:activeNode];
+}
+
+- (void)activeNetworkModified;
+{
+    [_view rebuildNetwork];
 }
 
 - (void)contextMenuForNode:(NodeCore::Node *)node event:(NSEvent *)theEvent

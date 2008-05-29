@@ -25,6 +25,7 @@
     IBOutlet NSTableView *tableView;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)view;
 
 @end

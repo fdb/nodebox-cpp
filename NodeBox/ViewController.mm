@@ -22,6 +22,13 @@
 
 @implementation ViewController
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
+{
+    self = [super init];
+    _windowController = windowController;
+    return self;
+}
+
 - (NSView *)view
 {
     return NULL;
@@ -79,21 +86,21 @@
     [_windowController setRenderedNode:renderedNode];
 }
 
-- (void)activeNodeChanged
+- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
 {
     if (NSView *v = [self view]) {
         [v setNeedsDisplay:TRUE];
     }
 }
 
-- (void)activeNetworkModified
+- (void)activeNetworkModified;
 {
     if (NSView *v = [self view]) {
         [v setNeedsDisplay:TRUE];
     }
 }
 
-- (void)renderedNodeChanged
+- (void)renderedNodeChanged:(NodeCore::Node *)renderedNode;
 {
     if (NSView *v = [self view]) {
         [v setNeedsDisplay:TRUE];

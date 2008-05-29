@@ -16,23 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import "CanvasViewController.h"
 
-@implementation CanvasViewController
+#import <Cocoa/Cocoa.h>
 
-- (id)initWithWindowController:(NodeBoxWindowController *)windowController
+@interface CGColorHelper : NSObject
 {
-    self = [super initWithWindowController:windowController];
-    if (![NSBundle loadNibNamed:@"CanvasView" owner:self]) {
-        NSLog(@"Could not load nib CanvasView");
-    }
-    return self;
 }
 
-- (NSView *)view
-{
-    return _view;
-}
++ (CGColorRef)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
+
++ (CGColorRef)clear;
++ (CGColorRef)white;
++ (CGColorRef)black;
++ (CGColorRef)red;
++ (CGColorRef)blue;
+
++ (CGColorRef)halfRed;
++ (CGColorRef)halfBlue;
++ (CGColorRef)halfWhite;
 
 @end

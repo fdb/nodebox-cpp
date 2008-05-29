@@ -21,8 +21,9 @@
 
 @implementation ParameterViewController
 
-- (id)init
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
 {
+    self = [super initWithWindowController:windowController];
     if (![NSBundle loadNibNamed:@"ParameterView" owner:self]) {
         NSLog(@"Could not load nib ParameterView");
     }
@@ -34,7 +35,7 @@
     return _view;
 }
 
-- (void)activeNodeChanged
+- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
 {
     [tableView reloadData];
 }

@@ -34,6 +34,22 @@
     return YES;
 }
 
+
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    NSLog(@"Canvas view mouse up");
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    NSLog(@"Canvas view mouse down");
+}
+
 - (void)drawRect:(NSRect)rect {
     [[NSColor redColor] set];
     NSRectFill(rect);
