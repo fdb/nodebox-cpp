@@ -35,12 +35,13 @@ static float kNodeHeight = 24.0f;
     self.name = [NSString stringWithCString:node->getName().c_str()];
     self.frame = CGRectMake(node->getX(), node->getY(), kNodeWidth, kNodeHeight);
     //nodeLayer.position = CGPointMake(node->getX(), NSHeight(self.bounds) - node->getY());
-    self.backgroundColor = [CGColorHelper halfBlue];
+    self.backgroundColor = [CGColorHelper lightGray];
     self.shadowColor = [CGColorHelper black];
     self.shadowOpacity = 0.5f;
     self.cornerRadius = 3.0f;
     self.shadowOffset = CGSizeMake(1.0f, -1.0f);
     self.shadowRadius = 2.0f;
+    self.borderColor = [CGColorHelper gray];
     [self setNeedsDisplay];
 
 

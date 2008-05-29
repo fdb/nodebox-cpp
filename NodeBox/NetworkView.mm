@@ -50,7 +50,7 @@
     //rootNetworkLayer.position = CGPointMake(0.0f, 0.0f);
     //rootNetworkLayer.anchorPoint = CGPointMake(0.0f, 0.0f);
     rootNetworkLayer.name = @"__root";
-    rootNetworkLayer.backgroundColor = [CGColorHelper halfRed];
+    rootNetworkLayer.backgroundColor = [CGColorHelper veryLightGray];
     [self.layer addSublayer:rootNetworkLayer];
     [self rebuildNetwork];
     [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];

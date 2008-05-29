@@ -28,6 +28,9 @@
 + (CGColorRef)clear;
 + (CGColorRef)white;
 + (CGColorRef)black;
++ (CGColorRef)gray;
++ (CGColorRef)lightGray;
++ (CGColorRef)veryLightGray;
 + (CGColorRef)red;
 + (CGColorRef)blue;
 

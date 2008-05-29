@@ -29,7 +29,8 @@
   return space;
 }
 
-+ (CGColorRef)clear {
++ (CGColorRef)clear
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.0f];
@@ -37,7 +38,8 @@
   return color;
 }
 
-+ (CGColorRef)white {
++ (CGColorRef)white
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
@@ -45,7 +47,8 @@
   return color;
 }
 
-+ (CGColorRef)black {
++ (CGColorRef)black
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
@@ -53,7 +56,35 @@
   return color;
 }
 
-+ (CGColorRef)red {
++ (CGColorRef)gray
+{
+  static CGColorRef color = NULL;
+  if(color == NULL) {
+    color = [self colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f];
+  }
+  return color;
+}
+
++ (CGColorRef)lightGray
+{
+  static CGColorRef color = NULL;
+  if(color == NULL) {
+    color = [self colorWithRed:0.62f green:0.62f blue:0.62f alpha:1.0f];
+  }
+  return color;
+}
+
++ (CGColorRef)veryLightGray
+{
+  static CGColorRef color = NULL;
+  if(color == NULL) {
+    color = [self colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f];
+  }
+  return color;
+}
+
++ (CGColorRef)red
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:1.0f green:0.0f blue:0.0f alpha:1.0f];
@@ -61,7 +92,8 @@
   return color;
 }
 
-+ (CGColorRef)blue {
++ (CGColorRef)blue
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:0.0f green:0.0f blue:1.0f alpha:1.0f];
@@ -69,14 +101,16 @@
   return color;
 }
 
-+ (CGColorRef)halfRed {
++ (CGColorRef)halfRed
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.5f];
   }
   return color;
 }  
-+ (CGColorRef)halfBlue {
++ (CGColorRef)halfBlue
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.5f];
@@ -84,7 +118,8 @@
   return color;
 }
 
-+ (CGColorRef)halfWhite {
++ (CGColorRef)halfWhite
+{
   static CGColorRef color = NULL;
   if(color == NULL) {
     color = [self colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.5f];
@@ -92,7 +127,8 @@
   return color;
 }
 
-+ (CGColorRef)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha {
++ (CGColorRef)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
+{
   CGFloat values[4] = {red, green, blue, alpha};
   return CGColorCreate([self genericRGBSpace], values);
 }
