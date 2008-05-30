@@ -44,11 +44,7 @@ static float kNodeHeight = 24.0f;
     self.borderColor = [CGColorHelper gray];
     [self setNeedsDisplay];
 
-
     return self;
-
-
-
 }
 
 - (void)setSelected:(BOOL)aselected
@@ -56,8 +52,10 @@ static float kNodeHeight = 24.0f;
     selected = aselected;
     if (selected) {
         self.borderWidth = 2.0f;
+        self.transform = CATransform3DMakeScale(1.1f, 1.1f, 1.0f);
     } else {
         self.borderWidth = 0.0f;
+        self.transform = CATransform3DIdentity;
     }
 }
 
