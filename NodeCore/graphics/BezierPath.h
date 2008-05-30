@@ -40,20 +40,33 @@ public:
     BezierPath(const BezierPath &path);
     virtual ~BezierPath();
     
+    //// Path methods ////
+    
     void moveto(float x, float y);
     void lineto(float x, float y);
     void curveto(float x1, float y1, float x2, float y2, float x3, float y3);
     void close();
     
+    //// Basic shapes ////
+
     void rect(float x, float y, float width, float height);
     void roundedRect(float x, float y, float width, float height, float roundness);
     void oval(float x, float y, float width, float height);
     void line(float x1, float y1, float x2, float y2);
     
+    //// List operations ////
+    
+    PathElement operator[](int n) const;
     void clear();
     unsigned int size();
     bool isempty();
-    virtual NodeCore::Rect bounds();
+    void append(const PathElement& el);
+    
+    //// Geometry ////
+
+    virtual NodeCore::Rect bounds(); 
+    
+    //// Color ////
     
     Color fillColor();
     void setFillColor(const Color& c);
@@ -74,7 +87,6 @@ public:
     BezierPath& operator=(const BezierPath& bp);
     virtual bool operator==(const Grob& g) const;
     virtual bool operator!=(const Grob& g) const { return !operator==(g); }
-    PathElement operator[](int n) const;
     friend std::ostream& operator<<(std::ostream& o, const BezierPath& bp);
 
 private:

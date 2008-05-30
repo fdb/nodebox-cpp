@@ -140,6 +140,11 @@ bool BezierPath::isempty()
     return m_elements.empty();
 }
 
+void BezierPath::append(const PathElement& el)
+{
+    m_elements.push_back(el);
+}
+
 NodeCore::Rect BezierPath::bounds()
 {
     CGRect r = CGPathGetBoundingBox(cgPath());
