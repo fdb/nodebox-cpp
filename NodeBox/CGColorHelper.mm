@@ -127,6 +127,15 @@
   return color;
 }
 
++ (CGColorRef)connectionLineColor
+{
+  static CGColorRef color = NULL;
+  if(color == NULL) {
+    color = [self colorWithRed:0.3f green:0.3f blue:0.3f alpha:1.0f];
+  }
+  return color;
+}
+
 + (CGColorRef)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
 {
   CGFloat values[4] = {red, green, blue, alpha};

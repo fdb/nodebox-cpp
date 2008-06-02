@@ -8,8 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
 			<integer value="17"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -31,6 +31,7 @@
 				<int key="NSvFlags">286</int>
 				<string key="NSFrameSize">{480, 272}</string>
 				<reference key="NSSuperview"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<string key="NSClassName">NetworkView</string>
 			</object>
 			<object class="NSMenu" id="574001011">

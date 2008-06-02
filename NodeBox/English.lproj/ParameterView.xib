@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.02">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">9C7010</string>
+		<string key="IBDocument.SystemVersion">9D34</string>
 		<string key="IBDocument.InterfaceBuilderVersion">658</string>
-		<string key="IBDocument.AppKitVersion">949.26</string>
+		<string key="IBDocument.AppKitVersion">949.33</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -43,7 +43,7 @@
 									<object class="NSTableView" id="72819225">
 										<reference key="NSNextResponder" ref="233271111"/>
 										<int key="NSvFlags">256</int>
-										<string key="NSFrameSize">{463, 256}</string>
+										<string key="NSFrameSize">{463, 255}</string>
 										<reference key="NSSuperview" ref="233271111"/>
 										<bool key="NSEnabled">YES</bool>
 										<object class="_NSCornerView" key="NSCornerView">
@@ -201,7 +201,7 @@
 										<bool key="NSAllowsTypeSelect">YES</bool>
 									</object>
 								</object>
-								<string key="NSFrame">{{1, 0}, {463, 256}}</string>
+								<string key="NSFrame">{{1, 1}, {463, 255}}</string>
 								<reference key="NSSuperview" ref="590528270"/>
 								<reference key="NSNextKeyView" ref="72819225"/>
 								<reference key="NSDocView" ref="72819225"/>
@@ -211,7 +211,7 @@
 							<object class="NSScroller" id="2127135">
 								<reference key="NSNextResponder" ref="590528270"/>
 								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{464, 0}, {15, 256}}</string>
+								<string key="NSFrame">{{464, 1}, {15, 255}}</string>
 								<reference key="NSSuperview" ref="590528270"/>
 								<reference key="NSTarget" ref="590528270"/>
 								<string key="NSAction">_doScroller:</string>
@@ -240,6 +240,7 @@
 				</object>
 				<string key="NSFrameSize">{480, 272}</string>
 				<reference key="NSSuperview"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSTableColumn" id="183268195">

@@ -35,6 +35,7 @@
 		61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EB960DEED21C00F09919 /* CGColorHelper.mm */; };
 		61B0EE990DEF13F700F09919 /* NodeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EE980DEF13F700F09919 /* NodeLayer.mm */; };
 		61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */; };
+		61DD33A20DF01357005431C0 /* NetworkLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61DD33A10DF01357005431C0 /* NetworkLayer.mm */; };
 		61FA1A440DCF31CE0056A7C6 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
 		61FA1A520DCF325A0056A7C6 /* NodeCore.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
@@ -124,6 +125,8 @@
 		61B0EE980DEF13F700F09919 /* NodeLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeLayer.mm; sourceTree = "<group>"; };
 		61C16CC00DCF4CCB000CC18E /* NetworkVisualiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkVisualiser.h; sourceTree = "<group>"; };
 		61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkVisualiser.cpp; sourceTree = "<group>"; };
+		61DD33A00DF01357005431C0 /* NetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkLayer.h; sourceTree = "<group>"; };
+		61DD33A10DF01357005431C0 /* NetworkLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkLayer.mm; sourceTree = "<group>"; };
 		61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeCore.framework; path = ../NodeCore/build/Debug/NodeCore.framework; sourceTree = SOURCE_ROOT; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* NodeBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +208,8 @@
 				61B0EB960DEED21C00F09919 /* CGColorHelper.mm */,
 				61B0EE970DEF13F700F09919 /* NodeLayer.h */,
 				61B0EE980DEF13F700F09919 /* NodeLayer.mm */,
+				61DD33A00DF01357005431C0 /* NetworkLayer.h */,
+				61DD33A10DF01357005431C0 /* NetworkLayer.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				61B0EB800DEED11700F09919 /* NetworkView.mm in Sources */,
 				61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */,
 				61B0EE990DEF13F700F09919 /* NodeLayer.mm in Sources */,
+				61DD33A20DF01357005431C0 /* NetworkLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

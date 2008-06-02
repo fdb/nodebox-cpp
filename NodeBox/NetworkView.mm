@@ -25,6 +25,7 @@
 #import "NodeBoxWindowController.h"
 #import "NodeBoxDocument.h"
 #import "NodeLayer.h"
+#import "NetworkLayer.h"
 
 @interface NetworkView(Private)
 
@@ -43,7 +44,7 @@
     self.layer.name = @"__top";
     self.wantsLayer = YES;
     self.layer.backgroundColor = [CGColorHelper white];
-    rootNetworkLayer = [CALayer layer];
+    rootNetworkLayer = [[NetworkLayer alloc] initWithNetwork:[viewController rootNetwork]];
     rootNetworkLayer.frame = self.layer.frame;
     rootNetworkLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
     //rootNetworkLayer.bounds = CGRectMake(0.0f, 0.0f, NSWidth(self.bounds), NSHeight(self.bounds));
@@ -55,6 +56,8 @@
     [self rebuildNetwork];
     [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];
 }
+
+#pragma mark Mouse Events
 
 - (BOOL)acceptsFirstResponder
 {
@@ -76,6 +79,18 @@
         [viewController setActiveNode:[self findNodeAt:pt]];
         [viewController setRenderedNode:[self findNodeAt:pt]];
     //}
+}
+
+- (void)rightMouseDown:(NSEvent *)theEvent
+{
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    NodeCore::Node *node = [self findNodeAt:pt];
+    if (!node) return;
+    [(NetworkViewController *)viewController contextMenuForNode:node event:theEvent];
 }
 
 - (NetworkViewController*)controller
@@ -161,6 +176,7 @@
         NodeCore::Node* node = (*nodeIter);
         [self addLayerForNode:node];
     }
+    [self select:[viewController activeNode]];
 }
 
 @end

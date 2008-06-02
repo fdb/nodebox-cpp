@@ -22,6 +22,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+static float kNodeWidth = 80.0f;
+static float kNodeHeight = 24.0f;
+
 @interface NodeLayer : CALayer {
     NodeCore::Node *node;
     BOOL selected;

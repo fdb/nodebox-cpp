@@ -20,8 +20,6 @@
 #import "NodeLayer.h"
 #import "CGColorHelper.h"
 
-static float kNodeWidth = 80.0f;
-static float kNodeHeight = 24.0f;
 
 @implementation NodeLayer
 
@@ -52,10 +50,12 @@ static float kNodeHeight = 24.0f;
     selected = aselected;
     if (selected) {
         self.borderWidth = 2.0f;
-        self.transform = CATransform3DMakeScale(1.1f, 1.1f, 1.0f);
+        self.shadowOpacity = 0.8f;
+        //self.transform = CATransform3DMakeScale(1.05f, 1.05f, 1.0f);
     } else {
         self.borderWidth = 0.0f;
-        self.transform = CATransform3DIdentity;
+        self.shadowOpacity = 0.5f;
+        //self.transform = CATransform3DIdentity;
     }
 }
 

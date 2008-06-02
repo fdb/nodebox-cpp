@@ -16,28 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 #import <Cocoa/Cocoa.h>
+#import <NodeCore/NodeCore.h>
+#import "NodeLayer.h"
 
-@interface CGColorHelper : NSObject
-{
+@interface NetworkLayer : NodeLayer {
+
 }
 
-+ (CGColorRef)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
-
-+ (CGColorRef)clear;
-+ (CGColorRef)white;
-+ (CGColorRef)black;
-+ (CGColorRef)gray;
-+ (CGColorRef)lightGray;
-+ (CGColorRef)veryLightGray;
-+ (CGColorRef)red;
-+ (CGColorRef)blue;
-
-+ (CGColorRef)halfRed;
-+ (CGColorRef)halfBlue;
-+ (CGColorRef)halfWhite;
-
-+ (CGColorRef)connectionLineColor;
-
+- (id)initWithNetwork:(NodeCore::Network *)network;
+- (NodeCore::Network *)network;
 @end

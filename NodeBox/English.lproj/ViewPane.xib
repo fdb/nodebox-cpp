@@ -122,6 +122,7 @@
 						<int key="NSvFlags">306</int>
 						<string key="NSFrameSize">{510, 394}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<string key="NSClassName">NSView</string>
 					</object>
 				</object>
