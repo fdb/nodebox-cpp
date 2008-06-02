@@ -84,6 +84,11 @@
     [self setNeedsDisplay];
 }
 
+- (void) didModifyNode: (NodeCore::Node *)node
+{
+    [self setNeedsDisplay];
+}
+
 - (void) didConnect: (NodeCore::Field*)field to: (NodeCore::Node*)node
 {
     [self setNeedsDisplay];

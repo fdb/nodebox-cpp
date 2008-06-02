@@ -164,6 +164,18 @@
     }
 }
 
+- (void) setFloat: (float)value forField: (NodeCore::Field*)field
+{
+    field->set(value);
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didModifyNode:field->getNode()];
+    }    
+}
+
 - (void) connectFrom: (NodeCore::Field*)field to: (NodeCore::Node*)node
 {
     field->connect(node);
@@ -175,6 +187,7 @@
         [[c viewController] didConnect:field to:node];
     }
 }
+
 
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
 {

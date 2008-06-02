@@ -36,6 +36,7 @@
 - (BOOL) removeNode: (NodeCore::Node *)node;
 - (void) moveNode: (NodeCore::Node *)node to:(NSPoint)pt;
 - (void) connectFrom: (NodeCore::Field*)field to: (NodeCore::Node*)node;
+- (void) setFloat: (float)value forField: (NodeCore::Field*)field;
 - (void) setActiveNetwork: (NodeCore::Network *)activeNetwork;
 - (void) setActiveNode: (NodeCore::Node *)activeNode;
 - (void) setRenderedNode: (NodeCore::Node *)renderedNode;

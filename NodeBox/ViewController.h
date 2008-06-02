@@ -42,6 +42,7 @@
 - (void) didAddNode: (NodeCore::Node *)node;
 - (void) didRemoveNode: (NodeCore::Node *)node;
 - (void) didMoveNode: (NodeCore::Node *)node to: (NSPoint)pt;
+- (void) didModifyNode: (NodeCore::Node *)node;
 - (void) didConnect: (NodeCore::Field*)field to: (NodeCore::Node*)node;
 - (void) didChangeActiveNetwork: (NodeCore::Network *)activeNetwork;
 - (void) didChangeActiveNode: (NodeCore::Node *)activeNode;

@@ -18,6 +18,7 @@
  */
  
 #import "ParameterViewController.h"
+#import "NodeBoxWindowController.h"
 
 @implementation ParameterViewController
 
@@ -35,21 +36,28 @@
     return _view;
 }
 
-- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
+#pragma mark Network notifications
+
+- (void) didChangeActiveNode: (NodeCore::Node *)activeNode
+{
+    [tableView reloadData];
+}
+
+- (void) didModifyNode: (NodeCore::Node *)node
 {
     [tableView reloadData];
 }
 
 @end
 
+#pragma mark Table data source protocol
+
 @implementation ParameterViewController (NSTableDataSource)
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
 
-    NSLog(@"numberOfRowsInTableView");
     if (![self activeNode]) return 0;
-    NSLog(@"rowcount %i", [self activeNode]->getFields().size());
     return [self activeNode]->getFields().size();
 }
 
@@ -92,8 +100,7 @@
     if (!([identifier isEqualToString:@"value"] | [identifier isEqualToString:@"stepper"])) return; 
     if ([objectValue respondsToSelector:@selector(floatValue)]) {
         NSLog(@"Setting value to %@", objectValue);
-        field->set([objectValue floatValue]);
-        [[self windowController] activeNetworkModified]; 
+        [self.windowController setFloat:[objectValue floatValue] forField:field];
     }
 }
 
