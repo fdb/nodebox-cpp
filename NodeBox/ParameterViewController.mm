@@ -99,7 +99,6 @@
     NSString *identifier = [aTableColumn identifier];
     if (!([identifier isEqualToString:@"value"] | [identifier isEqualToString:@"stepper"])) return; 
     if ([objectValue respondsToSelector:@selector(floatValue)]) {
-        NSLog(@"Setting value to %@", objectValue);
         [self.windowController setFloat:[objectValue floatValue] forField:field];
     }
 }

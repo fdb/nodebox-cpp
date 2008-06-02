@@ -30,6 +30,7 @@
 }
 
 //// Network operations ////
+
 - (NodeCore::Node*) createNode: (NodeCore::NodeInfo *)info at: (NSPoint)point;
 - (NodeCore::Node*) createNodeAt: (NSPoint)point;
 - (void) addNode: (NodeCore::Node *)node;
@@ -42,14 +43,16 @@
 - (void) setRenderedNode: (NodeCore::Node *)renderedNode;
 
 //// State ////
+
 - (NodeCore::Network *) rootNetwork;
 - (NodeCore::Network *) activeNetwork;
 - (NodeCore::Node *) activeNode;
 - (NodeCore::Node *) renderedNode;
 
 //// Library ////
+
 - (NodeCore::NodeLibraryManager*) nodeLibraryManager;
 
 // TODO: remove
-- (IBAction) pathChanged: (id)sender; // TODO should be renamed
+- (IBAction) pathChanged: (id)sender;
 @end

@@ -42,12 +42,10 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    NSLog(@"Canvas view mouse up");
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSLog(@"Canvas view mouse down");
 }
 
 - (void)drawRect:(NSRect)rect {

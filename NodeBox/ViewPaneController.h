@@ -45,7 +45,6 @@ enum ViewType {
 - (void)setViewType:(enum ViewType)type;
 - (void)switchType:(id)sender;
 - (NodeBoxWindowController *)windowController;
-- (void)setWindowController:(NodeBoxWindowController *)windowController;
 - (ViewController *)viewController;
 
 @end

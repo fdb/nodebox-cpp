@@ -49,20 +49,13 @@
         [_viewController release];
     switch (type) {
         case NetworkViewType:
-            NSLog(@"Switching to network view");
             _viewController = [[NetworkViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
-            NSLog(@"NN 2 %@", [_viewController view]);
             [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
-            NSLog(@"NN 3");
-            contentView = [_viewController view];
-            NSLog(@"NN 4");
-            
+            contentView = [_viewController view];            
             [viewTypePopup selectItemWithTag:type];
-            NSLog(@"NN 5");
             break;
         case ParameterViewType:
-            NSLog(@"Switching to parameter view");
             _viewController = [[ParameterViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
             [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
@@ -70,7 +63,6 @@
             [viewTypePopup selectItemWithTag:type];
             break;
         case CanvasViewType:
-            NSLog(@"Switching to canvas view");
             _viewController = [[CanvasViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
             [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
@@ -78,7 +70,6 @@
             [viewTypePopup selectItemWithTag:type];
             break;
         default:
-            NSLog(@"Switching to default view");
             // TODO: This empty view will leak.
             NSView *emptyView = [[NSView alloc] init];
             _viewController = NULL;
@@ -97,14 +88,6 @@
 - (NodeBoxWindowController *)windowController
 {
     return _windowController;
-}
-
-- (void)setWindowController:(NodeBoxWindowController *)windowController
-{
-    _windowController = windowController;
-    if (_viewController) {
-        [_viewController setWindowController:windowController];
-    }
 }
 
 - (ViewController *)viewController

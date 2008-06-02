@@ -61,7 +61,6 @@
 
 - (void)drawInContext:(CGContextRef)ctx
 {
-    NSLog(@"draw");
     CGContextSetFillColorWithColor(ctx, [CGColorHelper black]);
     CGContextSelectFont(ctx, "Lucida Grande", 13, kCGEncodingMacRoman);
     CGContextShowTextAtPoint(ctx, 10.0f, 5.0f, node->getName().c_str(), node->getName().length());

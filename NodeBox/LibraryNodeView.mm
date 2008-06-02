@@ -63,7 +63,6 @@
     pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
     [pboard declareTypes:[NSArray arrayWithObject:NodeType]  owner:self];
     // Get the node info
-    NSLog(@"Node identifier: %@", [[self nodeInfoWrapper] identifier]);
     [pboard setString:[[self nodeInfoWrapper] identifier] forType:NodeType];
     
     [self dragImage:dragImage at:NSZeroPoint offset:NSZeroSize

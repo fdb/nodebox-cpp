@@ -66,7 +66,6 @@
 
 -(NodeCore::Node*) createNode:(NodeCore::NodeInfo *)info at:(NSPoint)point
 {
-    NSLog(@"Create node %s at %f, %f", info->getName().c_str(), point.x, point.y);
     NodeCore::Node *node = info->create();
     node->setX(point.x);
     node->setY(point.y);
@@ -90,7 +89,6 @@
 
 -(NodeCore::Node*) createNodeAt:(NSPoint)point
 {
-    NSLog(@"Create node at %f, %f", point.x, point.y);
     NodeCore::Node *node = new NodeCore::Node();
     node->setX(point.x);
     node->setY(point.y);
@@ -192,8 +190,6 @@
 - (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
 {
     if (_activeNetwork == activeNetwork) return;
-    const char *c_name = activeNetwork->getName().c_str();
-    NSLog(@"setting active network to %s", c_name);
     // TODO: Assert that active network is in the root network.
     _activeNetwork = activeNetwork;
 
@@ -221,11 +217,6 @@
 - (void)setRenderedNode:(NodeCore::Node *)renderedNode
 {
     if (self.renderedNode == renderedNode) return;
-    if (renderedNode != NULL) {
-        NSLog(@"Setting rendered node to %s", renderedNode->getName().c_str());
-    } else {
-        NSLog(@"Setting rendered node to null"  );
-    }
     if (!_activeNetwork) return;
     _activeNetwork->setRenderedNode(renderedNode);
 
