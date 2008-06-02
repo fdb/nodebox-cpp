@@ -26,13 +26,11 @@
 #import "NodeBoxDocument.h"
 #import "NodeLayer.h"
 #import "NetworkLayer.h"
+#import "FieldWrapper.h"
 
 @interface NetworkView(Private)
 
-    - (void)addLayerForNode:(NodeCore::Node *)node;
-    - (void)deselect;
-    - (void)select:(NodeCore::Node *)node;
-    - (CALayer *)findLayerForNode:(NodeCore::Node *)node;
+- (NodeLayer*) findLayerForNode: (NodeCore::Node*)node;
 
 @end
 
@@ -57,6 +55,19 @@
     [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];
 }
 
+#pragma mark Controller
+
+- (NetworkViewController*)controller
+{
+    return viewController;
+}
+
+- (void) setController: (NetworkViewController*)controller
+{
+    viewController = controller;
+    [self rebuildNetwork];
+}
+
 #pragma mark Mouse Events
 
 - (BOOL)acceptsFirstResponder
@@ -64,21 +75,85 @@
     return YES;
 }
 
-
 - (void)mouseDown:(NSEvent *)theEvent
 {
+    _draggingNode = NULL;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NodeCore::Node *node = [self findNodeAt:pt];
+    if (!node) return;
+    BOOL shiftKeyDown = ([[NSApp currentEvent] modifierFlags] &
+        (NSShiftKeyMask | NSAlphaShiftKeyMask)) !=0; 
+    _startedDragging = false;
+    _draggingNode = node;
+    _dragMode = shiftKeyDown ? kDragModeConnect : kDragModeNode;
+    _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
+    _dragPoint = pt;
+    // TODO: When making a connection, show the connection line
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    if (_draggingNode == NULL) return;
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    if (!_startedDragging &&
+        abs(pt.x + _clickPoint.x - _draggingNode->getX()) > kDragStart ||
+        abs(pt.y + _clickPoint.y - _draggingNode->getY()) > kDragStart) {
+        _startedDragging = true;
+    }
+    if (_startedDragging) {
+        _dragPoint = pt;
+        if (_dragMode == kDragModeNode) {
+            NSPoint newPos = NSMakePoint(pt.x + _clickPoint.x, pt.y + _clickPoint.y);
+            [viewController.windowController moveNode:_draggingNode to:newPos];
+        } else if (_dragMode == kDragModeConnect) {
+            NodeCore::Node *newDragOverNode = [self findNodeAt:pt];
+            if (_dragOverNode == newDragOverNode) return;
+            [self dehighlightNode:_dragOverNode];
+            _dragOverNode = newDragOverNode;
+            [self highlightNode:_dragOverNode];
+        }
+    }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    // If I was dragging, should not select.
     NSPoint eventPoint = [theEvent locationInWindow];
     NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
     if (!viewController) return;
-    //if ([theEvent clickCount] == 1) {
+    if (_startedDragging && _dragMode == kDragModeConnect && _dragOverNode != NULL) {
+        [self dehighlightNode:_dragOverNode];
+        if (_dragOverNode != _draggingNode) {
+            _deferredDraggingNode = _draggingNode;
+            NSMenu *fieldMenu = [[NSMenu alloc] init];
+            SEL connectSelector = @selector(connectNodeToField:);
+            NodeCore::FieldList fields = _dragOverNode->getFields();
+            for (NodeCore::FieldIterator fieldIter = fields.begin(); fieldIter != fields.end(); ++fieldIter) {
+                NodeCore::Field *field = *fieldIter;
+                NSMenuItem *item = [fieldMenu addItemWithTitle:[NSString stringWithCString:field->getName().c_str()] action:connectSelector keyEquivalent:@""];
+                FieldWrapper *fieldWrapper = [[FieldWrapper alloc] initWithField:field];
+                [item setRepresentedObject:fieldWrapper];
+            }
+            [NSMenu popUpContextMenu:fieldMenu withEvent:theEvent forView:self];
+            _draggingNode = NULL;
+            _startedDragging = false;
+            _dragMode = kDragModeNotDragging;
+            _dragOverNode = NULL;
+        }
+    }
+    if ([theEvent clickCount] == 1) {
         // Select a node
-        [viewController setActiveNode:[self findNodeAt:pt]];
-        [viewController setRenderedNode:[self findNodeAt:pt]];
-    //}
+        [viewController.windowController setActiveNode:[self findNodeAt:pt]];
+        [viewController.windowController setRenderedNode:[self findNodeAt:pt]];
+    }
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
@@ -91,17 +166,6 @@
     NodeCore::Node *node = [self findNodeAt:pt];
     if (!node) return;
     [(NetworkViewController *)viewController contextMenuForNode:node event:theEvent];
-}
-
-- (NetworkViewController*)controller
-{
-    return viewController;
-}
-
-- (void)setController:(NetworkViewController *)controller
-{
-    viewController = controller;
-    [self rebuildNetwork];
 }
 
 #pragma mark Drag And Drop
@@ -144,7 +208,9 @@
     }
 }
 
-- (NodeCore::Node *)findNodeAt:(NSPoint) point
+#pragma mark View queries
+
+- (NodeCore::Node*) findNodeAt: (NSPoint)point
 {
     CALayer *hit = [rootNetworkLayer hitTest:CGPointMake(point.x, point.y)];
     if (!hit) return NULL;
@@ -152,13 +218,9 @@
     return node;
 }
 
-- (void)activeNodeChanged:(NodeCore::Node *)activeNode
-{
-    [self deselect];
-    [self select:activeNode];
-}
+#pragma mark View operations
 
-- (void)clearLayers
+- (void) clearLayers;
 {
     while (rootNetworkLayer.sublayers > 0) {
         CALayer *sublayer = (CALayer *)[rootNetworkLayer.sublayers objectAtIndex:0];
@@ -166,7 +228,7 @@
     }
 }
 
-- (void)rebuildNetwork
+- (void) rebuildNetwork;
 {
     [self clearLayers];
     NodeCore::Network* network = [viewController rootNetwork];
@@ -179,33 +241,82 @@
     [self select:[viewController activeNode]];
 }
 
-@end
-
-@implementation NetworkView(Private)
-
-- (void)addLayerForNode:(NodeCore::Node *)node
+- (void) moveNode: (NodeCore::Node*)node to: (NSPoint)pt;
 {
-    NodeLayer *nodeLayer  = [[NodeLayer alloc] initWithNode:node];
-    [rootNetworkLayer addSublayer:nodeLayer];    
+    NodeLayer *nodeLayer = [self findLayerForNode:node];
+    if (!nodeLayer) return;
+    nodeLayer.position = CGPointMake(pt.x, pt.y);
 }
 
-- (void)deselect
+- (void) deselect;
 {
     NSArray *sublayers = [rootNetworkLayer sublayers];
     for (int i=0; i < [sublayers count]; i++) {
         NodeLayer *sublayer = (NodeLayer *)[sublayers objectAtIndex:i];
         sublayer.selected = FALSE;
     }
-    
 }
 
-- (void)select:(NodeCore::Node *)node
+- (void) select: (NodeCore::Node*)node;
 {
     NodeLayer *layer = (NodeLayer *)[self findLayerForNode:node];
     layer.selected = TRUE;
 }
 
-- (CALayer *)findLayerForNode:(NodeCore::Node *)node
+- (void) addLayerForNode: (NodeCore::Node*)node
+{
+    NodeLayer *nodeLayer  = [[NodeLayer alloc] initWithNode:node];
+    [rootNetworkLayer addSublayer:nodeLayer];    
+}
+
+- (void) removeLayerForNode: (NodeCore::Node*)node
+{
+    NodeLayer *nodeLayer = [self findLayerForNode:node];
+    if (!nodeLayer) return;
+    [nodeLayer removeFromSuperlayer];
+}
+
+- (void) highlightNode: (NodeCore::Node*)node
+{
+    if (!node) return;
+    NodeLayer *layer = [self findLayerForNode:node];
+    if (!layer) return;
+    layer.shadowColor = [CGColorHelper dragHighlightColor];
+    layer.shadowOpacity = 1.0f;
+    layer.shadowRadius = 5.0f;
+}
+
+- (void) dehighlightNode: (NodeCore::Node*)node
+{
+    if (!node) return;
+    NodeLayer *layer = [self findLayerForNode:node];
+    if (!layer) return;
+    layer.shadowColor = [CGColorHelper black];
+    layer.shadowOpacity = 0.5f;
+    layer.shadowRadius = 2.0f;
+}
+
+- (void) redrawConnections
+{
+    [rootNetworkLayer setNeedsDisplay];
+}
+
+#pragma mark Event callbacks
+
+- (void) connectNodeToField: (NSMenuItem*)menuItem
+{
+    if (!_deferredDraggingNode) return;
+    NodeCore::Field *field = [(FieldWrapper *)[menuItem representedObject] field];
+    if (!field) return;
+    [viewController.windowController connectFrom:field to:_deferredDraggingNode];
+    _deferredDraggingNode = NULL;
+}
+
+@end
+
+@implementation NetworkView(Private)
+
+- (NodeLayer*) findLayerForNode: (NodeCore::Node*)node
 {
     if (!node) return NULL;
     NSString *nodeName = [NSString stringWithCString:node->getName().c_str()];
@@ -213,7 +324,7 @@
     for (int i=0; i < [sublayers count]; i++) {
         CALayer *sublayer = (CALayer *)[sublayers objectAtIndex:i];
         if ([sublayer.name isEqualToString:nodeName]) {
-            return sublayer;
+            return (NodeLayer*) sublayer;
         }
     }
     return NULL;

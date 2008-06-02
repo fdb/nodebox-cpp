@@ -20,6 +20,7 @@
 		618FA2F00DED84F8006F4B48 /* ValueLadderCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 618FA2EF0DED84F8006F4B48 /* ValueLadderCell.mm */; };
 		61936BEE0DC867AC0034D23C /* NodeBoxDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61936BEC0DC867AC0034D23C /* NodeBoxDocument.xib */; };
 		61936BF10DC867FC0034D23C /* NodeBoxDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */; };
+		6195A6080DF44A7500C752AD /* FieldWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6195A6070DF44A7500C752AD /* FieldWrapper.mm */; };
 		619CC13E0DDC8F7C00A69DA2 /* CanvasView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1360DDC8F7C00A69DA2 /* CanvasView.xib */; };
 		619CC13F0DDC8F7C00A69DA2 /* NetworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC1380DDC8F7C00A69DA2 /* NetworkView.xib */; };
 		619CC1400DDC8F7C00A69DA2 /* ViewPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 619CC13A0DDC8F7C00A69DA2 /* ViewPane.xib */; };
@@ -100,6 +101,8 @@
 		61936BED0DC867AC0034D23C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NodeBoxDocument.xib; sourceTree = "<group>"; };
 		61936BEF0DC867FC0034D23C /* NodeBoxDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeBoxDocument.mm; sourceTree = "<group>"; };
 		61936BF00DC867FC0034D23C /* NodeBoxDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeBoxDocument.h; sourceTree = "<group>"; };
+		6195A6060DF44A7500C752AD /* FieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldWrapper.h; sourceTree = "<group>"; };
+		6195A6070DF44A7500C752AD /* FieldWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FieldWrapper.mm; sourceTree = "<group>"; };
 		619CC1370DDC8F7C00A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CanvasView.xib; sourceTree = "<group>"; };
 		619CC1390DDC8F7C00A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetworkView.xib; sourceTree = "<group>"; };
 		619CC13B0DDC8F7C00A69DA2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ViewPane.xib; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 				61B0EE980DEF13F700F09919 /* NodeLayer.mm */,
 				61DD33A00DF01357005431C0 /* NetworkLayer.h */,
 				61DD33A10DF01357005431C0 /* NetworkLayer.mm */,
+				6195A6060DF44A7500C752AD /* FieldWrapper.h */,
+				6195A6070DF44A7500C752AD /* FieldWrapper.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				61B0EB970DEED21C00F09919 /* CGColorHelper.mm in Sources */,
 				61B0EE990DEF13F700F09919 /* NodeLayer.mm in Sources */,
 				61DD33A20DF01357005431C0 /* NetworkLayer.mm in Sources */,
+				6195A6080DF44A7500C752AD /* FieldWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

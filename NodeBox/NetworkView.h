@@ -23,6 +23,8 @@
 
 @class NetworkViewController;
 
+static int kDragStart = 5;
+
 enum DragModeType {
     kDragModeNotDragging = 0,
     kDragModeNode = 1,
@@ -32,13 +34,37 @@ enum DragModeType {
 @interface NetworkView : NSView {
     IBOutlet NetworkViewController *viewController;
     CALayer *rootNetworkLayer;
+
+    DragModeType _dragMode;
+    NodeCore::Node *_draggingNode;
+    NodeCore::Node *_dragOverNode;
+    NSPoint _dragPoint;
+    bool _startedDragging;
+    NodeCore::Node *_deferredDraggingNode;
+    NSPoint _clickPoint;
 }
 
-- (void)activeNodeChanged:(NodeCore::Node *)activeNode;
-- (NetworkViewController*)controller;
-- (void)setController:(NetworkViewController *)controller;
-- (NodeCore::Node *)findNodeAt:(NSPoint) point;
-- (void)clearLayers;
-- (void)rebuildNetwork;
+- (NetworkViewController*) controller;
+- (void) setController: (NetworkViewController*)controller;
+
+//// View queries ////
+
+- (NodeCore::Node*) findNodeAt: (NSPoint)point;
+
+//// View operations ////
+
+- (void) clearLayers;
+- (void) rebuildNetwork;
+- (void) moveNode: (NodeCore::Node*)node to: (NSPoint)pt;
+- (void) deselect;
+- (void) select: (NodeCore::Node*)node;
+- (void) addLayerForNode: (NodeCore::Node*)node;
+- (void) removeLayerForNode: (NodeCore::Node*)node;
+- (void) highlightNode: (NodeCore::Node*)node;
+- (void) dehighlightNode: (NodeCore::Node*)node;
+- (void) redrawConnections;
+
+//// Event callbacks ////
+- (void) connectNodeToField: (NSMenuItem*)menuItem;
 
 @end

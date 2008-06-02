@@ -16,22 +16,21 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import <NodeCore/NodeCore.h>
-#import <Cocoa/Cocoa.h>
-#import "ViewController.h"
-#import "NetworkView.h"
 
-@interface NetworkViewController : ViewController {
-    IBOutlet NetworkView *_view;
-    IBOutlet NSMenu *nodeContextMenu;
-    NodeCore::Node *_contextNode;
+#import "FieldWrapper.h"
+
+@implementation FieldWrapper
+
+- (id) initWithField: (NodeCore::Field*)field
+{
+    self = [super init];
+    _field = field;
+    return self;
 }
 
-- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
-- (NSView *)view;
-- (void)contextMenuForNode:(NodeCore::Node *)node event:(NSEvent *)theEvent;
-- (void)deleteNode:(id)sender;
-- (void)renameNode:(id)sender;
+- (NodeCore::Field*) field
+{
+    return _field;
+}
 
 @end

@@ -52,9 +52,14 @@
             NSLog(@"Switching to network view");
             _viewController = [[NetworkViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
+            NSLog(@"NN 2 %@", [_viewController view]);
             [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
+            NSLog(@"NN 3");
             contentView = [_viewController view];
+            NSLog(@"NN 4");
+            
             [viewTypePopup selectItemWithTag:type];
+            NSLog(@"NN 5");
             break;
         case ParameterViewType:
             NSLog(@"Switching to parameter view");

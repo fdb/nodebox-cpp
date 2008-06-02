@@ -29,21 +29,26 @@
     NodeCore::Node *_activeNode;
 }
 
--(NodeCore::Node*) createNode;
--(NodeCore::Node*) createNode:(NodeCore::NodeInfo *)info at:(NSPoint)point;
--(NodeCore::Node*) createNodeAt:(NSPoint)point;
--(void) addNode:(NodeCore::Node *)node;
--(BOOL) removeNode:(NodeCore::Node *)node;
-- (void)activeNetworkModified; // TODO not the best name
+//// Network operations ////
+- (NodeCore::Node*) createNode: (NodeCore::NodeInfo *)info at: (NSPoint)point;
+- (NodeCore::Node*) createNodeAt: (NSPoint)point;
+- (void) addNode: (NodeCore::Node *)node;
+- (BOOL) removeNode: (NodeCore::Node *)node;
+- (void) moveNode: (NodeCore::Node *)node to:(NSPoint)pt;
+- (void) connectFrom: (NodeCore::Field*)field to: (NodeCore::Node*)node;
+- (void) setActiveNetwork: (NodeCore::Network *)activeNetwork;
+- (void) setActiveNode: (NodeCore::Node *)activeNode;
+- (void) setRenderedNode: (NodeCore::Node *)renderedNode;
 
-- (IBAction)pathChanged:(id)sender; // TODO should be renamed
-- (NodeCore::Network *)rootNetwork;
-- (NodeCore::Network *)activeNetwork;
-- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork;
-- (NodeCore::Node *)activeNode;
-- (void)setActiveNode:(NodeCore::Node *)activeNode;
-- (NodeCore::Node *)renderedNode;
-- (void)setRenderedNode:(NodeCore::Node *)renderedNode;
+//// State ////
+- (NodeCore::Network *) rootNetwork;
+- (NodeCore::Network *) activeNetwork;
+- (NodeCore::Node *) activeNode;
+- (NodeCore::Node *) renderedNode;
 
-- (NodeCore::NodeLibraryManager*)nodeLibraryManager;
+//// Library ////
+- (NodeCore::NodeLibraryManager*) nodeLibraryManager;
+
+// TODO: remove
+- (IBAction) pathChanged: (id)sender; // TODO should be renamed
 @end

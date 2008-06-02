@@ -58,8 +58,8 @@
 {
     NodeCore::Node *inputNode = input->getNode();
     NodeCore::Node *outputNode = output->getNode();
-    NSPoint p1 = NSMakePoint(outputNode->getX() + kNodeWidth / 2, outputNode->getY() + kNodeHeight);
-    NSPoint p2 = NSMakePoint(inputNode->getX() + kNodeWidth / 2, inputNode->getY());
+    NSPoint p1 = NSMakePoint(outputNode->getX(), outputNode->getY() + kNodeHeight/2);
+    NSPoint p2 = NSMakePoint(inputNode->getX(), inputNode->getY() - kNodeHeight/2);
     [self drawConnectionLineFrom:p1 to:p2 context:ctx];
 }
 

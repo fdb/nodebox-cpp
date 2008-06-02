@@ -34,10 +34,12 @@
 + (CGColorRef)red;
 + (CGColorRef)blue;
 
+
 + (CGColorRef)halfRed;
 + (CGColorRef)halfBlue;
 + (CGColorRef)halfWhite;
 
 + (CGColorRef)connectionLineColor;
++ (CGColorRef)dragHighlightColor;
 
 @end

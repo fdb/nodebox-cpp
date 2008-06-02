@@ -62,10 +62,7 @@
     //[networkPath setURL:[[NSURL alloc] initWithString:@"doc://doc/root/test/hello"]];
 }
 
--(NodeCore::Node*) createNode
-{
-    return [self createNodeAt:NSMakePoint(30, 30)];
-}
+#pragma mark Network operations
 
 -(NodeCore::Node*) createNode:(NodeCore::NodeInfo *)info at:(NSPoint)point
 {
@@ -80,7 +77,14 @@
     }
     [self activeNetwork]->setUniqueNodeName(node);
     [self activeNetwork]->add(node);
-    [self activeNetworkModified];
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didAddNode:node];
+    }
+
     return node;    
 }
 
@@ -97,7 +101,14 @@
     }
     [self activeNetwork]->setUniqueNodeName(node);
     [self activeNetwork]->add(node);
-    [self activeNetworkModified];
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didAddNode:node];
+    }
+
     return node;
 }
 
@@ -108,11 +119,16 @@
     if (![undo isUndoing]) {
         [undo setActionName:@"Add Node"];
     }
-    [self activeNetwork]->add(node);
-    [self activeNetworkModified];
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didAddNode:node];
+    }
 }
 
--(BOOL) removeNode:(NodeCore::Node *)node
+- (BOOL) removeNode:(NodeCore::Node *)node
 {
     if (node->getNetwork() != [self activeNetwork]) {
         return false;
@@ -123,28 +139,92 @@
         [undo setActionName:@"Remove Node"];
     }
     [self activeNetwork]->remove(node);
-    [self activeNetworkModified];
+    
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didRemoveNode:node];
+    }
+
     // Not deleting the node, since the undoManager needs it.
     return true;
 }
 
-- (void) activeNetworkModified
+- (void) moveNode: (NodeCore::Node *)node to: (NSPoint)pt;
 {
-    // Notify everybody
+    node->setX(pt.x);
+    node->setY(pt.y);
+    
+    // Notify
     NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
     ViewPaneController *c;
     while (c = [enumerator nextObject]) {
-        [[c viewController] activeNetworkModified];
+        [[c viewController] didMoveNode:node to:pt];
     }
 }
 
-- (IBAction)pathChanged:(id)sender
+- (void) connectFrom: (NodeCore::Field*)field to: (NodeCore::Node*)node
 {
-    //NSLog(@"path changed %@", sender);
-    //NSLog(@"path %@", [networkPath objectValue]);
-    //NSLog(@"cell %@", [[networkPath clickedPathComponentCell] URL]);
-    //NSLog(@"relative path %@", [[[networkPath clickedPathComponentCell] URL] relativePath]);
+    field->connect(node);
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didConnect:field to:node];
+    }
 }
+
+- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
+{
+    if (_activeNetwork == activeNetwork) return;
+    const char *c_name = activeNetwork->getName().c_str();
+    NSLog(@"setting active network to %s", c_name);
+    // TODO: Assert that active network is in the root network.
+    _activeNetwork = activeNetwork;
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didChangeActiveNetwork:activeNetwork];
+    }
+}
+
+- (void)setActiveNode:(NodeCore::Node *)activeNode
+{
+    if (_activeNode == activeNode) return;
+    _activeNode = activeNode;
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didChangeActiveNode:activeNode];
+    }
+}
+
+- (void)setRenderedNode:(NodeCore::Node *)renderedNode
+{
+    if (self.renderedNode == renderedNode) return;
+    if (renderedNode != NULL) {
+        NSLog(@"Setting rendered node to %s", renderedNode->getName().c_str());
+    } else {
+        NSLog(@"Setting rendered node to null"  );
+    }
+    if (!_activeNetwork) return;
+    _activeNetwork->setRenderedNode(renderedNode);
+
+    // Notify
+    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
+    ViewPaneController *c;
+    while (c = [enumerator nextObject]) {
+        [[c viewController] didChangeRenderedNode:renderedNode];
+    }
+}
+
+#pragma mark State
 
 - (NodeCore::Network *)rootNetwork
 {
@@ -156,33 +236,9 @@
     return _activeNetwork;
 }
 
-- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
-{
-    const char *c_name = activeNetwork->getName().c_str();
-    NSLog(@"setting active network to %s", c_name);
-    // TODO: Assert that active network is in the root network.
-    _activeNetwork = activeNetwork;
-    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
-    ViewPaneController *c;
-    while (c = [enumerator nextObject]) {
-        NSLog(@"Active network in %@", c);
-        [[c viewController] activeNetworkChanged];
-    }
-}
-
 - (NodeCore::Node *)activeNode
 {
     return _activeNode;
-}
-
-- (void)setActiveNode:(NodeCore::Node *)activeNode
-{
-    _activeNode = activeNode;
-    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
-    ViewPaneController *c;
-    while (c = [enumerator nextObject]) {
-        [[c viewController] activeNodeChanged:activeNode];
-    }
 }
 
 - (NodeCore::Node *)renderedNode
@@ -191,26 +247,20 @@
     return _activeNetwork->getRenderedNode();
 }
 
-- (void)setRenderedNode:(NodeCore::Node *)renderedNode
-{
-    if (renderedNode != NULL) {
-        NSLog(@"Setting rendered node to %s", renderedNode->getName().c_str());
-    } else {
-        NSLog(@"Setting rendered node to null"  );
-    }
-    if (!_activeNetwork) return;
-    _activeNetwork->setRenderedNode(renderedNode);
-    NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
-    ViewPaneController *c;
-    while (c = [enumerator nextObject]) {
-        [[c viewController] renderedNodeChanged:renderedNode];
-    }
-}
+#pragma mark Library
 
 - (NodeCore::NodeLibraryManager*)nodeLibraryManager
 {
     NodeBoxAppDelegate *delegate = [[NSApplication sharedApplication] delegate];
     return [delegate nodeLibraryManager];
+}
+
+- (IBAction)pathChanged:(id)sender
+{
+    //NSLog(@"path changed %@", sender);
+    //NSLog(@"path %@", [networkPath objectValue]);
+    //NSLog(@"cell %@", [[networkPath clickedPathComponentCell] URL]);
+    //NSLog(@"relative path %@", [[[networkPath clickedPathComponentCell] URL] relativePath]);
 }
 
 @end

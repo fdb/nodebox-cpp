@@ -31,14 +31,14 @@
     self = [super init];
     node = anode;
     self.name = [NSString stringWithCString:node->getName().c_str()];
-    self.frame = CGRectMake(node->getX(), node->getY(), kNodeWidth, kNodeHeight);
-    //nodeLayer.position = CGPointMake(node->getX(), NSHeight(self.bounds) - node->getY());
+    self.bounds = CGRectMake(0, 0, kNodeWidth, kNodeHeight);
+    self.position = CGPointMake(node->getX(), node->getY());
     self.backgroundColor = [CGColorHelper lightGray];
     self.shadowColor = [CGColorHelper black];
     self.shadowOpacity = 0.5f;
-    self.cornerRadius = 3.0f;
     self.shadowOffset = CGSizeMake(1.0f, -1.0f);
     self.shadowRadius = 2.0f;
+    self.cornerRadius = 3.0f;
     self.borderColor = [CGColorHelper gray];
     [self setNeedsDisplay];
 
@@ -65,6 +65,19 @@
     CGContextSetFillColorWithColor(ctx, [CGColorHelper black]);
     CGContextSelectFont(ctx, "Lucida Grande", 13, kCGEncodingMacRoman);
     CGContextShowTextAtPoint(ctx, 10.0f, 5.0f, node->getName().c_str(), node->getName().length());
+}
+
++ (id<CAAction>)defaultActionForKey:(NSString *)aKey
+{
+    // TODO: Can't use a static obj for some reason. 
+    // on initialization, the object is suddenly uninitialized.
+    if ([aKey isEqualToString:@"position"]) {
+        CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position"]; 
+        anim.duration = 0.01f; 
+        return anim;
+    } else {
+        return [super defaultActionForKey:aKey];
+    }
 }
 
 @end
