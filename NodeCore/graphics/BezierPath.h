@@ -23,6 +23,7 @@
 #include "Rect.h"
 #include "Grob.h"
 #include "PathElement.h"
+#include "Color.h"
 
 #include <iostream>
 #include <vector>
@@ -32,9 +33,6 @@ namespace NodeCore {
 
 class Transform;
 class PathElement;
-
-typedef std::vector<PathElement> PathElementList;
-typedef PathElementList::iterator PathElementIterator;
 
 class BezierPath : public Grob {
 public:
@@ -48,12 +46,23 @@ public:
     void close();
     
     void rect(float x, float y, float width, float height);
+    void roundedRect(float x, float y, float width, float height, float roundness);
     void oval(float x, float y, float width, float height);
+    void line(float x1, float y1, float x2, float y2);
     
     void clear();
     unsigned int size();
     bool isempty();
-    NodeCore::Rect bounds();
+    virtual NodeCore::Rect bounds();
+    
+    Color fillColor();
+    void setFillColor(const Color& c);
+    void noFill();
+    Color strokeColor();
+    void setStrokeColor(const Color& c);
+    void noStroke();
+    float strokeWidth();
+    void setStrokeWidth(float width);
     
     CGMutablePathRef cgPath();
     void transform(const Transform& t);
@@ -69,7 +78,15 @@ public:
     friend std::ostream& operator<<(std::ostream& o, const BezierPath& bp);
 
 private:
+    typedef std::vector<PathElement> PathElementList;
+    typedef PathElementList::iterator PathElementIterator;
+
     PathElementList m_elements;
+    bool m_fill;
+    Color m_fillColor;
+    bool m_stroke;
+    Color m_strokeColor;
+    float m_strokeWidth;
     CGMutablePathRef m_path; // transient
     bool m_dirty; // transient
 };

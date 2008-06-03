@@ -99,13 +99,13 @@ std::ostream& operator<<(std::ostream& o, const PathElement& p)
 {
     switch (p.m_cmd) {
         case kMoveto:
-            return o << "PathElement(MOVETO, " << p.m_point.m_x << ", " << p.m_point.m_y << ")";
+            return o << "PathElement(MOVETO, " << p.m_point.getX() << ", " << p.m_point.getY() << ")";
         case kLineto:
-            return o << "PathElement(LINETO, " << p.m_point.m_x << ", " << p.m_point.m_y << ")";
+            return o << "PathElement(LINETO, " << p.m_point.getX() << ", " << p.m_point.getY() << ")";
         case kCurveto:
-            return o << "PathElement(CURVETO, " << p.m_point.m_x << ", " << p.m_point.m_y << "," 
-                                                << p.m_ctrl1.m_x << ", " << p.m_ctrl1.m_y << "," 
-                                                << p.m_ctrl2.m_x << ", " << p.m_ctrl2.m_y << ")";
+            return o << "PathElement(CURVETO, " << p.m_point.getX() << ", " << p.m_point.getY() << "," 
+                                                << p.m_ctrl1.getX() << ", " << p.m_ctrl1.getY() << "," 
+                                                << p.m_ctrl2.getX() << ", " << p.m_ctrl2.getY() << ")";
         case kClose:
             return o << "PathElement(CLOSE)";
         default: assert(false);

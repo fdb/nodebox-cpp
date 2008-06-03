@@ -24,29 +24,114 @@
 
 namespace NodeCore {
 
-Field::Field(Node *node, const FieldName& name, FieldPolarity polarity)
-     : m_node(node), 
-       m_name(name), 
-       m_verboseName(""), 
-       m_connectable(false),
-       m_required(false),
-       m_multi(false),
-       m_polarity(polarity), 
-       m_connection(NULL),
-       m_downstreams(DownstreamList())
+Field::Field(Node *node, const FieldName& name, const FieldType& type, FieldDirection direction)
+     : m_node(node),
+       m_name(name),
+       m_verboseName(""),
+       m_type(type),
+       m_direction(direction),
+       m_connection(0)
 {
     if (validName(name)) {
         m_name = name;
     } else {
         throw InvalidName();
     }
+    if (m_type == kInt) {
+        m_value.i = 0;
+    } else if (m_type == kFloat) {
+        m_value.f = 0;
+    } else if (m_type == kString) {
+        m_value.s = new std::string;
+    } else {
+        m_value.d = 0;
+    }
+}
+
+int Field::asInt()
+{
+    if (m_type == kInt) {
+        return m_value.i;
+    } else if (m_type == kFloat) {
+        return (int) m_value.f;
+    } else {
+        return 0;
+    }
+}
+
+float Field::asFloat()
+{
+    if (m_type == kFloat) {
+        return m_value.f;
+    } else if (m_type == kInt) {
+        return (float) m_value.i;
+    } else {
+        return 0;
+    }
+}
+
+std::string Field::asString()
+{
+    if (m_type == kString) {
+        return *m_value.s;
+    } else {
+        return "";
+    }
+}
+
+void* Field::asData()
+{
+    return m_value.d;
+}
+
+void Field::set(int i)
+{
+    if (m_type == kInt) {
+        // TODO: lazy setting
+        preSet();
+        m_value.i = i;
+        postSet();
+    } else {
+        throw ValueError("Tried setting int value on field with type " + m_type);
+    }
+}
+
+void Field::set(float f)
+{
+    if (m_type == kFloat) {
+        // TODO: lazy setting
+        preSet();
+        m_value.f = f;
+        postSet();
+    } else {
+        throw ValueError("Tried setting float value on field with type " + m_type);
+    }
+}
+
+void Field::set(const std::string& s)
+{
+    if (m_type == kString) {
+        // TODO: lazy setting
+        preSet();
+        delete m_value.s;
+        m_value.s = new std::string(s);
+        postSet();
+    } else {
+        throw ValueError("Tried setting string value on field with type " + m_type);
+    }
+}
+
+void Field::set(void* data)
+{  
+    // TODO: lazy setting
+    preSet();
+    m_value.d = data;
+    postSet();
 }
 
 Field::~Field()
 {
-    if (m_polarity == kIn) {
-        disconnect();
-    }
+    disconnect();
 }
 
 bool Field::validName(const FieldName& name)
@@ -61,142 +146,122 @@ bool Field::validName(const FieldName& name)
     regcomp(&doubleUnderScoreRe, "^__.*$", REG_EXTENDED|REG_NOSUB);
 
     // No reserved words
-    regcomp(&reservedRe, "^(node|process|name|x|y|dirty)$", REG_EXTENDED|REG_NOSUB);
+    regcomp(&reservedRe, "^(node|name)$", REG_EXTENDED|REG_NOSUB);
     
     return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
            regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0 &
            regexec(&reservedRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
-bool Field::isConnected()
+// Checks if this field can connect to the ouput of the given node.
+// This compares the types of the relevant input and output fields.
+bool Field::canConnectTo(Node* node)
 {
-    if (m_polarity == kIn) {
-        return m_connection != NULL;
-    } else {
-        return !m_downstreams.empty();
-    }
+    if (isOutputField()) return false;
+    return  node->getOutputField()->getType() == getType();
 }
 
-bool Field::isConnectedTo(Field* field) {
-    if (m_polarity == kOut) {
-        for (DownstreamIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-            if (field == (*iter)->getInputField()) return true;
-        }
-        return false;
-    } else {
-        if (m_connection == NULL) return false;
-        return m_connection->getOutputField() == field;
-    }
-}
-
-Connection* Field::connect(Node *outputNode)
+Connection* Field::connect(Node* node)
 {
-    // Sanity checks
-    if (m_polarity == kOut) {
-        throw ConnectionError(m_node->getName() + "." + m_name + ": invoke connect only from the input");
+    // Sanity check
+    if (!isInputField()) {
+        throw ConnectionError(m_node->getName() + "." + m_name + ": can only connect input nodes");        
     }
-    if (outputNode == m_node) {
+    if (node == m_node) {
         throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to myself");
     }
-    
-    if (isConnected()) {
-        disconnect();
+    if (!canConnectTo(node)) {
+        throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to " + node->getName());
     }
-    m_connection = new Connection(outputNode->getOutputField(), this);
-    outputNode->getOutputField()->m_downstreams.push_back(m_connection);
+    disconnect();
+    m_connection = new Connection(node->getOutputField(), this);
+    node->addDownstream(m_connection);
     m_node->markDirty();
-    // TODO: dispatch/notify
+    // TODO: notify
     return m_connection;
-}
-
-bool Field::disconnect(Node *outputNode)
-{
-    if (m_polarity == kOut) {
-        throw ConnectionError(m_node->getName() + "." + m_name + ": invoke disconnect only from the input");
-    }
-    
-    if (!isConnected()) return false;
-    
-    assert(outputNode->getOutputField()->isConnectedTo(this));
-    outputNode->getOutputField()->removeFromDownstreams(m_connection);
-    delete m_connection;
-    m_connection = NULL;
-    m_node->markDirty();
-    revertToDefault();
-    // TODO: dispatch/notify
-    return true;
 }
 
 bool Field::disconnect()
 {
-    if (m_polarity == kOut) {
-        throw ConnectionError(m_node->getName() + "." + m_name + ": invoke disconnect only from the input");
-    }
+    assert(isInputField()); // TODO: also support disconnecting output fields.
     if (!isConnected()) return false;
-    return disconnect(m_connection->getOutputNode());
+    if (m_connection->hasOutput()) {
+        assert(m_connection->getOutputNode()->isOutputConnectedTo(this));
+        m_connection->getOutputNode()->removeDownstream(m_connection);
+    }
+    delete m_connection;
+    m_connection = 0;
+    revertToDefault();
+    m_node->markDirty();
+    // TODO: dispatch/notify
+    return true;
+}
+
+bool Field::isConnected()
+{
+    return m_connection != 0;
+}
+
+bool Field::isConnectedTo(Node* node)
+{
+    if (!m_connection)
+        return false;
+    return m_connection->getOutputNode() == node;
 }
 
 Connection* Field::getConnection()
 {
-    assert (m_polarity == kIn);
     return m_connection;
 }
 
-void Field::removeFromDownstreams(Connection* conn)
+void Field::update()
 {
-    for (DownstreamIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        if (conn == (*iter)) {
-            m_downstreams.erase(iter);
-            return;
+    if (isConnected()) {
+        m_connection->getOutputNode()->update();
+        assert(m_connection->getOutputField()->getType() == getType());
+        if (m_type == kInt) {
+            set(m_connection->getOutputField()->asInt());
+        } else if (m_type == kFloat) {
+            set(m_connection->getOutputField()->asFloat());
+        } else if (m_type == kString) {
+            set(m_connection->getOutputField()->asString());
+        } else {
+            set(m_connection->getOutputField()->asData());
         }
     }
-    // We should have removed the connection from the downstreams.
-    assert(false);
 }
 
 std::ostream& operator<<(std::ostream& o, const Field& f)
 {
-    o << "Field(" << f.m_node->getName() << "." << f.m_name << ")";
+
+    o << "Field(" << f.m_node->getName() << ", " << f.m_name << ", " << f.m_type << ")";
     return o;
+}
+
+void Field::revertToDefault()
+{
+    if (m_type == kInt) {
+        m_value.i = 0;
+    } else if (m_type == kFloat) {
+        m_value.f = 0;
+    } else if (m_type == kString) {
+        delete m_value.s;
+        m_value.s = new std::string;
+    } else {
+        // Don't do anything for kData or others.
+        // TODO: this should ask the node to revert the data.
+        // The node is the only one who knows how to treat opaque data.
+    }
 }
 
 void Field::preSet()
 {
-    if (m_polarity == kOut) {
-        return;
-        // TODO: find a way to check whether the value was set from processing, which is the
-        //       only place the value can be set from.
-        // throw ValueError("Output fields cannot be set directly, only through updating.");
-    }
-    if (isConnected()) {
-        throw ValueError("Field '" + m_name + "' is connected.");
-    }
     // TODO: validate
 }
 
 void Field::postSet()
 {
     m_node->markDirty();
-}
-
-void Field::update()
-{
-    if (m_polarity == kIn) {
-        if (isConnected()) {
-            m_connection->update();
-            setValueFromConnection();
-        }
-    } else {
-        m_node->update();
-    }
-}
-
-void Field::markDirty()
-{
-    assert(m_polarity == kOut);
-    for (DownstreamIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        (*iter)->markDirtyDownstream();
-    }
 }
 
 } // namespace NodeCore

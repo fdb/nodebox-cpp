@@ -22,6 +22,10 @@
 
 #include <iostream>
 
+#include "Point.h"
+
+#include <ApplicationServices/ApplicationServices.h>
+
 namespace NodeCore {
 
 class Rect {
@@ -29,12 +33,21 @@ public:
     Rect();
     Rect(float x, float y, float width, float height);
     Rect(CGRect r);
+    Rect(const Rect &r);
     
     float getX() { return m_x; }
     float getY() { return m_y; }
     float getWidth() { return m_width; }
     float getHeight() { return m_height; }
+    
+    bool isEmpty() const;
+    Rect normalized() const;
+    Rect united(const Rect& r) const;
+    bool intersects(const Rect& r) const;
+    bool contains(const NodeCore::Point& p) const;
+    bool contains(const Rect& r) const;
 
+    Rect& operator=(const Rect& r);
     bool operator==(const Rect& r) const;
     bool operator!=(const Rect& r) const { return !operator==(r); }
     friend std::ostream& operator<<(std::ostream& o, const Rect& bp);

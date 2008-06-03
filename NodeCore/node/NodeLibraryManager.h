@@ -30,14 +30,12 @@
 
 namespace NodeCore {
 
-const std::string NODE_LIBRARY_SEARCH_PATH = "plugins";
-
 typedef std::vector<NodeLibraryName> NodeLibraryNameList;
 typedef NodeLibraryNameList::iterator NodeLibraryNameIterator;
 
 // Converts a dirname like graphics-2.3.4 to a 
 // NodeLibrary("graphics", 2, 3, 4) object.
-NodeLibrary* dirname_to_library(std::string dirname);
+NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname);
 
 typedef std::multimap<NodeLibraryName,NodeLibrary*> NodeLibraryMap;
 typedef std::vector<NodeLibrary*> NodeLibraryList;
@@ -57,7 +55,7 @@ class NodeLibraryManager
 {
 public:
     
-    NodeLibraryManager();
+    NodeLibraryManager(std::string searchPath=".");
     ~NodeLibraryManager();
     
     // Shows unique names of libraries
@@ -87,11 +85,18 @@ public:
     
     NodeLibraryList libraries();
     NodeLibrary* loadLatest(NodeLibraryName name);
+
+    void appendSearchPath(std::string path);    
+
 private:
     // Searches for available libraries in the plugin search path.
     void lookForLibraries();
+    
+    typedef std::vector<std::string> SearchPathList;
 
+    SearchPathList m_searchPaths;
     NodeLibraryMap m_nodeLibraryMap;
+    bool m_lookedForLibraries;
 };
 
 } // namespace NodeCore

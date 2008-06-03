@@ -44,14 +44,19 @@ public:
     Connection(Field *outputField, Field *inputField);
     virtual ~Connection();
 
-    Field* getOutputField();
-    Node* getOutputNode();
-    Field* getInputField();
-    Node* getInputNode();
+    Field* getOutputField() const;
+    Node* getOutputNode() const;
+    Field* getInputField() const;
+    Node* getInputNode() const;
+    bool hasOutput() const;
 
     friend std::ostream& operator<<(std::ostream& o, const Connection& c);
 
 private:
+    // Disallow copy construction or assignment
+    Connection(const Connection& other);
+    Connection& operator=(const Connection& other);
+    
     void markDirtyDownstream();
     void update();
     
@@ -59,6 +64,7 @@ private:
     Field* m_input;
     
     friend class Field;
+    friend class Node;
 };
 
 } // namespace NodeCore

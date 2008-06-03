@@ -33,7 +33,7 @@ posix_dirlist_t posix_listdir(const char *path, int type)
     posix_dirlist_t fnames;
 
     if ((dirp = opendir(path)) == NULL) {
-        printf("could not open dir.\n");
+        printf("Could not open dir '%s'.\n", path);
         return fnames;
     }
     

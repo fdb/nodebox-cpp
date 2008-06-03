@@ -30,12 +30,12 @@
 namespace NodeCore {
 
 typedef std::map<std::string, Field*> FieldMap;
-typedef FieldMap::iterator FieldIterator;
+typedef FieldMap::iterator FieldMapIterator;
 
 #define NodeNameMacro(nodeName) \
 public: \
-    static Node* initialize() { return new nodeName; } \
-    virtual std::string className() { return #nodeName; }
+    static Node* initialize() { return new nodeName(); } \
+    virtual std::string className() const { return #nodeName; }
 
 typedef std::string NodeName;
 typedef std::string NodeType;
@@ -50,38 +50,93 @@ private:
     FieldName m_name;
 };
 
-// TODO: forbidden names
+class NodeProcessingError : public std::exception
+{
+public:
+    NodeProcessingError(Node* node, const std::string& msg="")
+            : m_node(node), m_message(msg) {}
+    NodeProcessingError(const NodeProcessingError& other)
+            : m_node(other.m_node), m_message(other.m_message) {}
+    virtual ~NodeProcessingError() throw() {}
+    Node* getNode() { return m_node; }
+    std::string getMessage() { return m_message; }
+    NodeProcessingError& operator=(const NodeProcessingError& other)
+    {
+        if(this == &other) return *this;
+        m_node = other.m_node;
+        m_message = other.m_message;
+        return *this;
+    }
+private:
+    Node* m_node;
+    std::string m_message;
+};
+
+class Network;
+
+typedef std::vector<Field*> FieldList;
+typedef FieldList::iterator FieldIterator;
+typedef std::vector<Connection*> ConnectionList;
+typedef ConnectionList::iterator ConnectionIterator;
 
 class Node {
 public:
-    Node();
+    Node(const FieldType& outputType = kInt);
     virtual ~Node();
     
-    virtual NodeName defaultName() { return className(); };
+    virtual NodeName defaultName() const;
+    
+    NodeName getName() const;
+    void setName(const NodeName &name);
+    static bool validName(const NodeName& name);
+    
+    void setNetwork(Network* network);
+    Network* getNetwork();
+        
+    float getX() const { return m_x; }
+    float getY() const { return m_y; }
+    void setX(float x);
+    void setY(float y);
 
-    Field* addField(const FieldName &name, FieldType type, FieldPolarity polarity=kIn);
-    Field* getField(const FieldName &name);
-    bool hasField(const FieldName &name);
-    Field* getOutputField();
+    Field* addField(const FieldName &name, const FieldType& type);
+    Field* getField(const FieldName &name) const;
+    bool hasField(const FieldName &name) const;
+    Field* getOutputField() const { return m_outputField; }
+    FieldType getOutputType() const { return m_outputField->getType(); }
+    FieldList getFields();
     
     // Value shortcuts
     int asInt(const FieldName &name);
     float asFloat(const FieldName &name);
     std::string asString(const FieldName &name);
-
+    void* asData(const FieldName &name);
+    
     // All these can throw a ValueError.
     void set(const FieldName &name, int i);
     void set(const FieldName &name, float f);
-    void set(const FieldName &name, std::string s);
-    
-    NodeName getName();
-    void setName(const NodeName &name);
-    static bool validName(const NodeName& name);
-    
+    void set(const FieldName &name, const std::string& s);
+    void set(const FieldName &name, void* d);
     
     void update();
-    bool isDirty();
+    bool isDirty() const;
     void markDirty();
+    
+    bool isOutputConnected();
+    bool isOutputConnectedTo(Node* node);
+    bool isOutputConnectedTo(Field* field);
+    ConnectionList getOutputConnections();
+
+    int outputAsInt() const;
+    float outputAsFloat() const;
+    std::string outputAsString() const;
+    void* outputAsData() const;
+
+    void _setOutput(int i);
+    void _setOutput(float f);
+    void _setOutput(std::string s);
+    void _setOutput(void* d);
+    // Needed for setOutput overrides
+    void _setOutputAsData(void* d) { _setOutput(d); }
 
     friend std::ostream& operator<<(std::ostream& o, const Node& n);
     
@@ -89,13 +144,28 @@ protected:
     virtual void process();
     
 private:
+    // Disallow copy construction or assignment
+    Node(const Node& other);
+    Node& operator=(const Node& other);
+    
+    void Node::_setName(const NodeName& name);
+
+    void addDownstream(Connection* c);
+    void removeDownstream(Connection* c);
+    
     float m_x, m_y;
     std::string m_name;
+    Network* m_network;
     FieldMap m_fields;
+    Field* m_outputField;
+    ConnectionList m_downstreams;
     // TODO: add exception
     bool m_dirty;
 
     NodeNameMacro(Node);
+    
+    friend class Field;
+    friend class Network;
 };
 
 } // namespace NodeCore

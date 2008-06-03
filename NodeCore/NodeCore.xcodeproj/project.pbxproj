@@ -9,24 +9,17 @@
 /* Begin PBXBuildFile section */
 		611EC2440DC22A52008BE1A1 /* testpdf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC16E0DC228CF008BE1A1 /* testpdf.cpp */; };
 		611EC3AC0DC22E7C008BE1A1 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC0DD0DC2223C008BE1A1 /* Python.framework */; };
-		611EC3AD0DC22E7C008BE1A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA30DC21240008BE1A1 /* QuartzCore.framework */; };
 		611EC3AE0DC22E7C008BE1A1 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */; };
-		611EC3AF0DC22E7C008BE1A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */; };
-		611EC3B00DC22E7C008BE1A1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBF9D0DC21210008BE1A1 /* Carbon.framework */; };
 		611EC3B30DC22E83008BE1A1 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */; };
 		611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC2370DC2297B008BE1A1 /* NodeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF470DC2108B008BE1A1 /* Connection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF490DC2108B008BE1A1 /* Field.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4D0DC2108B008BE1A1 /* FloatField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF4F0DC2108B008BE1A1 /* IntField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF510DC2108B008BE1A1 /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF530DC2108B008BE1A1 /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF550DC2108B008BE1A1 /* NodeLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BD0DC22EA4008BE1A1 /* NodeLibraryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BE0DC22EA4008BE1A1 /* posixutils.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5B0DC2108B008BE1A1 /* posixutils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3BF0DC22EA4008BE1A1 /* PythonNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5D0DC2108B008BE1A1 /* PythonNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3C00DC22EA4008BE1A1 /* StringField.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5F0DC2108B008BE1A1 /* StringField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3BF0DC22EA4008BE1A1 /* PythonNodeWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF5D0DC2108B008BE1A1 /* PythonNodeWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3C10DC22EB9008BE1A1 /* BezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF370DC2108B008BE1A1 /* BezierPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3C20DC22EB9008BE1A1 /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF390DC2108B008BE1A1 /* Canvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3C30DC22EB9008BE1A1 /* Grob.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF3B0DC2108B008BE1A1 /* Grob.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,16 +38,12 @@
 		611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
 		611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
 		611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
-		611EC3D30DC22ED6008BE1A1 /* FieldTypeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */; };
-		611EC3D40DC22ED6008BE1A1 /* FloatField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */; };
-		611EC3D50DC22ED6008BE1A1 /* IntField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF4E0DC2108B008BE1A1 /* IntField.cpp */; };
 		611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
 		611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
 		611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
 		611EC3D90DC22ED6008BE1A1 /* NodeLibraryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */; };
 		611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */; };
-		611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */; };
-		611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5E0DC2108B008BE1A1 /* StringField.cpp */; };
+		611EC3DB0DC22ED6008BE1A1 /* PythonNodeWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5C0DC2108B008BE1A1 /* PythonNodeWrapper.cpp */; };
 		611EC4420DC24D33008BE1A1 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */; };
 		611EC4850DC24E0A008BE1A1 /* unittest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC4840DC24E0A008BE1A1 /* unittest.cpp */; };
 		611EC5540DC2575B008BE1A1 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5400DC2575B008BE1A1 /* utils.cpp */; };
@@ -66,6 +55,43 @@
 		611EC55A0DC2575B008BE1A1 /* htmloutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5480DC2575B008BE1A1 /* htmloutput.cpp */; };
 		611EC55B0DC2575B008BE1A1 /* collectoroutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5510DC2575B008BE1A1 /* collectoroutput.cpp */; };
 		611EC55C0DC2575B008BE1A1 /* compileroutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EC5520DC2575B008BE1A1 /* compileroutput.cpp */; };
+		615500070DDA02D300708CBC /* stringutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 615500050DDA02D300708CBC /* stringutils.cpp */; };
+		615500080DDA02D300708CBC /* stringutils.h in Headers */ = {isa = PBXBuildFile; fileRef = 615500060DDA02D300708CBC /* stringutils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		616557A30DC61E9100AC5259 /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = 616557A10DC61E9100AC5259 /* Image.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		616557A40DC61E9100AC5259 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 616557A20DC61E9100AC5259 /* Image.cpp */; };
+		6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6165582B0DC6297600AC5259 /* nodeboxicon.png */; };
+		61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
+		618C8BE20DE832E30096A514 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8BE00DE832E30096A514 /* Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		618C8BE30DE832E30096A514 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618C8BE10DE832E30096A514 /* Color.cpp */; };
+		618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 618C8D8A0DE875900096A514 /* ImageTestSuite.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		618C8DB20DE876880096A514 /* testimage.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 618C8DB00DE876770096A514 /* testimage.png */; };
+		61936C480DC86FA80034D23C /* Network.h in Headers */ = {isa = PBXBuildFile; fileRef = 61936C460DC86FA80034D23C /* Network.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61936C490DC86FA80034D23C /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61936C470DC86FA80034D23C /* Network.cpp */; };
+		6195F7520DEAC52D00F3771B /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC0DD0DC2223C008BE1A1 /* Python.framework */; };
+		6195F7710DEAC89300F3771B /* nodecore_wrap.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 6195F7700DEAC89300F3771B /* nodecore_wrap.cxx */; };
+		6195F8120DEACCB000F3771B /* nodecore.py in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6195F8100DEACCAD00F3771B /* nodecore.py */; };
+		6195F8300DEACD9B00F3771B /* BezierPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF360DC2108B008BE1A1 /* BezierPath.cpp */; };
+		6195F8310DEACD9B00F3771B /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF380DC2108B008BE1A1 /* Canvas.cpp */; };
+		6195F8320DEACD9B00F3771B /* Grob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3A0DC2108B008BE1A1 /* Grob.cpp */; };
+		6195F8330DEACD9B00F3771B /* PathElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3C0DC2108B008BE1A1 /* PathElement.cpp */; };
+		6195F8340DEACD9B00F3771B /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF3E0DC2108B008BE1A1 /* Point.cpp */; };
+		6195F8350DEACD9B00F3771B /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF400DC2108B008BE1A1 /* Rect.cpp */; };
+		6195F8360DEACD9B00F3771B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
+		6195F8370DEACD9B00F3771B /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
+		6195F8380DEACD9B00F3771B /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
+		6195F8390DEACD9B00F3771B /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
+		6195F83A0DEACD9B00F3771B /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
+		6195F83B0DEACD9B00F3771B /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
+		6195F83C0DEACD9B00F3771B /* NodeLibraryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF560DC2108B008BE1A1 /* NodeLibraryManager.cpp */; };
+		6195F83D0DEACD9B00F3771B /* posixutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */; };
+		6195F83E0DEACD9B00F3771B /* PythonNodeWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF5C0DC2108B008BE1A1 /* PythonNodeWrapper.cpp */; };
+		6195F83F0DEACD9B00F3771B /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 616557A20DC61E9100AC5259 /* Image.cpp */; };
+		6195F8400DEACD9B00F3771B /* CanvasNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */; };
+		6195F8410DEACD9B00F3771B /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61936C470DC86FA80034D23C /* Network.cpp */; };
+		6195F8420DEACD9B00F3771B /* stringutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 615500050DDA02D300708CBC /* stringutils.cpp */; };
+		6195F8430DEACD9B00F3771B /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618C8BE10DE832E30096A514 /* Color.cpp */; };
+		6195F8460DEACDB900F3771B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EBFA10DC2122E008BE1A1 /* ApplicationServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +110,39 @@
 			remoteInfo = NodeCore;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		616558260DC6290700AC5259 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				6165582C0DC6297F00AC5259 /* nodeboxicon.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		618C8DB10DE876770096A514 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				618C8DB20DE876880096A514 /* testimage.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F8110DEACCAD00F3771B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				6195F8120DEACCB000F3771B /* nodecore.py in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		611EBF360DC2108B008BE1A1 /* BezierPath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierPath.cpp; sourceTree = "<group>"; };
@@ -105,12 +164,6 @@
 		611EBF470DC2108B008BE1A1 /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
 		611EBF480DC2108B008BE1A1 /* Field.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Field.cpp; sourceTree = "<group>"; };
 		611EBF490DC2108B008BE1A1 /* Field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Field.h; sourceTree = "<group>"; };
-		611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FieldTypeManager.cpp; sourceTree = "<group>"; };
-		611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldTypeManager.h; sourceTree = "<group>"; };
-		611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FloatField.cpp; sourceTree = "<group>"; };
-		611EBF4D0DC2108B008BE1A1 /* FloatField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatField.h; sourceTree = "<group>"; };
-		611EBF4E0DC2108B008BE1A1 /* IntField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntField.cpp; sourceTree = "<group>"; };
-		611EBF4F0DC2108B008BE1A1 /* IntField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntField.h; sourceTree = "<group>"; };
 		611EBF500DC2108B008BE1A1 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		611EBF510DC2108B008BE1A1 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeInfo.cpp; sourceTree = "<group>"; };
@@ -121,10 +174,8 @@
 		611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeLibraryManager.h; sourceTree = "<group>"; };
 		611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = posixutils.cpp; sourceTree = "<group>"; };
 		611EBF5B0DC2108B008BE1A1 /* posixutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = posixutils.h; sourceTree = "<group>"; };
-		611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonNode.cpp; sourceTree = "<group>"; };
-		611EBF5D0DC2108B008BE1A1 /* PythonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PythonNode.h; sourceTree = "<group>"; };
-		611EBF5E0DC2108B008BE1A1 /* StringField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringField.cpp; sourceTree = "<group>"; };
-		611EBF5F0DC2108B008BE1A1 /* StringField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringField.h; sourceTree = "<group>"; };
+		611EBF5C0DC2108B008BE1A1 /* PythonNodeWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonNodeWrapper.cpp; sourceTree = "<group>"; };
+		611EBF5D0DC2108B008BE1A1 /* PythonNodeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PythonNodeWrapper.h; sourceTree = "<group>"; };
 		611EBF840DC211C9008BE1A1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		611EBF9D0DC21210008BE1A1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		611EBF9F0DC2121B008BE1A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -167,6 +218,45 @@
 		611EC5860DC26042008BE1A1 /* FieldTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldTestSuite.h; path = test/node/FieldTestSuite.h; sourceTree = "<group>"; };
 		611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeTestSuite.h; path = test/node/NodeTestSuite.h; sourceTree = "<group>"; };
 		611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathElementTestSuite.h; path = test/graphics/PathElementTestSuite.h; sourceTree = "<group>"; };
+		615500050DDA02D300708CBC /* stringutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stringutils.cpp; path = util/stringutils.cpp; sourceTree = "<group>"; };
+		615500060DDA02D300708CBC /* stringutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringutils.h; path = util/stringutils.h; sourceTree = "<group>"; };
+		6155000A0DDA02FE00708CBC /* StringUtilsTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtilsTestSuite.h; sourceTree = "<group>"; };
+		616557A10DC61E9100AC5259 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		616557A20DC61E9100AC5259 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		6165582B0DC6297600AC5259 /* nodeboxicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeboxicon.png; sourceTree = "<group>"; };
+		61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasNode.h; sourceTree = "<group>"; };
+		61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CanvasNode.cpp; sourceTree = "<group>"; };
+		61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CanvasNodeTestSuite.h; path = test/node/CanvasNodeTestSuite.h; sourceTree = "<group>"; };
+		618C8BE00DE832E30096A514 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		618C8BE10DE832E30096A514 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
+		618C8D8A0DE875900096A514 /* ImageTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTestSuite.h; path = test/graphics/ImageTestSuite.h; sourceTree = "<group>"; };
+		618C8DB00DE876770096A514 /* testimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testimage.png; path = test/testimage.png; sourceTree = "<group>"; };
+		618C8E230DE87C860096A514 /* RectTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RectTestSuite.h; path = test/graphics/RectTestSuite.h; sourceTree = "<group>"; };
+		61936C460DC86FA80034D23C /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		61936C470DC86FA80034D23C /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
+		61936CE90DC884570034D23C /* NetworkTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkTestSuite.h; path = test/node/NetworkTestSuite.h; sourceTree = "<group>"; };
+		6195F72F0DEAC50300F3771B /* _nodecore.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = _nodecore.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		6195F7700DEAC89300F3771B /* nodecore_wrap.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = nodecore_wrap.cxx; path = python/nodecore_wrap.cxx; sourceTree = "<group>"; };
+		6195F7F40DEACBFB00F3771B /* nodecore.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; name = nodecore.i; path = python/nodecore.i; sourceTree = "<group>"; };
+		6195F8100DEACCAD00F3771B /* nodecore.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = nodecore.py; path = python/nodecore.py; sourceTree = "<group>"; };
+		6195FAA00DEB04EA00F3771B /* BezierPath.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = BezierPath.i; sourceTree = "<group>"; };
+		6195FAA10DEB04EA00F3771B /* Canvas.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Canvas.i; sourceTree = "<group>"; };
+		6195FAA20DEB04EA00F3771B /* Color.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Color.i; sourceTree = "<group>"; };
+		6195FAA30DEB04EA00F3771B /* Grob.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Grob.i; sourceTree = "<group>"; };
+		6195FAA40DEB04EA00F3771B /* Image.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Image.i; sourceTree = "<group>"; };
+		6195FAA50DEB04EA00F3771B /* PathElement.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = PathElement.i; sourceTree = "<group>"; };
+		6195FAA60DEB04EA00F3771B /* Point.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Point.i; sourceTree = "<group>"; };
+		6195FAA70DEB04EA00F3771B /* Rect.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Rect.i; sourceTree = "<group>"; };
+		6195FAA80DEB04EA00F3771B /* Transform.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Transform.i; sourceTree = "<group>"; };
+		6195FAA90DEB04EA00F3771B /* Utils.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Utils.i; sourceTree = "<group>"; };
+		6195FAAB0DEB04F400F3771B /* Connection.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Connection.i; sourceTree = "<group>"; };
+		6195FAAC0DEB04F400F3771B /* Field.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Field.i; sourceTree = "<group>"; };
+		6195FAAD0DEB04F400F3771B /* Network.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Network.i; sourceTree = "<group>"; };
+		6195FAAE0DEB04F400F3771B /* Node.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Node.i; sourceTree = "<group>"; };
+		6195FAAF0DEB04F400F3771B /* NodeInfo.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = NodeInfo.i; sourceTree = "<group>"; };
+		6195FAB00DEB04F400F3771B /* NodeLibrary.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = NodeLibrary.i; sourceTree = "<group>"; };
+		6195FAB10DEB04F400F3771B /* NodeLibraryManager.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = NodeLibraryManager.i; sourceTree = "<group>"; };
+		61FA165A0DCF06830056A7C6 /* TestNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestNodes.h; path = test/node/TestNodes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,10 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				611EC3AC0DC22E7C008BE1A1 /* Python.framework in Frameworks */,
-				611EC3AD0DC22E7C008BE1A1 /* QuartzCore.framework in Frameworks */,
 				611EC3AE0DC22E7C008BE1A1 /* ApplicationServices.framework in Frameworks */,
-				611EC3AF0DC22E7C008BE1A1 /* Cocoa.framework in Frameworks */,
-				611EC3B00DC22E7C008BE1A1 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +282,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				611EC4420DC24D33008BE1A1 /* NodeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F72D0DEAC50300F3771B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6195F8460DEACDB900F3771B /* ApplicationServices.framework in Frameworks */,
+				6195F7520DEAC52D00F3771B /* Python.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +306,10 @@
 				611EC1700DC22963008BE1A1 /* api */,
 				611EBF350DC2108B008BE1A1 /* graphics */,
 				611EBF450DC2108B008BE1A1 /* node */,
+				6155FFF70DDA02A100708CBC /* utils */,
+				6195F7250DEAC4CE00F3771B /* python */,
 				611EC16D0DC2288F008BE1A1 /* test */,
+				616558290DC6296700AC5259 /* Resources */,
 				611EBF9C0DC21200008BE1A1 /* Frameworks */,
 				611EBF660DC210A8008BE1A1 /* Products */,
 			);
@@ -225,6 +324,8 @@
 				611EBF390DC2108B008BE1A1 /* Canvas.h */,
 				611EBF3A0DC2108B008BE1A1 /* Grob.cpp */,
 				611EBF3B0DC2108B008BE1A1 /* Grob.h */,
+				616557A10DC61E9100AC5259 /* Image.h */,
+				616557A20DC61E9100AC5259 /* Image.cpp */,
 				611EBF3C0DC2108B008BE1A1 /* PathElement.cpp */,
 				611EBF3D0DC2108B008BE1A1 /* PathElement.h */,
 				611EBF3E0DC2108B008BE1A1 /* Point.cpp */,
@@ -235,6 +336,8 @@
 				611EBF430DC2108B008BE1A1 /* Transform.h */,
 				611EBF440DC2108B008BE1A1 /* Utils.h */,
 				611EC0320DC21845008BE1A1 /* Exceptions.h */,
+				618C8BE00DE832E30096A514 /* Color.h */,
+				618C8BE10DE832E30096A514 /* Color.cpp */,
 			);
 			path = graphics;
 			sourceTree = "<group>";
@@ -242,16 +345,14 @@
 		611EBF450DC2108B008BE1A1 /* node */ = {
 			isa = PBXGroup;
 			children = (
+				61796F9C0DC7694E00CD8DC9 /* CanvasNode.h */,
+				61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */,
 				611EBF460DC2108B008BE1A1 /* Connection.cpp */,
 				611EBF470DC2108B008BE1A1 /* Connection.h */,
 				611EBF480DC2108B008BE1A1 /* Field.cpp */,
 				611EBF490DC2108B008BE1A1 /* Field.h */,
-				611EBF4A0DC2108B008BE1A1 /* FieldTypeManager.cpp */,
-				611EBF4B0DC2108B008BE1A1 /* FieldTypeManager.h */,
-				611EBF4C0DC2108B008BE1A1 /* FloatField.cpp */,
-				611EBF4D0DC2108B008BE1A1 /* FloatField.h */,
-				611EBF4E0DC2108B008BE1A1 /* IntField.cpp */,
-				611EBF4F0DC2108B008BE1A1 /* IntField.h */,
+				61936C460DC86FA80034D23C /* Network.h */,
+				61936C470DC86FA80034D23C /* Network.cpp */,
 				611EBF500DC2108B008BE1A1 /* Node.cpp */,
 				611EBF510DC2108B008BE1A1 /* Node.h */,
 				611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */,
@@ -262,10 +363,8 @@
 				611EBF570DC2108B008BE1A1 /* NodeLibraryManager.h */,
 				611EBF5A0DC2108B008BE1A1 /* posixutils.cpp */,
 				611EBF5B0DC2108B008BE1A1 /* posixutils.h */,
-				611EBF5C0DC2108B008BE1A1 /* PythonNode.cpp */,
-				611EBF5D0DC2108B008BE1A1 /* PythonNode.h */,
-				611EBF5E0DC2108B008BE1A1 /* StringField.cpp */,
-				611EBF5F0DC2108B008BE1A1 /* StringField.h */,
+				611EBF5C0DC2108B008BE1A1 /* PythonNodeWrapper.cpp */,
+				611EBF5D0DC2108B008BE1A1 /* PythonNodeWrapper.h */,
 			);
 			path = node;
 			sourceTree = "<group>";
@@ -276,6 +375,7 @@
 				611EC23D0DC22A3C008BE1A1 /* testpdf */,
 				611EC2B80DC22E66008BE1A1 /* NodeCore.framework */,
 				611EC43C0DC24D23008BE1A1 /* unittest */,
+				6195F72F0DEAC50300F3771B /* _nodecore.so */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -298,6 +398,7 @@
 				611EC53D0DC25749008BE1A1 /* cpptest */,
 				611EC4860DC24E4E008BE1A1 /* graphics */,
 				611EC5680DC25D8C008BE1A1 /* node */,
+				615500090DDA02FE00708CBC /* util */,
 				611EC4840DC24E0A008BE1A1 /* unittest.cpp */,
 				611EC16E0DC228CF008BE1A1 /* testpdf.cpp */,
 			);
@@ -317,7 +418,9 @@
 			children = (
 				611EC4870DC24E63008BE1A1 /* BezierPathTestSuite.h */,
 				611EC4F20DC25366008BE1A1 /* CanvasTestSuite.h */,
+				618C8D8A0DE875900096A514 /* ImageTestSuite.h */,
 				611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */,
+				618C8E230DE87C860096A514 /* RectTestSuite.h */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -353,11 +456,86 @@
 		611EC5680DC25D8C008BE1A1 /* node */ = {
 			isa = PBXGroup;
 			children = (
+				61FA165A0DCF06830056A7C6 /* TestNodes.h */,
+				61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */,
 				611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */,
 				611EC5860DC26042008BE1A1 /* FieldTestSuite.h */,
 				611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */,
+				61936CE90DC884570034D23C /* NetworkTestSuite.h */,
 			);
 			name = node;
+			sourceTree = "<group>";
+		};
+		615500090DDA02FE00708CBC /* util */ = {
+			isa = PBXGroup;
+			children = (
+				6155000A0DDA02FE00708CBC /* StringUtilsTestSuite.h */,
+			);
+			name = util;
+			path = test/util;
+			sourceTree = "<group>";
+		};
+		6155FFF70DDA02A100708CBC /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				615500050DDA02D300708CBC /* stringutils.cpp */,
+				615500060DDA02D300708CBC /* stringutils.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		616558290DC6296700AC5259 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6165582B0DC6297600AC5259 /* nodeboxicon.png */,
+				618C8DB00DE876770096A514 /* testimage.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6195F7250DEAC4CE00F3771B /* python */ = {
+			isa = PBXGroup;
+			children = (
+				6195FA9F0DEB04EA00F3771B /* graphics */,
+				6195FAAA0DEB04F400F3771B /* node */,
+				6195F8100DEACCAD00F3771B /* nodecore.py */,
+				6195F7F40DEACBFB00F3771B /* nodecore.i */,
+				6195F7700DEAC89300F3771B /* nodecore_wrap.cxx */,
+			);
+			name = python;
+			sourceTree = "<group>";
+		};
+		6195FA9F0DEB04EA00F3771B /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				6195FAA00DEB04EA00F3771B /* BezierPath.i */,
+				6195FAA10DEB04EA00F3771B /* Canvas.i */,
+				6195FAA20DEB04EA00F3771B /* Color.i */,
+				6195FAA30DEB04EA00F3771B /* Grob.i */,
+				6195FAA40DEB04EA00F3771B /* Image.i */,
+				6195FAA50DEB04EA00F3771B /* PathElement.i */,
+				6195FAA60DEB04EA00F3771B /* Point.i */,
+				6195FAA70DEB04EA00F3771B /* Rect.i */,
+				6195FAA80DEB04EA00F3771B /* Transform.i */,
+				6195FAA90DEB04EA00F3771B /* Utils.i */,
+			);
+			name = graphics;
+			path = python/graphics;
+			sourceTree = "<group>";
+		};
+		6195FAAA0DEB04F400F3771B /* node */ = {
+			isa = PBXGroup;
+			children = (
+				6195FAAB0DEB04F400F3771B /* Connection.i */,
+				6195FAAC0DEB04F400F3771B /* Field.i */,
+				6195FAAD0DEB04F400F3771B /* Network.i */,
+				6195FAAE0DEB04F400F3771B /* Node.i */,
+				6195FAAF0DEB04F400F3771B /* NodeInfo.i */,
+				6195FAB00DEB04F400F3771B /* NodeLibrary.i */,
+				6195FAB10DEB04F400F3771B /* NodeLibraryManager.i */,
+			);
+			name = node;
+			path = python/node;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,16 +548,14 @@
 				611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */,
 				611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */,
 				611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */,
-				611EC3B70DC22EA4008BE1A1 /* FieldTypeManager.h in Headers */,
-				611EC3B80DC22EA4008BE1A1 /* FloatField.h in Headers */,
-				611EC3B90DC22EA4008BE1A1 /* IntField.h in Headers */,
+				616557A30DC61E9100AC5259 /* Image.h in Headers */,
+				61936C480DC86FA80034D23C /* Network.h in Headers */,
 				611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */,
 				611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */,
 				611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */,
 				611EC3BD0DC22EA4008BE1A1 /* NodeLibraryManager.h in Headers */,
 				611EC3BE0DC22EA4008BE1A1 /* posixutils.h in Headers */,
-				611EC3BF0DC22EA4008BE1A1 /* PythonNode.h in Headers */,
-				611EC3C00DC22EA4008BE1A1 /* StringField.h in Headers */,
+				611EC3BF0DC22EA4008BE1A1 /* PythonNodeWrapper.h in Headers */,
 				611EC3C10DC22EB9008BE1A1 /* BezierPath.h in Headers */,
 				611EC3C20DC22EB9008BE1A1 /* Canvas.h in Headers */,
 				611EC3C30DC22EB9008BE1A1 /* Grob.h in Headers */,
@@ -389,6 +565,17 @@
 				611EC3C70DC22EB9008BE1A1 /* Transform.h in Headers */,
 				611EC3C80DC22EB9008BE1A1 /* Utils.h in Headers */,
 				611EC3C90DC22EB9008BE1A1 /* Exceptions.h in Headers */,
+				61796F9E0DC7694E00CD8DC9 /* CanvasNode.h in Headers */,
+				615500080DDA02D300708CBC /* stringutils.h in Headers */,
+				618C8BE20DE832E30096A514 /* Color.h in Headers */,
+				618C8D8B0DE875900096A514 /* ImageTestSuite.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F72B0DEAC50300F3771B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +588,7 @@
 			buildPhases = (
 				611EC23A0DC22A3C008BE1A1 /* Sources */,
 				611EC23B0DC22A3C008BE1A1 /* Frameworks */,
+				616558260DC6290700AC5259 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -436,6 +624,7 @@
 			buildPhases = (
 				611EC4390DC24D23008BE1A1 /* Sources */,
 				611EC43A0DC24D23008BE1A1 /* Frameworks */,
+				618C8DB10DE876770096A514 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -446,6 +635,25 @@
 			productName = unittest;
 			productReference = 611EC43C0DC24D23008BE1A1 /* unittest */;
 			productType = "com.apple.product-type.tool";
+		};
+		6195F72E0DEAC50300F3771B /* Python Wrapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6195F7550DEAC54600F3771B /* Build configuration list for PBXNativeTarget "Python Wrapper" */;
+			buildPhases = (
+				6195F78B0DEAC8AF00F3771B /* SWIG */,
+				6195F72B0DEAC50300F3771B /* Headers */,
+				6195F72C0DEAC50300F3771B /* Sources */,
+				6195F72D0DEAC50300F3771B /* Frameworks */,
+				6195F8110DEACCAD00F3771B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Python Wrapper";
+			productName = "Python Wrapper";
+			productReference = 6195F72F0DEAC50300F3771B /* _nodecore.so */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
 
@@ -463,6 +671,7 @@
 				611EC2B70DC22E66008BE1A1 /* NodeCore */,
 				611EC23C0DC22A3C008BE1A1 /* testpdf */,
 				611EC43B0DC24D23008BE1A1 /* unittest */,
+				6195F72E0DEAC50300F3771B /* Python Wrapper */,
 			);
 		};
 /* End PBXProject section */
@@ -476,6 +685,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6195F78B0DEAC8AF00F3771B /* SWIG */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/python/nodecore.i",
+			);
+			name = SWIG;
+			outputPaths = (
+				"$(SRCROOT)/python/nodecore_wrap.cxx",
+				"$(SRCROOT)/python/nodecore.py",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swig -python -c++ -shadow -Wall -I- -Ipython -o python/nodecore_wrap.cxx nodecore.i";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		611EC23A0DC22A3C008BE1A1 /* Sources */ = {
@@ -499,16 +728,17 @@
 				611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */,
 				611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */,
 				611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */,
-				611EC3D30DC22ED6008BE1A1 /* FieldTypeManager.cpp in Sources */,
-				611EC3D40DC22ED6008BE1A1 /* FloatField.cpp in Sources */,
-				611EC3D50DC22ED6008BE1A1 /* IntField.cpp in Sources */,
 				611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */,
 				611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */,
 				611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */,
 				611EC3D90DC22ED6008BE1A1 /* NodeLibraryManager.cpp in Sources */,
 				611EC3DA0DC22ED6008BE1A1 /* posixutils.cpp in Sources */,
-				611EC3DB0DC22ED6008BE1A1 /* PythonNode.cpp in Sources */,
-				611EC3DC0DC22ED6008BE1A1 /* StringField.cpp in Sources */,
+				611EC3DB0DC22ED6008BE1A1 /* PythonNodeWrapper.cpp in Sources */,
+				616557A40DC61E9100AC5259 /* Image.cpp in Sources */,
+				61796F9F0DC7694E00CD8DC9 /* CanvasNode.cpp in Sources */,
+				61936C490DC86FA80034D23C /* Network.cpp in Sources */,
+				615500070DDA02D300708CBC /* stringutils.cpp in Sources */,
+				618C8BE30DE832E30096A514 /* Color.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +756,34 @@
 				611EC55A0DC2575B008BE1A1 /* htmloutput.cpp in Sources */,
 				611EC55B0DC2575B008BE1A1 /* collectoroutput.cpp in Sources */,
 				611EC55C0DC2575B008BE1A1 /* compileroutput.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6195F72C0DEAC50300F3771B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6195F8300DEACD9B00F3771B /* BezierPath.cpp in Sources */,
+				6195F8310DEACD9B00F3771B /* Canvas.cpp in Sources */,
+				6195F8320DEACD9B00F3771B /* Grob.cpp in Sources */,
+				6195F8330DEACD9B00F3771B /* PathElement.cpp in Sources */,
+				6195F8340DEACD9B00F3771B /* Point.cpp in Sources */,
+				6195F8350DEACD9B00F3771B /* Rect.cpp in Sources */,
+				6195F8360DEACD9B00F3771B /* Transform.cpp in Sources */,
+				6195F8370DEACD9B00F3771B /* Connection.cpp in Sources */,
+				6195F8380DEACD9B00F3771B /* Field.cpp in Sources */,
+				6195F8390DEACD9B00F3771B /* Node.cpp in Sources */,
+				6195F83A0DEACD9B00F3771B /* NodeInfo.cpp in Sources */,
+				6195F83B0DEACD9B00F3771B /* NodeLibrary.cpp in Sources */,
+				6195F83C0DEACD9B00F3771B /* NodeLibraryManager.cpp in Sources */,
+				6195F83D0DEACD9B00F3771B /* posixutils.cpp in Sources */,
+				6195F83E0DEACD9B00F3771B /* PythonNodeWrapper.cpp in Sources */,
+				6195F83F0DEACD9B00F3771B /* Image.cpp in Sources */,
+				6195F8400DEACD9B00F3771B /* CanvasNode.cpp in Sources */,
+				6195F8410DEACD9B00F3771B /* Network.cpp in Sources */,
+				6195F8420DEACD9B00F3771B /* stringutils.cpp in Sources */,
+				6195F8430DEACD9B00F3771B /* Color.cpp in Sources */,
+				6195F7710DEAC89300F3771B /* nodecore_wrap.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +894,7 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-ObjC++";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -718,6 +977,40 @@
 			};
 			name = Release;
 		};
+		6195F7300DEAC50300F3771B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = _;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = /System/Library/Frameworks/Python.framework/Versions/2.5/include/python2.5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = nodecore;
+			};
+			name = Debug;
+		};
+		6195F7310DEAC50300F3771B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = "Python Wrapper";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -753,6 +1046,15 @@
 			buildConfigurations = (
 				611EC43E0DC24D23008BE1A1 /* Debug */,
 				611EC43F0DC24D23008BE1A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6195F7550DEAC54600F3771B /* Build configuration list for PBXNativeTarget "Python Wrapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6195F7300DEAC50300F3771B /* Debug */,
+				6195F7310DEAC50300F3771B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

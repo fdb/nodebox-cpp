@@ -19,38 +19,64 @@
 
 #include "config.h"
 #include "Node.h"
-//#include <boost/regex.hpp>
 
-#include "FieldTypeManager.h"
+#include "Network.h"
+#include "stringutils.h"
 
 namespace NodeCore {
 
-Node::Node()
+Node::Node(const FieldType& outputType)
     :
     m_x(0),
     m_y(0),
     m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
+    m_network(NULL),
+    m_fields(FieldMap()),
+    m_outputField(0),
+    m_downstreams(ConnectionList()),
     m_dirty(true)
 {
+    m_outputField = new Field(this, "out", outputType, kOut);
 }
 
 Node::~Node()
 {
+    for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+        delete (*iter).second;
+    }
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        Connection* conn = (*iter);
+        conn->m_output = 0;
+    }
 }
 
-std::string Node::getName()
+//// Naming
+
+NodeName Node::defaultName() const
 {
-    // The name "" is set from the constructor.
-    // If the name is asked for the first name, it will be set
-    // to the correct name, e.g. the default name.
+    return string_to_lower(className());
+}
+
+std::string Node::getName() const
+{
     if (m_name == "") {
-        m_name = defaultName();
+        return defaultName();
+    } else {
+        return m_name;
     }
-    return m_name;
 }
 
 void Node::setName(const NodeName& name)
 {
+    if (m_network) {
+        m_network->rename(this, name);
+    } else {
+        _setName(name);
+    }
+}
+
+void Node::_setName(const NodeName& name)
+{    
     if (validName(name)) {
         m_name = name;
     } else {
@@ -73,43 +99,70 @@ bool Node::validName(const NodeName& name)
            regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
-Field* Node::addField(const FieldName &name, FieldType type, FieldPolarity polarity)
+//// Network
+
+void Node::setNetwork(Network* network)
+{
+    if (m_network && m_network != network) {
+        m_network->remove(this);
+    }
+    if (network) {
+        // Network->add checks if this node was already added in the network,
+        // so we don't need to check it here.
+        network->add(this);
+    }
+}
+
+Network* Node::getNetwork()
+{
+    return m_network;
+}
+
+//// X/Y position
+
+void Node::setX(float x)
+{
+    m_x = x;
+    // TODO: notify
+}
+
+void Node::setY(float y)
+{
+    m_y = y;
+    // TODO: notify
+}
+
+Field* Node::addField(const FieldName &name, const FieldType& type)
 {
     if (hasField(name)) { throw InvalidName(); }
-    Field *f = FieldTypeManager::initialize(type, this, name, polarity);
-//new Field(this, name, type, polarity);
+    Field *f = new Field(this, name, type);
     m_fields[name] = f;
+    markDirty();
     return f;
 }
 
-Field* Node::getField(const FieldName &name)
+Field* Node::getField(const FieldName &name) const
 {
     if (hasField(name)) {
-        Field* f = m_fields[name];
-        return f;
+        FieldMap* fields = const_cast<FieldMap*>(&m_fields);
+        return (*fields)[name];
     } else {
         throw FieldNotFound(name);
     }
 }
 
-bool Node::hasField(const FieldName &name)
+bool Node::hasField(const FieldName &name) const
 {
     return m_fields.count(name) == 1;
 }
 
-/**
- * Returns the first output field.
- */
-Field* Node::getOutputField()
+FieldList Node::getFields()
 {
-    m_fields.begin();
-    for(FieldIterator iter=m_fields.begin(); iter != m_fields.end(); iter++) {
-        Field *f = (*iter).second;
-        if (f->getPolarity() & kOut) { // Matches kOut and kInOut
-            return f;
-        }
+    FieldList fieldList = FieldList();
+    for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+        fieldList.push_back((*iter).second);
     }
-    return NULL;
+    return fieldList;
 }
 
 // Value shortcuts
@@ -128,6 +181,31 @@ std::string Node::asString(const FieldName &name)
     return getField(name)->asString();
 }
 
+void* Node::asData(const FieldName &name)
+{
+    return getField(name)->asData();
+}
+
+int Node::outputAsInt() const
+{
+    return m_outputField->asInt();
+}
+
+float Node::outputAsFloat() const
+{
+    return m_outputField->asFloat();
+}
+
+std::string Node::outputAsString() const
+{
+    return m_outputField->asString();
+}
+
+void* Node::outputAsData() const
+{
+    return m_outputField->asData();
+}
+
 void Node::set(const FieldName &name, int i)
 {
     getField(name)->set(i);
@@ -138,42 +216,122 @@ void Node::set(const FieldName &name, float f)
     getField(name)->set(f);
 }
 
-void Node::set(const FieldName &name, std::string s)
+void Node::set(const FieldName &name, const std::string& s)
 {
     getField(name)->set(s);
+}
+
+void Node::set(const FieldName &name, void* d)
+{
+    getField(name)->set(d);
 }
 
 void Node::update()
 {
     if (m_dirty) {
-        // Update all input fields so values are up to date.
-        for (FieldIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+        for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
             Field* f = (*iter).second;
-            if (f->m_polarity == kIn) {
-                f->update();
-            }
+            f->update();
         }
         process();
         m_dirty = false;
     }
 }
 
-bool Node::isDirty()
+bool Node::isDirty() const
 {
     return m_dirty;
 }
 
 void Node::markDirty()
 {
+    if (m_dirty) return;
     m_dirty = true;
-    getOutputField()->markDirty();
-    // TODO: make network dirty
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        Connection* conn = (*iter);
+        conn->getInputNode()->markDirty();
+    }
+    if (m_network && !m_network->isDirty()) {
+        // TODO: this is not ideal, since only changes to the rendered node should
+        // make the network dirty.
+        m_network->markDirty();
+    }
     // TODO: dispatch/notify
+}
+
+bool Node::isOutputConnected()
+{
+    return m_downstreams.size() > 0;
+}
+
+bool Node::isOutputConnectedTo(Node* node)
+{
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        if ((*iter)->getInputNode() == node)
+            return true;
+    }
+    return false;
+}
+
+bool Node::isOutputConnectedTo(Field* field)
+{
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        if ((*iter)->getInputField() == field)
+            return true;
+    }
+    return false;
+}
+
+ConnectionList Node::getOutputConnections()
+{
+    return m_downstreams;
 }
 
 void Node::process()
 {
     // This space intentionally left blank.
+}
+
+void Node::_setOutput(int i)
+{
+    m_outputField->set(i);
+}
+
+void Node::_setOutput(float f)
+{
+    m_outputField->set(f);
+}
+
+void Node::_setOutput(std::string s)
+{
+    m_outputField->set(s);
+}
+
+void Node::_setOutput(void* d)
+{
+    m_outputField->set(d);
+}
+
+void Node::addDownstream(Connection* c)
+{
+    // TODO: Check if the connection/field is already in the list.
+    assert (c != 0);
+    assert (c->getOutputNode() == this);
+    assert (c->getInputNode() != this);
+    m_downstreams.push_back(c);
+}
+
+void Node::removeDownstream(Connection* c)
+{
+    assert (c != 0);
+    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
+        if (*iter == c) {
+            m_downstreams.erase(iter);
+            return;
+        }
+    }
+    std::cout << m_name <<": could not remove connection" << c << std::endl;
+    assert(false);
 }
 
 std::ostream& operator<<(std::ostream& o, const Node& n)

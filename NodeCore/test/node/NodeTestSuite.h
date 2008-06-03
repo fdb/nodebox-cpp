@@ -32,26 +32,23 @@ public:
         TEST_ADD(NodeTestSuite::test_fields);
         TEST_ADD(NodeTestSuite::test_node_naming);
         TEST_ADD(NodeTestSuite::test_field_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_naming);
+        TEST_ADD(NodeTestSuite::test_dirty);
     }
 
 private:
 
     void test_naming()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
 
-        TEST_ASSERT( n->defaultName() == "Node" );
+        TEST_ASSERT( n->defaultName() == "node" );
         TEST_ASSERT( n->className() == "Node" );
-        TEST_ASSERT( n->getName() == "Node" );
+        TEST_ASSERT( n->getName() == "node" );
     }
 
     void test_fields()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         TEST_THROWS( n->getField("f1"), FieldNotFound );
         Field *f1 = n->addField("f1", kInt);
         TEST_ASSERT( n->hasField("f1") );
@@ -62,7 +59,7 @@ private:
 
     void test_node_naming()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         // Names can not start with a digit.
         TEST_THROWS( n->setName("1234"), InvalidName );
         // Names can not be in uppercase or contain uppercase letters
@@ -88,16 +85,12 @@ private:
 
     void test_field_naming()
     {
-        Node *n = new Node();
+        Node *n = new Node(kInt);
         // Names can not start with a digit.
         TEST_THROWS( n->addField("1234", kInt), InvalidName );
         // Names can not be one of the reserved words.
         TEST_THROWS( n->addField("node", kInt), InvalidName );
-        TEST_THROWS( n->addField("process", kInt), InvalidName );
         TEST_THROWS( n->addField("name", kInt), InvalidName );
-        TEST_THROWS( n->addField("x", kInt), InvalidName );
-        TEST_THROWS( n->addField("y", kInt), InvalidName );
-        TEST_THROWS( n->addField("dirty", kInt), InvalidName );
         // Names can not be in uppercase or contain uppercase letters
         TEST_THROWS( n->addField("UPPERCASE", kInt), InvalidName );
         TEST_THROWS( n->addField("uPpercase", kInt), InvalidName );
@@ -121,6 +114,30 @@ private:
         TEST_THROWS_NOTHING( n->addField("_", kInt) );
         TEST_THROWS_NOTHING( n->addField("_1234", kInt) );
         TEST_THROWS_NOTHING( n->addField("a1234", kInt) );
+        TEST_THROWS_NOTHING( n->addField("x", kInt) );
+        TEST_THROWS_NOTHING( n->addField("y", kInt) );
+        TEST_THROWS_NOTHING( n->addField("dirty", kInt) );
+        TEST_THROWS_NOTHING( n->addField("process", kInt) );
+    }
+    
+    void test_dirty()
+    {
+        Node *n = new Node(kInt);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );
+        n->addField("test", kInt);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );
+        n->set("test", 12);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );
+        n->getField("test")->set(12);
+        TEST_ASSERT( n->isDirty() );
+        n->update();
+        TEST_ASSERT( !n->isDirty() );        
     }
 
 };

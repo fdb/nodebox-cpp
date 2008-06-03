@@ -34,6 +34,11 @@ Transform::Transform(CGAffineTransform t)
 {
 }
 
+Transform::Transform(const Transform& t)
+         : m_transform(t.m_transform)
+{
+}
+
 bool Transform::isidentity() const
 {
     return CGAffineTransformIsIdentity(m_transform);

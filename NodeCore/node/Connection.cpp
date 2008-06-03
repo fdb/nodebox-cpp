@@ -28,40 +28,44 @@ namespace NodeCore {
 Connection::Connection(Field *outputField, Field *inputField)
            : m_output(outputField), m_input(inputField)
 {
+    assert(outputField->isOutputField());
+    assert(inputField->isInputField());
 }
 
 Connection::~Connection()
 {
 }
 
-void Connection::update()
-{
-    getOutputNode()->update();
-}
-
-Field* Connection::getOutputField()
+Field* Connection::getOutputField() const
 {
     return m_output;
 }
 
-Node* Connection::getOutputNode()
+Node* Connection::getOutputNode() const
 {
+    if (!hasOutput()) return NULL;
     return m_output->getNode();
 }
 
-Field* Connection::getInputField()
+Field* Connection::getInputField() const
 {
     return m_input;
 }
 
-Node* Connection::getInputNode()
+Node* Connection::getInputNode() const
 {
     return m_input->getNode();
 }
 
+bool Connection::hasOutput() const
+{
+    // The output field can be set to null by the output node when it is deleting itself.
+    return m_output != 0;
+}
+
 std::ostream& operator<<(std::ostream& o, const Connection& c)
 {
-    o << "Connection(" << c.m_output << " -> " << c.m_input << ")";
+    o << "Connection(" << c.getOutputNode()->getName() << " -> " << c.getInputNode()->getName() << "." << c.m_input->getName() << ")";
     return o;
 }
 

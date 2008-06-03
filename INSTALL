@@ -1,0 +1,4 @@
+NodeBox consists of a number of XCode projects that should be compiled in the correct order.
+
+- NodeCore: C++ core functionality for nodes, plugins and graphics
+- NodeBox: Cocoa GUI

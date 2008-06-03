@@ -22,7 +22,7 @@
 
 #include "Node.h"
 #include "NodeInfo.h"
-#include "PythonNode.h"
+#include "PythonNodeWrapper.h"
 #include "posixutils.h"
 
 #include <string>
@@ -89,16 +89,6 @@ public:
 };
 
 
-class NodeProcessingError : public std::exception
-{
-public:
-    NodeProcessingError(const Node& node, std::string msg="")
-            : m_node(node), m_msg(msg) {}
-    virtual ~NodeProcessingError() throw() {}
-    const Node& m_node;
-    std::string m_msg;
-};
-
 class NodeInfoNotFound : public std::exception
 {
 public:
@@ -148,6 +138,10 @@ public:
     bool isLoaded();
     
 private:
+    // Disallow copy construction or assignment
+    NodeLibrary(const NodeLibrary& other);
+    NodeLibrary& operator=(const NodeLibrary& other);
+
     // A native library has one file inside of the library folder,
     // called <libname>.nbl (NodeBox Library)
     // The full path would be plugins/libname-1.2.3/libname.nbl

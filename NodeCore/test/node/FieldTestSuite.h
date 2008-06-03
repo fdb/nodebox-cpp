@@ -17,33 +17,9 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using namespace NodeCore;
-
 #include <NodeCore/NodeCore.h>
 
 using namespace NodeCore;
-
-class ValueNode : public Node {
-public:
-    ValueNode() {
-        f_int = addField("int", kInt);
-        f_float = addField("float", kFloat);
-        f_string = addField("string", kString);
-        f_out = addField("out", kString, kOut);
-    }
-    virtual ~ValueNode() {}
-
-protected:
-    virtual void process() { f_out->set("processed"); }
-
-public:
-    Field *f_int;
-    Field *f_float;
-    Field *f_string;
-    Field *f_out;
-
-    NodeNameMacro(ValueNode);
-};
 
 class FieldTestSuite : public Test::Suite
 {
@@ -58,15 +34,13 @@ private:
     {
         ValueNode *n = new ValueNode();
 
-        TEST_ASSERT( n->f_int->getTypeName() == kInt );
-        TEST_ASSERT( n->f_float->getTypeName() == kFloat );
-        TEST_ASSERT( n->f_string->getTypeName() == kString );
-        TEST_ASSERT( n->f_out->getTypeName() == kString );
+        TEST_ASSERT( n->f_int->getType() == kInt );
+        TEST_ASSERT( n->f_float->getType() == kFloat );
+        TEST_ASSERT( n->f_string->getType() == kString );
 
         TEST_ASSERT( n->f_int->asInt() == 0 );
         TEST_ASSERT( n->f_float->asFloat() == 0.0f );
         TEST_ASSERT( n->f_string->asString() == "" );
-        TEST_ASSERT( n->f_out->asString() == "" );
 
         n->f_int->set(12);
         n->f_float->set(0.5f);
@@ -75,7 +49,6 @@ private:
         TEST_ASSERT( n->f_int->asInt() == 12 );
         TEST_ASSERT( n->f_float->asFloat() == 0.5f );
         TEST_ASSERT( n->f_string->asString() == "hello" );
-        TEST_ASSERT( n->f_out->asString() == "" );
     }
 
 };
