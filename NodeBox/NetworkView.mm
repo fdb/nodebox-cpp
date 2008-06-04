@@ -152,6 +152,7 @@
     if ([theEvent clickCount] == 1) {
         // Select a node
         [viewController.windowController setActiveNode:[self findNodeAt:pt]];
+    } else if ([theEvent clickCount] == 2) {
         [viewController.windowController setRenderedNode:[self findNodeAt:pt]];
     }
 }
@@ -261,6 +262,19 @@
 {
     NodeLayer *layer = (NodeLayer *)[self findLayerForNode:node];
     layer.selected = TRUE;
+}
+
+- (void) setRenderedNode: (NodeCore::Node*)node
+{
+    NSArray *sublayers = [rootNetworkLayer sublayers];
+    for (int i=0; i < [sublayers count]; i++) {
+        NodeLayer *sublayer = (NodeLayer *)[sublayers objectAtIndex:i];
+        if (sublayer.node == node) {
+            sublayer.rendered = TRUE;
+        } else {
+            sublayer.rendered = FALSE;
+        }
+    }
 }
 
 - (void) addLayerForNode: (NodeCore::Node*)node

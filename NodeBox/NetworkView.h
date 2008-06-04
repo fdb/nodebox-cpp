@@ -58,6 +58,7 @@ enum DragModeType {
 - (void) moveNode: (NodeCore::Node*)node to: (NSPoint)pt;
 - (void) deselect;
 - (void) select: (NodeCore::Node*)node;
+- (void) setRenderedNode: (NodeCore::Node*)node;
 - (void) addLayerForNode: (NodeCore::Node*)node;
 - (void) removeLayerForNode: (NodeCore::Node*)node;
 - (void) highlightNode: (NodeCore::Node*)node;

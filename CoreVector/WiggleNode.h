@@ -17,22 +17,22 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RectNode_h
-#define RectNode_h
+#ifndef WiggleNode_h
+#define WiggleNode_h
 
 #include <NodeCore/NodeCore.h>
 using namespace NodeCore;
 
 namespace CoreVector {
 
-class RectNode : public Node
+class WiggleNode : public Node
 {
 public:
-    RectNode();
-    virtual ~RectNode();
+    WiggleNode();
+    virtual ~WiggleNode();
     virtual void process();
 
-    NodeNameMacro(RectNode);
+    NodeNameMacro(WiggleNode);
 };
 
 } // namespace CoreVector

@@ -21,6 +21,7 @@
 #include "RectNode.h"
 #include "OvalNode.h"
 #include "CopyNode.h"
+#include "WiggleNode.h"
 
 using namespace CoreVector;
 
@@ -36,9 +37,14 @@ Node* createCopyNode() {
     return new CopyNode();
 }
 
+Node* createWiggleNode() {
+    return new WiggleNode();
+}
+
 extern "C" void nodeLibraryInfo(NodeLibrary& lib)
 {
     lib.addNodeInfo("RectNode", createRectNode);
     lib.addNodeInfo("OvalNode", createOvalNode);
     lib.addNodeInfo("CopyNode", createCopyNode);
+    lib.addNodeInfo("WiggleNode", createWiggleNode);
 }

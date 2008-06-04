@@ -31,6 +31,8 @@ public:
     CopyNode();
     virtual ~CopyNode();
     virtual void process();
+
+    NodeNameMacro(CopyNode);
 };
 
 } // namespace CoreVector

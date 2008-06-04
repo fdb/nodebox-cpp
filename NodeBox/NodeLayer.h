@@ -28,11 +28,14 @@ static float kNodeHeight = 24.0f;
 @interface NodeLayer : CALayer {
     NodeCore::Node *node;
     BOOL selected;
+    BOOL rendered;
+    CALayer *renderLight;
 }
 
 - (id)initWithNode:(NodeCore::Node *)node;
 
 @property(readonly) NodeCore::Node *node;
+@property(readwrite) BOOL rendered;
 @property(readwrite) BOOL selected;
 
 @end

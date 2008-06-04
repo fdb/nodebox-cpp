@@ -77,7 +77,7 @@
 
 - (void) didChangeRenderedNode: (NodeCore::Node *)renderedNode
 {
-    // TODO: make indicator for rendered node.
+    [_view setRenderedNode:renderedNode];
 }
 
 #pragma Context menu

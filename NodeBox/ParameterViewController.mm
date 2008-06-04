@@ -101,7 +101,7 @@
     [self removeControls];
     if (![self activeNode]) return;
     NSRect frame = [_view frame];
-    float y = frame.size.height - 20;
+    float y = 5;
     int index = 0;
     NodeCore::FieldList fields = [self activeNode]->getFields();
     for (NodeCore::FieldIterator iter = fields.begin(); iter != fields.end(); ++iter) {
@@ -114,7 +114,7 @@
         } else {
             NSLog(@"Field: %s: don't know how to handle type %s", field->getName().c_str(), field->getType().c_str());
         }
-        y -= 21;
+        y += 21;
         index++;
     }
 }

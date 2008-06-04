@@ -25,6 +25,7 @@
 
 @synthesize node;
 @synthesize selected;
+@synthesize rendered;
 
 - (id)initWithNode:(NodeCore::Node *)anode
 {
@@ -40,9 +41,28 @@
     self.shadowRadius = 2.0f;
     self.cornerRadius = 3.0f;
     self.borderColor = [CGColorHelper gray];
+    renderLight = [CALayer layer];
+    renderLight.frame = CGRectMake(5, 10, 3, 5);
+    renderLight.backgroundColor = [CGColorHelper white];
+    renderLight.shadowColor = [CGColorHelper blue];
+    renderLight.shadowOpacity = 1.0f;
+    renderLight.shadowOffset = CGSizeMake(0, 0);
+    renderLight.shadowRadius = 2.0f;
+    renderLight.opacity = 0.0f;
+    [self addSublayer:renderLight];
     [self setNeedsDisplay];
 
     return self;
+}
+
+- (void)setRendered:(BOOL)arendered
+{
+    rendered = arendered;
+    if (rendered) {
+        renderLight.opacity = 1.0f;
+    } else {
+        renderLight.opacity = 0.0f;
+    }
 }
 
 - (void)setSelected:(BOOL)aselected
@@ -62,8 +82,8 @@
 - (void)drawInContext:(CGContextRef)ctx
 {
     CGContextSetFillColorWithColor(ctx, [CGColorHelper black]);
-    CGContextSelectFont(ctx, "Lucida Grande", 13, kCGEncodingMacRoman);
-    CGContextShowTextAtPoint(ctx, 10.0f, 5.0f, node->getName().c_str(), node->getName().length());
+    CGContextSelectFont(ctx, "Lucida Grande", 12, kCGEncodingMacRoman);
+    CGContextShowTextAtPoint(ctx, 13.0f, 8.0f, node->getName().c_str(), node->getName().length());
 }
 
 + (id<CAAction>)defaultActionForKey:(NSString *)aKey

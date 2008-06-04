@@ -31,6 +31,8 @@ public:
     OvalNode();
     virtual ~OvalNode();
     virtual void process();
+
+    NodeNameMacro(OvalNode);
 };
 
 } // namespace CoreVector
