@@ -16,16 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import <Cocoa/Cocoa.h>
-#import "ViewController.h"
 
-@interface ParameterViewController : ViewController {
-    IBOutlet NSView *_view;
-    NSMutableDictionary *_controlMap;
-}
+#ifndef CopyNode_h
+#define CopyNode_h
 
-- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
-- (NSView *)view;
+#include <NodeCore/NodeCore.h>
+using namespace NodeCore;
 
-@end
+namespace CoreVector {
+
+class CopyNode : public Node
+{
+public:
+    CopyNode();
+    virtual ~CopyNode();
+    virtual void process();
+};
+
+} // namespace CoreVector
+
+#endif

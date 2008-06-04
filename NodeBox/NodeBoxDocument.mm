@@ -34,18 +34,13 @@ NSString *NodeType = @"NodeType";
         _rootNetwork = new NodeCore::Network();
         NodeCore::NodeLibrary *vectorLib = nlm->loadLatest("corevector");
         NodeCore::Node *rect1 = vectorLib->createNode("RectNode");
-        NodeCore::Node *rect2 = vectorLib->createNode("RectNode");
         NodeCore::Node *oval1 = vectorLib->createNode("OvalNode");
         rect1->setX(100);
         rect1->setY(100);
-        rect2->setX(200);
-        rect2->setY(100);
-        oval1->setX(300);
+        oval1->setX(200);
         oval1->setY(100);
         _rootNetwork->setUniqueNodeName(rect1);
         _rootNetwork->add(rect1);
-        _rootNetwork->setUniqueNodeName(rect2);
-        _rootNetwork->add(rect2);
         _rootNetwork->setUniqueNodeName(oval1);
         _rootNetwork->add(oval1);
     }
@@ -63,15 +58,6 @@ NSString *NodeType = @"NodeType";
     delete _rootNetwork;
     [super finalize];
 }
-
-/*
-- (NSString *)windowNibName
-{
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"NodeBoxDocument";
-}
-*/
 
 - (void)makeWindowControllers
 {

@@ -25,10 +25,11 @@
 
 @interface ParameterViewController(Private)
 
+- (void)setValueForControls;
 - (void)removeControls;
 - (void)rebuildControls;
 - (void)addLabelForField:(NodeCore::Field *)field y:(float)y index:(int)index;
-- (void)addFloatControlForField:(NodeCore::Field *)field y:(float)y index:(int)index;
+- (NXDragControl *)addFloatControlForField:(NodeCore::Field *)field y:(float)y index:(int)index;
 - (void)floatValueChanged:(id)sender;
 
 @end
@@ -41,6 +42,8 @@
     if (![NSBundle loadNibNamed:@"ParameterView" owner:self]) {
         NSLog(@"Could not load nib ParameterView");
     }
+    _controlMap = [[NSMutableDictionary alloc] init];
+    [self rebuildControls];
     // Perhaps construct view?
     return self;
 }
@@ -59,7 +62,7 @@
 
 - (void) didModifyNode: (NodeCore::Node *)node
 {
-    [self rebuildControls];
+    [self setValueForControls];
 }
 
 
@@ -67,7 +70,22 @@
 
 @implementation ParameterViewController(Private)
 
-#pragma mark Action callbacks
+#pragma mark Control interface
+
+- (void)setValueForControls
+{
+    if (![self activeNode]) return;
+    NodeCore::FieldList fields = [self activeNode]->getFields();
+    for (NodeCore::FieldIterator iter = fields.begin(); iter != fields.end(); ++iter) {
+        NodeCore::Field *field = *iter;
+        NSString *fieldName = [NSString stringWithUTF8String:field->getName().c_str()];
+        NSControl *control = [_controlMap objectForKey:fieldName];
+        if (!control) break;
+        if ([control floatValue] != field->asFloat()) {
+            [control setFloatValue:field->asFloat()];
+        }
+    }
+}
 
 - (void)removeControls
 {
@@ -75,6 +93,7 @@
         NSView *subview = (NSView *)[[_view subviews] objectAtIndex:0];
         [subview removeFromSuperview];
     }
+    [_controlMap removeAllObjects];
 }
 
 - (void)rebuildControls
@@ -87,9 +106,11 @@
     NodeCore::FieldList fields = [self activeNode]->getFields();
     for (NodeCore::FieldIterator iter = fields.begin(); iter != fields.end(); ++iter) {
         NodeCore::Field *field = *iter;
+        NSString *fieldName = [NSString stringWithUTF8String:field->getName().c_str()];
         if (field->getType() == NodeCore::kFloat) {
             [self addLabelForField:field y:y index:index];
-            [self addFloatControlForField:field y:y index:index];
+            NSControl *control = [self addFloatControlForField:field y:y index:index];
+            [_controlMap setObject:control forKey:fieldName];
         } else {
             NSLog(@"Field: %s: don't know how to handle type %s", field->getName().c_str(), field->getType().c_str());
         }
@@ -112,7 +133,7 @@
 }
 
 
-- (void)addFloatControlForField:(NodeCore::Field *)field y:(float)y index:(int)index
+- (NXDragControl *)addFloatControlForField:(NodeCore::Field *)field y:(float)y index:(int)index
 {
     NXDragControl *control = [[NXDragControl alloc] init];
     [control setFrame:NSMakeRect(108, y-1, 100, 15)];
@@ -121,7 +142,10 @@
     [control setTag:index];
     [control setAction:@selector(floatValueChanged:)];
     [_view addSubview:control];
+    return control;
 }
+
+#pragma mark Action callbacks
 
 - (void)floatValueChanged:(id)sender
 {
