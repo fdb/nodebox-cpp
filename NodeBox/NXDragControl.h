@@ -18,13 +18,20 @@
  */
  
 #import <Cocoa/Cocoa.h>
-#import "ViewController.h"
 
-@interface ParameterViewController : ViewController {
-    IBOutlet NSView *_view;
+@interface NXDragCell : NSActionCell {
+    float value;
 }
 
-- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
-- (NSView *)view;
+- (NSRect)leftButtonRect:(NSRect)cellFrame;
+- (NSRect)rightButtonRect:(NSRect)cellFrame;
+- (void)increaseValue:(float)delta;
+- (void)decreaseValue:(float)delta;
+- (void)drawArrowInRect:(NSRect)r direction:(int)dir;
+@end
 
+@interface NXDragControl : NSControl {
+}
+
+- (void)fieldChanged:(id)sender;
 @end
