@@ -694,6 +694,23 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/python/nodecore.i",
+				"$(SRCROOT)/python/graphics/BezierPath.i",
+				"$(SRCROOT)/python/graphics/Canvas.i",
+				"$(SRCROOT)/python/graphics/Color.i",
+				"$(SRCROOT)/python/graphics/Grob.i",
+				"$(SRCROOT)/python/graphics/Image.i",
+				"$(SRCROOT)/python/graphics/PathElement.i",
+				"$(SRCROOT)/python/graphics/Point.i",
+				"$(SRCROOT)/python/graphics/Rect.i",
+				"$(SRCROOT)/python/graphics/Transform.i",
+				"$(SRCROOT)/python/graphics/Utils.i",
+				"$(SRCROOT)/python/node/Field.i",
+				"$(SRCROOT)/python/node/Connection.i",
+				"$(SRCROOT)/python/node/Network.i",
+				"$(SRCROOT)/python/node/Node.i",
+				"$(SRCROOT)/python/node/NodeInfo.i",
+				"$(SRCROOT)/python/node/NodeLibrary.i",
+				"$(SRCROOT)/python/node/NodeLibraryManager.i",
 			);
 			name = SWIG;
 			outputPaths = (
@@ -989,7 +1006,8 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/Python.framework/Versions/2.5/include/python2.5;
-				INSTALL_PATH = /usr/local/lib;
+				INSTALL_PATH = "";
+				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
 				PREBINDING = NO;
 				PRODUCT_NAME = nodecore;
 			};

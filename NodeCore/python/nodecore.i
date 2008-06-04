@@ -1,4 +1,5 @@
 %module(directors="1") nodecore
+#pragma SWIG nowarn=512
 
 // This code makes sure std::exceptions are wrapped in SWIG runtime exceptions,
 // instead of crashing the application.
@@ -12,6 +13,7 @@
 }
 
 %include "std_string.i"
+
 
 %{
 #include <NodeCore/NodeCore.h>
