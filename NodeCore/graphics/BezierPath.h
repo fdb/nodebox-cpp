@@ -34,6 +34,9 @@ namespace NodeCore {
 class Transform;
 class PathElement;
 
+typedef std::vector<PathElement> PathElementList;
+typedef PathElementList::iterator PathElementIterator;
+
 class BezierPath : public Grob {
 public:
     BezierPath();
@@ -56,10 +59,11 @@ public:
     
     //// List operations ////
     
+    PathElementList elements() const { return m_elements; }
     PathElement operator[](int n) const;
     void clear();
-    unsigned int size();
-    bool isempty();
+    unsigned int size() const;
+    bool isempty() const;
     void append(const PathElement& el);
     
     //// Geometry ////
@@ -90,9 +94,6 @@ public:
     friend std::ostream& operator<<(std::ostream& o, const BezierPath& bp);
 
 private:
-    typedef std::vector<PathElement> PathElementList;
-    typedef PathElementList::iterator PathElementIterator;
-
     PathElementList m_elements;
     bool m_fill;
     Color m_fillColor;
