@@ -22,6 +22,7 @@
 #import "ViewPaneController.h"
 #import "ViewController.h"
 #import "NodeBoxAppDelegate.h"
+#import "NXSplitView.h"
 
 @implementation NodeBoxWindowController
 
@@ -37,11 +38,11 @@
     [super windowDidLoad];
     // This will normally be set up from a config file with a layout.
     NSView *contentView = [[self window] contentView];
-    NSSplitView *primarySplit = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
+    NXSplitView *primarySplit = [[NXSplitView alloc] initWithFrame:[contentView bounds]];
     [primarySplit setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [primarySplit setVertical:TRUE];
     [contentView addSubview:primarySplit];
-    NSSplitView *secondarySplit = [[NSSplitView alloc] initWithFrame:[contentView bounds]];
+    NXSplitView *secondarySplit = [[NXSplitView alloc] initWithFrame:[contentView bounds]];
     [secondarySplit setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [secondarySplit setVertical:FALSE];
     ViewPaneController *canvasView = [[ViewPaneController alloc] initWithWindowController:self];
