@@ -37,6 +37,7 @@
 		61B0EE990DEF13F700F09919 /* NodeLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61B0EE980DEF13F700F09919 /* NodeLayer.mm */; };
 		61C16CC20DCF4D0A000CC18E /* NetworkVisualiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */; };
 		61DBDD9E0DF7EE9300BE478A /* NXSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DBDD9D0DF7EE9300BE478A /* NXSplitView.m */; };
+		61DBDDE10DF7F4AB00BE478A /* NXFieldBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DBDDE00DF7F4AB00BE478A /* NXFieldBox.m */; };
 		61DD33A20DF01357005431C0 /* NetworkLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61DD33A10DF01357005431C0 /* NetworkLayer.mm */; };
 		61F4AC2E0DF71CE200044204 /* NXDragControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F4AC2D0DF71CE200044204 /* NXDragControl.m */; };
 		61FA1A440DCF31CE0056A7C6 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FA1A430DCF31CE0056A7C6 /* NodeCore.framework */; };
@@ -132,6 +133,8 @@
 		61C16CC10DCF4D0A000CC18E /* NetworkVisualiser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkVisualiser.cpp; sourceTree = "<group>"; };
 		61DBDD9C0DF7EE9300BE478A /* NXSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXSplitView.h; sourceTree = "<group>"; };
 		61DBDD9D0DF7EE9300BE478A /* NXSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXSplitView.m; sourceTree = "<group>"; };
+		61DBDDDF0DF7F4AB00BE478A /* NXFieldBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXFieldBox.h; sourceTree = "<group>"; };
+		61DBDDE00DF7F4AB00BE478A /* NXFieldBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXFieldBox.m; sourceTree = "<group>"; };
 		61DD33A00DF01357005431C0 /* NetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkLayer.h; sourceTree = "<group>"; };
 		61DD33A10DF01357005431C0 /* NetworkLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkLayer.mm; sourceTree = "<group>"; };
 		61F4AC2C0DF71CE200044204 /* NXDragControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXDragControl.h; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				61F4AC2D0DF71CE200044204 /* NXDragControl.m */,
 				61DBDD9C0DF7EE9300BE478A /* NXSplitView.h */,
 				61DBDD9D0DF7EE9300BE478A /* NXSplitView.m */,
+				61DBDDDF0DF7F4AB00BE478A /* NXFieldBox.h */,
+				61DBDDE00DF7F4AB00BE478A /* NXFieldBox.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				6195A6080DF44A7500C752AD /* FieldWrapper.mm in Sources */,
 				61F4AC2E0DF71CE200044204 /* NXDragControl.m in Sources */,
 				61DBDD9E0DF7EE9300BE478A /* NXSplitView.m in Sources */,
+				61DBDDE10DF7F4AB00BE478A /* NXFieldBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
