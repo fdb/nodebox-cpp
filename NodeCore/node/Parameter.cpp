@@ -24,114 +24,137 @@
 
 namespace NodeCore {
 
-Parameter::Parameter(Node *node, const ParameterName& name, const ParameterType& type, ParameterDirection direction)
+Parameter::Parameter(Node *node, const ParameterName& name, const ParameterType& type, Channel channels, ParameterDirection direction)
      : m_node(node),
        m_name(name),
        m_verboseName(""),
        m_type(type),
        m_direction(direction),
-       m_connection(0)
+       m_connection(0),
+       m_channelCount(channels),
+       m_channels(new Value[channels])
 {
     if (validName(name)) {
         m_name = name;
     } else {
         throw InvalidName();
     }
-    if (m_type == kInt) {
-        m_value.i = 0;
-    } else if (m_type == kFloat) {
-        m_value.f = 0;
-    } else if (m_type == kString) {
-        m_value.s = new std::string;
-    } else {
-        m_value.d = 0;
+    
+    if (channels <= 0) {
+        throw InvalidName();
+    }
+    
+    for (Channel i=0; i<m_channelCount;++i) {        
+        if (m_type == kInt) {
+            m_channels[i].i = 0;
+        } else if (m_type == kFloat) {
+            m_channels[i].f = 0;
+        } else if (m_type == kString) {
+            m_channels[i].s = new std::string;
+        } else {
+            m_channels[i].d = 0;
+        }
     }
 }
 
-int Parameter::asInt()
+Parameter::~Parameter()
+{
+    // TODO: strings don't get cleaned up, data may get cleaned up too soon.
+    delete m_channels;
+    disconnect();
+}
+
+int Parameter::asInt(Channel channel)
 {
     if (m_type == kInt) {
-        return m_value.i;
+        return m_channels[channel].i;
     } else if (m_type == kFloat) {
-        return (int) m_value.f;
+        return (int) m_channels[channel].f;
     } else {
         return 0;
     }
 }
 
-float Parameter::asFloat()
+float Parameter::asFloat(Channel channel)
 {
     if (m_type == kFloat) {
-        return m_value.f;
+        return m_channels[channel].f;
     } else if (m_type == kInt) {
-        return (float) m_value.i;
+        return (float) m_channels[channel].i;
     } else {
         return 0;
     }
 }
 
-std::string Parameter::asString()
+std::string Parameter::asString(Channel channel)
 {
     if (m_type == kString) {
-        return *m_value.s;
+        return *m_channels[channel].s;
     } else {
         return "";
     }
 }
 
-void* Parameter::asData()
+void* Parameter::asData(Channel channel)
 {
-    return m_value.d;
+    return m_channels[channel].d;
 }
 
-void Parameter::set(int i)
+void Parameter::set(int i, Channel channel)
 {
+    if (channel < 0 || channel >= m_channelCount) {
+        throw ValueError("Invalid channel " + channel);
+    }
     if (m_type == kInt) {
         // TODO: lazy setting
         preSet();
-        m_value.i = i;
+        m_channels[channel].i = i;
         postSet();
     } else {
         throw ValueError("Tried setting int value on parameter with type " + m_type);
     }
 }
 
-void Parameter::set(float f)
+void Parameter::set(float f, Channel channel)
 {
+    if (channel < 0 || channel >= m_channelCount) {
+        throw ValueError("Invalid channel " + channel);
+    }
     if (m_type == kFloat) {
         // TODO: lazy setting
         preSet();
-        m_value.f = f;
+        m_channels[channel].f = f;
         postSet();
     } else {
         throw ValueError("Tried setting float value on parameter with type " + m_type);
     }
 }
 
-void Parameter::set(const std::string& s)
+void Parameter::set(const std::string& s, Channel channel)
 {
+    if (channel < 0 || channel >= m_channelCount) {
+        throw ValueError("Invalid channel " + channel);
+    }
     if (m_type == kString) {
         // TODO: lazy setting
         preSet();
-        delete m_value.s;
-        m_value.s = new std::string(s);
+        delete m_channels[channel].s;
+        m_channels[channel].s = new std::string(s);
         postSet();
     } else {
         throw ValueError("Tried setting string value on parameter with type " + m_type);
     }
 }
 
-void Parameter::set(void* data)
+void Parameter::set(void* data, Channel channel)
 {  
+    if (channel < 0 || channel >= m_channelCount) {
+        throw ValueError("Invalid channel " + channel);
+    }
     // TODO: lazy setting
     preSet();
-    m_value.d = data;
+    m_channels[channel].d = data;
     postSet();
-}
-
-Parameter::~Parameter()
-{
-    disconnect();
 }
 
 bool Parameter::validName(const ParameterName& name)
@@ -240,17 +263,18 @@ std::ostream& operator<<(std::ostream& o, const Parameter& f)
 
 void Parameter::revertToDefault()
 {
-    if (m_type == kInt) {
-        m_value.i = 0;
-    } else if (m_type == kFloat) {
-        m_value.f = 0;
-    } else if (m_type == kString) {
-        delete m_value.s;
-        m_value.s = new std::string;
-    } else {
-        // Don't do anything for kData or others.
-        // TODO: this should ask the node to revert the data.
-        // The node is the only one who knows how to treat opaque data.
+    for (Channel i=0; i<m_channelCount;++i) {        
+        if (m_type == kInt) {
+            m_channels[i].i = 0;
+        } else if (m_type == kFloat) {
+            m_channels[i].f = 0;
+        } else if (m_type == kString) {
+            m_channels[i].s = new std::string;
+        } else {
+            // Don't do anything for kData or others.
+            // TODO: this should ask the node to revert the data.
+            // The node is the only one who knows how to treat opaque data.
+        }
     }
 }
 

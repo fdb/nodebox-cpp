@@ -36,7 +36,7 @@ Node::Node(const ParameterType& outputType)
     m_downstreams(ConnectionList()),
     m_dirty(true)
 {
-    m_outputParameter = new Parameter(this, "out", outputType, kOut);
+    m_outputParameter = new Parameter(this, "out", outputType, 1, kOut);
 }
 
 Node::~Node()
@@ -132,10 +132,10 @@ void Node::setY(float y)
     // TODO: notify
 }
 
-Parameter* Node::addParameter(const ParameterName &name, const ParameterType& type)
+Parameter* Node::addParameter(const ParameterName &name, const ParameterType& type, Channel channels)
 {
     if (hasParameter(name)) { throw InvalidName(); }
-    Parameter *f = new Parameter(this, name, type);
+    Parameter *f = new Parameter(this, name, type, channels);
     m_parameters[name] = f;
     markDirty();
     return f;

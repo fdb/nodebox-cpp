@@ -98,7 +98,7 @@ public:
     void setX(float x);
     void setY(float y);
 
-    Parameter* addParameter(const ParameterName &name, const ParameterType& type);
+    Parameter* addParameter(const ParameterName &name, const ParameterType& type, Channel channels=1);
     Parameter* getParameter(const ParameterName &name) const;
     bool hasParameter(const ParameterName &name) const;
     Parameter* getOutputParameter() const { return m_outputParameter; }
