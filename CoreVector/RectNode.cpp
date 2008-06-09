@@ -25,10 +25,10 @@ namespace CoreVector {
 RectNode::RectNode()
         : Node(kCanvas)
 {
-    addField("x", kFloat);
-    addField("y", kFloat);
-    addField("width", kFloat);
-    addField("height", kFloat);
+    addParameter("x", kFloat);
+    addParameter("y", kFloat);
+    addParameter("width", kFloat);
+    addParameter("height", kFloat);
     set("width", 100.0F);
     set("height", 100.0F);
 }

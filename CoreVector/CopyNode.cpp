@@ -25,14 +25,14 @@ namespace CoreVector {
 CopyNode::CopyNode()
         : Node(kCanvas)
 {
-    addField("canvas", kCanvas);
-    // TODO: copies should become an integer field
-    addField("copies", kFloat);
-    addField("tx", kFloat);
-    addField("ty", kFloat);
-    addField("sx", kFloat);
-    addField("sy", kFloat);
-    addField("r", kFloat);
+    addParameter("canvas", kCanvas);
+    // TODO: copies should become an integer parameter
+    addParameter("copies", kFloat);
+    addParameter("tx", kFloat);
+    addParameter("ty", kFloat);
+    addParameter("sx", kFloat);
+    addParameter("sy", kFloat);
+    addParameter("r", kFloat);
     set("copies", 1.0F);
     set("sx", 1.0F);
     set("sy", 1.0F);

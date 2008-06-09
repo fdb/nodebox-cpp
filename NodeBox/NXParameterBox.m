@@ -17,13 +17,17 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <Cocoa/Cocoa.h>
-#import <NodeCore/NodeCore.h>
+#import "NXParameterBox.h"
 
-@interface FieldWrapper : NSObject {
-    NodeCore::Field *_field;
+@implementation NXParameterBox
+
+- (void)drawRect:(NSRect)rect
+{
+    [[NSColor colorWithDeviceWhite:0.8f alpha:1.0f] set];
+    NSRectFill(rect);
+    [[NSColor colorWithDeviceWhite:0.75f alpha:1.0f] set];
+    NSRectFill(NSMakeRect(rect.origin.x, rect.origin.y, rect.size.width, 1));
+    NSRectFill(NSMakeRect(rect.origin.x+100, rect.origin.y, 1, rect.size.height));
 }
 
-- (id) initWithField: (NodeCore::Field*)field;
-- (NodeCore::Field*) field;
 @end

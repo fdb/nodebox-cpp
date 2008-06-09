@@ -32,10 +32,10 @@ namespace CoreVector {
 WiggleNode::WiggleNode()
         : Node(kCanvas)
 {
-    addField("canvas", kCanvas);
-    addField("wx", kFloat);
-    addField("wy", kFloat);
-    addField("seed", kFloat);
+    addParameter("canvas", kCanvas);
+    addParameter("wx", kFloat);
+    addParameter("wy", kFloat);
+    addParameter("seed", kFloat);
 }
 
 WiggleNode::~WiggleNode()

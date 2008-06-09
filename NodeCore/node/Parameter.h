@@ -17,8 +17,8 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Field_h
-#define Field_h
+#ifndef Parameter_h
+#define Parameter_h
 
 #include "Connection.h"
 
@@ -42,29 +42,29 @@ private:
 
 class InvalidName : public std::exception {};
 
-typedef std::string FieldName;
-typedef std::string FieldType;
+typedef std::string ParameterName;
+typedef std::string ParameterType;
 
-const FieldType kInt = "int";
-const FieldType kFloat = "float";
-const FieldType kString = "string";
-const FieldType kNode = "Node";
-const FieldType kNetwork = "Network";
+const ParameterType kInt = "int";
+const ParameterType kFloat = "float";
+const ParameterType kString = "string";
+const ParameterType kNode = "Node";
+const ParameterType kNetwork = "Network";
 
-enum FieldDirection {
+enum ParameterDirection {
     kIn = 1,
     kOut = 2
 };
 
-class Field {
+class Parameter {
 public:
-    Field(Node *node, const FieldName& name, const FieldType& type, FieldDirection dir = kIn);
-    virtual ~Field();
+    Parameter(Node *node, const ParameterName& name, const ParameterType& type, ParameterDirection dir = kIn);
+    virtual ~Parameter();
     
     Node* getNode() const { return m_node; }
-    FieldDirection getDirection() const { return m_direction; }
-    bool isInputField() const { return m_direction == kIn; }
-    bool isOutputField() const { return m_direction == kOut; }
+    ParameterDirection getDirection() const { return m_direction; }
+    bool isInputParameter() const { return m_direction == kIn; }
+    bool isOutputParameter() const { return m_direction == kOut; }
     
     int asInt();
     float asFloat();
@@ -77,8 +77,8 @@ public:
     void set(const std::string& s);
     void set(void* v);
     
-    FieldName getName() const { return m_name; }
-    FieldType getType() const { return m_type; }
+    ParameterName getName() const { return m_name; }
+    ParameterType getType() const { return m_type; }
     
     // Connection methods
     bool canConnectTo(Node* node);
@@ -89,9 +89,9 @@ public:
     Connection* getConnection();
     void update();
     
-    static bool validName(const FieldName& name);
+    static bool validName(const ParameterName& name);
 
-    friend std::ostream& operator<<(std::ostream& o, const Field& f);
+    friend std::ostream& operator<<(std::ostream& o, const Parameter& f);
     
 protected:
     void revertToDefault();
@@ -107,16 +107,16 @@ private:
     };
 
     // Disallow copy construction or assignment
-    Field(const Field& other);
-    Field& operator=(const Field& other);
+    Parameter(const Parameter& other);
+    Parameter& operator=(const Parameter& other);
 
     void markDirty();
 
     Node *m_node;
     std::string m_name;
     std::string m_verboseName;
-    FieldType m_type;
-    FieldDirection m_direction;
+    ParameterType m_type;
+    ParameterDirection m_direction;
     Connection *m_connection;
     Value m_value;
     // TODO: expression
@@ -126,4 +126,4 @@ private:
 
 } // namespace NodeCore
 
-#endif // Field_h
+#endif // Parameter_h

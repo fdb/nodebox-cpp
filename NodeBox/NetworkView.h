@@ -66,6 +66,6 @@ enum DragModeType {
 - (void) redrawConnections;
 
 //// Event callbacks ////
-- (void) connectNodeToField: (NSMenuItem*)menuItem;
+- (void) connectNodeToParameter: (NSMenuItem*)menuItem;
 
 @end

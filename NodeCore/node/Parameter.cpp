@@ -18,13 +18,13 @@
  */
 
 #include "config.h"
-#include "Field.h"
+#include "Parameter.h"
 
 #include "Node.h"
 
 namespace NodeCore {
 
-Field::Field(Node *node, const FieldName& name, const FieldType& type, FieldDirection direction)
+Parameter::Parameter(Node *node, const ParameterName& name, const ParameterType& type, ParameterDirection direction)
      : m_node(node),
        m_name(name),
        m_verboseName(""),
@@ -48,7 +48,7 @@ Field::Field(Node *node, const FieldName& name, const FieldType& type, FieldDire
     }
 }
 
-int Field::asInt()
+int Parameter::asInt()
 {
     if (m_type == kInt) {
         return m_value.i;
@@ -59,7 +59,7 @@ int Field::asInt()
     }
 }
 
-float Field::asFloat()
+float Parameter::asFloat()
 {
     if (m_type == kFloat) {
         return m_value.f;
@@ -70,7 +70,7 @@ float Field::asFloat()
     }
 }
 
-std::string Field::asString()
+std::string Parameter::asString()
 {
     if (m_type == kString) {
         return *m_value.s;
@@ -79,12 +79,12 @@ std::string Field::asString()
     }
 }
 
-void* Field::asData()
+void* Parameter::asData()
 {
     return m_value.d;
 }
 
-void Field::set(int i)
+void Parameter::set(int i)
 {
     if (m_type == kInt) {
         // TODO: lazy setting
@@ -92,11 +92,11 @@ void Field::set(int i)
         m_value.i = i;
         postSet();
     } else {
-        throw ValueError("Tried setting int value on field with type " + m_type);
+        throw ValueError("Tried setting int value on parameter with type " + m_type);
     }
 }
 
-void Field::set(float f)
+void Parameter::set(float f)
 {
     if (m_type == kFloat) {
         // TODO: lazy setting
@@ -104,11 +104,11 @@ void Field::set(float f)
         m_value.f = f;
         postSet();
     } else {
-        throw ValueError("Tried setting float value on field with type " + m_type);
+        throw ValueError("Tried setting float value on parameter with type " + m_type);
     }
 }
 
-void Field::set(const std::string& s)
+void Parameter::set(const std::string& s)
 {
     if (m_type == kString) {
         // TODO: lazy setting
@@ -117,11 +117,11 @@ void Field::set(const std::string& s)
         m_value.s = new std::string(s);
         postSet();
     } else {
-        throw ValueError("Tried setting string value on field with type " + m_type);
+        throw ValueError("Tried setting string value on parameter with type " + m_type);
     }
 }
 
-void Field::set(void* data)
+void Parameter::set(void* data)
 {  
     // TODO: lazy setting
     preSet();
@@ -129,12 +129,12 @@ void Field::set(void* data)
     postSet();
 }
 
-Field::~Field()
+Parameter::~Parameter()
 {
     disconnect();
 }
 
-bool Field::validName(const FieldName& name)
+bool Parameter::validName(const ParameterName& name)
 {
     regex_t nameRe, doubleUnderScoreRe, reservedRe;
 
@@ -153,18 +153,18 @@ bool Field::validName(const FieldName& name)
            regexec(&reservedRe, name.c_str(), 0, NULL, 0) != 0;
 }
 
-// Checks if this field can connect to the ouput of the given node.
-// This compares the types of the relevant input and output fields.
-bool Field::canConnectTo(Node* node)
+// Checks if this parameter can connect to the ouput of the given node.
+// This compares the types of the relevant input and output parameters.
+bool Parameter::canConnectTo(Node* node)
 {
-    if (isOutputField()) return false;
-    return  node->getOutputField()->getType() == getType();
+    if (isOutputParameter()) return false;
+    return  node->getOutputParameter()->getType() == getType();
 }
 
-Connection* Field::connect(Node* node)
+Connection* Parameter::connect(Node* node)
 {
     // Sanity check
-    if (!isInputField()) {
+    if (!isInputParameter()) {
         throw ConnectionError(m_node->getName() + "." + m_name + ": can only connect input nodes");        
     }
     if (node == m_node) {
@@ -174,16 +174,16 @@ Connection* Field::connect(Node* node)
         throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to " + node->getName());
     }
     disconnect();
-    m_connection = new Connection(node->getOutputField(), this);
+    m_connection = new Connection(node->getOutputParameter(), this);
     node->addDownstream(m_connection);
     m_node->markDirty();
     // TODO: notify
     return m_connection;
 }
 
-bool Field::disconnect()
+bool Parameter::disconnect()
 {
-    assert(isInputField()); // TODO: also support disconnecting output fields.
+    assert(isInputParameter()); // TODO: also support disconnecting output parameters.
     if (!isConnected()) return false;
     if (m_connection->hasOutput()) {
         assert(m_connection->getOutputNode()->isOutputConnectedTo(this));
@@ -197,48 +197,48 @@ bool Field::disconnect()
     return true;
 }
 
-bool Field::isConnected()
+bool Parameter::isConnected()
 {
     return m_connection != 0;
 }
 
-bool Field::isConnectedTo(Node* node)
+bool Parameter::isConnectedTo(Node* node)
 {
     if (!m_connection)
         return false;
     return m_connection->getOutputNode() == node;
 }
 
-Connection* Field::getConnection()
+Connection* Parameter::getConnection()
 {
     return m_connection;
 }
 
-void Field::update()
+void Parameter::update()
 {
     if (isConnected()) {
         m_connection->getOutputNode()->update();
-        assert(m_connection->getOutputField()->getType() == getType());
+        assert(m_connection->getOutputParameter()->getType() == getType());
         if (m_type == kInt) {
-            set(m_connection->getOutputField()->asInt());
+            set(m_connection->getOutputParameter()->asInt());
         } else if (m_type == kFloat) {
-            set(m_connection->getOutputField()->asFloat());
+            set(m_connection->getOutputParameter()->asFloat());
         } else if (m_type == kString) {
-            set(m_connection->getOutputField()->asString());
+            set(m_connection->getOutputParameter()->asString());
         } else {
-            set(m_connection->getOutputField()->asData());
+            set(m_connection->getOutputParameter()->asData());
         }
     }
 }
 
-std::ostream& operator<<(std::ostream& o, const Field& f)
+std::ostream& operator<<(std::ostream& o, const Parameter& f)
 {
 
-    o << "Field(" << f.m_node->getName() << ", " << f.m_name << ", " << f.m_type << ")";
+    o << "Parameter(" << f.m_node->getName() << ", " << f.m_name << ", " << f.m_type << ")";
     return o;
 }
 
-void Field::revertToDefault()
+void Parameter::revertToDefault()
 {
     if (m_type == kInt) {
         m_value.i = 0;
@@ -254,12 +254,12 @@ void Field::revertToDefault()
     }
 }
 
-void Field::preSet()
+void Parameter::preSet()
 {
     // TODO: validate
 }
 
-void Field::postSet()
+void Parameter::postSet()
 {
     m_node->markDirty();
 }

@@ -20,7 +20,7 @@
 %}
 
 %include "node/Connection.i"
-%include "node/Field.i"
+%include "node/Parameter.i"
 %include "node/Node.i"
 %include "node/Network.i"
 %include "node/NodeInfo.i"

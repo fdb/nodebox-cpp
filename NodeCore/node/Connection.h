@@ -26,7 +26,7 @@
 
 namespace NodeCore {
     
-class Field;
+class Parameter;
 class Node;
 
 class ConnectionError : public std::exception {
@@ -41,12 +41,12 @@ private:
 
 class Connection {
 public:
-    Connection(Field *outputField, Field *inputField);
+    Connection(Parameter *outputParameter, Parameter *inputParameter);
     virtual ~Connection();
 
-    Field* getOutputField() const;
+    Parameter* getOutputParameter() const;
     Node* getOutputNode() const;
-    Field* getInputField() const;
+    Parameter* getInputParameter() const;
     Node* getInputNode() const;
     bool hasOutput() const;
 
@@ -60,10 +60,10 @@ private:
     void markDirtyDownstream();
     void update();
     
-    Field* m_output;
-    Field* m_input;
+    Parameter* m_output;
+    Parameter* m_input;
     
-    friend class Field;
+    friend class Parameter;
     friend class Node;
 };
 

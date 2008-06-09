@@ -21,12 +21,12 @@
 
 using namespace NodeCore;
 
-class FieldTestSuite : public Test::Suite
+class ParameterTestSuite : public Test::Suite
 {
 public:
-	FieldTestSuite()
+	ParameterTestSuite()
 	{
-		TEST_ADD(FieldTestSuite::test_values);
+		TEST_ADD(ParameterTestSuite::test_values);
 	}
 
 private:

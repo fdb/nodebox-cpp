@@ -20,7 +20,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface NXFieldBox : NSView {
+@interface NXParameterBox : NSView {
 
 }
 

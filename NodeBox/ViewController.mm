@@ -89,7 +89,7 @@
     [self setNeedsDisplay];
 }
 
-- (void) didConnect: (NodeCore::Field*)field to: (NodeCore::Node*)node
+- (void) didConnect: (NodeCore::Parameter*)parameter to: (NodeCore::Node*)node
 {
     [self setNeedsDisplay];
 }

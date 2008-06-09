@@ -17,20 +17,20 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "FieldWrapper.h"
+#import "ParameterWrapper.h"
 
-@implementation FieldWrapper
+@implementation ParameterWrapper
 
-- (id) initWithField: (NodeCore::Field*)field
+- (id) initWithParameter: (NodeCore::Parameter*)parameter
 {
     self = [super init];
-    _field = field;
+    _parameter = parameter;
     return self;
 }
 
-- (NodeCore::Field*) field
+- (NodeCore::Parameter*) parameter
 {
-    return _field;
+    return _parameter;
 }
 
 @end

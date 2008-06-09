@@ -163,27 +163,27 @@
     }
 }
 
-- (void) setFloat: (float)value forField: (NodeCore::Field*)field
+- (void) setFloat: (float)value forParameter: (NodeCore::Parameter*)parameter
 {
-    field->set(value);
+    parameter->set(value);
 
     // Notify
     NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
     ViewPaneController *c;
     while (c = [enumerator nextObject]) {
-        [[c viewController] didModifyNode:field->getNode()];
+        [[c viewController] didModifyNode:parameter->getNode()];
     }    
 }
 
-- (void) connectFrom: (NodeCore::Field*)field to: (NodeCore::Node*)node
+- (void) connectFrom: (NodeCore::Parameter*)parameter to: (NodeCore::Node*)node
 {
-    field->connect(node);
+    parameter->connect(node);
 
     // Notify
     NSEnumerator *enumerator = [viewPaneControllers objectEnumerator];
     ViewPaneController *c;
     while (c = [enumerator nextObject]) {
-        [[c viewController] didConnect:field to:node];
+        [[c viewController] didConnect:parameter to:node];
     }
 }
 

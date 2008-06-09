@@ -59,7 +59,7 @@
     [_view redrawConnections];
 }
 
-- (void) didConnect: (NodeCore::Field*)field to: (NodeCore::Node*)node
+- (void) didConnect: (NodeCore::Parameter*)parameter to: (NodeCore::Node*)node
 {
     [_view redrawConnections];
 }

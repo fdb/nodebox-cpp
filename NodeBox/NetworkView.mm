@@ -26,7 +26,7 @@
 #import "NodeBoxDocument.h"
 #import "NodeLayer.h"
 #import "NetworkLayer.h"
-#import "FieldWrapper.h"
+#import "ParameterWrapper.h"
 
 @interface NetworkView(Private)
 
@@ -133,16 +133,16 @@
         [self dehighlightNode:_dragOverNode];
         if (_dragOverNode != _draggingNode) {
             _deferredDraggingNode = _draggingNode;
-            NSMenu *fieldMenu = [[NSMenu alloc] init];
-            SEL connectSelector = @selector(connectNodeToField:);
-            NodeCore::FieldList fields = _dragOverNode->getFields();
-            for (NodeCore::FieldIterator fieldIter = fields.begin(); fieldIter != fields.end(); ++fieldIter) {
-                NodeCore::Field *field = *fieldIter;
-                NSMenuItem *item = [fieldMenu addItemWithTitle:[NSString stringWithCString:field->getName().c_str()] action:connectSelector keyEquivalent:@""];
-                FieldWrapper *fieldWrapper = [[FieldWrapper alloc] initWithField:field];
-                [item setRepresentedObject:fieldWrapper];
+            NSMenu *parameterMenu = [[NSMenu alloc] init];
+            SEL connectSelector = @selector(connectNodeToParameter:);
+            NodeCore::ParameterList parameters = _dragOverNode->getParameters();
+            for (NodeCore::ParameterIterator parameterIter = parameters.begin(); parameterIter != parameters.end(); ++parameterIter) {
+                NodeCore::Parameter *parameter = *parameterIter;
+                NSMenuItem *item = [parameterMenu addItemWithTitle:[NSString stringWithCString:parameter->getName().c_str()] action:connectSelector keyEquivalent:@""];
+                ParameterWrapper *parameterWrapper = [[ParameterWrapper alloc] initWithParameter:parameter];
+                [item setRepresentedObject:parameterWrapper];
             }
-            [NSMenu popUpContextMenu:fieldMenu withEvent:theEvent forView:self];
+            [NSMenu popUpContextMenu:parameterMenu withEvent:theEvent forView:self];
             _draggingNode = NULL;
             _startedDragging = false;
             _dragMode = kDragModeNotDragging;
@@ -317,12 +317,12 @@
 
 #pragma mark Event callbacks
 
-- (void) connectNodeToField: (NSMenuItem*)menuItem
+- (void) connectNodeToParameter: (NSMenuItem*)menuItem
 {
     if (!_deferredDraggingNode) return;
-    NodeCore::Field *field = [(FieldWrapper *)[menuItem representedObject] field];
-    if (!field) return;
-    [viewController.windowController connectFrom:field to:_deferredDraggingNode];
+    NodeCore::Parameter *parameter = [(ParameterWrapper *)[menuItem representedObject] parameter];
+    if (!parameter) return;
+    [viewController.windowController connectFrom:parameter to:_deferredDraggingNode];
     _deferredDraggingNode = NULL;
 }
 

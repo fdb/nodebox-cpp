@@ -29,7 +29,7 @@ class NumberGenerator : public Node
 public:
     NumberGenerator() : Node(kInt)
     {
-        addField("number", kInt);
+        addParameter("number", kInt);
     }
 
 protected:
@@ -46,9 +46,9 @@ class Multiplier : public Node
 public:
     Multiplier() : Node(kInt)
     {
-        addField("number", kInt);
-        addField("multiplier", kInt);
-        addField("somestring", kString);
+        addParameter("number", kInt);
+        addParameter("multiplier", kInt);
+        addParameter("somestring", kString);
     }
 protected:
     virtual void process()
@@ -65,9 +65,9 @@ class ValueNode : public Node {
 public:
     ValueNode() : Node(kInt)
     {
-        f_int = addField("int", kInt);
-        f_float = addField("float", kFloat);
-        f_string = addField("string", kString);
+        f_int = addParameter("int", kInt);
+        f_float = addParameter("float", kFloat);
+        f_string = addParameter("string", kString);
     }
     virtual ~ValueNode() {}
 
@@ -75,9 +75,9 @@ protected:
     virtual void process() { }
 
 public:
-    Field *f_int;
-    Field *f_float;
-    Field *f_string;
+    Parameter *f_int;
+    Parameter *f_float;
+    Parameter *f_string;
 
     NodeNameMacro(ValueNode);
 };

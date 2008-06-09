@@ -22,7 +22,7 @@
 
 @interface NetworkLayer(Private)
 
-    - (void)drawConnectionFrom:(NodeCore::Field *)output to:(NodeCore::Field *)input context:(CGContextRef)ctx;
+    - (void)drawConnectionFrom:(NodeCore::Parameter *)output to:(NodeCore::Parameter *)input context:(CGContextRef)ctx;
     - (void)drawConnectionLineFrom:(NSPoint)p1 to:(NSPoint)p2 context:(CGContextRef)ctx;
 
 @end
@@ -49,12 +49,12 @@
         NodeCore::ConnectionList downstreams = theNode->getOutputConnections();
         for (NodeCore::ConnectionIterator connIter = downstreams.begin(); connIter != downstreams.end(); ++connIter) {
             NodeCore::Connection *conn = (*connIter);
-            [self drawConnectionFrom:conn->getInputField() to:conn->getOutputField() context:ctx];
+            [self drawConnectionFrom:conn->getInputParameter() to:conn->getOutputParameter() context:ctx];
         }        
     }
 }
 
-- (void)drawConnectionFrom:(NodeCore::Field *)output to:(NodeCore::Field *)input context:(CGContextRef)ctx
+- (void)drawConnectionFrom:(NodeCore::Parameter *)output to:(NodeCore::Parameter *)input context:(CGContextRef)ctx
 {
     NodeCore::Node *inputNode = input->getNode();
     NodeCore::Node *outputNode = output->getNode();
