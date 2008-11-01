@@ -16,158 +16,157 @@
  * You should have received a copy of the GNU General Public License
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
-#import "NetworkView.h"
-#import "NetworkViewController.h"
-#import "NetworkVisualiser.h"
-#import "NodeBoxDocument.h"
-#import "NodeBoxWindowController.h"
-#import "NodeInfoWrapper.h"
 
-float NODE_WIDTH = 121;
-float NODE_HEIGHT = 30;
-float CONNECTOR_RADIUS = 5;
-float DRAG_START = 5;
+#import "NetworkView.h"
+#import <QuartzCore/QuartzCore.h>
+#import "CGColorHelper.h"
+#import "NetworkViewController.h"
+#import "NodeInfoWrapper.h"
+#import "NodeBoxWindowController.h"
+#import "NodeBoxDocument.h"
+#import "NodeLayer.h"
+#import "NetworkLayer.h"
+#import "ParameterWrapper.h"
+
+@interface NetworkView(Private)
+
+- (NodeLayer*) findLayerForNode: (NodeCore::Node*)node;
+
+@end
 
 @implementation NetworkView
 
-- (id)initWithFrame:(NSRect)frame
+- (void)awakeFromNib
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _dragMode = kDragModeNotDragging;
-        _draggingNode = NULL;
-        _dragOverNode = NULL;
-        _dragPoint = NSMakePoint(0, 0);
-        _startedDragging = false;
-        _deferredDraggingNode = NULL;
-        _clickPoint = NSMakePoint(0, 0);
-        visualiser = new NetworkVisualiser();
-        [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];
-    }
-    return self;
+    self.layer = [CALayer layer];
+    self.layer.name = @"__top";
+    self.wantsLayer = YES;
+    self.layer.backgroundColor = [CGColorHelper white];
+    rootNetworkLayer = [[NetworkLayer alloc] initWithNetwork:[viewController rootNetwork]];
+    rootNetworkLayer.frame = self.layer.frame;
+    rootNetworkLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
+    //rootNetworkLayer.bounds = CGRectMake(0.0f, 0.0f, NSWidth(self.bounds), NSHeight(self.bounds));
+    //rootNetworkLayer.position = CGPointMake(0.0f, 0.0f);
+    //rootNetworkLayer.anchorPoint = CGPointMake(0.0f, 0.0f);
+    rootNetworkLayer.name = @"__root";
+    rootNetworkLayer.backgroundColor = [CGColorHelper veryLightGray];
+    [self.layer addSublayer:rootNetworkLayer];
+    [self rebuildNetwork];
+    [self registerForDraggedTypes:[NSArray arrayWithObjects:NodeType, nil]];
 }
 
--(void)dealloc
-{
-    delete visualiser;
-    [super dealloc];
-}
-
--(BOOL)isFlipped
-{
-    return TRUE;
-}
-
--(BOOL)canBecomeKeyView
-{
-    return TRUE;
-}
-
--(BOOL)acceptsFirstResponder
-{
-    return TRUE;
-}
+#pragma mark Controller
 
 - (NetworkViewController*)controller
 {
     return viewController;
 }
 
-- (void)setController:(NetworkViewController *)controller
+- (void) setController: (NetworkViewController*)controller
 {
     viewController = controller;
-    [self setNeedsDisplay:TRUE];
+    [self rebuildNetwork];
 }
 
-#pragma mark Drawing
+#pragma mark Mouse Events
 
-- (void)drawRect:(NSRect)rect
+- (BOOL)acceptsFirstResponder
 {
-    [[NSColor redColor] set];
-    NSRectFill(rect);
+    return YES;
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    _draggingNode = NULL;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
     if (!viewController) return;
     NodeCore::Network* network = [viewController activeNetwork];
     if (!network) return;
-    [[NSColor whiteColor] set];
-    NSRectFill(rect);
-    NodeCore::NodeList nodes = network->getNodes();
-    for (NodeCore::NodeIterator nodeIter = nodes.begin(); nodeIter != nodes.end(); ++nodeIter) {
-        NodeCore::Node* node = (*nodeIter);
-        NodeCore::ConnectionList downstreams = node->getOutputConnections();
-        for (NodeCore::ConnectionIterator connIter = downstreams.begin(); connIter != downstreams.end(); ++connIter) {
-            NodeCore::Connection *conn = (*connIter);
-            [self _drawConnectionWithInputField:conn->getInputField() outputField:conn->getOutputField()];
-        }        
+    NodeCore::Node *node = [self findNodeAt:pt];
+    if (!node) return;
+    BOOL shiftKeyDown = ([[NSApp currentEvent] modifierFlags] &
+        (NSShiftKeyMask | NSAlphaShiftKeyMask)) !=0; 
+    _startedDragging = false;
+    _draggingNode = node;
+    _dragMode = shiftKeyDown ? kDragModeConnect : kDragModeNode;
+    _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
+    _dragPoint = pt;
+    // TODO: When making a connection, show the connection line
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    if (_draggingNode == NULL) return;
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    if (!_startedDragging &&
+        abs(pt.x + _clickPoint.x - _draggingNode->getX()) > kDragStart ||
+        abs(pt.y + _clickPoint.y - _draggingNode->getY()) > kDragStart) {
+        _startedDragging = true;
     }
-    for (NodeCore::NodeIterator iter = nodes.begin(); iter != nodes.end(); ++iter) {
-        NodeCore::Node* node = (*iter);
-        [self _drawNode:node];
-    }
-    if (_startedDragging && _dragMode == kDragModeConnect) {
-        NSPoint p1 = NSMakePoint(_draggingNode->getX() + NODE_WIDTH / 2, _draggingNode->getY() + NODE_HEIGHT);
-        [self _drawConnectionLineFrom:p1 to:_dragPoint];
+    if (_startedDragging) {
+        _dragPoint = pt;
+        if (_dragMode == kDragModeNode) {
+            NSPoint newPos = NSMakePoint(pt.x + _clickPoint.x, pt.y + _clickPoint.y);
+            [viewController.windowController moveNode:_draggingNode to:newPos];
+        } else if (_dragMode == kDragModeConnect) {
+            NodeCore::Node *newDragOverNode = [self findNodeAt:pt];
+            if (_dragOverNode == newDragOverNode) return;
+            [self dehighlightNode:_dragOverNode];
+            _dragOverNode = newDragOverNode;
+            [self highlightNode:_dragOverNode];
+        }
     }
 }
 
-- (void)_drawNode:(NodeCore::Node *)node
+- (void)mouseUp:(NSEvent *)theEvent
 {
-    NSColor *nodeColor;
-    if (node == _dragOverNode) {
-        nodeColor = [NSColor blueColor];
-    //} else if (node->hasError) {
-    //    [[NSColor redColor] set];
-    } else {
-        nodeColor = [NSColor blackColor];
+    // If I was dragging, should not select.
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    if (!viewController) return;
+    if (_startedDragging && _dragMode == kDragModeConnect && _dragOverNode != NULL) {
+        [self dehighlightNode:_dragOverNode];
+        if (_dragOverNode != _draggingNode) {
+            _deferredDraggingNode = _draggingNode;
+            NSMenu *parameterMenu = [[NSMenu alloc] init];
+            SEL connectSelector = @selector(connectNodeToParameter:);
+            NodeCore::ParameterList parameters = _dragOverNode->getParameters();
+            for (NodeCore::ParameterIterator parameterIter = parameters.begin(); parameterIter != parameters.end(); ++parameterIter) {
+                NodeCore::Parameter *parameter = *parameterIter;
+                NSMenuItem *item = [parameterMenu addItemWithTitle:[NSString stringWithCString:parameter->getName().c_str()] action:connectSelector keyEquivalent:@""];
+                ParameterWrapper *parameterWrapper = [[ParameterWrapper alloc] initWithParameter:parameter];
+                [item setRepresentedObject:parameterWrapper];
+            }
+            [NSMenu popUpContextMenu:parameterMenu withEvent:theEvent forView:self];
+            _draggingNode = NULL;
+            _startedDragging = false;
+            _dragMode = kDragModeNotDragging;
+            _dragOverNode = NULL;
+        }
     }
-    [nodeColor set];
-    NSRect r = NSMakeRect(node->getX(), node->getY(), NODE_WIDTH, NODE_HEIGHT);
-    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:r xRadius:2 yRadius:2];
-    [path fill];
-    if (node == [viewController activeNode]) {
-        [path setLineWidth:3.0];
-        [[NSColor colorWithDeviceRed:0.8 green:0.8 blue:0.9 alpha:1.0] set];
-    } else {
-        [path setLineWidth:1.0];
-        [[NSColor colorWithDeviceWhite:0.3 alpha:1.0] set];
-    }
-    [path stroke];
-    NSRect connectorRect = NSMakeRect(node->getX() + NODE_WIDTH / 2 - CONNECTOR_RADIUS, node->getY() + NODE_HEIGHT - CONNECTOR_RADIUS - 1,
-               CONNECTOR_RADIUS * 2, CONNECTOR_RADIUS * 2);
-    NSBezierPath *connectorPath = [NSBezierPath bezierPathWithOvalInRect:connectorRect];
-    [nodeColor set];
-    [connectorPath fill];
-    NSString *s = [NSString stringWithCString:node->getName().c_str()];
-    NSColor *c= [NSColor colorWithDeviceWhite:0.9 alpha:1.0];
-    NSDictionary *attrs = [NSDictionary dictionaryWithObject:c forKey:NSForegroundColorAttributeName];
-    [s drawAtPoint:NSMakePoint(node->getX()+5, node->getY()+5) withAttributes:attrs];
-    if (node->getNetwork()->getRenderedNode() == node) {
-        NSLog(@"%s is the rendered node", node->getName().c_str());
-        [[NSColor whiteColor] set];
-        [[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(node->getX()+2, node->getY()+2, 5, 5)] fill];
+    if ([theEvent clickCount] == 1) {
+        // Select a node
+        [viewController.windowController setActiveNode:[self findNodeAt:pt]];
+    } else if ([theEvent clickCount] == 2) {
+        [viewController.windowController setRenderedNode:[self findNodeAt:pt]];
     }
 }
 
-- (void)_drawConnectionWithInputField:(NodeCore::Field *)input outputField:(NodeCore::Field *)output
+- (void)rightMouseDown:(NSEvent *)theEvent
 {
-    NodeCore::Node *inputNode = input->getNode();
-    NodeCore::Node *outputNode = output->getNode();
-    NSPoint p1 = NSMakePoint(outputNode->getX() + NODE_WIDTH / 2, outputNode->getY() + NODE_HEIGHT);
-    NSPoint p2 = NSMakePoint(inputNode->getX() + NODE_WIDTH / 2, inputNode->getY());
-    [self _drawConnectionLineFrom:p1 to:p2];
-}
-
-- (void)_drawConnectionLineFrom:(NSPoint)p1 to:(NSPoint)p2
-{
-    float dx = abs(p2.x - p1.x) / 2;
-    NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:p1];
-    [path curveToPoint:p2 
-         controlPoint1:NSMakePoint(p1.x, p1.y + dx) 
-         controlPoint2:NSMakePoint(p2.x, p2.y - dx)];
-    [path setLineWidth:2.0];
-    [[NSColor colorWithDeviceWhite:0.3 alpha:1.0] set];
-    [path stroke];
+    if (!viewController) return;
+    NodeCore::Network* network = [viewController activeNetwork];
+    if (!network) return;
+    NSPoint eventPoint = [theEvent locationInWindow];
+    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
+    NodeCore::Node *node = [self findNodeAt:pt];
+    if (!node) return;
+    [(NetworkViewController *)viewController contextMenuForNode:node event:theEvent];
 }
 
 #pragma mark Drag And Drop
@@ -200,7 +199,7 @@ float DRAG_START = 5;
         NodeInfoWrapper *wrapper = [NodeInfoWrapper wrapperWithIdentifier:identifier];
         if (!wrapper) return NO;
         NSPoint dragPoint = [sender draggingLocation];
-        dragPoint = [self convertPointFromBase:dragPoint];
+        dragPoint = [self convertPoint:dragPoint fromView:NULL];
         [[viewController windowController] createNode:[wrapper nodeInfo] at:dragPoint];
         [self setNeedsDisplay:TRUE];
         [wrapper dealloc];
@@ -210,141 +209,139 @@ float DRAG_START = 5;
     }
 }
 
-#pragma mark Dragging
+#pragma mark View queries
 
-- (void)mouseDown:(NSEvent *)theEvent
+- (NodeCore::Node*) findNodeAt: (NSPoint)point
 {
-    _draggingNode = NULL;
-    NSPoint eventPoint = [theEvent locationInWindow];
-    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
-    if (!viewController) return;
-    NodeCore::Network* network = [viewController activeNetwork];
+    CALayer *hit = [rootNetworkLayer hitTest:CGPointMake(point.x, point.y)];
+    if (!hit) return NULL;
+    NodeCore::Node *node = [viewController rootNetwork]->getNode([[hit name] UTF8String]);
+    return node;
+}
+
+#pragma mark View operations
+
+- (void) clearLayers;
+{
+    while (rootNetworkLayer.sublayers > 0) {
+        CALayer *sublayer = (CALayer *)[rootNetworkLayer.sublayers objectAtIndex:0];
+        [sublayer removeFromSuperlayer];
+    }
+}
+
+- (void) rebuildNetwork;
+{
+    [self clearLayers];
+    NodeCore::Network* network = [viewController rootNetwork];
     if (!network) return;
     NodeCore::NodeList nodes = network->getNodes();
     for (NodeCore::NodeIterator nodeIter = nodes.begin(); nodeIter != nodes.end(); ++nodeIter) {
         NodeCore::Node* node = (*nodeIter);
-        if (pt.x >= node->getX() && pt.y >= node->getY() 
-            && pt.x <= node->getX() + NODE_WIDTH && pt.y <= node->getY() + NODE_HEIGHT) {
-            _startedDragging = false;
-            _draggingNode = node;
-            _dragMode = kDragModeNode;
-            _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
-            _dragPoint = pt;
-        } else if (pt.x >= node->getX() && pt.y >= node->getY() 
-            && pt.x <= node->getX() + NODE_WIDTH && pt.y <= node->getY() + NODE_HEIGHT + CONNECTOR_RADIUS) {
-            _startedDragging = false;
-            _draggingNode = node;
-            _dragMode = kDragModeConnect;
-            _clickPoint = NSMakePoint(node->getX() - pt.x, node->getY() - pt.y);
-            _dragPoint = pt;            
+        [self addLayerForNode:node];
+    }
+    [self select:[viewController activeNode]];
+}
+
+- (void) moveNode: (NodeCore::Node*)node to: (NSPoint)pt;
+{
+    NodeLayer *nodeLayer = [self findLayerForNode:node];
+    if (!nodeLayer) return;
+    nodeLayer.position = CGPointMake(pt.x, pt.y);
+}
+
+- (void) deselect;
+{
+    NSArray *sublayers = [rootNetworkLayer sublayers];
+    for (int i=0; i < [sublayers count]; i++) {
+        NodeLayer *sublayer = (NodeLayer *)[sublayers objectAtIndex:i];
+        sublayer.selected = FALSE;
+    }
+}
+
+- (void) select: (NodeCore::Node*)node;
+{
+    NodeLayer *layer = (NodeLayer *)[self findLayerForNode:node];
+    layer.selected = TRUE;
+}
+
+- (void) setRenderedNode: (NodeCore::Node*)node
+{
+    NSArray *sublayers = [rootNetworkLayer sublayers];
+    for (int i=0; i < [sublayers count]; i++) {
+        NodeLayer *sublayer = (NodeLayer *)[sublayers objectAtIndex:i];
+        if (sublayer.node == node) {
+            sublayer.rendered = TRUE;
+        } else {
+            sublayer.rendered = FALSE;
         }
     }
 }
 
-- (void)rightMouseDown:(NSEvent *)theEvent
+- (void) addLayerForNode: (NodeCore::Node*)node
 {
-    if (!viewController) return;
-    NodeCore::Network* network = [viewController activeNetwork];
-    if (!network) return;
-    NSPoint eventPoint = [theEvent locationInWindow];
-    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
-    NodeCore::Node *node = [self findNodeAt:pt];
+    NodeLayer *nodeLayer  = [[NodeLayer alloc] initWithNode:node];
+    [rootNetworkLayer addSublayer:nodeLayer];    
+}
+
+- (void) removeLayerForNode: (NodeCore::Node*)node
+{
+    NodeLayer *nodeLayer = [self findLayerForNode:node];
+    if (!nodeLayer) return;
+    [nodeLayer removeFromSuperlayer];
+}
+
+- (void) highlightNode: (NodeCore::Node*)node
+{
     if (!node) return;
-    [(NetworkViewController *)viewController contextMenuForNode:node event:theEvent];
+    NodeLayer *layer = [self findLayerForNode:node];
+    if (!layer) return;
+    layer.shadowColor = [CGColorHelper dragHighlightColor];
+    layer.shadowOpacity = 1.0f;
+    layer.shadowRadius = 5.0f;
 }
 
-- (void)mouseDragged:(NSEvent *)theEvent
+- (void) dehighlightNode: (NodeCore::Node*)node
 {
-    if (_draggingNode == NULL) return;
-    if (!viewController) return;
-    NodeCore::Network* network = [viewController activeNetwork];
-    if (!network) return;
-
-    NSPoint eventPoint = [theEvent locationInWindow];
-    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
-    
-    if (!_startedDragging &&
-        abs(pt.x + _clickPoint.x - _draggingNode->getX()) > DRAG_START ||
-        abs(pt.y + _clickPoint.y - _draggingNode->getY()) > DRAG_START) {
-        _startedDragging = true;
-    }
-    if (_startedDragging) {
-        _dragPoint = pt;
-        if (_dragMode == kDragModeNode) {
-            _draggingNode->setX(pt.x + _clickPoint.x);
-            _draggingNode->setY(pt.y + _clickPoint.y);
-        } else if (_dragMode == kDragModeConnect) {
-            _dragOverNode = [self findNodeAt:pt];
-        }
-        // TODO: this should be settable from the viewController
-        [[viewController windowController] activeNetworkModified];
-    }
+    if (!node) return;
+    NodeLayer *layer = [self findLayerForNode:node];
+    if (!layer) return;
+    layer.shadowColor = [CGColorHelper black];
+    layer.shadowOpacity = 0.5f;
+    layer.shadowRadius = 2.0f;
 }
 
-- (void)mouseUp:(NSEvent *)theEvent
+- (void) redrawConnections
 {
-    NSPoint eventPoint = [theEvent locationInWindow];
-    NSPoint pt = [self convertPoint:eventPoint fromView:NULL];
-    if (!viewController) return;
-    NodeCore::Network* network = [viewController activeNetwork];
-    if (!network) return;
-    if (_startedDragging && _dragMode == kDragModeConnect && _dragOverNode != NULL && _dragOverNode != _draggingNode) {
-        // Make a connection
-        // TODO: popup menu
-        _deferredDraggingNode = _draggingNode;
-        NSMenu *fieldMenu = [[NSMenu alloc] init];
-        SEL connectSelector = @selector(connectNodeToField:);
-        NodeCore::FieldList fields = _dragOverNode->getFields();
-        for (NodeCore::FieldIterator fieldIter = fields.begin(); fieldIter != fields.end(); ++fieldIter) {
-            NodeCore::Field *field = *fieldIter;
-            NSMenuItem *item = [fieldMenu addItemWithTitle:[NSString stringWithCString:field->getName().c_str()] action:connectSelector keyEquivalent:@""];
-            FieldWrapper *fieldWrapper = [[FieldWrapper alloc] initWithField:field];
-            [item setRepresentedObject:fieldWrapper];
-        }
-        [NSMenu popUpContextMenu:fieldMenu withEvent:theEvent forView:self];
-        _draggingNode = NULL;
-        _startedDragging = false;
-        _dragMode = kDragModeNotDragging;
-        _dragOverNode = NULL;
-        [self setNeedsDisplay:TRUE];
-    } else if ([theEvent clickCount] == 1) {
-        // Select a node
-        [viewController setActiveNode:[self findNodeAt:pt]];
-    } else { // Doubleclick
-        NodeCore::Node* node = [self findNodeAt:pt];
-        if (!node) return;
-        [viewController setRenderedNode:node];
-    }
+    [rootNetworkLayer setNeedsDisplay];
 }
 
+#pragma mark Event callbacks
 
-
-- (NodeCore::Node *)findNodeAt:(NSPoint) point
+- (void) connectNodeToParameter: (NSMenuItem*)menuItem
 {
-    if (!viewController) return NULL;
-    NodeCore::Network* network = [viewController activeNetwork];
-    if (!network) return NULL;
-    NodeCore::NodeList nodes = network->getNodes();
-    for (NodeCore::NodeIterator nodeIter = nodes.begin(); nodeIter != nodes.end(); ++nodeIter) {
-        NodeCore::Node* node = (*nodeIter);
-        if (point.x >= node->getX() && point.y >= node->getY() 
-            && point.x <= node->getX() + NODE_WIDTH && point.y <= node->getY() + NODE_HEIGHT) {
-            return node;
+    if (!_deferredDraggingNode) return;
+    NodeCore::Parameter *parameter = [(ParameterWrapper *)[menuItem representedObject] parameter];
+    if (!parameter) return;
+    [viewController.windowController connectFrom:parameter to:_deferredDraggingNode];
+    _deferredDraggingNode = NULL;
+}
+
+@end
+
+@implementation NetworkView(Private)
+
+- (NodeLayer*) findLayerForNode: (NodeCore::Node*)node
+{
+    if (!node) return NULL;
+    NSString *nodeName = [NSString stringWithCString:node->getName().c_str()];
+    NSArray *sublayers = [rootNetworkLayer sublayers];
+    for (int i=0; i < [sublayers count]; i++) {
+        CALayer *sublayer = (CALayer *)[sublayers objectAtIndex:i];
+        if ([sublayer.name isEqualToString:nodeName]) {
+            return (NodeLayer*) sublayer;
         }
     }
     return NULL;
-}
-
-- (void)connectNodeToField:(NSMenuItem *)menuItem
-{
-    if (!_deferredDraggingNode) return;
-    NodeCore::Field *field = [(FieldWrapper *)[menuItem representedObject] field];
-    if (!field) return;
-    field->connect(_deferredDraggingNode);
-    _deferredDraggingNode = NULL;
-    // TODO: this should be triggered automatically by field->connect.
-    // TODO: get access to activeNetworkModified from the viewController.
-    [[viewController windowController] activeNetworkModified];
 }
 
 @end

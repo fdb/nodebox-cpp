@@ -22,43 +22,11 @@
 #import "NetworkView.h"
 #import "NodeBoxWindowController.h"
 
-@implementation NodeWrapper
-
-- (id)initWithNode:(NodeCore::Node *)node
-{
-    self = [super init];
-    _theNode = node;
-    return self;
-}
-
-- (NodeCore::Node*)node
-{
-    return _theNode;
-}
-
-@end
-
-@implementation FieldWrapper
-
-- (id)initWithField:(NodeCore::Field *)field
-{
-    self = [super init];
-    _field = field;
-    return self;
-}
-
-- (NodeCore::Field*)field
-{
-    return _field;
-}
-
-@end
-
 @implementation NetworkViewController
 
-- (id)init
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
 {
-    self = [super init];
+    self = [super initWithWindowController:windowController];
     if (![NSBundle loadNibNamed:@"NetworkView" owner:self]) {
         NSLog(@"Could not load nib NetworkView");
     }
@@ -70,6 +38,49 @@
 {
     return _view;
 }
+
+#pragma Network notifications
+
+- (void) didAddNode: (NodeCore::Node *)node
+{
+    [_view addLayerForNode:node];
+    [_view redrawConnections];
+}
+
+- (void) didRemoveNode: (NodeCore::Node *)node
+{
+    [_view removeLayerForNode:node];
+    [_view redrawConnections];
+}
+
+- (void) didMoveNode: (NodeCore::Node *)node to: (NSPoint)pt
+{
+    [_view moveNode:node to:pt];
+    [_view redrawConnections];
+}
+
+- (void) didConnect: (NodeCore::Parameter*)parameter to: (NodeCore::Node*)node
+{
+    [_view redrawConnections];
+}
+
+- (void) didChangeActiveNetwork: (NodeCore::Network *)activeNetwork
+{
+    [_view rebuildNetwork];
+}
+
+- (void) didChangeActiveNode: (NodeCore::Node *)activeNode
+{
+    [_view deselect];
+    [_view select:activeNode];
+}
+
+- (void) didChangeRenderedNode: (NodeCore::Node *)renderedNode
+{
+    [_view setRenderedNode:renderedNode];
+}
+
+#pragma Context menu
 
 - (void)contextMenuForNode:(NodeCore::Node *)node event:(NSEvent *)theEvent
 {

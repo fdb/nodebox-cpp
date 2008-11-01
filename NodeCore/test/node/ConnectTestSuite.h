@@ -59,28 +59,28 @@ private:
         NumberGenerator *ng = new NumberGenerator();
         Multiplier *m = new Multiplier();
         
-        TEST_ASSERT( !m->getField("number")->isConnected() );
-        TEST_ASSERT( !m->getField("number")->isConnectedTo(ng) );
+        TEST_ASSERT( !m->getParameter("number")->isConnected() );
+        TEST_ASSERT( !m->getParameter("number")->isConnectedTo(ng) );
         TEST_ASSERT( !ng->isOutputConnected() );
         TEST_ASSERT( !ng->isOutputConnectedTo(m) );
-        TEST_ASSERT( !ng->isOutputConnectedTo(m->getField("number")) );
+        TEST_ASSERT( !ng->isOutputConnectedTo(m->getParameter("number")) );
         
-        TEST_ASSERT( m->getField("number")->canConnectTo(ng) );
-        TEST_ASSERT( m->getField("multiplier")->canConnectTo(ng) );
-        TEST_ASSERT( !m->getField("somestring")->canConnectTo(ng) );
+        TEST_ASSERT( m->getParameter("number")->canConnectTo(ng) );
+        TEST_ASSERT( m->getParameter("multiplier")->canConnectTo(ng) );
+        TEST_ASSERT( !m->getParameter("somestring")->canConnectTo(ng) );
 
-        Connection* conn = m->getField("number")->connect(ng);
-        TEST_ASSERT( m->getField("number")->isConnected() );
-        TEST_ASSERT( m->getField("number")->isConnectedTo(ng) );
+        Connection* conn = m->getParameter("number")->connect(ng);
+        TEST_ASSERT( m->getParameter("number")->isConnected() );
+        TEST_ASSERT( m->getParameter("number")->isConnectedTo(ng) );
         TEST_ASSERT( ng->isOutputConnected() );
         TEST_ASSERT( ng->isOutputConnectedTo(m) );
-        TEST_ASSERT( ng->isOutputConnectedTo(m->getField("number")) );
-        TEST_ASSERT( m->getField("number") == conn->getInputField() );
+        TEST_ASSERT( ng->isOutputConnectedTo(m->getParameter("number")) );
+        TEST_ASSERT( m->getParameter("number") == conn->getInputParameter() );
         TEST_ASSERT( m == conn->getInputNode() );
         TEST_ASSERT( ng == conn->getOutputNode() );
         
-        // The somestring field is of the wrong type, and thus cannot be connected.
-        TEST_THROWS( m->getField("somestring")->connect(ng), ConnectionError );
+        // The somestring parameter is of the wrong type, and thus cannot be connected.
+        TEST_THROWS( m->getParameter("somestring")->connect(ng), ConnectionError );
     }
 
     // Test cyclic connections
@@ -88,7 +88,7 @@ private:
     {
         NumberGenerator *ng = new NumberGenerator();
         // Nodes can't connect to themselves.
-        TEST_THROWS( ng->getField("number")->connect(ng), ConnectionError );
+        TEST_THROWS( ng->getParameter("number")->connect(ng), ConnectionError );
         // TODO: more complex cyclic checks (A -> B -> A)
     }
 
@@ -107,7 +107,7 @@ private:
         TEST_ASSERT( !m->isDirty() );
         // Connecting the multiplier to another node makes it dirty.
         // The output node doesn't become dirty.
-        m->getField("number")->connect(ng);
+        m->getParameter("number")->connect(ng);
         TEST_ASSERT( !ng->isDirty() );
         TEST_ASSERT( m->isDirty() );
         m->update();
@@ -126,7 +126,7 @@ private:
         TEST_ASSERT( !ng->isDirty() );
         TEST_ASSERT( m->isDirty() );
         // Check if disconnect nodes still propagate.
-        m->getField("number")->disconnect();
+        m->getParameter("number")->disconnect();
         m->update();
         ng->update();
         ng->set("number", 12);
@@ -141,7 +141,7 @@ private:
         NumberGenerator *ng = new NumberGenerator();
         Multiplier *m = new Multiplier();
         m->set("multiplier", 2);
-        m->getField("number")->connect(ng);
+        m->getParameter("number")->connect(ng);
         TEST_ASSERT( m->outputAsInt() == 0 );
         ng->set("number", 3);
         TEST_ASSERT( m->isDirty() );
@@ -155,7 +155,7 @@ private:
         TEST_ASSERT( !m->isDirty() );
         TEST_ASSERT( m->outputAsInt() == 6 );
         // Test if value stops propagating after disconnection.
-        m->getField("number")->disconnect();
+        m->getParameter("number")->disconnect();
         TEST_ASSERT( m->isDirty() );
         TEST_ASSERT( !ng->isDirty() );
         ng->set("number", 3);
@@ -169,17 +169,17 @@ private:
         Multiplier *m = new Multiplier();
         m->set("multiplier", 2);
         ng->set("number", 5);
-        m->getField("number")->connect(ng);
-        TEST_ASSERT( m->getField("number")->isConnected() );
+        m->getParameter("number")->connect(ng);
+        TEST_ASSERT( m->getParameter("number")->isConnected() );
         TEST_ASSERT( ng->isOutputConnected() );
         m->update();
         TEST_ASSERT( m->asInt("number") == 5 );
         TEST_ASSERT( m->outputAsInt() == 10 );
 
-        m->getField("number")->disconnect();
+        m->getParameter("number")->disconnect();
         TEST_ASSERT( m->isDirty() );
         TEST_ASSERT( !ng->isDirty() );        
-        TEST_ASSERT( !m->getField("number")->isConnected() );
+        TEST_ASSERT( !m->getParameter("number")->isConnected() );
         TEST_ASSERT( !ng->isOutputConnected() );
         // Number reverts to default after disconnection
         m->update();

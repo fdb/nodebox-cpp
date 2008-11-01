@@ -22,7 +22,7 @@
 
 namespace NodeCore {
 
-Network::Network(const FieldType& outputType)
+Network::Network(const ParameterType& outputType)
        : Node(outputType),
          m_nodes(NodeMap()),
          m_renderedNode(NULL)

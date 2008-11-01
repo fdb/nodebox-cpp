@@ -20,7 +20,22 @@
 #import "ViewController.h"
 #import "NodeBoxWindowController.h"
 
+@interface ViewController(Private)
+
+- (void) setNeedsDisplay;
+
+@end
+
 @implementation ViewController
+
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
+{
+    self = [super init];
+    _windowController = windowController;
+    return self;
+}
+
+#pragma mark State
 
 - (NSView *)view
 {
@@ -30,11 +45,6 @@
 - (NodeBoxWindowController *)windowController
 {
     return _windowController;
-}
-
-- (void)setWindowController:(NodeBoxWindowController *)windowController
-{
-    _windowController = windowController;
 }
 
 - (NodeCore::Network *)rootNetwork
@@ -47,26 +57,9 @@
     return [_windowController activeNetwork];
 }
 
-- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork
-{
-    [_windowController setActiveNetwork:activeNetwork];
-}
-
-- (void)activeNetworkChanged
-{
-    if (NSView *v = [self view]) {
-        [v setNeedsDisplay:TRUE];
-    }
-}
-
 - (NodeCore::Node *)activeNode
 {
     return [_windowController activeNode];
-}
-
-- (void)setActiveNode:(NodeCore::Node *)activeNode
-{
-    [_windowController setActiveNode:activeNode];
 }
 
 - (NodeCore::Node *)renderedNode
@@ -74,26 +67,53 @@
     return [_windowController renderedNode];
 }
 
-- (void)setRenderedNode:(NodeCore::Node *)renderedNode
+#pragma mark Network notifications
+
+- (void) didAddNode: (NodeCore::Node *)node
 {
-    [_windowController setRenderedNode:renderedNode];
+    [self setNeedsDisplay];
 }
 
-- (void)activeNodeChanged
+- (void) didRemoveNode: (NodeCore::Node *)node
 {
-    if (NSView *v = [self view]) {
-        [v setNeedsDisplay:TRUE];
-    }
+    [self setNeedsDisplay];
 }
 
-- (void)activeNetworkModified
+- (void) didMoveNode: (NodeCore::Node *)node to: (NSPoint)pt
 {
-    if (NSView *v = [self view]) {
-        [v setNeedsDisplay:TRUE];
-    }
+    [self setNeedsDisplay];
 }
 
-- (void)renderedNodeChanged
+- (void) didModifyNode: (NodeCore::Node *)node
+{
+    [self setNeedsDisplay];
+}
+
+- (void) didConnect: (NodeCore::Parameter*)parameter to: (NodeCore::Node*)node
+{
+    [self setNeedsDisplay];
+}
+
+- (void) didChangeActiveNetwork: (NodeCore::Network *)activeNetwork
+{
+    [self setNeedsDisplay];
+}
+
+- (void) didChangeActiveNode: (NodeCore::Node *)activeNode
+{
+    [self setNeedsDisplay];
+}
+
+- (void) didChangeRenderedNode: (NodeCore::Node *)renderedNode
+{
+    [self setNeedsDisplay];
+}
+
+@end
+
+@implementation ViewController(Private)
+
+- (void) setNeedsDisplay
 {
     if (NSView *v = [self view]) {
         [v setNeedsDisplay:TRUE];

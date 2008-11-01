@@ -19,6 +19,7 @@
  
 #import "NodeBoxDocument.h"
 #import "NodeBoxWindowController.h"
+#import "NodeBoxAppDelegate.h"
 
 NSString *NodeType = @"NodeType";
 
@@ -28,25 +29,20 @@ NSString *NodeType = @"NodeType";
 {
     self = [super init];
     if (self) {
+        NodeBoxAppDelegate *delegate = [[NSApplication sharedApplication] delegate];
+        NodeCore::NodeLibraryManager *nlm = [delegate nodeLibraryManager];
         _rootNetwork = new NodeCore::Network();
-        NodeCore::Node* n1 = new NodeCore::Node(NodeCore::kFloat);
-        _rootNetwork->setUniqueNodeName(n1);
-        n1->setX(20);
-        n1->setY(30);
-        _rootNetwork->add(n1);
-        NodeCore::Node* n2 = new NodeCore::Node(NodeCore::kFloat);
-        _rootNetwork->setUniqueNodeName(n2);
-        n2->setX(50);
-        n2->setY(100);
-        _rootNetwork->add(n2);
-        NodeCore::Field *f = n2->addField("number", NodeCore::kFloat);
-        f->connect(n1);
-        NodeCore::Node* n3 = new NodeCore::Node(NodeCore::kFloat);
-        _rootNetwork->setUniqueNodeName(n3);
-        n3->setX(200);
-        n3->setY(100);
-        _rootNetwork->add(n3);
-        n3->addField("number", NodeCore::kFloat);
+        NodeCore::NodeLibrary *vectorLib = nlm->loadLatest("corevector");
+        NodeCore::Node *rect1 = vectorLib->createNode("RectNode");
+        NodeCore::Node *oval1 = vectorLib->createNode("OvalNode");
+        rect1->setX(100);
+        rect1->setY(100);
+        oval1->setX(200);
+        oval1->setY(100);
+        _rootNetwork->setUniqueNodeName(rect1);
+        _rootNetwork->add(rect1);
+        _rootNetwork->setUniqueNodeName(oval1);
+        _rootNetwork->add(oval1);
     }
     return self;
 }
@@ -62,15 +58,6 @@ NSString *NodeType = @"NodeType";
     delete _rootNetwork;
     [super finalize];
 }
-
-/*
-- (NSString *)windowNibName
-{
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"NodeBoxDocument";
-}
-*/
 
 - (void)makeWindowControllers
 {

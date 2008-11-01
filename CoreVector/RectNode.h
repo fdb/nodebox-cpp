@@ -31,6 +31,8 @@ public:
     RectNode();
     virtual ~RectNode();
     virtual void process();
+
+    NodeNameMacro(RectNode);
 };
 
 } // namespace CoreVector

@@ -13,7 +13,7 @@
 		611EC3B30DC22E83008BE1A1 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 611EC2B80DC22E66008BE1A1 /* NodeCore.framework */; };
 		611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EC2370DC2297B008BE1A1 /* NodeCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF470DC2108B008BE1A1 /* Connection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF490DC2108B008BE1A1 /* Field.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		611EC3B60DC22EA4008BE1A1 /* Parameter.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF490DC2108B008BE1A1 /* Parameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF510DC2108B008BE1A1 /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BB0DC22EA4008BE1A1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF530DC2108B008BE1A1 /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		611EC3BC0DC22EA4008BE1A1 /* NodeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 611EBF550DC2108B008BE1A1 /* NodeLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,7 +37,7 @@
 		611EC3CF0DC22ED6008BE1A1 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF400DC2108B008BE1A1 /* Rect.cpp */; };
 		611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
 		611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
-		611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
+		611EC3D20DC22ED6008BE1A1 /* Parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Parameter.cpp */; };
 		611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
 		611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
 		611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
@@ -79,7 +79,7 @@
 		6195F8350DEACD9B00F3771B /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF400DC2108B008BE1A1 /* Rect.cpp */; };
 		6195F8360DEACD9B00F3771B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF420DC2108B008BE1A1 /* Transform.cpp */; };
 		6195F8370DEACD9B00F3771B /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF460DC2108B008BE1A1 /* Connection.cpp */; };
-		6195F8380DEACD9B00F3771B /* Field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Field.cpp */; };
+		6195F8380DEACD9B00F3771B /* Parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF480DC2108B008BE1A1 /* Parameter.cpp */; };
 		6195F8390DEACD9B00F3771B /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF500DC2108B008BE1A1 /* Node.cpp */; };
 		6195F83A0DEACD9B00F3771B /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */; };
 		6195F83B0DEACD9B00F3771B /* NodeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 611EBF540DC2108B008BE1A1 /* NodeLibrary.cpp */; };
@@ -162,8 +162,8 @@
 		611EBF440DC2108B008BE1A1 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		611EBF460DC2108B008BE1A1 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Connection.cpp; sourceTree = "<group>"; };
 		611EBF470DC2108B008BE1A1 /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
-		611EBF480DC2108B008BE1A1 /* Field.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Field.cpp; sourceTree = "<group>"; };
-		611EBF490DC2108B008BE1A1 /* Field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Field.h; sourceTree = "<group>"; };
+		611EBF480DC2108B008BE1A1 /* Parameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parameter.cpp; sourceTree = "<group>"; };
+		611EBF490DC2108B008BE1A1 /* Parameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parameter.h; sourceTree = "<group>"; };
 		611EBF500DC2108B008BE1A1 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		611EBF510DC2108B008BE1A1 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		611EBF520DC2108B008BE1A1 /* NodeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NodeInfo.cpp; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 		611EC5520DC2575B008BE1A1 /* compileroutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compileroutput.cpp; path = test/cpptest/src/compileroutput.cpp; sourceTree = "<group>"; };
 		611EC5530DC2575B008BE1A1 /* cpptest-assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "cpptest-assert.h"; path = "test/cpptest/src/cpptest-assert.h"; sourceTree = "<group>"; };
 		611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectTestSuite.h; path = test/node/ConnectTestSuite.h; sourceTree = "<group>"; };
-		611EC5860DC26042008BE1A1 /* FieldTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldTestSuite.h; path = test/node/FieldTestSuite.h; sourceTree = "<group>"; };
+		611EC5860DC26042008BE1A1 /* ParameterTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParameterTestSuite.h; path = test/node/ParameterTestSuite.h; sourceTree = "<group>"; };
 		611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeTestSuite.h; path = test/node/NodeTestSuite.h; sourceTree = "<group>"; };
 		611EC5EF0DC267D9008BE1A1 /* PathElementTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathElementTestSuite.h; path = test/graphics/PathElementTestSuite.h; sourceTree = "<group>"; };
 		615500050DDA02D300708CBC /* stringutils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stringutils.cpp; path = util/stringutils.cpp; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 		6195FAA80DEB04EA00F3771B /* Transform.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Transform.i; sourceTree = "<group>"; };
 		6195FAA90DEB04EA00F3771B /* Utils.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Utils.i; sourceTree = "<group>"; };
 		6195FAAB0DEB04F400F3771B /* Connection.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Connection.i; sourceTree = "<group>"; };
-		6195FAAC0DEB04F400F3771B /* Field.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Field.i; sourceTree = "<group>"; };
+		6195FAAC0DEB04F400F3771B /* Parameter.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Parameter.i; sourceTree = "<group>"; };
 		6195FAAD0DEB04F400F3771B /* Network.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Network.i; sourceTree = "<group>"; };
 		6195FAAE0DEB04F400F3771B /* Node.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = Node.i; sourceTree = "<group>"; };
 		6195FAAF0DEB04F400F3771B /* NodeInfo.i */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.interfacer; path = NodeInfo.i; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 				61796F9D0DC7694E00CD8DC9 /* CanvasNode.cpp */,
 				611EBF460DC2108B008BE1A1 /* Connection.cpp */,
 				611EBF470DC2108B008BE1A1 /* Connection.h */,
-				611EBF480DC2108B008BE1A1 /* Field.cpp */,
-				611EBF490DC2108B008BE1A1 /* Field.h */,
+				611EBF480DC2108B008BE1A1 /* Parameter.cpp */,
+				611EBF490DC2108B008BE1A1 /* Parameter.h */,
 				61936C460DC86FA80034D23C /* Network.h */,
 				61936C470DC86FA80034D23C /* Network.cpp */,
 				611EBF500DC2108B008BE1A1 /* Node.cpp */,
@@ -459,7 +459,7 @@
 				61FA165A0DCF06830056A7C6 /* TestNodes.h */,
 				61796FB30DC76EDC00CD8DC9 /* CanvasNodeTestSuite.h */,
 				611EC5690DC25DCB008BE1A1 /* ConnectTestSuite.h */,
-				611EC5860DC26042008BE1A1 /* FieldTestSuite.h */,
+				611EC5860DC26042008BE1A1 /* ParameterTestSuite.h */,
 				611EC59D0DC26100008BE1A1 /* NodeTestSuite.h */,
 				61936CE90DC884570034D23C /* NetworkTestSuite.h */,
 			);
@@ -527,7 +527,7 @@
 			isa = PBXGroup;
 			children = (
 				6195FAAB0DEB04F400F3771B /* Connection.i */,
-				6195FAAC0DEB04F400F3771B /* Field.i */,
+				6195FAAC0DEB04F400F3771B /* Parameter.i */,
 				6195FAAD0DEB04F400F3771B /* Network.i */,
 				6195FAAE0DEB04F400F3771B /* Node.i */,
 				6195FAAF0DEB04F400F3771B /* NodeInfo.i */,
@@ -547,7 +547,7 @@
 			files = (
 				611EC3B40DC22E91008BE1A1 /* NodeCore.h in Headers */,
 				611EC3B50DC22EA4008BE1A1 /* Connection.h in Headers */,
-				611EC3B60DC22EA4008BE1A1 /* Field.h in Headers */,
+				611EC3B60DC22EA4008BE1A1 /* Parameter.h in Headers */,
 				616557A30DC61E9100AC5259 /* Image.h in Headers */,
 				61936C480DC86FA80034D23C /* Network.h in Headers */,
 				611EC3BA0DC22EA4008BE1A1 /* Node.h in Headers */,
@@ -694,6 +694,23 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/python/nodecore.i",
+				"$(SRCROOT)/python/graphics/BezierPath.i",
+				"$(SRCROOT)/python/graphics/Canvas.i",
+				"$(SRCROOT)/python/graphics/Color.i",
+				"$(SRCROOT)/python/graphics/Grob.i",
+				"$(SRCROOT)/python/graphics/Image.i",
+				"$(SRCROOT)/python/graphics/PathElement.i",
+				"$(SRCROOT)/python/graphics/Point.i",
+				"$(SRCROOT)/python/graphics/Rect.i",
+				"$(SRCROOT)/python/graphics/Transform.i",
+				"$(SRCROOT)/python/graphics/Utils.i",
+				"$(SRCROOT)/python/node/Field.i",
+				"$(SRCROOT)/python/node/Connection.i",
+				"$(SRCROOT)/python/node/Network.i",
+				"$(SRCROOT)/python/node/Node.i",
+				"$(SRCROOT)/python/node/NodeInfo.i",
+				"$(SRCROOT)/python/node/NodeLibrary.i",
+				"$(SRCROOT)/python/node/NodeLibraryManager.i",
 			);
 			name = SWIG;
 			outputPaths = (
@@ -727,7 +744,7 @@
 				611EC3CF0DC22ED6008BE1A1 /* Rect.cpp in Sources */,
 				611EC3D00DC22ED6008BE1A1 /* Transform.cpp in Sources */,
 				611EC3D10DC22ED6008BE1A1 /* Connection.cpp in Sources */,
-				611EC3D20DC22ED6008BE1A1 /* Field.cpp in Sources */,
+				611EC3D20DC22ED6008BE1A1 /* Parameter.cpp in Sources */,
 				611EC3D60DC22ED6008BE1A1 /* Node.cpp in Sources */,
 				611EC3D70DC22ED6008BE1A1 /* NodeInfo.cpp in Sources */,
 				611EC3D80DC22ED6008BE1A1 /* NodeLibrary.cpp in Sources */,
@@ -771,7 +788,7 @@
 				6195F8350DEACD9B00F3771B /* Rect.cpp in Sources */,
 				6195F8360DEACD9B00F3771B /* Transform.cpp in Sources */,
 				6195F8370DEACD9B00F3771B /* Connection.cpp in Sources */,
-				6195F8380DEACD9B00F3771B /* Field.cpp in Sources */,
+				6195F8380DEACD9B00F3771B /* Parameter.cpp in Sources */,
 				6195F8390DEACD9B00F3771B /* Node.cpp in Sources */,
 				6195F83A0DEACD9B00F3771B /* NodeInfo.cpp in Sources */,
 				6195F83B0DEACD9B00F3771B /* NodeLibrary.cpp in Sources */,
@@ -989,7 +1006,8 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/Python.framework/Versions/2.5/include/python2.5;
-				INSTALL_PATH = /usr/local/lib;
+				INSTALL_PATH = "";
+				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
 				PREBINDING = NO;
 				PRODUCT_NAME = nodecore;
 			};

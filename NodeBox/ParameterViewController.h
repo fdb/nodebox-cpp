@@ -22,9 +22,10 @@
 
 @interface ParameterViewController : ViewController {
     IBOutlet NSView *_view;
-    IBOutlet NSTableView *tableView;
+    NSMutableDictionary *_controlMap;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)view;
 
 @end

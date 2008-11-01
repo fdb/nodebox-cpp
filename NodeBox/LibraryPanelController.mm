@@ -46,11 +46,9 @@
     NodeCore::NodeLibraryList libs = nodeLibraryManager->libraries();
     for(NodeCore::NodeLibraryIterator libIter = libs.begin(); libIter != libs.end(); ++libIter) {
         NodeCore::NodeLibrary *lib = (*libIter);
-        NSLog(@"Library %s", lib->getName().c_str());
         NodeCore::NodeInfoList nodeInfos = lib->getNodeInfoList();
         for (NodeCore::NodeInfoIterator nodeInfoIter = nodeInfos.begin(); nodeInfoIter != nodeInfos.end(); ++nodeInfoIter) {
             NodeCore::NodeInfo *nodeInfo = (*nodeInfoIter);
-            NSLog(@"  Node %s", nodeInfo->getName().c_str());
             [nodeInfoController addObject:[[NodeInfoWrapper alloc] initWithNodeInfo:nodeInfo]];
         }
     }

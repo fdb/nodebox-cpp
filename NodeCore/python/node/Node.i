@@ -19,23 +19,23 @@
 
 namespace NodeCore {
 
-typedef std::map<std::string, Field*> FieldMap;
-typedef FieldMap::iterator FieldMapIterator;
+typedef std::map<std::string, Parameter*> ParameterMap;
+typedef ParameterMap::iterator ParameterMapIterator;
 
 typedef std::string NodeName;
 typedef std::string NodeType;
 
 class Network;
 
-typedef std::vector<Field*> FieldList;
-typedef FieldList::iterator FieldIterator;
+typedef std::vector<Parameter*> ParameterList;
+typedef ParameterList::iterator ParameterIterator;
 typedef std::vector<Connection*> ConnectionList;
 typedef ConnectionList::iterator ConnectionIterator;
 
 %feature("director") Node;
 class Node {
 public:
-    Node(const FieldType& outputType = kInt);
+    Node(const ParameterType& outputType = kInt);
     virtual ~Node();
     
     virtual NodeName defaultName() const;
@@ -52,24 +52,24 @@ public:
     void setX(float x);
     void setY(float y);
 
-    Field* addField(const FieldName &name, const FieldType& type);
-    Field* getField(const FieldName &name) const;
-    bool hasField(const FieldName &name) const;
-    Field* getOutputField() const { return m_outputField; }
-    FieldType getOutputType() const { return m_outputField->getType(); }
-    FieldList getFields();
+    Parameter* addParameter(const ParameterName &name, const ParameterType& type);
+    Parameter* getParameter(const ParameterName &name) const;
+    bool hasParameter(const ParameterName &name) const;
+    Parameter* getOutputParameter() const { return m_outputParameter; }
+    ParameterType getOutputType() const { return m_outputParameter->getType(); }
+    ParameterList getParameters();
     
     // Value shortcuts
-    int asInt(const FieldName &name);
-    float asFloat(const FieldName &name);
-    std::string asString(const FieldName &name);
-    void* asData(const FieldName &name);
+    int asInt(const ParameterName &name);
+    float asFloat(const ParameterName &name);
+    std::string asString(const ParameterName &name);
+    void* asData(const ParameterName &name);
     
     // All these can throw a ValueError.
-    void set(const FieldName &name, int i);
-    void set(const FieldName &name, float f);
-    void set(const FieldName &name, const std::string& s);
-    void set(const FieldName &name, void* d);
+    void set(const ParameterName &name, int i);
+    void set(const ParameterName &name, float f);
+    void set(const ParameterName &name, const std::string& s);
+    void set(const ParameterName &name, void* d);
     
     void update();
     bool isDirty() const;
@@ -77,7 +77,7 @@ public:
     
     bool isOutputConnected();
     bool isOutputConnectedTo(Node* node);
-    bool isOutputConnectedTo(Field* field);
+    bool isOutputConnectedTo(Parameter* parameter);
     ConnectionList getOutputConnections();
 
     int outputAsInt() const;

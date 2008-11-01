@@ -26,19 +26,26 @@
     NodeBoxWindowController *_windowController;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
+
+//// State ////
+
 - (NSView *)view;
 - (NodeBoxWindowController *)windowController;
-- (void)setWindowController:(NodeBoxWindowController *)windowController;
 - (NodeCore::Network *)rootNetwork;
 - (NodeCore::Network *)activeNetwork;
-- (void)setActiveNetwork:(NodeCore::Network *)activeNetwork;
-- (void)activeNetworkChanged;
 - (NodeCore::Node *)activeNode;
-- (void)setActiveNode:(NodeCore::Node *)activeNode;
 - (NodeCore::Node *)renderedNode;
-- (void)setRenderedNode:(NodeCore::Node *)renderedNode;
-- (void)activeNodeChanged;
-- (void)renderedNodeChanged;
-- (void)activeNetworkModified;
+
+//// Network notifications ////
+
+- (void) didAddNode: (NodeCore::Node *)node;
+- (void) didRemoveNode: (NodeCore::Node *)node;
+- (void) didMoveNode: (NodeCore::Node *)node to: (NSPoint)pt;
+- (void) didModifyNode: (NodeCore::Node *)node;
+- (void) didConnect: (NodeCore::Parameter*)parameter to: (NodeCore::Node*)node;
+- (void) didChangeActiveNetwork: (NodeCore::Network *)activeNetwork;
+- (void) didChangeActiveNode: (NodeCore::Node *)activeNode;
+- (void) didChangeRenderedNode: (NodeCore::Node *)renderedNode;
 
 @end

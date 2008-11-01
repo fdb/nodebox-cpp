@@ -30,6 +30,7 @@ typedef std::multimap<NodeLibraryName,NodeLibrary*> NodeLibraryMap;
 typedef std::vector<NodeLibrary*> NodeLibraryList;
 typedef NodeLibraryList::iterator NodeLibraryIterator;
 
+
 class NodeLibraryManager
 {
 public:

@@ -130,14 +130,19 @@ void BezierPath::clear()
     m_elements.clear();
 }
 
-unsigned int BezierPath::size()
+unsigned int BezierPath::size() const
 {
     return m_elements.size();
 }
 
-bool BezierPath::isempty()
+bool BezierPath::isempty() const
 {
     return m_elements.empty();
+}
+
+void BezierPath::append(const PathElement& el)
+{
+    m_elements.push_back(el);
 }
 
 NodeCore::Rect BezierPath::bounds()

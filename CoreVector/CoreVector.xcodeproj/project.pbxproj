@@ -17,6 +17,10 @@
 		61E9CD3B0DE42AE80051BD90 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61E9CD3A0DE42AE80051BD90 /* test.cpp */; };
 		61E9CD440DE42BE00051BD90 /* NodeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
 		61E9CD970DE42EF00051BD90 /* NodeCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61E9CD040DE42A230051BD90 /* NodeCore.framework */; };
+		61F4ACD30DF727BB00044204 /* CopyNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F4ACD10DF727BB00044204 /* CopyNode.h */; };
+		61F4ACD40DF727BB00044204 /* CopyNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F4ACD20DF727BB00044204 /* CopyNode.cpp */; };
+		61F4AD440DF72D5400044204 /* WiggleNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F4AD420DF72D5400044204 /* WiggleNode.h */; };
+		61F4AD450DF72D5400044204 /* WiggleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F4AD430DF72D5400044204 /* WiggleNode.cpp */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +59,10 @@
 		61E9CD040DE42A230051BD90 /* NodeCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeCore.framework; path = ../NodeCore/build/Debug/NodeCore.framework; sourceTree = SOURCE_ROOT; };
 		61E9CD0B0DE42A7F0051BD90 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E9CD3A0DE42AE80051BD90 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
+		61F4ACD10DF727BB00044204 /* CopyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyNode.h; sourceTree = "<group>"; };
+		61F4ACD20DF727BB00044204 /* CopyNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CopyNode.cpp; sourceTree = "<group>"; };
+		61F4AD420DF72D5400044204 /* WiggleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiggleNode.h; sourceTree = "<group>"; };
+		61F4AD430DF72D5400044204 /* WiggleNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WiggleNode.cpp; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* corevector.nbl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = corevector.nbl; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -117,6 +125,10 @@
 				61E9CD000DE426C70051BD90 /* RectNode.cpp */,
 				618FA2AE0DED81E7006F4B48 /* OvalNode.h */,
 				618FA2AF0DED81E7006F4B48 /* OvalNode.cpp */,
+				61F4ACD10DF727BB00044204 /* CopyNode.h */,
+				61F4ACD20DF727BB00044204 /* CopyNode.cpp */,
+				61F4AD420DF72D5400044204 /* WiggleNode.h */,
+				61F4AD430DF72D5400044204 /* WiggleNode.cpp */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -148,6 +160,8 @@
 				50149BDA09E781A5002DEE6A /* CoreVector.h in Headers */,
 				61E9CD010DE426C70051BD90 /* RectNode.h in Headers */,
 				618FA2B00DED81E7006F4B48 /* OvalNode.h in Headers */,
+				61F4ACD30DF727BB00044204 /* CopyNode.h in Headers */,
+				61F4AD440DF72D5400044204 /* WiggleNode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +238,8 @@
 				61E9CCEC0DE4267B0051BD90 /* CoreVectorLibrary.cpp in Sources */,
 				61E9CD020DE426C70051BD90 /* RectNode.cpp in Sources */,
 				618FA2B10DED81E7006F4B48 /* OvalNode.cpp in Sources */,
+				61F4ACD40DF727BB00044204 /* CopyNode.cpp in Sources */,
+				61F4AD450DF72D5400044204 /* WiggleNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

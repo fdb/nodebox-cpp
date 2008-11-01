@@ -25,23 +25,23 @@
 
 namespace NodeCore {
 
-Node::Node(const FieldType& outputType)
+Node::Node(const ParameterType& outputType)
     :
     m_x(0),
     m_y(0),
     m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
     m_network(NULL),
-    m_fields(FieldMap()),
-    m_outputField(0),
+    m_parameters(ParameterMap()),
+    m_outputParameter(0),
     m_downstreams(ConnectionList()),
     m_dirty(true)
 {
-    m_outputField = new Field(this, "out", outputType, kOut);
+    m_outputParameter = new Parameter(this, "out", outputType, 1, kOut);
 }
 
 Node::~Node()
 {
-    for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
+    for (ParameterMapIterator iter = m_parameters.begin(); iter != m_parameters.end(); ++iter) {
         delete (*iter).second;
     }
     for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
@@ -132,105 +132,105 @@ void Node::setY(float y)
     // TODO: notify
 }
 
-Field* Node::addField(const FieldName &name, const FieldType& type)
+Parameter* Node::addParameter(const ParameterName &name, const ParameterType& type, Channel channels)
 {
-    if (hasField(name)) { throw InvalidName(); }
-    Field *f = new Field(this, name, type);
-    m_fields[name] = f;
+    if (hasParameter(name)) { throw InvalidName(); }
+    Parameter *f = new Parameter(this, name, type, channels);
+    m_parameters[name] = f;
     markDirty();
     return f;
 }
 
-Field* Node::getField(const FieldName &name) const
+Parameter* Node::getParameter(const ParameterName &name) const
 {
-    if (hasField(name)) {
-        FieldMap* fields = const_cast<FieldMap*>(&m_fields);
-        return (*fields)[name];
+    if (hasParameter(name)) {
+        ParameterMap* parameters = const_cast<ParameterMap*>(&m_parameters);
+        return (*parameters)[name];
     } else {
-        throw FieldNotFound(name);
+        throw ParameterNotFound(name);
     }
 }
 
-bool Node::hasField(const FieldName &name) const
+bool Node::hasParameter(const ParameterName &name) const
 {
-    return m_fields.count(name) == 1;
+    return m_parameters.count(name) == 1;
 }
 
-FieldList Node::getFields()
+ParameterList Node::getParameters()
 {
-    FieldList fieldList = FieldList();
-    for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
-        fieldList.push_back((*iter).second);
+    ParameterList parameterList = ParameterList();
+    for (ParameterMapIterator iter = m_parameters.begin(); iter != m_parameters.end(); ++iter) {
+        parameterList.push_back((*iter).second);
     }
-    return fieldList;
+    return parameterList;
 }
 
 // Value shortcuts
-int Node::asInt(const FieldName &name)
+int Node::asInt(const ParameterName &name)
 {
-    return getField(name)->asInt();
+    return getParameter(name)->asInt();
 }
 
-float Node::asFloat(const FieldName &name)
+float Node::asFloat(const ParameterName &name)
 {
-    return getField(name)->asFloat();
+    return getParameter(name)->asFloat();
 }
 
-std::string Node::asString(const FieldName &name)
+std::string Node::asString(const ParameterName &name)
 {
-    return getField(name)->asString();
+    return getParameter(name)->asString();
 }
 
-void* Node::asData(const FieldName &name)
+void* Node::asData(const ParameterName &name)
 {
-    return getField(name)->asData();
+    return getParameter(name)->asData();
 }
 
 int Node::outputAsInt() const
 {
-    return m_outputField->asInt();
+    return m_outputParameter->asInt();
 }
 
 float Node::outputAsFloat() const
 {
-    return m_outputField->asFloat();
+    return m_outputParameter->asFloat();
 }
 
 std::string Node::outputAsString() const
 {
-    return m_outputField->asString();
+    return m_outputParameter->asString();
 }
 
 void* Node::outputAsData() const
 {
-    return m_outputField->asData();
+    return m_outputParameter->asData();
 }
 
-void Node::set(const FieldName &name, int i)
+void Node::set(const ParameterName &name, int i)
 {
-    getField(name)->set(i);
+    getParameter(name)->set(i);
 }
 
-void Node::set(const FieldName &name, float f)
+void Node::set(const ParameterName &name, float f)
 {
-    getField(name)->set(f);
+    getParameter(name)->set(f);
 }
 
-void Node::set(const FieldName &name, const std::string& s)
+void Node::set(const ParameterName &name, const std::string& s)
 {
-    getField(name)->set(s);
+    getParameter(name)->set(s);
 }
 
-void Node::set(const FieldName &name, void* d)
+void Node::set(const ParameterName &name, void* d)
 {
-    getField(name)->set(d);
+    getParameter(name)->set(d);
 }
 
 void Node::update()
 {
     if (m_dirty) {
-        for (FieldMapIterator iter = m_fields.begin(); iter != m_fields.end(); ++iter) {
-            Field* f = (*iter).second;
+        for (ParameterMapIterator iter = m_parameters.begin(); iter != m_parameters.end(); ++iter) {
+            Parameter* f = (*iter).second;
             f->update();
         }
         process();
@@ -273,10 +273,10 @@ bool Node::isOutputConnectedTo(Node* node)
     return false;
 }
 
-bool Node::isOutputConnectedTo(Field* field)
+bool Node::isOutputConnectedTo(Parameter* parameter)
 {
     for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        if ((*iter)->getInputField() == field)
+        if ((*iter)->getInputParameter() == parameter)
             return true;
     }
     return false;
@@ -294,27 +294,27 @@ void Node::process()
 
 void Node::_setOutput(int i)
 {
-    m_outputField->set(i);
+    m_outputParameter->set(i);
 }
 
 void Node::_setOutput(float f)
 {
-    m_outputField->set(f);
+    m_outputParameter->set(f);
 }
 
 void Node::_setOutput(std::string s)
 {
-    m_outputField->set(s);
+    m_outputParameter->set(s);
 }
 
 void Node::_setOutput(void* d)
 {
-    m_outputField->set(d);
+    m_outputParameter->set(d);
 }
 
 void Node::addDownstream(Connection* c)
 {
-    // TODO: Check if the connection/field is already in the list.
+    // TODO: Check if the connection/parameter is already in the list.
     assert (c != 0);
     assert (c->getOutputNode() == this);
     assert (c->getInputNode() != this);

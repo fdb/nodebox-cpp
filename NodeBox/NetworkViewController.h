@@ -20,27 +20,15 @@
 #import <NodeCore/NodeCore.h>
 #import <Cocoa/Cocoa.h>
 #import "ViewController.h"
-
-@interface NodeWrapper : NSObject {
-    NodeCore::Node *_theNode;
-}
-- (id)initWithNode:(NodeCore::Node *)node;
-- (NodeCore::Node*)node;
-@end
-
-@interface FieldWrapper : NSObject {
-    NodeCore::Field *_field;
-}
-- (id)initWithField:(NodeCore::Field *)field;
-- (NodeCore::Field*)field;
-@end
+#import "NetworkView.h"
 
 @interface NetworkViewController : ViewController {
-    IBOutlet NSView *_view;
+    IBOutlet NetworkView *_view;
     IBOutlet NSMenu *nodeContextMenu;
     NodeCore::Node *_contextNode;
 }
 
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController;
 - (NSView *)view;
 - (void)contextMenuForNode:(NodeCore::Node *)node event:(NSEvent *)theEvent;
 - (void)deleteNode:(id)sender;

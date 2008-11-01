@@ -27,10 +27,10 @@ class RectNode : public CanvasNode {
 public:
     RectNode()
     {
-        f_x = addField("x", kFloat);
-        f_y = addField("y", kFloat);
-        f_width = addField("width", kFloat);
-        f_height = addField("height", kFloat);
+        f_x = addParameter("x", kFloat);
+        f_y = addParameter("y", kFloat);
+        f_width = addParameter("width", kFloat);
+        f_height = addParameter("height", kFloat);
     }
 
 protected:
@@ -44,10 +44,10 @@ protected:
     }
 
 public:
-    Field *f_x;
-    Field *f_y;
-    Field *f_width;
-    Field *f_height;
+    Parameter *f_x;
+    Parameter *f_y;
+    Parameter *f_width;
+    Parameter *f_height;
 };
 
 class CanvasNodeTestSuite : public Test::Suite

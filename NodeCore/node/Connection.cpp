@@ -20,23 +20,23 @@
 #include "config.h"
 #include "Connection.h"
 
-#include "Field.h"
+#include "Parameter.h"
 #include "Node.h"
 
 namespace NodeCore {
 
-Connection::Connection(Field *outputField, Field *inputField)
-           : m_output(outputField), m_input(inputField)
+Connection::Connection(Parameter *outputParameter, Parameter *inputParameter)
+           : m_output(outputParameter), m_input(inputParameter)
 {
-    assert(outputField->isOutputField());
-    assert(inputField->isInputField());
+    assert(outputParameter->isOutputParameter());
+    assert(inputParameter->isInputParameter());
 }
 
 Connection::~Connection()
 {
 }
 
-Field* Connection::getOutputField() const
+Parameter* Connection::getOutputParameter() const
 {
     return m_output;
 }
@@ -47,7 +47,7 @@ Node* Connection::getOutputNode() const
     return m_output->getNode();
 }
 
-Field* Connection::getInputField() const
+Parameter* Connection::getInputParameter() const
 {
     return m_input;
 }
@@ -59,7 +59,7 @@ Node* Connection::getInputNode() const
 
 bool Connection::hasOutput() const
 {
-    // The output field can be set to null by the output node when it is deleting itself.
+    // The output parameter can be set to null by the output node when it is deleting itself.
     return m_output != 0;
 }
 

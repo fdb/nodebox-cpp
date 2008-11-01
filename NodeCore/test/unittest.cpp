@@ -24,7 +24,7 @@
 #include "graphics/PathElementTestSuite.h"
 #include "graphics/RectTestSuite.h"
 #include "node/ConnectTestSuite.h"
-#include "node/FieldTestSuite.h"
+#include "node/ParameterTestSuite.h"
 #include "node/NetworkTestSuite.h"
 #include "node/NodeTestSuite.h"
 #include "node/CanvasNodeTestSuite.h"
@@ -97,7 +97,7 @@ main(int argc, char* argv[])
 		ts.add(auto_ptr<Test::Suite>(new CanvasTestSuite));
         // Node tests
 		ts.add(auto_ptr<Test::Suite>(new NodeTestSuite));
-		ts.add(auto_ptr<Test::Suite>(new FieldTestSuite));
+		ts.add(auto_ptr<Test::Suite>(new ParameterTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new ConnectTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new NetworkTestSuite));
 		ts.add(auto_ptr<Test::Suite>(new CanvasNodeTestSuite));

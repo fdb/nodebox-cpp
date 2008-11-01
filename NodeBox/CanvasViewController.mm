@@ -21,8 +21,9 @@
 
 @implementation CanvasViewController
 
-- (id)init
+- (id)initWithWindowController:(NodeBoxWindowController *)windowController
 {
+    self = [super initWithWindowController:windowController];
     if (![NSBundle loadNibNamed:@"CanvasView" owner:self]) {
         NSLog(@"Could not load nib CanvasView");
     }

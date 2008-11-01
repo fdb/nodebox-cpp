@@ -34,8 +34,22 @@
     return YES;
 }
 
+
+- (BOOL)acceptsFirstResponder
+{
+    return YES;
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+}
+
 - (void)drawRect:(NSRect)rect {
-    [[NSColor redColor] set];
+    [[NSColor colorWithCalibratedWhite:0.5 alpha:1.0] set];
     NSRectFill(rect);
     NodeCore::Node *renderedNode = [viewController renderedNode];
     if (!renderedNode) return;

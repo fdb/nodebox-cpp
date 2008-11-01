@@ -21,12 +21,13 @@
 
 using namespace NodeCore;
 
-class FieldTestSuite : public Test::Suite
+class ParameterTestSuite : public Test::Suite
 {
 public:
-	FieldTestSuite()
+	ParameterTestSuite()
 	{
-		TEST_ADD(FieldTestSuite::test_values);
+		TEST_ADD(ParameterTestSuite::test_values);
+		TEST_ADD(ParameterTestSuite::test_channels);
 	}
 
 private:
@@ -49,6 +50,18 @@ private:
         TEST_ASSERT( n->f_int->asInt() == 12 );
         TEST_ASSERT( n->f_float->asFloat() == 0.5f );
         TEST_ASSERT( n->f_string->asString() == "hello" );
+    }
+    
+    void test_channels()
+    {
+        Node *n = new Node();
+        Parameter *color = n->addParameter("color", kFloat, 3);
+        TEST_ASSERT( color->channelCount() == 3 );
+        TEST_THROWS_NOTHING( color->set(0.2f, 0) );
+        TEST_THROWS_NOTHING( color->set(0.4f, 1) );
+        TEST_THROWS_NOTHING( color->set(0.7f, 2) );
+        TEST_THROWS( color->set(0.5f, 3), ValueError );
+        TEST_THROWS( color->set(0.5f, -1), ValueError );
     }
 
 };

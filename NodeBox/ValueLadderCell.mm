@@ -24,7 +24,6 @@
 
 + (BOOL)prefersTrackingUntilMouseUp
 {
-  //NSLog(@"prefersTrackingUntilMouseUp");
   return YES;
 }
 
@@ -39,7 +38,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
   if ((self = [super initWithCoder:aDecoder])) {
    [self setContinuous:TRUE];
-    NSLog(@"inti value ladder coder ");
+    NSLog(@"init value ladder coder ");
   }
   return self;
 }

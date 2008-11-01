@@ -32,6 +32,9 @@ namespace NodeCore {
 const float DEFAULT_WIDTH = 1000;
 const float DEFAULT_HEIGHT = 1000;
 
+typedef std::vector<Grob*> GrobList;
+typedef std::vector<Grob*>::iterator GrobIterator;
+
 class Canvas : public Grob {
 public:
     Canvas(float width=DEFAULT_WIDTH, float height=DEFAULT_HEIGHT);
@@ -39,8 +42,9 @@ public:
     virtual ~Canvas();
     
     void append(const Grob& grob);
-    unsigned int size() { return m_grobs.size(); };
+    unsigned int size() const { return m_grobs.size(); };
     void clear() { m_grobs.clear(); };
+    GrobList grobs() const { return m_grobs; }
 
     virtual NodeCore::Rect bounds();
 
@@ -57,9 +61,6 @@ public:
 
 private:
     void saveAsPDF(std::string fname);
-
-    typedef std::vector<Grob*> GrobList;
-    typedef std::vector<Grob*>::iterator GrobIterator;
 
     GrobList m_grobs;
     float m_width, m_height;

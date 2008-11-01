@@ -164,7 +164,7 @@ private:
         net->add(m);
         net->add(ng2);
         ng->set("number", 5);
-        m->getField("number")->connect(ng);
+        m->getParameter("number")->connect(ng);
         m->set("multiplier", 3);
         TEST_ASSERT( net->isDirty() );
         TEST_THROWS( net->update(), NodeProcessingError ); // No node to render
@@ -192,7 +192,7 @@ private:
         Node* n2 = new Node(kFloat);
         _rootNetwork->setUniqueNodeName(n2);
         _rootNetwork->add(n2);
-        Field *f = n2->addField("number", kFloat);
+        Parameter *f = n2->addParameter("number", kFloat);
         Connection* conn = f->connect(n1);
         TEST_ASSERT(n1->isOutputConnectedTo(f));
         delete _rootNetwork;

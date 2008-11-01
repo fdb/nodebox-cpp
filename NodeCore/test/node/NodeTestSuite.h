@@ -29,9 +29,9 @@ public:
     NodeTestSuite()
     {
         TEST_ADD(NodeTestSuite::test_naming);
-        TEST_ADD(NodeTestSuite::test_fields);
+        TEST_ADD(NodeTestSuite::test_parameters);
         TEST_ADD(NodeTestSuite::test_node_naming);
-        TEST_ADD(NodeTestSuite::test_field_naming);
+        TEST_ADD(NodeTestSuite::test_parameter_naming);
         TEST_ADD(NodeTestSuite::test_dirty);
     }
 
@@ -46,15 +46,15 @@ private:
         TEST_ASSERT( n->getName() == "node" );
     }
 
-    void test_fields()
+    void test_parameters()
     {
         Node *n = new Node(kInt);
-        TEST_THROWS( n->getField("f1"), FieldNotFound );
-        Field *f1 = n->addField("f1", kInt);
-        TEST_ASSERT( n->hasField("f1") );
-        TEST_THROWS_NOTHING( n->getField("f1") );
-        TEST_ASSERT( n->getField("f1") == f1 );
-        TEST_THROWS( n->getField("x"), FieldNotFound );
+        TEST_THROWS( n->getParameter("f1"), ParameterNotFound );
+        Parameter *f1 = n->addParameter("f1", kInt);
+        TEST_ASSERT( n->hasParameter("f1") );
+        TEST_THROWS_NOTHING( n->getParameter("f1") );
+        TEST_ASSERT( n->getParameter("f1") == f1 );
+        TEST_THROWS( n->getParameter("x"), ParameterNotFound );
     }
 
     void test_node_naming()
@@ -83,41 +83,41 @@ private:
         TEST_THROWS_NOTHING( n->setName("a1234") );
     }
 
-    void test_field_naming()
+    void test_parameter_naming()
     {
         Node *n = new Node(kInt);
         // Names can not start with a digit.
-        TEST_THROWS( n->addField("1234", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("1234", kInt), InvalidName );
         // Names can not be one of the reserved words.
-        TEST_THROWS( n->addField("node", kInt), InvalidName );
-        TEST_THROWS( n->addField("name", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("node", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("name", kInt), InvalidName );
         // Names can not be in uppercase or contain uppercase letters
-        TEST_THROWS( n->addField("UPPERCASE", kInt), InvalidName );
-        TEST_THROWS( n->addField("uPpercase", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("UPPERCASE", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("uPpercase", kInt), InvalidName );
         // Names can not start with double underscores
-        TEST_THROWS( n->addField("__reserved", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("__reserved", kInt), InvalidName );
         // Only lowercase, numbers and underscore are allowed
-        TEST_THROWS( n->addField("what!", kInt), InvalidName );
-        TEST_THROWS( n->addField("($-_#$34", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("what!", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("($-_#$34", kInt), InvalidName );
         // Names can not be empty
-        TEST_THROWS( n->addField("", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("", kInt), InvalidName );
         // Names can not be longer than 30 characters
-        TEST_THROWS( n->addField("very_very_very_very_very_very_long_name", kInt), InvalidName );
+        TEST_THROWS( n->addParameter("very_very_very_very_very_very_long_name", kInt), InvalidName );
 
         // Names can only appear once
-        TEST_THROWS_NOTHING( n->addField("my_field", kInt) );
-        TEST_THROWS( n->addField("my_field", kInt), InvalidName );
+        TEST_THROWS_NOTHING( n->addParameter("my_parameter", kInt) );
+        TEST_THROWS( n->addParameter("my_parameter", kInt), InvalidName );
 
         // Some other correct names
-        TEST_THROWS_NOTHING( n->addField("radius", kInt) );
-        TEST_THROWS_NOTHING( n->addField("_test", kInt) );
-        TEST_THROWS_NOTHING( n->addField("_", kInt) );
-        TEST_THROWS_NOTHING( n->addField("_1234", kInt) );
-        TEST_THROWS_NOTHING( n->addField("a1234", kInt) );
-        TEST_THROWS_NOTHING( n->addField("x", kInt) );
-        TEST_THROWS_NOTHING( n->addField("y", kInt) );
-        TEST_THROWS_NOTHING( n->addField("dirty", kInt) );
-        TEST_THROWS_NOTHING( n->addField("process", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("radius", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("_test", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("_", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("_1234", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("a1234", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("x", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("y", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("dirty", kInt) );
+        TEST_THROWS_NOTHING( n->addParameter("process", kInt) );
     }
     
     void test_dirty()
@@ -126,7 +126,7 @@ private:
         TEST_ASSERT( n->isDirty() );
         n->update();
         TEST_ASSERT( !n->isDirty() );
-        n->addField("test", kInt);
+        n->addParameter("test", kInt);
         TEST_ASSERT( n->isDirty() );
         n->update();
         TEST_ASSERT( !n->isDirty() );
@@ -134,7 +134,7 @@ private:
         TEST_ASSERT( n->isDirty() );
         n->update();
         TEST_ASSERT( !n->isDirty() );
-        n->getField("test")->set(12);
+        n->getParameter("test")->set(12);
         TEST_ASSERT( n->isDirty() );
         n->update();
         TEST_ASSERT( !n->isDirty() );        

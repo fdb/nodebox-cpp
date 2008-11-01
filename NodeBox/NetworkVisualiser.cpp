@@ -24,7 +24,7 @@ using namespace NodeCore;
 
 NetworkVisualiser::NetworkVisualiser()
 {
-    addField("network", kNetwork);
+    addParameter("network", kNetwork);
 }
 
 void NetworkVisualiser::process()

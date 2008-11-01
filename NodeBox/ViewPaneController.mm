@@ -49,38 +49,31 @@
         [_viewController release];
     switch (type) {
         case NetworkViewType:
-            NSLog(@"Switching to network view");
-            _viewController = [[NetworkViewController alloc] init];
-            [_viewController setWindowController:_windowController];
+            _viewController = [[NetworkViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
-            [viewPane replaceSubview:contentView with:[_viewController view]];
-            contentView = [_viewController view];
+            [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
+            contentView = [_viewController view];            
             [viewTypePopup selectItemWithTag:type];
             break;
         case ParameterViewType:
-            NSLog(@"Switching to parameter view");
-            _viewController = [[ParameterViewController alloc] init];
-            [_viewController setWindowController:_windowController];
+            _viewController = [[ParameterViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
-            [viewPane replaceSubview:contentView with:[_viewController view]];
+            [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
             break;
         case CanvasViewType:
-            NSLog(@"Switching to canvas view");
-            _viewController = [[CanvasViewController alloc] init];
-            [_viewController setWindowController:_windowController];
+            _viewController = [[CanvasViewController alloc] initWithWindowController:_windowController];
             [[_viewController view] setFrame:[contentView frame]];
-            [viewPane replaceSubview:contentView with:[_viewController view]];
+            [[viewPane animator] replaceSubview:contentView with:[_viewController view]];
             contentView = [_viewController view];
             [viewTypePopup selectItemWithTag:type];
             break;
         default:
-            NSLog(@"Switching to default view");
             // TODO: This empty view will leak.
             NSView *emptyView = [[NSView alloc] init];
             _viewController = NULL;
-            [viewPane replaceSubview:contentView with:emptyView];
+            [[viewPane animator] replaceSubview:contentView with:emptyView];
             contentView = emptyView;
             [viewTypePopup selectItemWithTag:type];
             break;
@@ -95,14 +88,6 @@
 - (NodeBoxWindowController *)windowController
 {
     return _windowController;
-}
-
-- (void)setWindowController:(NodeBoxWindowController *)windowController
-{
-    _windowController = windowController;
-    if (_viewController) {
-        [_viewController setWindowController:windowController];
-    }
 }
 
 - (ViewController *)viewController

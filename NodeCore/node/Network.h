@@ -75,7 +75,7 @@ typedef NodeList::iterator NodeIterator;
 
 class Network: public Node {
 public:
-    Network(const FieldType& outputType = kInt);
+    Network(const ParameterType& outputType = kInt);
     virtual ~Network();
     
     bool isEmpty();
