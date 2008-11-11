@@ -36,25 +36,25 @@ Connection::~Connection()
 {
 }
 
-Parameter* Connection::getOutputParameter() const
+Parameter* Connection::outputParameter() const
 {
     return m_output;
 }
 
-Node* Connection::getOutputNode() const
+Node* Connection::outputNode() const
 {
     if (!hasOutput()) return NULL;
-    return m_output->getNode();
+    return m_output->node();
 }
 
-Parameter* Connection::getInputParameter() const
+Parameter* Connection::inputParameter() const
 {
     return m_input;
 }
 
-Node* Connection::getInputNode() const
+Node* Connection::inputNode() const
 {
-    return m_input->getNode();
+    return m_input->node();
 }
 
 bool Connection::hasOutput() const
@@ -63,15 +63,20 @@ bool Connection::hasOutput() const
     return m_output != 0;
 }
 
-std::ostream& operator<<(std::ostream& o, const Connection& c)
+//std::ostream& operator<<(std::ostream& o, const Connection& c)
+//{
+//    o << "Connection(" << c.getOutputNode()->getName() << " -> " << c.getInputNode()->getName() << "." << c.m_input->getName() << ")";
+//    return o;
+//}
+
+void Connection::update()
 {
-    o << "Connection(" << c.getOutputNode()->getName() << " -> " << c.getInputNode()->getName() << "." << c.m_input->getName() << ")";
-    return o;
+    m_output->node()->update();
 }
 
 void Connection::markDirtyDownstream()
 {
-    getInputNode()->markDirty();
+    inputNode()->markDirty();
 }
 
 } // namespace NodeCore

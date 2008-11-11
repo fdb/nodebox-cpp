@@ -17,327 +17,280 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
+#include "Connection.h"
 #include "Node.h"
-
 #include "Network.h"
-#include "stringutils.h"
+
+#include <QtCore/QStringList>
 
 namespace NodeCore {
 
-Node::Node(const ParameterType& outputType)
-    :
-    m_x(0),
-    m_y(0),
-    m_name(""), // This should go to defaultName(), but you can't call virtuals in ctors.
-    m_network(NULL),
-    m_parameters(ParameterMap()),
-    m_outputParameter(0),
-    m_downstreams(ConnectionList()),
-    m_dirty(true)
+Node::Node(NodeType* type, const QString& name)
+    : m_type(type),
+      m_network(NULL),
+      m_x(0),
+      m_y(0),
+      m_dirty(true)
 {
-    m_outputParameter = new Parameter(this, "out", outputType, 1, kOut);
+    if (name == NULL) {
+        m_name = m_type->defaultName();
+    } else {
+        m_name = name;
+    }
+    for (int i=0; i<m_type->parameterTypeCount(); ++i) {
+        ParameterType* pType = m_type->parameterTypeAt(i);
+        Parameter* param = pType->createParameter(this);
+        m_parameters[pType->name()] = param;
+    }
+    m_outputParameter = qobject_cast<OutputParameter*>(m_type->outputParameterType()->createParameter(this));
+    // Whenever the node type is reloaded, it sends out a signal. Use that
+    // to mark the node as dirty.
+    // TODO: implement this as a signal.
+    // dispatcher.connect(self._reloaded, signal=signals.node_type_reloaded)
 }
 
 Node::~Node()
 {
-    for (ParameterMapIterator iter = m_parameters.begin(); iter != m_parameters.end(); ++iter) {
-        delete (*iter).second;
+    QList<Parameter*> params = m_parameters.values();
+    for (int i=0; i<params.size(); ++i) {
+        delete params[i];
     }
-    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        Connection* conn = (*iter);
-        conn->m_output = 0;
-    }
+    delete m_outputParameter;
 }
 
-//// Naming
-
-NodeName Node::defaultName() const
+void Node::setPosition(const QPointF& p)
 {
-    return string_to_lower(className());
+    m_x = p.x();
+    m_y = p.y();
+    // emit signal
 }
 
-std::string Node::getName() const
+void Node::setX(qreal x)
 {
-    if (m_name == "") {
-        return defaultName();
+    setPosition(QPointF(x, m_y));
+}
+
+void Node::setY(qreal y)
+{
+    setPosition(QPointF(m_x, y));
+}
+
+void Node::setName(const QString& name)
+{
+    if (inNetwork()) {
+        network()->rename(this, name);
     } else {
-        return m_name;
+        if (name.isEmpty()) return;
+        if (NodeType::isValidName(name)) {
+            QString old_name = m_name;
+            m_name = name;
+            // TODO: signal
+            // dispatcher.send(signal=signals.node_renamed, sender=self, node=self, old_name=old_name, name=name)
+        }
     }
 }
 
-void Node::setName(const NodeName& name)
+QList<Parameter*> Node::parameters() const
 {
-    if (m_network) {
-        m_network->rename(this, name);
-    } else {
-        _setName(name);
+    // Parameters are stored in a map, and are not ordered.
+    // The correct order is that of ParameterTypes in the NodeType.
+    QList<Parameter*> parameters;
+    for (int i=0; i<m_type->parameterTypeCount(); ++i) {
+        ParameterType* pType = m_type->parameterTypeAt(i);
+        Parameter* param = m_parameters[pType->name()];
+        parameters.append(param);
     }
+    return parameters;
 }
 
-void Node::_setName(const NodeName& name)
-{    
-    if (validName(name)) {
-        m_name = name;
-    } else {
-        throw InvalidName();
-    }
-}
-
-bool Node::validName(const NodeName& name)
+QVariantList Node::values(const QString& parameterName) const
 {
-    regex_t nameRe, doubleUnderScoreRe;
-
-    // Only lowercase letters, digits and underscore. Start with letter or underscore.
-    // Minimum 1 characters, maximum 30 characters.
-    regcomp(&nameRe, "^[a-z_][a-z0-9_]{0,29}$", REG_EXTENDED|REG_NOSUB);
-
-    // No double underscore names (__reserved)
-    regcomp(&doubleUnderScoreRe, "^__.*$", REG_EXTENDED|REG_NOSUB);
-
-    return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
-           regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0;
+    if (!m_parameters.contains(parameterName)) return QVariantList();
+    return m_parameters[parameterName]->values();
 }
 
-//// Network
+void
+Node::setValues(const QString& parameterName, const QVariantList& values)
+{
+    if (!m_parameters.contains(parameterName)) return;
+    m_parameters[parameterName]->setValues(values);
+}
+
+QVariantList Node::outputValues() const
+{
+    return m_outputParameter->values();
+}
+
+QList<Parameter*> Node::compatibleParameters(Node* outputNode) const
+{
+    QList<Parameter*> params;
+    for (int i=0; i<m_parameters.count(); ++i) {
+        Parameter* param = m_parameters.values()[i];
+        if (param->canConnect(outputNode)) {
+            params.append(param);
+        }
+    }
+    return params;
+}
+
+/*! Removes all connections from and to this node.
+    Returns true if any connections were removed.
+*/
+bool Node::disconnect()
+{
+    bool removedSomething = false;
+
+    // Disconnect all inputs
+    for (int i=0; i<m_parameters.count(); ++i) {
+        Parameter* param = m_parameters.values()[i];
+        removedSomething = param->disconnect() | removedSomething;
+    }
+
+    // Disconnect all outputs
+    // Copy the list of downstreams, since you will be removing elements
+    // from it while iterating.
+    QList<Connection*> downstreams = m_outputParameter->m_downstreams;
+    for (int i=0; i<downstreams.count(); ++i) {
+        Connection* conn = downstreams.at(i);
+        removedSomething = conn->inputParameter()->disconnect() | removedSomething;
+    }
+
+    return removedSomething;
+}
+
+bool Node::isConnected()
+{
+    // Check parameters for upstream connections.
+    for (int i=0; i<m_parameters.count(); ++i) {
+        Parameter* param = m_parameters.values()[i];
+        if (param->isConnected())
+            return true;
+    }
+    // Check output parameter for downstream connections.
+    return m_outputParameter->isConnected();
+}
+
+/*! Updates the node by processing all required dependencies.
+    This method will process only dirty nodes.
+    This operation can take a long time, and should be run in a separate thread.
+*/
+void Node::update()
+{
+    if (!isDirty())
+        return;
+    for (int i=0; i<m_parameters.count(); ++i) {
+        Parameter* param = m_parameters.values()[i];
+        param->update();
+    }
+    // TODO: Catch exception here.
+    bool success = process();
+    m_dirty = false;
+    // TODO: signal
+    // dispatcher.send(signal=signals.node_updated, sender=self, node=self)
+}
+
+void Node::markDirty(bool forced)
+{
+    if (m_dirty && !forced) return;
+    m_dirty = true;
+    m_outputParameter->markDirtyDownstream();
+    if (inNetwork()) {
+        // Mark the network as dirty if it is not dirty already.
+        // The force flag overrides this, and makes the network
+        // dirty regardless.
+        if (!m_network->isDirty() || forced) {
+            // Only changes to the rendered node should make the network dirty.
+            // TODO: Check for corner cases.
+            if (m_network->renderedNode() == this)
+                m_network->markDirty(forced);
+        }
+    }
+    // TODO: dispatcher.send(signal=signals.node_marked_dirty, sender=self, node=self)
+}
+
+/*! Do the actual processing for this node.
+
+    Implementing nodes will want to override this.
+    This method can return either true or false:
+    - true: if no processing errors occurred. The output of this node should be set
+    (using _setOutput).
+    - false: if errors occurred. The error should be set (using setError).
+*/
+bool Node::process()
+{
+    return true;
+}
+
+void Node::setOutputValues(const QVariantList& values)
+{
+    m_outputParameter->m_values = values;
+}
+
+void Node::setError(const QString& error)
+{
+    m_error = error;
+    // TODO: signal?
+}
 
 void Node::setNetwork(Network* network)
 {
-    if (m_network && m_network != network) {
+    Network* oldNetwork = m_network;
+    if (m_network != NULL)
         m_network->remove(this);
+    if (network != NULL)
+        m_network->add(this);
+   // TODO: dispatcher.send(signal=signals.node_changed_network, sender=self, node=self, old_network=old_network, network=network)
+}
+Network* Node::rootNetwork() const
+{
+    if (!inNetwork()) return NULL;
+    Network* network = m_network;
+    while (network->network() != NULL)
+        network = network->network();
+   return network;
+}
+
+bool Node::isRendered() const
+{
+    if (!inNetwork()) return false;
+    return m_network->renderedNode() == this;
+}
+
+void Node::setRendered()
+{
+    if (!inNetwork()) return;
+    m_network->setRenderedNode(this);
+    // TODO: dispatcher.send(signal=signals.node_set_rendered, sender=self, node=self)
+}
+
+QString Node::networkPath()
+{
+    QStringList parts;
+    parts << m_name;
+    Network* network = m_network;
+    while (network != NULL) {
+        parts << network->name();
+        network = network->network();
     }
-    if (network) {
-        // Network->add checks if this node was already added in the network,
-        // so we don't need to check it here.
-        network->add(this);
-    }
+    return parts.join(QString("/"));
 }
 
-Network* Node::getNetwork()
+/*! Reloads the library that implements this node.
+
+    Afterwards, this node, all others of its type,
+    and all other instances of types in this library will
+    be marked dirty.
+*/
+void Node::reload()
 {
-    return m_network;
+    // TODO: implement
 }
 
-//// X/Y position
-
-void Node::setX(float x)
+/*! This method will get called whenever the node type is reloaded. */
+void Node::reloadEvent()
 {
-    m_x = x;
-    // TODO: notify
-}
-
-void Node::setY(float y)
-{
-    m_y = y;
-    // TODO: notify
-}
-
-Parameter* Node::addParameter(const ParameterName &name, const ParameterType& type, Channel channels)
-{
-    if (hasParameter(name)) { throw InvalidName(); }
-    Parameter *f = new Parameter(this, name, type, channels);
-    m_parameters[name] = f;
     markDirty();
-    return f;
-}
-
-Parameter* Node::getParameter(const ParameterName &name) const
-{
-    if (hasParameter(name)) {
-        ParameterMap* parameters = const_cast<ParameterMap*>(&m_parameters);
-        return (*parameters)[name];
-    } else {
-        throw ParameterNotFound(name);
-    }
-}
-
-bool Node::hasParameter(const ParameterName &name) const
-{
-    return m_parameters.count(name) == 1;
-}
-
-ParameterList Node::getParameters()
-{
-    ParameterList parameterList = ParameterList();
-    for (ParameterMapIterator iter = m_parameters.begin(); iter != m_parameters.end(); ++iter) {
-        parameterList.push_back((*iter).second);
-    }
-    return parameterList;
-}
-
-// Value shortcuts
-int Node::asInt(const ParameterName &name)
-{
-    return getParameter(name)->asInt();
-}
-
-float Node::asFloat(const ParameterName &name)
-{
-    return getParameter(name)->asFloat();
-}
-
-std::string Node::asString(const ParameterName &name)
-{
-    return getParameter(name)->asString();
-}
-
-void* Node::asData(const ParameterName &name)
-{
-    return getParameter(name)->asData();
-}
-
-int Node::outputAsInt() const
-{
-    return m_outputParameter->asInt();
-}
-
-float Node::outputAsFloat() const
-{
-    return m_outputParameter->asFloat();
-}
-
-std::string Node::outputAsString() const
-{
-    return m_outputParameter->asString();
-}
-
-void* Node::outputAsData() const
-{
-    return m_outputParameter->asData();
-}
-
-void Node::set(const ParameterName &name, int i)
-{
-    getParameter(name)->set(i);
-}
-
-void Node::set(const ParameterName &name, float f)
-{
-    getParameter(name)->set(f);
-}
-
-void Node::set(const ParameterName &name, const std::string& s)
-{
-    getParameter(name)->set(s);
-}
-
-void Node::set(const ParameterName &name, void* d)
-{
-    getParameter(name)->set(d);
-}
-
-void Node::update()
-{
-    if (m_dirty) {
-        for (ParameterMapIterator iter = m_parameters.begin(); iter != m_parameters.end(); ++iter) {
-            Parameter* f = (*iter).second;
-            f->update();
-        }
-        process();
-        m_dirty = false;
-    }
-}
-
-bool Node::isDirty() const
-{
-    return m_dirty;
-}
-
-void Node::markDirty()
-{
-    if (m_dirty) return;
-    m_dirty = true;
-    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        Connection* conn = (*iter);
-        conn->getInputNode()->markDirty();
-    }
-    if (m_network && !m_network->isDirty()) {
-        // TODO: this is not ideal, since only changes to the rendered node should
-        // make the network dirty.
-        m_network->markDirty();
-    }
-    // TODO: dispatch/notify
-}
-
-bool Node::isOutputConnected()
-{
-    return m_downstreams.size() > 0;
-}
-
-bool Node::isOutputConnectedTo(Node* node)
-{
-    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        if ((*iter)->getInputNode() == node)
-            return true;
-    }
-    return false;
-}
-
-bool Node::isOutputConnectedTo(Parameter* parameter)
-{
-    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        if ((*iter)->getInputParameter() == parameter)
-            return true;
-    }
-    return false;
-}
-
-ConnectionList Node::getOutputConnections()
-{
-    return m_downstreams;
-}
-
-void Node::process()
-{
-    // This space intentionally left blank.
-}
-
-void Node::_setOutput(int i)
-{
-    m_outputParameter->set(i);
-}
-
-void Node::_setOutput(float f)
-{
-    m_outputParameter->set(f);
-}
-
-void Node::_setOutput(std::string s)
-{
-    m_outputParameter->set(s);
-}
-
-void Node::_setOutput(void* d)
-{
-    m_outputParameter->set(d);
-}
-
-void Node::addDownstream(Connection* c)
-{
-    // TODO: Check if the connection/parameter is already in the list.
-    assert (c != 0);
-    assert (c->getOutputNode() == this);
-    assert (c->getInputNode() != this);
-    m_downstreams.push_back(c);
-}
-
-void Node::removeDownstream(Connection* c)
-{
-    assert (c != 0);
-    for (ConnectionIterator iter = m_downstreams.begin(); iter != m_downstreams.end(); ++iter) {
-        if (*iter == c) {
-            m_downstreams.erase(iter);
-            return;
-        }
-    }
-    std::cout << m_name <<": could not remove connection" << c << std::endl;
-    assert(false);
-}
-
-std::ostream& operator<<(std::ostream& o, const Node& n)
-{
-    o << "Node(" << n.m_name << ")";
-    return o;
+    // TODO: dispatcher.send(signal=signals.node_reloaded, sender=self, node=self)
 }
 
 } // namespace NodeCore

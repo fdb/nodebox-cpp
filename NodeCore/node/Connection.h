@@ -20,37 +20,28 @@
 #ifndef Connection_h
 #define Connection_h
 
-#include <string>
-#include <exception>
-#include <iostream>
+#include <QtCore/QObject>
+
+#include "NodeCoreGlobal.h"
 
 namespace NodeCore {
     
 class Parameter;
 class Node;
 
-class ConnectionError : public std::exception {
-public:
-    ConnectionError(std::string message = "")
-        :m_message(message) {}
-    virtual ~ConnectionError() throw () {}
-    std::string getMessage() { return m_message; }
-private:
-    std::string m_message;
-};
-
-class Connection {
+class NODECORESHARED_EXPORT Connection : public QObject {
+    Q_OBJECT
 public:
     Connection(Parameter *outputParameter, Parameter *inputParameter);
     virtual ~Connection();
 
-    Parameter* getOutputParameter() const;
-    Node* getOutputNode() const;
-    Parameter* getInputParameter() const;
-    Node* getInputNode() const;
+    Parameter* outputParameter() const;
+    Node* outputNode() const;
+    Parameter* inputParameter() const;
+    Node* inputNode() const;
     bool hasOutput() const;
 
-    friend std::ostream& operator<<(std::ostream& o, const Connection& c);
+    // friend std::ostream& operator<<(std::ostream& o, const Connection& c);
 
 private:
     // Disallow copy construction or assignment
@@ -65,6 +56,7 @@ private:
     
     friend class Parameter;
     friend class Node;
+    friend class OutputParameter;
 };
 
 } // namespace NodeCore

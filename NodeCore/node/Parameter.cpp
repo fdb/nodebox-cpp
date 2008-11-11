@@ -17,275 +17,170 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
+#include "Connection.h"
 #include "Parameter.h"
-
+#include "Network.h"
 #include "Node.h"
 
 namespace NodeCore {
 
-Parameter::Parameter(Node *node, const ParameterName& name, const ParameterType& type, Channel channels, ParameterDirection direction)
-     : m_node(node),
-       m_name(name),
-       m_verboseName(""),
-       m_type(type),
-       m_direction(direction),
-       m_connection(0),
-       m_channelCount(channels),
-       m_channels(new Value[channels])
+Parameter::Parameter(ParameterType* type, Node* node)
+    : m_type(type),
+      m_node(node),
+      m_values(type->defaultValues())
 {
-    if (validName(name)) {
-        m_name = name;
-    } else {
-        throw InvalidName();
-    }
-    
-    if (channels <= 0) {
-        throw InvalidName();
-    }
-    
-    for (Channel i=0; i<m_channelCount;++i) {        
-        if (m_type == kInt) {
-            m_channels[i].i = 0;
-        } else if (m_type == kFloat) {
-            m_channels[i].f = 0;
-        } else if (m_type == kString) {
-            m_channels[i].s = new std::string;
-        } else {
-            m_channels[i].d = 0;
-        }
-    }
 }
 
 Parameter::~Parameter()
 {
-    // TODO: strings don't get cleaned up, data may get cleaned up too soon.
-    delete m_channels;
-    disconnect();
+    if (isConnected())
+        disconnect();
 }
 
-int Parameter::asInt(Channel channel)
+void Parameter::setValues(const QVariantList& values)
 {
-    if (m_type == kInt) {
-        return m_channels[channel].i;
-    } else if (m_type == kFloat) {
-        return (int) m_channels[channel].f;
-    } else {
-        return 0;
-    }
-}
-
-float Parameter::asFloat(Channel channel)
-{
-    if (m_type == kFloat) {
-        return m_channels[channel].f;
-    } else if (m_type == kInt) {
-        return (float) m_channels[channel].i;
-    } else {
-        return 0;
-    }
-}
-
-std::string Parameter::asString(Channel channel)
-{
-    if (m_type == kString) {
-        return *m_channels[channel].s;
-    } else {
-        return "";
-    }
-}
-
-void* Parameter::asData(Channel channel)
-{
-    return m_channels[channel].d;
-}
-
-void Parameter::set(int i, Channel channel)
-{
-    if (channel < 0 || channel >= m_channelCount) {
-        throw ValueError("Invalid channel " + channel);
-    }
-    if (m_type == kInt) {
-        // TODO: lazy setting
-        preSet();
-        m_channels[channel].i = i;
-        postSet();
-    } else {
-        throw ValueError("Tried setting int value on parameter with type " + m_type);
-    }
-}
-
-void Parameter::set(float f, Channel channel)
-{
-    if (channel < 0 || channel >= m_channelCount) {
-        throw ValueError("Invalid channel " + channel);
-    }
-    if (m_type == kFloat) {
-        // TODO: lazy setting
-        preSet();
-        m_channels[channel].f = f;
-        postSet();
-    } else {
-        throw ValueError("Tried setting float value on parameter with type " + m_type);
-    }
-}
-
-void Parameter::set(const std::string& s, Channel channel)
-{
-    if (channel < 0 || channel >= m_channelCount) {
-        throw ValueError("Invalid channel " + channel);
-    }
-    if (m_type == kString) {
-        // TODO: lazy setting
-        preSet();
-        delete m_channels[channel].s;
-        m_channels[channel].s = new std::string(s);
-        postSet();
-    } else {
-        throw ValueError("Tried setting string value on parameter with type " + m_type);
-    }
-}
-
-void Parameter::set(void* data, Channel channel)
-{  
-    if (channel < 0 || channel >= m_channelCount) {
-        throw ValueError("Invalid channel " + channel);
-    }
-    // TODO: lazy setting
-    preSet();
-    m_channels[channel].d = data;
-    postSet();
-}
-
-bool Parameter::validName(const ParameterName& name)
-{
-    regex_t nameRe, doubleUnderScoreRe, reservedRe;
-
-    // Only lowercase letters, digits and underscore. Start with letter or underscore.
-    // Minimum 1 characters, maximum 30 characters.
-    regcomp(&nameRe, "^[a-z_][a-z0-9_]{0,29}$", REG_EXTENDED|REG_NOSUB);
-
-    // No double underscore names (__reserved)
-    regcomp(&doubleUnderScoreRe, "^__.*$", REG_EXTENDED|REG_NOSUB);
-
-    // No reserved words
-    regcomp(&reservedRe, "^(node|name)$", REG_EXTENDED|REG_NOSUB);
-    
-    return regexec(&nameRe, name.c_str(), 0, NULL, 0) == 0 &
-           regexec(&doubleUnderScoreRe, name.c_str(), 0, NULL, 0) != 0 &
-           regexec(&reservedRe, name.c_str(), 0, NULL, 0) != 0;
-}
-
-// Checks if this parameter can connect to the ouput of the given node.
-// This compares the types of the relevant input and output parameters.
-bool Parameter::canConnectTo(Node* node)
-{
-    if (isOutputParameter()) return false;
-    return  node->getOutputParameter()->getType() == getType();
-}
-
-Connection* Parameter::connect(Node* node)
-{
-    // Sanity check
-    if (!isInputParameter()) {
-        throw ConnectionError(m_node->getName() + "." + m_name + ": can only connect input nodes");        
-    }
-    if (node == m_node) {
-        throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to myself");
-    }
-    if (!canConnectTo(node)) {
-        throw ConnectionError(m_node->getName() + "." + m_name + ": cannot connect to " + node->getName());
-    }
-    disconnect();
-    m_connection = new Connection(node->getOutputParameter(), this);
-    node->addDownstream(m_connection);
+    if (isConnected()) return;
+    if (hasExpression()) return;
+    if (m_values == values) return;
+    if (!validate(values)) return;
+    m_values = values;
     m_node->markDirty();
-    // TODO: notify
-    return m_connection;
+    // TODO: dispatch
 }
 
-bool Parameter::disconnect()
+bool Parameter::validate(const QVariantList& values)
 {
-    assert(isInputParameter()); // TODO: also support disconnecting output parameters.
-    if (!isConnected()) return false;
-    if (m_connection->hasOutput()) {
-        assert(m_connection->getOutputNode()->isOutputConnectedTo(this));
-        m_connection->getOutputNode()->removeDownstream(m_connection);
-    }
-    delete m_connection;
-    m_connection = 0;
-    revertToDefault();
-    m_node->markDirty();
-    // TODO: dispatch/notify
-    return true;
-}
-
-bool Parameter::isConnected()
-{
-    return m_connection != 0;
-}
-
-bool Parameter::isConnectedTo(Node* node)
-{
-    if (!m_connection)
-        return false;
-    return m_connection->getOutputNode() == node;
-}
-
-Connection* Parameter::getConnection()
-{
-    return m_connection;
-}
-
-void Parameter::update()
-{
-    if (isConnected()) {
-        m_connection->getOutputNode()->update();
-        assert(m_connection->getOutputParameter()->getType() == getType());
-        if (m_type == kInt) {
-            set(m_connection->getOutputParameter()->asInt());
-        } else if (m_type == kFloat) {
-            set(m_connection->getOutputParameter()->asFloat());
-        } else if (m_type == kString) {
-            set(m_connection->getOutputParameter()->asString());
-        } else {
-            set(m_connection->getOutputParameter()->asData());
-        }
-    }
-}
-
-std::ostream& operator<<(std::ostream& o, const Parameter& f)
-{
-
-    o << "Parameter(" << f.m_node->getName() << ", " << f.m_name << ", " << f.m_type << ")";
-    return o;
+    return m_type->validate(values);
 }
 
 void Parameter::revertToDefault()
 {
-    for (Channel i=0; i<m_channelCount;++i) {        
-        if (m_type == kInt) {
-            m_channels[i].i = 0;
-        } else if (m_type == kFloat) {
-            m_channels[i].f = 0;
-        } else if (m_type == kString) {
-            m_channels[i].s = new std::string;
-        } else {
-            // Don't do anything for kData or others.
-            // TODO: this should ask the node to revert the data.
-            // The node is the only one who knows how to treat opaque data.
-        }
+    if (isConnected()) return;
+    if (hasExpression()) return;
+    m_values = m_type->defaultValues();
+    m_node->markDirty();
+}
+
+void Parameter::setExpression(const QString& s)
+{
+    if (isConnected()) return;
+    if (s.isEmpty()) {
+        clearExpression();
+    } else {
+        // TODO: Parse expression
+        // TODO: Create expression connections
+        m_expression = s;
+        createExpressionConnections();
+        m_node->markDirty();
+        // TODO: Send signal that expression changed
     }
 }
 
-void Parameter::preSet()
+void Parameter::clearExpression()
 {
-    // TODO: validate
+    if (!hasExpression()) return;
+    m_expression = "";
+    removeExpressionConnections();
+    m_node->markDirty();
+    // TODO: Send signal that expression changed
 }
 
-void Parameter::postSet()
+QList<Parameter*> Parameter::expressionDependencies() const
 {
+    return QList<Parameter*>();
+}
+
+Connection* Parameter::connect(Node* outputNode)
+{
+    Q_ASSERT(isInputParameter());
+    if (m_node == outputNode) return NULL;
+    if (isConnected())
+        disconnect();
+    m_connection = new Connection(outputNode->outputParameter(), this);
+    outputNode->outputParameter()->m_downstreams.append(m_connection);
+    // After the connection is made, check if it creates a cycle, and
+    // remove the connection if it does.
+    if (m_node->inNetwork()) {
+        if (m_node->network()->containsCycles()) {
+            disconnect();
+            return NULL;
+        }
+    }
+    // TODO: Send signal
+    // dispatcher.send(signal=signals.parameter_connected, sender=self, parameter=self, output_node=output_node, connection=self._connection)
     m_node->markDirty();
+    return m_connection;
+}
+bool Parameter::disconnect()
+{
+    Q_ASSERT(isInputParameter());
+    if (!isConnected()) return false;
+    Node* outputNode = m_connection->outputNode();
+    Q_ASSERT(outputNode->outputParameter()->m_downstreams.contains(m_connection));
+    outputNode->outputParameter()->m_downstreams.removeAll(m_connection);
+    delete m_connection;
+    m_connection = NULL;
+    revertToDefault(); // This also marks the node dirty.
+    // TODO: Signal
+    // dispatcher.send(signal=signals.parameter_disconnected, sender=self, parameter=self, connection=old_connection, output_node=output_node)
+    return true;
+}
+bool Parameter::canConnect(const Node* node) const
+{
+    return m_type->isCompatible(node);
+}
+
+bool Parameter::canConnect(const OutputParameter* p) const
+{
+    return m_type->isCompatible(p);
+}
+
+/*! Updates the parameter, making sure all dependencies are clean.
+
+    This method can take a long time and should be run in a separate thread.
+*/
+void Parameter::update()
+{
+    if (isConnected()) {
+        m_connection->outputNode()->update();
+        // TODO: Validation errors are silently discarded.
+        if (validate(m_connection->outputNode()->outputValues()))
+            m_values = m_connection->outputNode()->outputValues();
+    }
+    if (hasExpression()) {
+        for (int i=0; i<m_expressionConnections.size(); i++) {
+            m_expressionConnections[i]->update();
+        }
+        QVariantList values = evaluateExpression();
+        if (validate(values))
+            m_values = values;
+    }
+}
+
+QList<QScriptValue*> Parameter::expressionLocals()
+{
+    return QList<QScriptValue*>();
+}
+
+QList<QScriptValue*> Parameter::expressionGlobals()
+{
+    return QList<QScriptValue*>();
+}
+
+QVariantList Parameter::evaluateExpression()
+{
+    // TODO: Implement
+    return QVariantList();
+}
+
+void Parameter::createExpressionConnections()
+{
+    // TODO: Implement
+}
+
+void Parameter::removeExpressionConnections()
+{
+    // TODO: Implement
 }
 
 } // namespace NodeCore

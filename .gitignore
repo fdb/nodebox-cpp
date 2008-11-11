@@ -3,5 +3,6 @@ build
 *.mode*
 *.pbxuser
 *.perspective*
+moc_*.cpp
 NodeCore/python/nodecore_wrap.*
 NodeCore/python/nodecore.py*

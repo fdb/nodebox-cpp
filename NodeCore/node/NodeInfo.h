@@ -43,12 +43,12 @@ typedef std::string NodeLibraryName;
 class NodeCreationError : public std::exception
 {
 public:
-    NodeCreationError(NodeLibraryName libraryName, NodeName nodeName, std::string msg="")
+    NodeCreationError(const QString& libraryName, NodeName nodeName, std::string msg="")
             : m_libraryName(libraryName), m_nodeName(nodeName), m_msg(msg) {}
     virtual ~NodeCreationError() throw() {}
-    NodeLibraryName m_libraryName;
-    NodeName m_nodeName;
-    std::string m_msg;
+    QString m_libraryName;
+    QString m_nodeName;
+    QString m_msg;
 };
 
 class NodeInfo

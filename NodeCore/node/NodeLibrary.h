@@ -20,152 +20,75 @@
 #ifndef NodeLibrary_h
 #define NodeLibrary_h
 
-#include "Node.h"
-#include "NodeInfo.h"
-#include "PythonNodeWrapper.h"
-#include "posixutils.h"
+#include <QtCore/QDir>
+#include <QtCore/QMap>
+#include <QtCore/QObject>
+#include <QtCore/QString>
 
-#include <string>
-#include <exception>
-#include <vector>
+#include "NodeCoreGlobal.h"
+#include "NodeLibraryVersion.h"
+#include "NodeType.h"
 
 namespace NodeCore {
 
-const std::string LIBRARY_NATIVE = "native";
-const std::string LIBRARY_PYTHON = "python";
+class Node;
 
-// See http://en.wikipedia.org/wiki/Software_versioning
-// GNU version numbering scheme
-class NodeLibraryVersion
+class NODECORESHARED_EXPORT NodeLibrary : public QObject
 {
+    Q_OBJECT
 public:
-    NodeLibraryVersion(int version_major, int version_minor, int version_revision)
-        : m_version_major(version_major), 
-          m_version_minor(version_minor),
-          m_version_revision(version_revision) {}
-          
-    NodeLibraryVersion()
-        : m_version_major(0),
-          m_version_minor(0),
-          m_version_revision(0) {}
-    
-    NodeLibraryVersion& operator=(const NodeLibraryVersion& other)
-    {
-        if (this== &other) return *this;
-        //std::cout << "NodeLibraryVersion: operator= " << other.asString() << std::endl;
-        m_version_major = other.m_version_major;
-        m_version_minor = other.m_version_minor;
-        m_version_revision = other.m_version_revision;
-        return *this;
-    }
+    enum LibraryType {
+        NativeType,
+        PythonType
+    };
 
-    int getMajor() { return m_version_major; }
-    int getMinor() { return m_version_minor; }
-    int getRevision() { return m_version_revision; }
-
-    std::string asString();
-      
-private:
-    int m_version_major;
-    int m_version_minor;
-    int m_version_revision;
-};
-
-const std::string PATH_SEP = "/";
-
-typedef std::vector<NodeInfo*> NodeInfoList;
-typedef NodeInfoList::iterator NodeInfoIterator;
-typedef std::string NodeLibraryPath;
-
-class NodeLibraryLoadError : public std::exception
-{
-public:
-    NodeLibraryLoadError(NodeLibraryName name, std::string msg="")
-            : m_name(name), m_msg(msg) {}
-    virtual ~NodeLibraryLoadError() throw() {}
-    std::string getMessage() { return m_msg; }
-    NodeLibraryName m_name;
-    std::string m_msg;
-};
-
-
-class NodeInfoNotFound : public std::exception
-{
-public:
-    NodeInfoNotFound(NodeName name)
-            : m_name(name) {}
-    virtual ~NodeInfoNotFound() throw() {}
-    NodeName getName() { return m_name; }
-    NodeName m_name;
-};
-
-class NodeLibrary;
-typedef void (*nodeLibraryInfoFunction)(NodeLibrary&);
-
-// NodeLibrary can load both native and Python libraries.
-// They are not split out because we only support those two types
-// at the moment, so the additional overhead is not worth it.
-
-// A Node Library is a collection of nodes.
-// Each libary has an identifier and a version number.
-// A Node's fully qualified name (FQN) contains the node identifier
-// and version number, like this: net.nodebox.graphics.Wiggle[1.0.2]
-class NodeLibrary
-{
-public:
-    NodeLibrary(NodeLibraryName name, int version_major, int version_minor, int version_revision, NodeLibraryPath path);    
+    NodeLibrary(const QString& name, int version_major, int version_minor, int version_revision, const QDir& path);
     virtual ~NodeLibrary();
 
-    NodeLibraryType getType();
+    // Attribute getters
+    LibraryType libraryType();
+    void setLibraryType(LibraryType libraryType);
+    QString name() { return m_name; }
+    QString label() { return m_label; }
+    void setLabel(const QString& label);
+    NodeLibraryVersion version() { return m_version; }
+    QString versionAsString() { return m_version.toString(); }
+    QDir path() { return m_path; }
 
-    // Can only be called by native libraries.
-    void addNodeInfo(NodeName name, NodeCreator creator);
-    NodeInfo* getNodeInfo(NodeName name);
-    NodeInfoList getNodeInfoList();
-    
-    NodeLibraryType getLibraryType();
+    // Node type access
+    int size() { return m_types.size(); }
+    NodeType* nodeType(const QString& name) { return m_types[name]; }
+    bool hasNodeType(const QString& name) { return m_types.contains(name); }
+    QList<NodeType*> nodeTypes() { return m_types.values(); }
 
-    NodeLibraryVersion getVersion();
-    std::string getVersionAsString();
-    
-    NodeLibraryName getName();
-    
-    Node* createNode(NodeName name);
+    // Library operations
+    Node* createNode(const QString& name);
 
     // Loading is made public so you can catch errors at an opportune time,
     // not when loading is triggered at an arbitrary point.
     void load();
+    void unload();
+    void reload();
     bool isLoaded();
-    
+
+protected:
+    void addNodeType(NodeType* nodeType);
+
 private:
     // Disallow copy construction or assignment
     NodeLibrary(const NodeLibrary& other);
     NodeLibrary& operator=(const NodeLibrary& other);
+    QString typesFile() const;
 
-    // A native library has one file inside of the library folder,
-    // called <libname>.nbl (NodeBox Library)
-    // The full path would be plugins/libname-1.2.3/libname.nbl
-    std::string getNativeLibraryPath();
-    // A python library has, amongst others, a file inside of the library folder
-    // called <libname>.py
-    // The full path would be plugins/libname-1.2.3/libname.py
-    std::string getPythonLibraryPath();
-    std::string getLibraryPath();
-    void unload();
-    void loadNativeLibrary();
-    void loadPythonLibrary();
-    void unloadNativeLibrary();
-    void unloadPythonLibrary();
-    Node* createNativeNode(NodeName name);
-    Node* createPythonNode(NodeName name);
-
-    NodeLibraryName m_name;
-    NodeInfoList m_nodes;
+    QString m_name;
+    QString m_label;
     NodeLibraryVersion m_version;
-    NodeLibraryPath m_path;
-    NodeLibraryType m_type;
+    LibraryType m_type;
+    QMap<QString, NodeType*> m_types;
+    QDir m_path;
     bool m_loaded;
-    void* m_handle;
+
+    friend class TypesHandler;
 };
 
 } // namespace NodeCore

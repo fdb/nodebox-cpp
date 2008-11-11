@@ -20,111 +20,67 @@
 #ifndef Parameter_h
 #define Parameter_h
 
-#include "Connection.h"
+#include <QtCore/QList>
+#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QVariant>
+#include <QtScript/QScriptValue>
 
-#include <string>
-#include <exception>
-#include <iostream>
-#include <vector>
+#include "NodeCoreGlobal.h"
+#include "ParameterType.h"
 
 namespace NodeCore {
 
+class Connection;
+class OutputParameter;
+class ParameterType;
 class Node;
 
-class ValueError : public std::exception {
+class NODECORESHARED_EXPORT Parameter : public QObject {
+    Q_OBJECT
 public:
-    ValueError(std::string message = "") : m_message(message) {}
-    virtual ~ValueError() throw () {}
-    std::string getMessage() { return m_message; }
-private:
-    std::string m_message;
-};
-
-class InvalidName : public std::exception {};
-
-typedef std::string ParameterName;
-typedef std::string ParameterType;
-
-const ParameterType kInt = "int";
-const ParameterType kFloat = "float";
-const ParameterType kString = "string";
-const ParameterType kNode = "Node";
-const ParameterType kNetwork = "Network";
-
-enum ParameterDirection {
-    kIn = 1,
-    kOut = 2
-};
-
-typedef unsigned int Channel;
-
-class Parameter {
-public:
-    Parameter(Node *node, const ParameterName& name, const ParameterType& type, Channel channels=1, ParameterDirection dir = kIn);
+    Parameter(ParameterType* type, Node* node);
     virtual ~Parameter();
-    
-    Node* getNode() const { return m_node; }
-    ParameterDirection getDirection() const { return m_direction; }
-    bool isInputParameter() const { return m_direction == kIn; }
-    bool isOutputParameter() const { return m_direction == kOut; }
-    Channel channelCount() const { return m_channelCount; }
-    
-    int asInt(Channel channel=0);
-    float asFloat(Channel channel=0);
-    std::string asString(Channel channel=0);
-    void* asData(Channel channel=0);
 
-    // All these can throw a ValueError.
-    void set(int i, Channel channel=0);
-    void set(float f, Channel channel=0);
-    void set(const std::string& s, Channel channel=0);
-    void set(void* v, Channel channel=0);
-    
-    ParameterName getName() const { return m_name; }
-    ParameterType getType() const { return m_type; }
-    
-    // Connection methods
-    bool canConnectTo(Node* node);
-    Connection* connect(Node* node);
-    bool disconnect();
-    bool isConnected();
-    bool isConnectedTo(Node* node);
-    Connection* getConnection();
+    ParameterType* parameterType() const { return m_type; }
+    virtual bool isOutputParameter() const { return false; }
+    bool isInputParameter() const { return !isOutputParameter(); }
+    Node* node() const { return m_node; }
+    QString name() const { return m_type->name(); }
+
+    QVariantList values() const { return m_values; }
+    virtual void setValues(const QVariantList& values);
+    virtual bool validate(const QVariantList& values);
+    virtual void revertToDefault();
+
+    QString expression() const { return m_expression; }
+    void setExpression(const QString& s);
+    bool hasExpression() const { return m_expression.isEmpty(); }
+    void clearExpression();
+    QList<Parameter*> expressionDependencies() const;
+
+    virtual Connection* connect(Node* node);
+    virtual bool disconnect();
+    virtual bool isConnected() const { return m_connection != NULL; }
+    virtual bool canConnect(const Node* node) const;
+    virtual bool canConnect(const OutputParameter* p) const;
+
     void update();
-    
-    static bool validName(const ParameterName& name);
 
-    friend std::ostream& operator<<(std::ostream& o, const Parameter& f);
-    
-protected:
-    void revertToDefault();
-    void preSet();
-    void postSet();
-    
 private:
-    union Value {
-        int i;
-        float f;
-        std::string* s;
-        void* d;
-    };
+    QList<QScriptValue*> expressionLocals();
+    QList<QScriptValue*> expressionGlobals();
+    QVariantList evaluateExpression();
+    void createExpressionConnections();
+    void removeExpressionConnections();
 
-    // Disallow copy construction or assignment
-    Parameter(const Parameter& other);
-    Parameter& operator=(const Parameter& other);
+    ParameterType* m_type;
+    Node* m_node;
+    QVariantList m_values;
+    Connection* m_connection;
+    QString m_expression;
+    QList<Connection*> m_expressionConnections;
 
-    void markDirty();
-
-    Node *m_node;
-    std::string m_name;
-    std::string m_verboseName;
-    ParameterType m_type;
-    ParameterDirection m_direction;
-    Connection *m_connection;
-    unsigned int m_channelCount;
-    Value* m_channels;
-    // TODO: expression
-    
     friend class Node;
 };
 

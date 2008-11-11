@@ -20,151 +20,110 @@
 #ifndef Node_h
 #define Node_h
 
-#include "Parameter.h"
+#include <QtCore/QList>
+#include <QtCore/QMap>
+#include <QtCore/QObject>
+#include <QtCore/QPointF>
+#include <QtCore/QString>
+#include <QtCore/QVariant>
 
-#include <string>
-#include <exception>
-#include <iostream>
-#include <map>
+#include "NodeCoreGlobal.h"
+#include "OutputParameter.h"
+#include "Parameter.h"
 
 namespace NodeCore {
 
-typedef std::map<std::string, Parameter*> ParameterMap;
-typedef ParameterMap::iterator ParameterMapIterator;
-
-#define NodeNameMacro(nodeName) \
-public: \
-    static Node* initialize() { return new nodeName(); } \
-    virtual std::string className() const { return #nodeName; }
-
-typedef std::string NodeName;
-typedef std::string NodeType;
-
-class ParameterNotFound : public std::exception
-{
-public:
-    ParameterNotFound(const ParameterName& name) : m_name(name) {}
-    virtual ~ParameterNotFound() throw () {}
-    ParameterName getName() { return m_name; }
-private:
-    ParameterName m_name;
-};
-
-class NodeProcessingError : public std::exception
-{
-public:
-    NodeProcessingError(Node* node, const std::string& msg="")
-            : m_node(node), m_message(msg) {}
-    NodeProcessingError(const NodeProcessingError& other)
-            : m_node(other.m_node), m_message(other.m_message) {}
-    virtual ~NodeProcessingError() throw() {}
-    Node* getNode() { return m_node; }
-    std::string getMessage() { return m_message; }
-    NodeProcessingError& operator=(const NodeProcessingError& other)
-    {
-        if(this == &other) return *this;
-        m_node = other.m_node;
-        m_message = other.m_message;
-        return *this;
-    }
-private:
-    Node* m_node;
-    std::string m_message;
-};
-
 class Network;
+class NodeType;
+class OutputParameter;
+class Parameter;
 
-typedef std::vector<Parameter*> ParameterList;
-typedef ParameterList::iterator ParameterIterator;
-typedef std::vector<Connection*> ConnectionList;
+typedef QMap<QString, Parameter*> ParameterMap;
+typedef QList<Parameter*> ParameterList;
+typedef QList<Connection*> ConnectionList;
 typedef ConnectionList::iterator ConnectionIterator;
 
-class Node {
+class NODECORESHARED_EXPORT Node : public QObject {
+    Q_OBJECT
 public:
-    Node(const ParameterType& outputType = kInt);
+    Node(NodeType* type, const QString& name=NULL);
     virtual ~Node();
-    
-    virtual NodeName defaultName() const;
-    
-    NodeName getName() const;
-    void setName(const NodeName &name);
-    static bool validName(const NodeName& name);
-    
-    void setNetwork(Network* network);
-    Network* getNetwork();
-        
-    float getX() const { return m_x; }
-    float getY() const { return m_y; }
-    void setX(float x);
-    void setY(float y);
 
-    Parameter* addParameter(const ParameterName &name, const ParameterType& type, Channel channels=1);
-    Parameter* getParameter(const ParameterName &name) const;
-    bool hasParameter(const ParameterName &name) const;
-    Parameter* getOutputParameter() const { return m_outputParameter; }
-    ParameterType getOutputType() const { return m_outputParameter->getType(); }
-    ParameterList getParameters();
-    
+    // Basic attributes
+
+    NodeType* nodeType() const { return m_type; }
+    QPointF position() const { return QPointF(m_x, m_y); }
+    void setPosition(const QPointF& p);
+    qreal x() const { return m_x; }
+    qreal y() const { return m_y; }
+    void setX(qreal x);
+    void setY(qreal y);
+    OutputParameter* outputParameter() const { return m_outputParameter; }
+
+    // Naming
+
+    QString name() const { return m_name; }
+    void setName(const QString& name);
+
+    // Parameters
+
+    Parameter* parameterAt(quint16 index) const { return parameters().at(index); }
+    quint16 parameterCount() const { return m_parameters.count(); }
+    QList<Parameter*> parameters() const;
+    bool hasParameter(const QString& name) const { return m_parameters.contains(name); }
+
     // Value shortcuts
-    int asInt(const ParameterName &name);
-    float asFloat(const ParameterName &name);
-    std::string asString(const ParameterName &name);
-    void* asData(const ParameterName &name);
-    
-    // All these can throw a ValueError.
-    void set(const ParameterName &name, int i);
-    void set(const ParameterName &name, float f);
-    void set(const ParameterName &name, const std::string& s);
-    void set(const ParameterName &name, void* d);
-    
+
+    QVariantList values(const QString& parameterName) const;
+    void setValues(const QString& parameterName, const QVariantList& values);
+    QVariantList outputValues() const;
+
+    // Expression shortcuts
+
+    // Connection shortcuts
+
+    QList<Parameter*> compatibleParameters(Node* outputNode) const;
+    bool disconnect();
+    bool isConnected();
+
+    // Node processing
+
     void update();
-    bool isDirty() const;
-    void markDirty();
-    
-    bool isOutputConnected();
-    bool isOutputConnectedTo(Node* node);
-    bool isOutputConnectedTo(Parameter* parameter);
-    ConnectionList getOutputConnections();
+    void markDirty(bool forced=false);
+    bool isDirty() const { return m_dirty; }
+    QString error() const { return m_error; }
+    bool hasError() const { return m_error.isEmpty(); }
 
-    int outputAsInt() const;
-    float outputAsFloat() const;
-    std::string outputAsString() const;
-    void* outputAsData() const;
+    // Network state
 
-    void _setOutput(int i);
-    void _setOutput(float f);
-    void _setOutput(std::string s);
-    void _setOutput(void* d);
-    // Needed for setOutput overrides
-    void _setOutputAsData(void* d) { _setOutput(d); }
+    Network* network() const { return m_network; }
+    void setNetwork(Network* network);
+    Network* rootNetwork() const;
+    bool inNetwork() const { return m_network != NULL; }
+    bool isRendered() const;
+    void setRendered();
+    QString networkPath();
 
-    friend std::ostream& operator<<(std::ostream& o, const Node& n);
+    // Reloading
+
+    void reload();
     
 protected:
-    virtual void process();
+    void reloadEvent();
+    virtual bool process();
+    void setOutputValues(const QVariantList& values);
+    void setError(const QString& error);
     
 private:
-    // Disallow copy construction or assignment
-    Node(const Node& other);
-    Node& operator=(const Node& other);
-    
-    void Node::_setName(const NodeName& name);
-
-    void addDownstream(Connection* c);
-    void removeDownstream(Connection* c);
-    
-    float m_x, m_y;
-    std::string m_name;
+    NodeType* m_type;
     Network* m_network;
-    ParameterMap m_parameters;
-    Parameter* m_outputParameter;
-    ConnectionList m_downstreams;
-    // TODO: add exception
+    QString m_name;
+    qreal m_x, m_y;
+    QString m_error;
     bool m_dirty;
+    QMap<QString, Parameter*> m_parameters;
+    OutputParameter* m_outputParameter;
 
-    NodeNameMacro(Node);
-    
-    friend class Parameter;
     friend class Network;
 };
 

@@ -20,43 +20,29 @@
 #ifndef NodeLibraryManager_h
 #define NodeLibraryManager_h
 
-#include "NodeLibrary.h"
-#include "Node.h"
+#include <QtCore/QDir>
+#include <QtCore/QList>
+#include <QtCore/QMap>
+#include <QtCore/QObject>
 
-#include <string>
-#include <exception>
-#include <vector>
-#include <map>
+#include "NodeCoreGlobal.h"
+#include "NodeLibrary.h"
 
 namespace NodeCore {
 
-typedef std::vector<NodeLibraryName> NodeLibraryNameList;
-typedef NodeLibraryNameList::iterator NodeLibraryNameIterator;
-
 // Converts a dirname like graphics-2.3.4 to a 
 // NodeLibrary("graphics", 2, 3, 4) object.
-NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname);
+//NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname);
 
-typedef std::multimap<NodeLibraryName,NodeLibrary*> NodeLibraryMap;
-typedef std::vector<NodeLibrary*> NodeLibraryList;
-typedef NodeLibraryList::iterator NodeLibraryIterator;
-
-class NodeLibraryNotFound : public std::exception
+class NODECORESHARED_EXPORT NodeLibraryManager : public QObject
 {
-public:
-    NodeLibraryNotFound(NodeLibraryName name)
-            : m_name(name) {}
-    virtual ~NodeLibraryNotFound() throw() {}
-    NodeLibraryName getName() { return m_name; }
-    NodeLibraryName m_name;
-};
-
-class NodeLibraryManager
-{
+    Q_OBJECT
 public:
     
-    NodeLibraryManager(std::string searchPath=".");
+    NodeLibraryManager();
     ~NodeLibraryManager();
+
+    static NodeLibrary* libraryFromDirectory(const QDir& dir);
     
     // Shows unique names of libraries
     // std::vector<NodeLibraryName> libraryNames()
@@ -76,26 +62,18 @@ public:
     
     // Retrieve the latest versions 
     
-    /* deprecated
-    std::string findLibrary(NodeLibraryName name)
-    {
-        return PLUGIN_SEARCH_PATH + PATH_SEP + name + PATH_SEP + name + ".nbl";
-    }
-    */
-    
-    NodeLibraryList libraries();
-    NodeLibrary* loadLatest(NodeLibraryName name);
+    QList<NodeLibrary*> libraries();
+    NodeLibrary* loadLatest(const QString& name);
 
-    void appendSearchPath(std::string path);    
+    void appendSearchPath(const QDir& path);
+    QList<QDir> searchPaths();
 
 private:
     // Searches for available libraries in the plugin search path.
     void lookForLibraries();
-    
-    typedef std::vector<std::string> SearchPathList;
 
-    SearchPathList m_searchPaths;
-    NodeLibraryMap m_nodeLibraryMap;
+    QList<QDir> m_searchPaths;
+    QList<NodeLibrary*> m_libraries;
     bool m_lookedForLibraries;
 };
 

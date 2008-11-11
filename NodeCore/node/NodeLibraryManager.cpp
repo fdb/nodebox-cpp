@@ -29,25 +29,25 @@
 
 namespace NodeCore {
 
-NodeLibraryManager::NodeLibraryManager(std::string searchPath)
-                   : m_searchPaths(SearchPathList()),
-                     m_nodeLibraryMap(NodeLibraryMap()),
-                     m_lookedForLibraries(false)
+NodeLibraryManager::NodeLibraryManager()
+                   : m_lookedForLibraries(false)
                    
 {
-    m_searchPaths.push_back(searchPath);
 }
 
 NodeLibraryManager::~NodeLibraryManager()
 {
-    NodeLibraryMap::iterator iter = m_nodeLibraryMap.begin();
-    for (;iter!=m_nodeLibraryMap.end(); ++iter) {
-        delete (*iter).second;
-    }
+    // Delete libraries.
 }
 
-NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname)
+/*! Converts a dirname like graphics-2.3.4 to a
+    NodeLibrary("graphics", 2, 3, 4) object.
+ */
+NodeLibrary* NodeLibraryManager::libraryFromDirectory(const QDir& dir)
 {
+    // TODO: implement
+    return NULL;
+    /*
     char c_dirname[64];
     char name[32];
     strncpy(c_dirname, dirname.c_str(), 63);
@@ -63,47 +63,40 @@ NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname)
         sscanf(pch, "%i", &revision);
 
     // TODO: last argument shouldn't be here, but loaded from somewhere else, or dirname should be full.
-    return new NodeLibrary(std::string(name), major, minor, revision, searchPath + PATH_SEP + dirname);
+    return new NodeLibrary(std::string(name), major, minor, revision, searchPath + '/' + dirname);
+    */
+    return NULL;
 }
 
-NodeLibraryList NodeLibraryManager::libraries()
+QList<NodeLibrary*> NodeLibraryManager::libraries()
 {
     if (!m_lookedForLibraries)
         lookForLibraries();
-    NodeLibraryList libs;
-    NodeLibraryMap::iterator iter = m_nodeLibraryMap.begin();
-    for (;iter!=m_nodeLibraryMap.end(); ++iter) {
-        NodeLibrary* pLib = (*iter).second;
-        libs.push_back(pLib);
-    }
-    return libs;
+    return m_libraries;
 }
 
-NodeLibrary* NodeLibraryManager::loadLatest(NodeLibraryName name)
+NodeLibrary* NodeLibraryManager::loadLatest(const QString& name)
 {
+    // TODO: We do not handle multiple versions yet.
     if (!m_lookedForLibraries)
         lookForLibraries();
-    if (m_nodeLibraryMap.count(name) == 0) {
-        throw NodeLibraryNotFound(name);
-    }
-    // TODO: Handle multiple versions
-    assert(m_nodeLibraryMap.count(name) == 1);
-    NodeLibraryMap::iterator iter = m_nodeLibraryMap.find(name);
-    NodeLibrary* lib = (*iter).second;
-    lib->load();
-    return lib;
+    // TODO: Not entirely correct :)
+    NodeLibrary* library = m_libraries[0];
+    library->load();
+    return library;
 }
 
-void NodeLibraryManager::appendSearchPath(std::string path)
+void NodeLibraryManager::appendSearchPath(const QDir& path)
 {
-    assert(!m_lookedForLibraries);
+    Q_ASSERT(!m_lookedForLibraries);
+    m_searchPaths.append(path);
 }
 
 // Searches for available libraries in the plugin search path.
 void NodeLibraryManager::lookForLibraries()
 {
-    assert(!m_lookedForLibraries);
-    
+    Q_ASSERT(!m_lookedForLibraries);
+    /*
     SearchPathList::iterator pathIter = m_searchPaths.begin();
     for (;pathIter!=m_searchPaths.end(); ++pathIter) {
         std::string searchPath = (*pathIter);
@@ -113,7 +106,7 @@ void NodeLibraryManager::lookForLibraries()
             NodeLibrary* lib = dirname_to_library(searchPath, dirname);
             m_nodeLibraryMap.insert(std::pair<const NodeLibraryName, NodeLibrary*>(lib->getName(), lib));
         }
-    }
+    }*/
     
     m_lookedForLibraries = true;
 }
