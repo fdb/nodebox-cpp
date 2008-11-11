@@ -22,13 +22,12 @@
 
 #include <QtCore/QString>
 
-#include "NodeCoreGlobal.h"
 
 namespace NodeCore {
 
 // See http://en.wikipedia.org/wiki/Software_versioning
 // GNU version numbering scheme
-class NODECORESHARED_EXPORT NodeLibraryVersion
+class NodeLibraryVersion
 {
 public:
     NodeLibraryVersion();

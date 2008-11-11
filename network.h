@@ -23,13 +23,12 @@
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 
-#include "NodeCoreGlobal.h"
 #include "Node.h"
 #include "NodeType.h"
 
 namespace NodeCore {
 
-class NODECORESHARED_EXPORT Network: public Node {
+class Network: public Node {
     Q_OBJECT
 public:
     Network(NodeType* type, const QString& name=NULL);

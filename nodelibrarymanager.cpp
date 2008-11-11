@@ -17,21 +17,14 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
-#include "NodeLibraryManager.h"
-
-#include <stdio.h>
-#include <string.h>
-
-#include "posixutils.h"
-#include "NodeLibrary.h"
-#include "Node.h"
+#include "node.h"
+#include "nodelibrarymanager.h"
+#include "nodelibrary.h"
 
 namespace NodeCore {
 
 NodeLibraryManager::NodeLibraryManager()
-                   : m_lookedForLibraries(false)
-                   
+    : m_lookedForLibraries(false)
 {
 }
 

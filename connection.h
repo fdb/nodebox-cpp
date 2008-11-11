@@ -20,16 +20,14 @@
 #ifndef Connection_h
 #define Connection_h
 
-#include <QtCore/QObject>
-
-#include "NodeCoreGlobal.h"
+#include <qobject.h>
 
 namespace NodeCore {
     
 class Parameter;
 class Node;
 
-class NODECORESHARED_EXPORT Connection : public QObject {
+class Connection : public QObject {
     Q_OBJECT
 public:
     Connection(Parameter *outputParameter, Parameter *inputParameter);

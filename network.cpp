@@ -17,8 +17,7 @@
  * along with NodeBox.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
-#include "Network.h"
+#include "network.h"
 
 namespace NodeCore {
 

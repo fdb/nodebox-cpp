@@ -23,7 +23,6 @@
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 
-#include "NodeCoreGlobal.h"
 #include "Parameter.h"
 
 namespace NodeCore {
@@ -32,7 +31,7 @@ class Connection;
 class Node;
 class ParameterType;
 
-class NODECORESHARED_EXPORT OutputParameter : public Parameter {
+class OutputParameter : public Parameter {
     Q_OBJECT
 public:
     OutputParameter(ParameterType* type, Node* node);

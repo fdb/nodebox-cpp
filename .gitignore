@@ -4,5 +4,6 @@ build
 *.pbxuser
 *.perspective*
 moc_*.cpp
+Makefile*
 NodeCore/python/nodecore_wrap.*
 NodeCore/python/nodecore.py*

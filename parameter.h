@@ -26,7 +26,6 @@
 #include <QtCore/QVariant>
 #include <QtScript/QScriptValue>
 
-#include "NodeCoreGlobal.h"
 #include "ParameterType.h"
 
 namespace NodeCore {
@@ -36,7 +35,7 @@ class OutputParameter;
 class ParameterType;
 class Node;
 
-class NODECORESHARED_EXPORT Parameter : public QObject {
+class Parameter : public QObject {
     Q_OBJECT
 public:
     Parameter(ParameterType* type, Node* node);

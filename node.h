@@ -27,7 +27,6 @@
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 
-#include "NodeCoreGlobal.h"
 #include "OutputParameter.h"
 #include "Parameter.h"
 
@@ -43,7 +42,7 @@ typedef QList<Parameter*> ParameterList;
 typedef QList<Connection*> ConnectionList;
 typedef ConnectionList::iterator ConnectionIterator;
 
-class NODECORESHARED_EXPORT Node : public QObject {
+class Node : public QObject {
     Q_OBJECT
 public:
     Node(NodeType* type, const QString& name=NULL);

@@ -22,7 +22,6 @@
 
 #include <QtXml/QXmlDefaultHandler>
 
-#include "NodeCoreGlobal.h"
 #include "NodeLibrary.h"
 #include "NodeType.h"
 #include "ParameterType.h"

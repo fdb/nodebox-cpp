@@ -25,7 +25,6 @@
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 
-#include "NodeCoreGlobal.h"
 #include "NodeLibrary.h"
 
 namespace NodeCore {
@@ -34,7 +33,7 @@ namespace NodeCore {
 // NodeLibrary("graphics", 2, 3, 4) object.
 //NodeLibrary* dirname_to_library(std::string searchPath, std::string dirname);
 
-class NODECORESHARED_EXPORT NodeLibraryManager : public QObject
+class NodeLibraryManager : public QObject
 {
     Q_OBJECT
 public:

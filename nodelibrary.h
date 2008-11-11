@@ -25,7 +25,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "NodeCoreGlobal.h"
 #include "NodeLibraryVersion.h"
 #include "NodeType.h"
 
@@ -33,7 +32,7 @@ namespace NodeCore {
 
 class Node;
 
-class NODECORESHARED_EXPORT NodeLibrary : public QObject
+class NodeLibrary : public QObject
 {
     Q_OBJECT
 public:

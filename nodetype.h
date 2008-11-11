@@ -24,15 +24,13 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "NodeCoreGlobal.h"
-
 namespace NodeCore {
 
 class ParameterType;
 class Node;
 class NodeLibrary;
 
-class NODECORESHARED_EXPORT NodeType : public QObject {
+class NodeType : public QObject {
     Q_OBJECT
 public:
     NodeType(NodeLibrary* library, const QString& name, const QString& outputType, const QString& methodName);

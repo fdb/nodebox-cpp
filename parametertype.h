@@ -24,8 +24,6 @@
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 
-#include "NodeCoreGlobal.h"
-
 namespace NodeCore {
 
 class Node;
@@ -33,7 +31,7 @@ class NodeType;
 class OutputParameter;
 class Parameter;
 
-class NODECORESHARED_EXPORT MenuOption : public QObject {
+class MenuOption : public QObject {
     Q_OBJECT
 public:
     MenuOption(const QString& key, const QString& label);
@@ -46,7 +44,7 @@ private:
     QString m_label;
 };
 
-class NODECORESHARED_EXPORT ParameterType : public QObject {
+class ParameterType : public QObject {
     Q_OBJECT
 public:
 
