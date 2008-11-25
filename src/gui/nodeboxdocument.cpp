@@ -12,8 +12,6 @@ using namespace NodeCore;
 NodeBoxDocument::NodeBoxDocument(QWidget *parent, Qt::WFlags flags)
     : QMainWindow(parent, flags)
 {
-    ui.setupUi(this);
-
     NodeBoxApplication *app = (NodeBoxApplication*)QApplication::instance(); //(NodeBoxApplication*)(qApp);//qobject_cast<NodeBoxApplication*>(qApp);
     NodeLibraryManager* manager = app->nodeLibraryManager();
     NodeLibrary* library = manager->loadLatest("core");

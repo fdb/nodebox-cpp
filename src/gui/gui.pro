@@ -3,6 +3,7 @@ QT = core \
     xml \
     webkit \
     svg
+DESTDIR    = ../../build
 TARGET = NodeBox
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -14,3 +15,4 @@ HEADERS += \
     nodeboxapplication.h
 
 INCLUDEPATH += ../nodecore/node
+LIBS += -L../nodecore -lnodecore
