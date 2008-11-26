@@ -31,6 +31,7 @@ void NodeBoxApplication::createNewDocument()
 {
     NodeBoxDocument *doc = new NodeBoxDocument();
     m_documents.append(doc);
+    doc->setVisible(true);
     doc->raise();
 }
 

@@ -6,13 +6,16 @@
 
 namespace NodeCore {
 
-class Color {
+class Color
+{
 
 public:
     Color(double r, double g, double b, double a = 1.0);
     Color(const QString &name);
     Color(const Color &color);
     Color(const QColor &color);
+
+    QColor qColor() const;
     
     double red() const;
     double green() const;

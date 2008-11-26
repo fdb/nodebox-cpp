@@ -23,6 +23,11 @@ Color::Color(const QColor &color)
 {
 }
 
+QColor Color::qColor() const
+{
+    return QColor(*m_color);
+}
+
 double Color::red() const
 {
     return m_color->redF();

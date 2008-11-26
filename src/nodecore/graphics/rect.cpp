@@ -1,5 +1,7 @@
+#include <qdebug.h>
+#include <qrect.h>
+
 #include "rect.h"
-#include "qdebug.h"
 
 namespace NodeCore {
     
@@ -31,6 +33,11 @@ Rect::Rect(const Rect &r)
 Rect::Rect(const QRectF &r)
            : m_x(r.x()), m_y(r.y()), m_width(r.width()), m_height(r.height())
 {
+}
+
+QRectF Rect::qRectF() const
+{
+    return QRectF(m_x, m_y, m_width, m_height);
 }
 
 bool Rect::isEmpty() const

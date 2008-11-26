@@ -12,7 +12,7 @@ using namespace NodeCore;
 class CoreVectorFactory : public QObject, public NodeFactoryInterface
 {
     Q_OBJECT
-    Q_INTERFACES(NodeFactoryInterface)
+    Q_INTERFACES(NodeCore::NodeFactoryInterface)
     
 public:
     Node *createNode(const NodeType *t) const;

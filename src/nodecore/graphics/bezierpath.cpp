@@ -27,6 +27,11 @@ BezierPath::~BezierPath()
     delete m_path;
 }
 
+QPainterPath BezierPath::qPainterPath() const
+{
+    return QPainterPath(*m_path);
+}
+
 void BezierPath::moveTo(const Point &p)
 {
     m_path->moveTo(p.x(), p.y());
@@ -145,7 +150,7 @@ BezierPath BezierPath::united(const BezierPath &p)
     return BezierPath(m_path->united(*p.m_path));
 }
 
-Rect BezierPath::bounds()
+Rect BezierPath::bounds() const
 {
     return Rect(m_path->boundingRect());
 }

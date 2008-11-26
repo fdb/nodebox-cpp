@@ -3,16 +3,26 @@ QT = core \
     xml \
     webkit \
     svg
-DESTDIR    = ../../build
+DESTDIR = ../../build
 TARGET = NodeBox
 TEMPLATE = app
 SOURCES += main.cpp \
     nodeboxdocument.cpp \
     nodeboxapplication.cpp \
-
-HEADERS += \
-    nodeboxdocument.h \
-    nodeboxapplication.h
-
-INCLUDEPATH += ../nodecore/node
-LIBS += -L../../build -lnodecore
+    canvasviewer.cpp \
+    codeeditor.cpp \
+    logger.cpp
+HEADERS += nodeboxdocument.h \
+    nodeboxapplication.h \
+    canvasviewer.h \
+    codeeditor.h \
+    logger.h
+INCLUDEPATH += ../nodecore/node \
+    ../nodecore/graphics \
+    ../3rdparty/pythonqt/src \
+    /System/Library/Frameworks/Python.framework/Headers
+include(../3rdparty/pythonqt/src/pythonqt.pri)
+LIBS += -L../../build \
+    -lnodecore \
+    -framework \
+    Python

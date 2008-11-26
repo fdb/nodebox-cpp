@@ -2,7 +2,6 @@
 #define Rect_h
 
 #include <qrect.h>
-#include <qdebug.h>
 
 #include "point.h"
 
@@ -14,7 +13,9 @@ public:
     Rect(double x, double y, double width, double height);
     Rect(const Rect &r);
     Rect(const QRectF &r);
-    
+
+    QRectF qRectF() const;
+
     bool isEmpty() const;
 
     double x() const;

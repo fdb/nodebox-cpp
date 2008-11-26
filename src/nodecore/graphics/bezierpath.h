@@ -18,6 +18,8 @@ public:
     BezierPath(const BezierPath &path);
     BezierPath(const QPainterPath &path);
     virtual ~BezierPath();
+
+    QPainterPath qPainterPath() const;
     
     void moveTo(const Point &p);
     void moveTo(double x, double y);
@@ -45,7 +47,7 @@ public:
     BezierPath subtracted(const BezierPath &p);
     BezierPath united(const BezierPath &p);
 
-    virtual Rect bounds();
+    virtual Rect bounds() const;
 
     virtual Grob* clone() const;
 

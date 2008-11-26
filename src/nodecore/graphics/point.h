@@ -14,6 +14,8 @@ public:
     Point(double x, double y);
     Point(const Point &p);
     Point(const QPointF &p);
+
+    QPointF qPointF() const;
     
     double x() const;
     double y() const;

@@ -8,9 +8,9 @@ namespace NodeCore {
 
 class Grob {
 public:
-    virtual ~Grob() {};
+    virtual ~Grob() {}
 
-    virtual Rect bounds() = 0;
+    virtual Rect bounds() const = 0;
 
     virtual Grob* clone() const = 0;
 

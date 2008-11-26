@@ -23,6 +23,11 @@ Point::Point(const QPointF &p)
 {
 }
 
+QPointF Point::qPointF() const
+{
+    return QPointF(m_x, m_y);
+}
+
 double Point::x() const
 {
     return m_x;
