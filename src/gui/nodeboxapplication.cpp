@@ -1,6 +1,7 @@
 #include <qdesktopservices.h>
 
 #include "nodeboxapplication.h"
+#include "nodeboxdocument.h"
 
 using namespace NodeCore;
 
@@ -28,6 +29,9 @@ NodeBoxApplication::~NodeBoxApplication()
 
 void NodeBoxApplication::createNewDocument()
 {
+    NodeBoxDocument *doc = new NodeBoxDocument();
+    m_documents.append(doc);
+    doc->raise();
 }
 
 void NodeBoxApplication::exit()

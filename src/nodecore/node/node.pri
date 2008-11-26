@@ -1,6 +1,7 @@
 HEADERS += node/connection.h \
            node/network.h \
            node/node.h \
+           node/nodefactoryinterface.h \
            node/nodelibrary.h \
            node/nodelibrarymanager.h \
            node/nodelibraryversion.h \

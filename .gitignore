@@ -3,7 +3,13 @@ build
 *.mode*
 *.pbxuser
 *.perspective*
+*.pro.user
 moc_*.cpp
 Makefile*
 NodeCore/python/nodecore_wrap.*
 NodeCore/python/nodecore.py*
+src/gui/debug
+src/nodecore/debug
+libraries/corevector/debug
+test/debug
+test/test_nodecore/debug

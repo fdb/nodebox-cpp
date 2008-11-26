@@ -3,9 +3,11 @@
 
 #include <qapplication.h>
 #include <qdir.h>
+#include <qlist.h>
 #include <qobject.h>
 #include <qsettings.h>
 
+#include "nodeboxdocument.h"
 #include "nodelibrarymanager.h"
 
 using namespace NodeCore;
@@ -33,6 +35,7 @@ private:
     NodeLibraryManager *m_manager;
     QSettings m_settings;
     QDir m_lastDirectory;
+    QList<NodeBoxDocument*> m_documents;
 };
 
 #endif // NODEBOXAPPLICATION_H

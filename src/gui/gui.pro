@@ -15,4 +15,4 @@ HEADERS += \
     nodeboxapplication.h
 
 INCLUDEPATH += ../nodecore/node
-LIBS += -L../nodecore -lnodecore
+LIBS += -L../../build -lnodecore

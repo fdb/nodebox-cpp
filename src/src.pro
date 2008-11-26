@@ -1,2 +1,4 @@
 TEMPLATE = subdirs
-SUBDIRS += gui nodecore
+SUBDIRS += \
+           nodecore \
+           gui
