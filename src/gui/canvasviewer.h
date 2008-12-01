@@ -17,6 +17,8 @@ public:
     Canvas *canvas() const;
     void setCanvas(Canvas *canvas);
 
+    virtual void paintEvent(QPaintEvent *event);
+
 private:
     Canvas *m_canvas;
 };

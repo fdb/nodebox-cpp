@@ -51,4 +51,10 @@ void Canvas::background(const Color& color)
     m_background = color;
 }
 
+void Canvas::draw(QPainter& p) const
+{
+    p.fillRect(0, 0, m_width, m_height, m_background.qColor());
+    Group::draw(p);
+}
+
 } // namespace NodeCore

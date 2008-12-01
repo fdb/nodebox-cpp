@@ -82,6 +82,14 @@ Rect Group::bounds() const
     return r;
 }
 
+void Group::draw(QPainter& p) const
+{
+    Grob *item;
+    foreach(item, m_items) {
+        item->draw(p);
+    }
+}
+
 Grob* Group::clone() const
 {
     return new Group(*this);

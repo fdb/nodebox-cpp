@@ -48,14 +48,17 @@ public:
     BezierPath united(const BezierPath &p);
 
     virtual Rect bounds() const;
-
+    virtual void draw(QPainter &p) const;
     virtual Grob* clone() const;
 
-    virtual bool operator==(const Grob& g) const;
-    virtual bool operator!=(const Grob& g) const;
+    virtual bool operator==(const Grob &g) const;
+    virtual bool operator!=(const Grob &g) const;
     
 private:
     QPainterPath *m_path;
+    Color m_fill;
+    Color m_stroke;
+    double m_strokeWidth;
 };
 
 #ifndef QT_NO_DEBUG_STREAM

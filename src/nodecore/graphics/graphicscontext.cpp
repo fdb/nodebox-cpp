@@ -8,6 +8,7 @@
 namespace NodeCore {
 
 GraphicsContext::GraphicsContext()
+               : m_canvas(new Canvas())
 {
 }
 

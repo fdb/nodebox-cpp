@@ -2,6 +2,7 @@
 #define Group_h
 
 #include <qdebug.h>
+#include <qpainter.h>
 
 #include "grob.h"
 #include "transform.h"
@@ -26,7 +27,7 @@ public:
     void clear();
     
     virtual Rect bounds() const;
-
+    virtual void draw(QPainter& p) const;
     virtual Grob* clone() const;
 
     virtual bool operator==(const Grob &g) const;

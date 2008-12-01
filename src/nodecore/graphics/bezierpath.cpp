@@ -6,19 +6,25 @@ namespace NodeCore {
     
 BezierPath::BezierPath()
           : Grob(),
-            m_path(new QPainterPath())
+            m_path(new QPainterPath()),
+            m_fill(Color()),
+            m_stroke(Color::invisibleColor())
 {
 }
 
 BezierPath::BezierPath(const BezierPath &path)
           : Grob(),
-            m_path(new QPainterPath(*path.m_path))
+            m_path(new QPainterPath(*path.m_path)),
+            m_fill(Color()),
+            m_stroke(Color::invisibleColor())
 {
 }
 
 BezierPath::BezierPath(const QPainterPath &path)
           : Grob(),
-            m_path(new QPainterPath(path))
+            m_path(new QPainterPath(path)),
+            m_fill(Color()),
+            m_stroke(Color::invisibleColor())
 {
 }
 
@@ -155,17 +161,28 @@ Rect BezierPath::bounds() const
     return Rect(m_path->boundingRect());
 }
 
+void BezierPath::draw(QPainter &p) const
+{
+    const QPainterPath &constPath = (const QPainterPath&)*m_path;
+    if (!m_fill.isInvisible()) {
+        p.fillPath(constPath, m_fill.qBrush());
+    }
+    if (!m_stroke.isInvisible()) {
+        p.strokePath(constPath, m_stroke.qPen(m_strokeWidth));
+    }
+}
+
 Grob* BezierPath::clone() const
 {
     return new BezierPath(*this);
 }
 
-bool BezierPath::operator==(const Grob& g) const
+bool BezierPath::operator==(const Grob &g) const
 {
     return false;
 }
 
-bool BezierPath::operator!=(const Grob& g) const
+bool BezierPath::operator!=(const Grob &g) const
 {
     return false;
 }

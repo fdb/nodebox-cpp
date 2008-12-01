@@ -2,6 +2,8 @@
 #define Color_h
 
 #include <qcolor.h>
+#include <qbrush.h>
+#include <qpen.h>
 #include <qdebug.h>
 
 namespace NodeCore {
@@ -10,12 +12,18 @@ class Color
 {
 
 public:
+    Color();
     Color(double r, double g, double b, double a = 1.0);
     Color(const QString &name);
     Color(const Color &color);
     Color(const QColor &color);
 
+    static Color invisibleColor();
+    bool isInvisible() const;
+
     QColor qColor() const;
+    QBrush qBrush() const;
+    QPen qPen(double width=1.0) const;
     
     double red() const;
     double green() const;

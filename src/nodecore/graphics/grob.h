@@ -2,6 +2,7 @@
 #define Grob_h
 
 #include <qdebug.h>
+#include <qpainter.h>
 #include "rect.h"
 
 namespace NodeCore {
@@ -11,7 +12,7 @@ public:
     virtual ~Grob() {}
 
     virtual Rect bounds() const = 0;
-
+    virtual void draw(QPainter& p) const = 0;
     virtual Grob* clone() const = 0;
 
     virtual bool operator==(const Grob& g) const = 0;

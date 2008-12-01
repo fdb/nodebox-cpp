@@ -1,6 +1,11 @@
 #include "color.h"
 
 namespace NodeCore {
+
+Color::Color()
+     : m_color(new QColor(0, 0, 0))
+{
+}
     
 Color::Color(double r, double g, double b, double a)
     : m_color(NULL)
@@ -23,9 +28,29 @@ Color::Color(const QColor &color)
 {
 }
 
+Color Color::invisibleColor()
+{
+    return Color(0, 0, 0, 0);
+}
+
+bool Color::isInvisible() const
+{
+    return alpha() <= 0.0;
+}
+
 QColor Color::qColor() const
 {
     return QColor(*m_color);
+}
+
+QBrush Color::qBrush() const
+{
+    return QBrush(qColor());
+}
+
+QPen Color::qPen(double width) const
+{
+    return QPen(qColor(), width);
 }
 
 double Color::red() const

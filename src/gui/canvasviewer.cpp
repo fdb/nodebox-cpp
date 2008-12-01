@@ -20,3 +20,10 @@ void CanvasViewer::setCanvas(Canvas *canvas)
     m_canvas = canvas;
     update();
 }
+
+void CanvasViewer::paintEvent(QPaintEvent *event)
+{
+    QPainter p(this);
+    if (m_canvas != NULL)
+        m_canvas->draw(p);
+}

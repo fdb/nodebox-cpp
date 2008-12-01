@@ -24,6 +24,8 @@ public:
     Color background() const;
     void background(const Color& color);
 
+    virtual void draw(QPainter& p) const;
+
 private:
     double m_width;
     double m_height;
